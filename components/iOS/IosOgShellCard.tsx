@@ -2,26 +2,13 @@
 
 import { Typewriter } from '@/components/text/TypewriterMessage';
 import { Input } from '@/components/ui/Input';
-import {
-	PopoverBody,
-	PopoverContent,
-	PopoverRoot,
-	PopoverTrigger,
-} from '@/components/ui/Popover';
 import { env } from '@/env/client';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { Microphone, Plus } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
 
-interface IosOgShellCardProps {
-	texts: string[];
-}
-
-export const IosOgShellCard = ({
-	texts,
-}: IosOgShellCardProps): React.JSX.Element => {
+export const IosOgShellCard = (): React.JSX.Element => {
 	const { isMobile } = useMediaQuery();
-	console.log(texts);
 
 	return (
 		<div className="relative z-20 mx-auto flex max-w-xs flex-col rounded-md border border-neutral-200 bg-background shadow-inner-shadow md:min-w-80 md:max-w-xl md:px-px md:pb-px dark:border-neutral-700">
