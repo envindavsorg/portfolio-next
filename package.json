@@ -1,10 +1,30 @@
 {
+	"name": "cuzeac-florin-portfolio",
+	"description": "Mon nouveau site web personnel, construit avec Next.js, Tailwind CSS, et MDX.",
+	"version": "3.0.0-canary.1",
+	"license": "MIT",
+	"url": "https://cuzeac-florin.app",
+	"author": {
+		"email": "florin@cuzeac.com",
+		"name": "Cuzeac Florin",
+		"url": "https://cuzeac-florin.app"
+	},
+	"contributors": ["florin@cuzeac.com"],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/envindavsorg/portfolio-site"
+	},
 	"private": true,
+	"packageManager": "pnpm@6.32.4",
 	"scripts": {
-		"dev": "next dev --turbo",
+		"dev": "next dev -p 2702 --turbo",
 		"build": "next build",
-		"start": "next start",
-		"delete": "rm -rf app/n"
+		"start": "next start -p 2702",
+		"email": "email dev",
+		"lint": "next lint",
+		"patch-version": "pnpm version patch",
+		"dep-check": "npx depcheck",
+		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@mdx-js/loader": "^3.0.1",
@@ -26,7 +46,7 @@
 		"@vercel/speed-insights": "^1.0.12",
 		"cobe": "^0.6.3",
 		"dayjs": "^1.11.13",
-		"framer-motion": "^11.5.4",
+		"framer-motion": "^11.5.5",
 		"jiti": "^1.21.6",
 		"next": "15.0.0-canary.143",
 		"next-themes": "^0.3.0",
@@ -41,7 +61,7 @@
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.1",
+		"@biomejs/biome": "^1.8.3",
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/node": "^20.16.5",
 		"@types/react": "^18.3.7",
@@ -53,6 +73,7 @@
 		"postcss-100vh-fix": "^1.0.2",
 		"tailwind-merge": "^2.5.2",
 		"tailwindcss": "^3.4.12",
+		"turbo": "^2.1.2",
 		"typescript": "^5.6.2"
 	}
 }
