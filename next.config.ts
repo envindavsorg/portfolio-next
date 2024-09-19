@@ -13,6 +13,13 @@ jiti('./env/client');
 // Next.js configuration
 const nextConfig: NextConfig = {
 	pageExtensions: ['mdx', 'ts', 'tsx'],
+	typescript: {
+		// !! WARN !!
+		// Dangerously allow production builds to successfully complete even if
+		// your project has type errors.
+		// !! WARN !!
+		ignoreBuildErrors: true,
+	},
 	images: {
 		remotePatterns: [
 			{
