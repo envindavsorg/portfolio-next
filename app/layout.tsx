@@ -60,7 +60,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			>
 				<Providers>
 					<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-switch md:pt-8">
-						<main className="mx-auto w-full max-w-[60ch]">
+						<main className="mx-auto w-full max-w-[60ch] pb-5">
 							<div className="relative ms-auto mt-4 flex h-16 w-1/2 justify-end overflow-hidden border-neutral-200 border-b md:h-20 md:w-1/3 dark:border-neutral-700">
 								<Cat className="absolute top-5 right-5 h-full" />
 							</div>
