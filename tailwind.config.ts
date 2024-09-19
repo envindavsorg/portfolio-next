@@ -206,6 +206,10 @@ const config = {
 				mid: '4s',
 			},
 		},
+		fontFamily: {
+			'geist-sans': ['var(--font-geist-sans)'],
+			'geist-mono': ['var(--font-geist-mono)'],
+		},
 	},
 	plugins: [require('@tailwindcss/typography')],
 } satisfies Config;
