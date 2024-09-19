@@ -1,7 +1,6 @@
 import { githubUser } from '@/actions/github/user.action';
 import { linkedInData } from '@/actions/linkedin/data.action';
 import { Counter } from '@/components/Counter';
-import { cn } from '@/lib/utils';
 import {
 	ArrowUpRight,
 	GithubLogo,
@@ -28,11 +27,7 @@ const Channel = ({
 			href={link}
 			target="_blank"
 			rel="noreferrer"
-			className={cn(
-				'flex w-full items-center justify-between',
-				'border border-neutral-200 dark:border-neutral-700',
-				'rounded-md bg-background px-3 py-4',
-			)}
+			className="flex w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-4 dark:border-neutral-700 dark:bg-black"
 		>
 			<div className="flex items-center space-x-4">
 				<Image
