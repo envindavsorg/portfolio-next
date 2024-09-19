@@ -18,7 +18,6 @@ import {
 	Phone,
 } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
-import { headers } from 'next/headers';
 import type React from 'react';
 
 const AnimatedName = (): React.JSX.Element => (
@@ -70,10 +69,8 @@ const SocialLink = ({
 );
 
 const Home = (): React.JSX.Element => {
-	const header: Headers = headers();
-	const ip: string = (header.get('x-forwarded-for') ?? '127.0.0.1').split(
-		',',
-	)[0];
+	const age: number = new Date().getFullYear() - 1994;
+	const experience: number = new Date().getFullYear() - 2018;
 
 	return (
 		<>
@@ -84,11 +81,8 @@ const Home = (): React.JSX.Element => {
 					<span className="font-bold text-switch">
 						{env.NEXT_PUBLIC_SURNAME}
 					</span>
-					, j'ai{' '}
-					<span className="font-bold text-switch">
-						{new Date().getFullYear() - 1994} ans
-					</span>{' '}
-					et j'habite actuellement à{' '}
+					, j'ai <span className="font-bold text-switch">{age} ans</span> et
+					j'habite actuellement à{' '}
 					<span className="font-bold text-switch">Paris</span>.
 				</p>
 
@@ -97,15 +91,12 @@ const Home = (): React.JSX.Element => {
 						Next.js
 					</Link>
 				</p>
-				<p>{ip}</p>
 
 				<p className="leading-7">
 					Je suis un <span className="font-bold text-switch">développeur</span>{' '}
 					et <span className="font-bold text-switch">designer web</span> depuis{' '}
-					<span className="font-bold text-switch">
-						{new Date().getFullYear() - 2018} ans
-					</span>
-					, passionné par la création d’applications <span>belles</span> et{' '}
+					<span className="font-bold text-switch">{experience} ans</span>,
+					passionné par la création d’applications <span>belles</span> et{' '}
 					<span>fonctionnelles</span>, le design et le développement web.
 				</p>
 				<p className="leading-7">
@@ -164,7 +155,7 @@ const Home = (): React.JSX.Element => {
 				<p className="leading-7">
 					En{' '}
 					<span className="font-semibold text-switch">
-						{new Date().getFullYear() - 2018} ans d'expérience
+						{experience} ans d'expérience
 					</span>
 					, j'ai eu l'occasion de travailler avec de nombreux langages et
 					technologies, sur beaucoup de projets différents. J'ai commencé par le
