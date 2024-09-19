@@ -1,5 +1,4 @@
 import { Channels } from '@/components/Channels';
-import { Cards } from '@/components/cards';
 import { IosOgShellCard } from '@/components/iOS/IosOgShellCard';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
@@ -78,7 +77,11 @@ const Home = (): React.JSX.Element => {
 					<span>fonctionnelles</span>, le design et le développement web.
 				</p>
 				<p className="leading-8">
-					Je <span className="font-bold">travaille</span> actuellement chez{' '}
+					Je{' '}
+					<Link href="/n/stack" className="font-bold text-theme underline">
+						travaille
+					</Link>{' '}
+					actuellement chez{' '}
 					<Link
 						href="https://wefix.net/"
 						aria-label="Voir le site WeFix !"
@@ -128,7 +131,7 @@ const Home = (): React.JSX.Element => {
 				</div>
 			</div>
 
-			<div className="my-10 px-6 sm:px-14">
+			<div className="my-10 px-8 sm:px-16">
 				<IosOgShellCard />
 			</div>
 
@@ -228,26 +231,6 @@ const Home = (): React.JSX.Element => {
 				</p>
 				<Channels />
 			</div>
-
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-			<hr className="my-20" />
-
-			<p className="leading-8">
-				<Link href="/n/stack" className="text-blue-500 hover:text-blue-700">
-					Next.js
-				</Link>
-			</p>
-
-			<Cards />
 		</>
 	);
 };
