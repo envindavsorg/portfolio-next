@@ -106,7 +106,7 @@ importers:
         version: 3.23.8
     devDependencies:
       '@biomejs/biome':
-        specifier: ^1.9.2
+        specifier: ^1.8.3
         version: 1.9.2
       '@tailwindcss/typography':
         specifier: ^0.5.15
