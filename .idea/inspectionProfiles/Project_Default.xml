@@ -1,0 +1,316 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="AssignmentToForLoopParameterJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="BadExpressionStatementJS" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="BreakStatementWithLabelJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ChainedEqualityJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CheckTagEmptyBody" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CommaExpressionJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ConditionalExpressionWithIdenticalBranchesJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConfusingFloatingPointLiteralJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConfusingPlusesOrMinusesJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ConstantOnLHSOfComparisonJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ContinueStatementWithLabelJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CssConvertColorToHexInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CssInvalidAtRule" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="CssInvalidPseudoSelector" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="CssMissingSemicolon" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="CssUnknownProperty" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myCustomPropertiesEnabled" value="true" />
+      <option name="myIgnoreVendorSpecificProperties" value="false" />
+      <option name="myCustomPropertiesList">
+        <value>
+          <list size="5">
+            <item index="0" class="java.lang.String" itemvalue="-webkit" />
+            <item index="1" class="java.lang.String" itemvalue="user" />
+            <item index="2" class="java.lang.String" itemvalue="drag" />
+            <item index="3" class="java.lang.String" itemvalue="select" />
+            <item index="4" class="java.lang.String" itemvalue="view-transition-name" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="CssUnusedSymbol" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="CustomRegExpInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="DebuggerStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DefaultNotLastCaseInSwitchJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DivideByZeroJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DocumentWriteJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DuplicateConditionJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="223" name="TypeScript" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="DynamicallyGeneratedCodeJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ES6ConvertVarToLetConst" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="ES6TopLevelAwaitExpression" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="EmptyCatchBlockJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EmptyDirectory" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EmptyFinallyBlockJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="EmptyTryBlockJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FlowJSCoverage" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="FlowJSError" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ForLoopReplaceableByWhileJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreLoopsWithoutConditions" value="false" />
+    </inspection_tool>
+    <inspection_tool class="ForLoopThatDoesntUseLoopVariableJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="HtmlNonExistentInternetResource" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="HtmlPresentationalElement" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="HtmlRequiredSummaryAttribute" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="HtmlRequiredTitleAttribute" enabled="true" level="INFORMATION" enabled_by_default="true" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="93">
+            <item index="0" class="java.lang.String" itemvalue="class" />
+            <item index="1" class="java.lang.String" itemvalue="slot" />
+            <item index="2" class="java.lang.String" itemvalue="aria-label" />
+            <item index="3" class="java.lang.String" itemvalue="data-nav" />
+            <item index="4" class="java.lang.String" itemvalue="role" />
+            <item index="5" class="java.lang.String" itemvalue="data-animation" />
+            <item index="6" class="java.lang.String" itemvalue="style" />
+            <item index="7" class="java.lang.String" itemvalue="data-appointment" />
+            <item index="8" class="java.lang.String" itemvalue="data-animated" />
+            <item index="9" class="java.lang.String" itemvalue="id" />
+            <item index="10" class="java.lang.String" itemvalue="variant" />
+            <item index="11" class="java.lang.String" itemvalue="x-show" />
+            <item index="12" class="java.lang.String" itemvalue="x-cloak" />
+            <item index="13" class="java.lang.String" itemvalue="@click" />
+            <item index="14" class="java.lang.String" itemvalue="x-init" />
+            <item index="15" class="java.lang.String" itemvalue="x-data" />
+            <item index="16" class="java.lang.String" itemvalue="x-ref" />
+            <item index="17" class="java.lang.String" itemvalue="@mouseleave" />
+            <item index="18" class="java.lang.String" itemvalue="@mousemove" />
+            <item index="19" class="java.lang.String" itemvalue="x-transition:enter" />
+            <item index="20" class="java.lang.String" itemvalue="x-transition:enter-start" />
+            <item index="21" class="java.lang.String" itemvalue="x-transition:enter-end" />
+            <item index="22" class="java.lang.String" itemvalue="x-transition:leave" />
+            <item index="23" class="java.lang.String" itemvalue="x-transition:leave-start" />
+            <item index="24" class="java.lang.String" itemvalue="x-transition:leave-end" />
+            <item index="25" class="java.lang.String" itemvalue=":class" />
+            <item index="26" class="java.lang.String" itemvalue="@mouseover" />
+            <item index="27" class="java.lang.String" itemvalue="@mouseenter" />
+            <item index="28" class="java.lang.String" itemvalue="size" />
+            <item index="29" class="java.lang.String" itemvalue="caret" />
+            <item index="30" class="java.lang.String" itemvalue="data-animated-icon" />
+            <item index="31" class="java.lang.String" itemvalue="data-hover-icon" />
+            <item index="32" class="java.lang.String" itemvalue="mask-type" />
+            <item index="33" class="java.lang.String" itemvalue="ns1:href" />
+            <item index="34" class="java.lang.String" itemvalue="ns2:href" />
+            <item index="35" class="java.lang.String" itemvalue="data-map" />
+            <item index="36" class="java.lang.String" itemvalue="data-rdv" />
+            <item index="37" class="java.lang.String" itemvalue="data-grid-control" />
+            <item index="38" class="java.lang.String" itemvalue="href" />
+            <item index="39" class="java.lang.String" itemvalue="target" />
+            <item index="40" class="java.lang.String" itemvalue="rel" />
+            <item index="41" class="java.lang.String" itemvalue="data-type" />
+            <item index="42" class="java.lang.String" itemvalue="data-grid" />
+            <item index="43" class="java.lang.String" itemvalue="data-grid-item" />
+            <item index="44" class="java.lang.String" itemvalue="data-grid-root" />
+            <item index="45" class="java.lang.String" itemvalue="aria-hidden" />
+            <item index="46" class="java.lang.String" itemvalue="part" />
+            <item index="47" class="java.lang.String" itemvalue="library" />
+            <item index="48" class="java.lang.String" itemvalue="name" />
+            <item index="49" class="java.lang.String" itemvalue="data-account" />
+            <item index="50" class="java.lang.String" itemvalue="outline" />
+            <item index="51" class="java.lang.String" itemvalue="src" />
+            <item index="52" class="java.lang.String" itemvalue="alt" />
+            <item index="53" class="java.lang.String" itemvalue="data-item" />
+            <item index="54" class="java.lang.String" itemvalue="data-first" />
+            <item index="55" class="java.lang.String" itemvalue="data-last" />
+            <item index="56" class="java.lang.String" itemvalue="type" />
+            <item index="57" class="java.lang.String" itemvalue="data-carousel-control" />
+            <item index="58" class="java.lang.String" itemvalue="label" />
+            <item index="59" class="java.lang.String" itemvalue="delay" />
+            <item index="60" class="java.lang.String" itemvalue="duration" />
+            <item index="61" class="java.lang.String" itemvalue="once" />
+            <item index="62" class="java.lang.String" itemvalue="animation" />
+            <item index="63" class="java.lang.String" itemvalue="config" />
+            <item index="64" class="java.lang.String" itemvalue="defer" />
+            <item index="65" class="java.lang.String" itemvalue="content" />
+            <item index="66" class="java.lang.String" itemvalue="onclick" />
+            <item index="67" class="java.lang.String" itemvalue="icon" />
+            <item index="68" class="java.lang.String" itemvalue="data" />
+            <item index="69" class="java.lang.String" itemvalue="fetchPriority" />
+            <item index="70" class="java.lang.String" itemvalue="containingElement" />
+            <item index="71" class="java.lang.String" itemvalue=":poster" />
+            <item index="72" class="java.lang.String" itemvalue="x-text" />
+            <item index="73" class="java.lang.String" itemvalue=":value" />
+            <item index="74" class="java.lang.String" itemvalue=":src" />
+            <item index="75" class="java.lang.String" itemvalue="patterntransform" />
+            <item index="76" class="java.lang.String" itemvalue="patternunits" />
+            <item index="77" class="java.lang.String" itemvalue="tabindex" />
+            <item index="78" class="java.lang.String" itemvalue="contenteditable" />
+            <item index="79" class="java.lang.String" itemvalue="error-message" />
+            <item index="80" class="java.lang.String" itemvalue="x-for" />
+            <item index="81" class="java.lang.String" itemvalue=":key" />
+            <item index="82" class="java.lang.String" itemvalue=":id" />
+            <item index="83" class="java.lang.String" itemvalue="x-if" />
+            <item index="84" class="java.lang.String" itemvalue="x-html" />
+            <item index="85" class="java.lang.String" itemvalue="set-toasts-layout.window" />
+            <item index="86" class="java.lang.String" itemvalue="active" />
+            <item index="87" class="java.lang.String" itemvalue="data-order-pieces" />
+            <item index="88" class="java.lang.String" itemvalue="@set-toasts-layout.window" />
+            <item index="89" class="java.lang.String" itemvalue="@toast-show.window" />
+            <item index="90" class="java.lang.String" itemvalue="@mouseout" />
+            <item index="91" class="java.lang.String" itemvalue="data-quotation-id" />
+            <item index="92" class="java.lang.String" itemvalue="data-dashboard" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="49">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="sl-input" />
+            <item index="7" class="java.lang.String" itemvalue="sl-button" />
+            <item index="8" class="java.lang.String" itemvalue="sl-resize-observer" />
+            <item index="9" class="java.lang.String" itemvalue="sl-dialog" />
+            <item index="10" class="java.lang.String" itemvalue="sl-divider" />
+            <item index="11" class="java.lang.String" itemvalue="sl-avatar" />
+            <item index="12" class="java.lang.String" itemvalue="sl-alert" />
+            <item index="13" class="java.lang.String" itemvalue="sl-icon-button" />
+            <item index="14" class="java.lang.String" itemvalue="sl-badge" />
+            <item index="15" class="java.lang.String" itemvalue="sl-card" />
+            <item index="16" class="java.lang.String" itemvalue="sl-icon" />
+            <item index="17" class="java.lang.String" itemvalue="pl-no-interactions" />
+            <item index="18" class="java.lang.String" itemvalue="placeholder" />
+            <item index="19" class="java.lang.String" itemvalue="sl-checkbox" />
+            <item index="20" class="java.lang.String" itemvalue="sl-textarea" />
+            <item index="21" class="java.lang.String" itemvalue="sl-select" />
+            <item index="22" class="java.lang.String" itemvalue="sl-spinner" />
+            <item index="23" class="java.lang.String" itemvalue="sl-carousel" />
+            <item index="24" class="java.lang.String" itemvalue="sl-animated-image" />
+            <item index="25" class="java.lang.String" itemvalue="sl-breadcrumb" />
+            <item index="26" class="java.lang.String" itemvalue="sl-breadcrumb-item" />
+            <item index="27" class="java.lang.String" itemvalue="sl-button-group" />
+            <item index="28" class="java.lang.String" itemvalue="sl-copy-button" />
+            <item index="29" class="java.lang.String" itemvalue="sl-details" />
+            <item index="30" class="java.lang.String" itemvalue="sl-drawer" />
+            <item index="31" class="java.lang.String" itemvalue="sl-dropdown" />
+            <item index="32" class="java.lang.String" itemvalue="sl-image-comparer" />
+            <item index="33" class="java.lang.String" itemvalue="sl-menu" />
+            <item index="34" class="java.lang.String" itemvalue="sl-menu-item" />
+            <item index="35" class="java.lang.String" itemvalue="sl-menu-label" />
+            <item index="36" class="java.lang.String" itemvalue="sl-progress-bar" />
+            <item index="37" class="java.lang.String" itemvalue="sl-radio" />
+            <item index="38" class="java.lang.String" itemvalue="sl-radio-button" />
+            <item index="39" class="java.lang.String" itemvalue="sl-radio-group" />
+            <item index="40" class="java.lang.String" itemvalue="sl-option" />
+            <item index="41" class="java.lang.String" itemvalue="sl-tooltip" />
+            <item index="42" class="java.lang.String" itemvalue="sl-tab-panel" />
+            <item index="43" class="java.lang.String" itemvalue="sl-tab" />
+            <item index="44" class="java.lang.String" itemvalue="sl-tab-group" />
+            <item index="45" class="java.lang.String" itemvalue="sl-inputs" />
+            <item index="46" class="java.lang.String" itemvalue="sl-carousel-item" />
+            <item index="47" class="java.lang.String" itemvalue="help-text" />
+            <item index="48" class="java.lang.String" itemvalue="sl-rating" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HttpUrlsUsage" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <option name="ignoredUrls">
+        <list>
+          <option value="http://localhost" />
+          <option value="http://127.0.0.1" />
+          <option value="http://0.0.0.0" />
+          <option value="http://www.w3.org/" />
+          <option value="http://json-schema.org/draft" />
+          <option value="http://java.sun.com/" />
+          <option value="http://xmlns.jcp.org/" />
+          <option value="http://javafx.com/javafx/" />
+          <option value="http://javafx.com/fxml" />
+          <option value="http://maven.apache.org/xsd/" />
+          <option value="http://maven.apache.org/POM/" />
+          <option value="http://www.springframework.org/schema/" />
+          <option value="http://www.springframework.org/tags" />
+          <option value="http://www.springframework.org/security/tags" />
+          <option value="http://www.thymeleaf.org" />
+          <option value="http://www.jboss.org/j2ee/schema/" />
+          <option value="http://www.jboss.com/xml/ns/" />
+          <option value="http://www.ibm.com/webservices/xsd" />
+          <option value="http://activemq.apache.org/schema/" />
+          <option value="http://schema.cloudfoundry.org/spring/" />
+          <option value="http://schemas.xmlsoap.org/" />
+          <option value="http://cxf.apache.org/schemas/" />
+          <option value="http://primefaces.org/ui" />
+          <option value="http://tiles.apache.org/" />
+          <option value="http://maps.apple.com" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="IfStatementWithIdenticalBranchesJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="IncrementDecrementResultUsedJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSConstructorReturnsPrimitive" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSDeclarationsAtScopeStart" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSEqualityComparisonWithCoercion.TS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSIgnoredPromiseFromCall" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSNonASCIINames" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSNonStrictModeUsed" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSUnfilteredForInLoop" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSUnresolvedReference" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSUnusedGlobalSymbols" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSValidateJSDoc" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="JSXSyntaxUsed" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="JadeTabsAndSpaces" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="NegatedConditionalExpressionJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NegatedIfStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NestedFunctionJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_includeAnonymousFunctions" value="false" />
+    </inspection_tool>
+    <inspection_tool class="NestedSwitchStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NestingDepthJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_limit" value="5" />
+    </inspection_tool>
+    <inspection_tool class="NonAsciiCharacters" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="NonBlockStatementBodyJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ObjectAllocationIgnoredJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="OverlyComplexArithmeticExpressionJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_limit" value="6" />
+    </inspection_tool>
+    <inspection_tool class="ParameterNamingConventionJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_regex" value="[a-z][A-Za-z]*" />
+      <option name="m_minLength" value="1" />
+      <option name="m_maxLength" value="32" />
+    </inspection_tool>
+    <inspection_tool class="ParametersPerFunctionJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_limit" value="5" />
+    </inspection_tool>
+    <inspection_tool class="PointlessBitwiseExpressionJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreExpressionsContainingConstants" value="false" />
+    </inspection_tool>
+    <inspection_tool class="PostCssNesting" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ReplaceAssignmentWithOperatorAssignmentJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="StringLiteralBreaksHTMLJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TailRecursionJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TextLabelInSwitchStatementJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TodoComment" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TsLint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="TypeScriptValidateJSTypes" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLabelJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnusedCatchParameterJS" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreCatchBlocksWithComments" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnusedDefine" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="VoidExpressionJS" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="VueUnrecognizedDirective" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VueUnrecognizedSlot" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="XmlInvalidId" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="XmlUnboundNsPrefix" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
