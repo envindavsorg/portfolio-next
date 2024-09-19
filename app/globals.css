@@ -4,47 +4,47 @@
 
 @layer base {
 	:root {
-		--theme: #EA580C;
+		--theme: #ea580c;
 		--switch: #000000;
-		--background: #FEFCE8;
+		--background: #fefce8;
 		--foreground: #000000;
 		--border: #000000;
 		--divide: #000000;
 		--input: #000000;
 		--code: #020617;
-		--primary: #18181B;
-		--primary-foreground: #FAFAFA;
-		--secondary: #F4F4F5;
-		--secondary-foreground: #18181B;
-		--muted: #F4F4F5;
-		--muted-foreground: #71717A;
-		--accent: #F4F4F5;
-		--accent-foreground: #18181B;
-		--destructive: #DC2626;
-		--destructive-foreground: #FAFAFA;
+		--primary: #18181b;
+		--primary-foreground: #fafafa;
+		--secondary: #f4f4f5;
+		--secondary-foreground: #18181b;
+		--muted: #f4f4f5;
+		--muted-foreground: #71717a;
+		--accent: #f4f4f5;
+		--accent-foreground: #18181b;
+		--destructive: #dc2626;
+		--destructive-foreground: #fafafa;
 
 		--radius: 0.5rem;
 	}
 
 	.dark {
-		--theme: #FDE047;
-		--switch: #FFFFFF;
+		--theme: #fde047;
+		--switch: #ffffff;
 		--background: #000000;
-		--foreground: #FAFAFA;
+		--foreground: #fafafa;
 		--border: #737373;
 		--divide: #737373;
 		--input: #737373;
-		--code: #0F172A;
-		--primary: #FAFAFA;
-		--primary-foreground: #18181B;
-		--secondary: #27272A;
-		--secondary-foreground: #FAFAFA;
-		--muted: #27272A;
-		--muted-foreground: #A1A1AA;
-		--accent: #27272A;
-		--accent-foreground: #FAFAFA;
-		--destructive: #FCA5A5;
-		--destructive-foreground: #FAFAFA;
+		--code: #0f172a;
+		--primary: #fafafa;
+		--primary-foreground: #18181b;
+		--secondary: #27272a;
+		--secondary-foreground: #fafafa;
+		--muted: #27272a;
+		--muted-foreground: #a1a1aa;
+		--accent: #27272a;
+		--accent-foreground: #fafafa;
+		--destructive: #fca5a5;
+		--destructive-foreground: #fafafa;
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -103,7 +103,8 @@ code {
 	font-size: 14px;
 	padding: 0.2em 0.4em;
 	border-radius: 0.3em;
-	background-color: var(--color-gray-100);
+
+	@apply bg-border;
 }
 
 pre code {
@@ -128,7 +129,7 @@ pre code span {
 }
 
 hr {
-	color: var(--color-gray-200);
+	@apply text-border;
 }
 
 /* Remove Safari input shadow on mobile */

@@ -1,4 +1,5 @@
 import './globals.css';
+import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
 import { Footer } from '@/components/navigation/Footer';
 import { env as client } from '@/env/client';
@@ -51,16 +52,19 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			<body
 				className={cn(
 					'font-geist-mono tracking-tight antialiased',
+					'bg-white dark:bg-black',
 					geistSans.variable,
 					geistMono.variable,
 				)}
 			>
-				<div className="flex min-h-screen flex-col justify-between bg-white p-8 pt-0 text-switch md:pt-8 dark:bg-black">
-					<main className="mx-auto w-full max-w-[60ch]">{children}</main>
-					<Footer />
+				<Providers>
+					<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-switch md:pt-8">
+						<main className="mx-auto w-full max-w-[60ch]">{children}</main>
+						<Footer />
 
-					<Sparkles density={100} />
-				</div>
+						<Sparkles density={50} />
+					</div>
+				</Providers>
 
 				{process.env.NODE_ENV === 'production' && (
 					<>
