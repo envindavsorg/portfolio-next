@@ -1,25 +1,39 @@
 import './globals.css';
+import { Sparkles } from '@/components/background/Sparkles';
 import { Footer } from '@/components/navigation/Footer';
-import { env } from '@/env/client';
+import { env as client } from '@/env/client';
+import { env as server } from '@/env/server';
+import { cn } from '@/lib/utils';
+import { absoluteUrl, constructMetadata } from '@/site/metadata';
 import { Analytics } from '@vercel/analytics/react';
-import type { Metadata } from 'next';
+import { SpeedInsights } from '@vercel/speed-insights/react';
+import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
+import Script from 'next/script';
 import type React from 'react';
 
-const inter = Inter({ subsets: ['latin'] });
+const geistSans = localFont({
+	src: '../fonts/GeistSansVF.woff2',
+	variable: '--font-geist-sans',
+	weight: '100 900',
+});
 
-export const metadata: Metadata = {
-	metadataBase: new URL('https://leerob.com'),
-	alternates: {
-		canonical: '/',
-	},
-	title: {
-		default: env.NEXT_PUBLIC_FULL_NAME,
-		template: `%s | ${env.NEXT_PUBLIC_FULL_NAME}`,
-	},
+const geistMono = localFont({
+	src: '../fonts/GeistMonoVF.woff2',
+	variable: '--font-geist-mono',
+	weight: '100 900',
+});
+
+export const metadata: Metadata = constructMetadata({
+	title: client.NEXT_PUBLIC_FULL_NAME,
 	description:
 		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et passionné de nouvelles technologies.",
+	image: absoluteUrl('/api/og'),
+});
+
+export const viewport: Viewport = {
+	viewportFit: 'cover',
 };
 
 interface RootLayoutProps {
@@ -28,13 +42,40 @@ interface RootLayoutProps {
 
 const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 	<ViewTransitions>
-		<html lang="en" className={`${inter.className} [scrollbar-gutter:stable]`}>
-			<body className="tracking-tight antialiased">
-				<div className="flex min-h-screen flex-col justify-between bg-background p-8 pt-0 text-switch md:pt-8">
+		<html
+			lang="fr"
+			dir="ltr"
+			className="scrollbar-hide h-full scroll-smooth antialiased [scrollbar-gutter:stable]"
+			suppressHydrationWarning
+		>
+			<body
+				className={cn(
+					'font-geist-mono tracking-tight antialiased',
+					geistSans.variable,
+					geistMono.variable,
+				)}
+			>
+				<div className="flex min-h-screen flex-col justify-between bg-white p-8 pt-0 text-switch md:pt-8 dark:bg-black">
 					<main className="mx-auto w-full max-w-[60ch]">{children}</main>
 					<Footer />
-					<Analytics />
+
+					<Sparkles density={100} />
 				</div>
+
+				{process.env.NODE_ENV === 'production' && (
+					<>
+						<Analytics mode={'production'} debug={true} />
+						<SpeedInsights debug={false} />
+
+						{process.env.NODE_ENV === 'production' && (
+							<Script
+								defer
+								src={server.UMAMI_SCRIPT}
+								data-website-id={server.UMAMI_WEBSITE_ID}
+							/>
+						)}
+					</>
+				)}
 			</body>
 		</html>
 	</ViewTransitions>
