@@ -18,6 +18,9 @@ const fetchProjectStars = async (
 		});
 		return {
 			stars: repository.stargazers.totalCount,
+			owner: repository.owner.login,
+			name: repository.name,
+			avatar: repository.owner.avatarUrl,
 		};
 	} catch (error) {
 		logger.error('Error fetching GitHub project stars data:', error);
