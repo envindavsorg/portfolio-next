@@ -4,6 +4,11 @@ export const query: string = String.raw`
             stargazers {
                 totalCount
             }
+            owner {
+                login
+                avatarUrl
+            }
+            name
         }
     }
 `;
