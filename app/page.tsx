@@ -1,4 +1,5 @@
 import { Channels } from '@/components/Channels';
+import { Stars } from '@/components/Stars';
 import { CSSIcon } from '@/components/icons/CSS';
 import { ExpressIcon } from '@/components/icons/Express';
 import { FastifyIcon } from '@/components/icons/Fastify';
@@ -253,56 +254,60 @@ const Home = (): React.JSX.Element => (
 		</Motion>
 
 		<Motion className="mt-10" variants={variantsFive} asChild>
-			<p className="leading-8">
-				J'ai ensuite appris à utiliser des frameworks plus complexes comme{' '}
-				<Link
-					href="https://react.dev/"
-					aria-label="Voir le site de React !"
-					target="_blank"
-				>
-					<Badge>
-						<ReactIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>React</span>
-					</Badge>
-				</Link>{' '}
-				et{' '}
-				<Link
-					href="https://vuejs.org/"
-					aria-label="Voir le site de Vue !"
-					target="_blank"
-				>
-					<Badge>
-						<VueIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>Vue.js</span>
-					</Badge>
-				</Link>
-				, avec{' '}
-				<Link
-					href="https://www.typescriptlang.org/"
-					aria-label="Voir le site de Vue !"
-					target="_blank"
-				>
-					<Badge>
-						<TypeScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>TypeScript</span>
-					</Badge>
-				</Link>{' '}
-				en parallèle, me permettant de développer des applications plus
-				robustes, belles et fonctionnelles. Pour le{' '}
-				<span className="font-bold">design</span> et l'
-				<span className="font-bold">UI</span> des mes applications, j'utilise{' '}
-				<Link
-					href="https://tailwindcss.com/"
-					aria-label="Voir le site de Tailwind !"
-					target="_blank"
-				>
-					<Badge>
-						<TailwindCSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>Tailwind CSS</span>
-					</Badge>
-				</Link>
-				, qui est un framework incroyable de styling, puissant et modulaire.
-			</p>
+			<div className="space-y-4 leading-snug">
+				<p className="leading-8">
+					J'ai ensuite appris à utiliser des frameworks plus complexes comme{' '}
+					<Link
+						href="https://react.dev/"
+						aria-label="Voir le site de React !"
+						target="_blank"
+					>
+						<Badge>
+							<ReactIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>React</span>
+						</Badge>
+					</Link>{' '}
+					et{' '}
+					<Link
+						href="https://vuejs.org/"
+						aria-label="Voir le site de Vue !"
+						target="_blank"
+					>
+						<Badge>
+							<VueIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>Vue.js</span>
+						</Badge>
+					</Link>
+					, avec{' '}
+					<Link
+						href="https://www.typescriptlang.org/"
+						aria-label="Voir le site de Vue !"
+						target="_blank"
+					>
+						<Badge>
+							<TypeScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>TypeScript</span>
+						</Badge>
+					</Link>{' '}
+					en parallèle, me permettant de développer des applications plus
+					robustes, belles et fonctionnelles. Pour le{' '}
+					<span className="font-bold">design</span> et l'
+					<span className="font-bold">UI</span> des mes applications, j'utilise{' '}
+					<Link
+						href="https://tailwindcss.com/"
+						aria-label="Voir le site de Tailwind !"
+						target="_blank"
+					>
+						<Badge>
+							<TailwindCSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>Tailwind CSS</span>
+						</Badge>
+					</Link>
+					, qui est un framework incroyable de styling, puissant et modulaire.
+				</p>
+
+				<Stars className="mt-2" />
+			</div>
 		</Motion>
 
 		<Motion className="mt-10" variants={variantsSix} asChild>
