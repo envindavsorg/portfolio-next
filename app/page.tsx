@@ -96,7 +96,11 @@ const Home = (): React.JSX.Element => (
 			<Motion variants={variantsTwo} asChild>
 				<p className="leading-8">
 					Je{' '}
-					<Link href="/n/stack" className="font-bold text-theme underline">
+					<Link
+						href="/stack"
+						aria-label="Technologies que j'utilise"
+						className="font-bold text-theme underline"
+					>
 						travaille
 					</Link>{' '}
 					actuellement chez{' '}
@@ -193,7 +197,9 @@ const Home = (): React.JSX.Element => (
 					<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
 						<TypeScriptIcon className="size-7 shrink-0" />
 					</div>
-
+					<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+						<TailwindCSSIcon className="size-7 shrink-0" />
+					</div>
 					<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
 						<HTML5Icon className="size-7 shrink-0" />
 					</div>

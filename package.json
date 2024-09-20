@@ -9,7 +9,9 @@
 		"name": "Cuzeac Florin",
 		"url": "https://cuzeac-florin.app"
 	},
-	"contributors": ["florin@cuzeac.com"],
+	"contributors": [
+		"florin@cuzeac.com"
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/envindavsorg/portfolio-site"
@@ -32,6 +34,7 @@
 		"@next/mdx": "15.0.0-canary.143",
 		"@openstatus/react": "^0.0.3",
 		"@phosphor-icons/react": "^2.1.7",
+		"@radix-ui/react-accordion": "^1.2.0",
 		"@radix-ui/react-avatar": "^1.1.0",
 		"@radix-ui/react-separator": "^1.1.0",
 		"@radix-ui/react-slot": "^1.1.0",
