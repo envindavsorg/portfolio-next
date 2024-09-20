@@ -1,7 +1,6 @@
 'use client';
 
 import { defaultVariants } from '@/components/motion.variants';
-import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import {
 	type ForwardRefComponent,
@@ -41,14 +40,7 @@ export function Motion({
 		variants: variants || defaultVariants,
 	};
 	return (
-		<Comp
-			{...defaultProps}
-			className={cn(
-				'text-2xl font-medium leading-relaxed dark:text-white',
-				className,
-			)}
-			{...props}
-		>
+		<Comp {...defaultProps} className={className} {...props}>
 			{children}
 		</Comp>
 	);

@@ -237,3 +237,12 @@ table {
 ::selection {
 	@apply text-white dark:text-black bg-theme;
 }
+
+.scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}

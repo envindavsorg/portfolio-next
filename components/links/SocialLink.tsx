@@ -14,7 +14,7 @@ export const SocialLink = ({
 	SocialLinkProps): React.JSX.Element => (
 	<Link className="group -m-1 p-1" {...props}>
 		<Icon
-			className="size-6 fill-switch transition group-hover:fill-theme"
+			className="size-8 fill-switch transition group-hover:fill-theme"
 			{...iconProps}
 		/>
 	</Link>

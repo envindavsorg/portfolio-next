@@ -1,6 +1,7 @@
 import { githubUser } from '@/actions/github/user.action';
 import { linkedInData } from '@/actions/linkedin/data.action';
 import { Counter } from '@/components/Counter';
+import { cn } from '@/lib/utils';
 import {
 	ArrowUpRight,
 	GithubLogo,
@@ -57,12 +58,23 @@ const Channel = ({
 	</div>
 );
 
-export const Channels = async (): Promise<React.JSX.Element> => {
+interface ChannelsProps {
+	className?: string;
+}
+
+export const Channels = async ({
+	className,
+}: ChannelsProps): Promise<React.JSX.Element> => {
 	const [github, linkedin] = await Promise.all([githubUser(), linkedInData()]);
 
 	return (
-		<div className="my-8 flex w-full flex-col space-x-0 space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-			<div className="flex w-full flex-col gap-y-2">
+		<div
+			className={cn(
+				'flex w-full flex-col space-x-0 space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0',
+				className,
+			)}
+		>
+			<div className="flex w-full flex-col-reverse gap-y-2">
 				<div className="flex items-center gap-x-2">
 					<GithubLogo className="text-lg" weight="bold" />
 					<p className="text-sm leading-snug">Sur GitHub :</p>
@@ -74,7 +86,7 @@ export const Channels = async (): Promise<React.JSX.Element> => {
 					subs={Math.round(github.followers + github.following)}
 				/>
 			</div>
-			<div className="group flex w-full flex-col gap-y-2">
+			<div className="group flex w-full flex-col-reverse gap-y-2">
 				<div className="flex items-center gap-x-2">
 					<LinkedinLogo className="text-lg" weight="bold" />
 					<p className="text-sm leading-snug">Sur LinkedIn :</p>

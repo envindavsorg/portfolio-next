@@ -1,9 +1,8 @@
 import './globals.css';
 import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
-import { Cat } from '@/components/draw/Cat';
 import { Footer } from '@/components/navigation/Footer';
-import { env as client, env } from '@/env/client';
+import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
@@ -28,7 +27,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = constructMetadata({
-	title: `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`,
+	title: `${client.NEXT_PUBLIC_NAME} ${client.NEXT_PUBLIC_SURNAME}`,
 	description:
 		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et de nouvelles technologies.",
 	image: absoluteUrl('/api/og'),
@@ -60,13 +59,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			>
 				<Providers>
 					<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-switch md:pt-8">
-						<main className="mx-auto w-full max-w-[60ch] pb-5">
-							<div className="relative ms-auto mt-4 flex h-16 w-1/2 justify-end overflow-hidden border-neutral-200 border-b md:h-20 md:w-1/3 dark:border-neutral-700">
-								<Cat className="absolute top-5 right-5 h-full" />
-							</div>
-
-							{children}
-						</main>
+						<main className="mx-auto w-full max-w-[60ch] pb-5">{children}</main>
 						<Footer />
 
 						<Sparkles density={50} />
