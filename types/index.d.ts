@@ -222,6 +222,9 @@ export type { ProjectInfo, ProjectInfoResponse };
 // fetch number of stars for a specific GitHub project
 interface ProjectStars {
 	stars: number;
+	owner: string;
+	name: string;
+	avatar: string;
 }
 
 interface ProjectStarsResponse {
@@ -229,6 +232,11 @@ interface ProjectStarsResponse {
 		stargazers: {
 			totalCount: number;
 		};
+		owner: {
+			login: string;
+			avatarUrl: string;
+		};
+		name: string;
 	};
 }
 
