@@ -3,7 +3,7 @@ import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
 import { Cat } from '@/components/draw/Cat';
 import { Footer } from '@/components/navigation/Footer';
-import { env as client } from '@/env/client';
+import { env as client, env } from '@/env/client';
 import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
@@ -28,7 +28,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = constructMetadata({
-	title: client.NEXT_PUBLIC_FULL_NAME,
+	title: `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`,
 	description:
 		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et de nouvelles technologies.",
 	image: absoluteUrl('/api/og'),
