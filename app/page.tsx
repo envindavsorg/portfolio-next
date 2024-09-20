@@ -98,8 +98,8 @@ const Home = (): React.JSX.Element => (
 				<p className="leading-8">
 					Je{' '}
 					<Link
-						href="/stack"
-						aria-label="Technologies que j'utilise"
+						href="/work"
+						aria-label="Entreprises pour lesquelles j'ai travaillé"
 						className="font-bold text-theme underline"
 					>
 						travaille
@@ -162,8 +162,15 @@ const Home = (): React.JSX.Element => (
 				<p className="leading-8">
 					En{' '}
 					<span className="font-semibold">{experience} ans d'expérience</span>,
-					j'ai eu l'occasion de travailler avec de nombreux langages et
-					technologies, sur beaucoup de projets différents. J'ai commencé par le
+					j'ai eu l'occasion de{' '}
+					<Link
+						href="/stack"
+						aria-label="Technologies que j'utilise"
+						className="font-bold text-theme underline"
+					>
+						travailler avec de nombreux langages et technologies
+					</Link>
+					, sur beaucoup de projets différents. J'ai commencé par le
 					développement web avec{' '}
 					<Badge>
 						<HTML5Icon className="me-1 size-4 shrink-0 pb-0.5" />
