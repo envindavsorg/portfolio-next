@@ -263,7 +263,15 @@ const Home = (): React.JSX.Element => (
 		<Motion className="mt-10" variants={variantsFive} asChild>
 			<div className="space-y-4 leading-snug">
 				<p className="leading-8">
-					J'ai ensuite appris à utiliser des frameworks plus complexes comme{' '}
+					J'ai ensuite{' '}
+					<Link
+						href="/stack"
+						aria-label="Technologies que j'utilise"
+						className="font-bold text-theme underline"
+					>
+						appris à utiliser
+					</Link>{' '}
+					des frameworks plus complexes comme{' '}
 					<Link
 						href="https://react.dev/"
 						aria-label="Voir le site de React !"
@@ -333,6 +341,13 @@ const Home = (): React.JSX.Element => (
 						className="font-medium underline hover:text-theme"
 					>
 						GitHub
+					</Link>{' '}
+					<Link
+						href="/github"
+						aria-label="Activité et statistiques de mon profil GitHub"
+						className="font-bold text-theme underline"
+					>
+						(retrouvez toute mon activité et mes statistiques)
 					</Link>
 					, n'hésitez pas à me rendre une petite visite sur mes profils et
 					pourquoi pas me laisser un message :)
