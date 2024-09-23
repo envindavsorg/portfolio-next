@@ -30,11 +30,8 @@ import {
     variantsSeven,
     variantsEight,
 } from '@/components/motion.variants';
-import { wakatimeStats } from '@/actions/wakatime/stats.action';
 import { MostUsedLanguagesCharts } from '@/app/stack/MostUsedLanguagesCharts';
 import { LanguagesUsedInProject } from '@/app/stack/LanguagesUsedInProject';
-import { projectInfo } from '@/actions/github/project.action';
-import { env } from '@/env/server';
 
 export const metadata = {
     title: "Technologies que j'utilise",
@@ -42,23 +39,6 @@ export const metadata = {
         canonical: '/stack',
     },
 };
-
-export const Languages = async () => {
-    const { data } = await wakatimeStats();
-
-    return (
-        <MostUsedLanguagesCharts languages={data.languages} />
-    )
-}
-
-export const Project = async () => {
-    const { languages, commits } = await projectInfo(env.GITHUB_REPO);
-    languages.unshift({name: 'Contributions', percentage: commits});
-
-    return (
-        <LanguagesUsedInProject languages={languages}/>
-    )
-}
 
 # Technologies que j'utilise
 
@@ -101,14 +81,14 @@ export const Project = async () => {
     en pourcentage d'utilisation :
 </Motion>
 <Motion className="mt-4" variants={variantsTwo}>
-    <Project />
+    <LanguagesUsedInProject />
 </Motion>
 
 <Motion className="mt-8" variants={variantsThree} asChild>
     Les langages que j'ai le plus utilisé cette semaine :
 </Motion>
 <Motion className="mt-4 pb-[52px]" variants={variantsThree}>
-    <Languages />
+    <MostUsedLanguagesCharts />
 </Motion>
 
 <Motion variants={variantsFour} asChild>
