@@ -30,6 +30,8 @@ enum VariantDurations {
 	Four = 0.65,
 	Five = 0.75,
 	Six = 0.85,
+	Seven = 0.95,
+	Eight = 1,
 }
 
 enum VariantDelays {
@@ -39,6 +41,8 @@ enum VariantDelays {
 	Four = 0.55,
 	Five = 0.65,
 	Six = 0.75,
+	Seven = 0.85,
+	Eight = 0.95,
 }
 
 export const variantsOne: Variants = createVariant(
@@ -64,6 +68,11 @@ export const variantsFive: Variants = createVariant(
 export const variantsSix: Variants = createVariant(
 	VariantDurations.Six,
 	VariantDelays.Six,
+);
+
+export const variantsSeven: Variants = createVariant(
+	VariantDurations.Seven,
+	VariantDelays.Seven,
 );
 
 //
