@@ -1,6 +1,5 @@
 'use client';
 
-import { wakatimeStats } from '@/actions/wakatime/stats.action';
 import { CSSIcon } from '@/components/icons/CSS';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { JsonIcon } from '@/components/icons/Json';
@@ -20,11 +19,11 @@ type Languages = {
 	items?: number;
 };
 
-export const MostUsedLanguagesCharts = async () => {
-	const { data } = await wakatimeStats();
-	const { languages } = data as {
-		languages: Languages[];
-	};
+interface Props {
+	languages: Languages[];
+}
+
+export const MostUsedLanguagesCharts = ({ languages }: Props) => {
 	const content: Languages[] = languages
 		.slice(0, 5)
 		.map(({ name, percent }) => ({
