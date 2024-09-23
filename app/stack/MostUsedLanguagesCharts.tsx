@@ -1,5 +1,6 @@
 'use client';
 
+import { wakatimeStats } from '@/actions/wakatime/stats.action';
 import { CSSIcon } from '@/components/icons/CSS';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { JsonIcon } from '@/components/icons/Json';
@@ -19,11 +20,11 @@ type Languages = {
 	items?: number;
 };
 
-interface Props {
-	languages: Languages[];
-}
-
-export const MostUsedLanguagesCharts = ({ languages }: Props) => {
+export const MostUsedLanguagesCharts = async () => {
+	const { data } = await wakatimeStats();
+	const { languages } = data as {
+		languages: Languages[];
+	};
 	const content: Languages[] = languages
 		.slice(0, 5)
 		.map(({ name, percent }) => ({
@@ -44,7 +45,7 @@ export const MostUsedLanguagesCharts = ({ languages }: Props) => {
 
 	return (
 		<div
-			className="grid grid-cols-1 gap-3 md:gap-6 min-h-[200px]"
+			className="grid min-h-[200px] grid-cols-1 gap-3 md:gap-6"
 			style={{
 				gridTemplateColumns: `repeat(${content.length}, minmax(0, 1fr))`,
 			}}
@@ -70,8 +71,8 @@ export const MostUsedLanguagesCharts = ({ languages }: Props) => {
 								<Icon className="size-8 shrink-0 sm:size-10" />
 							</div>
 						</div>
-						<div className="flex flex-col items-center justify-center gap-y-1 mt-2">
-							<p className="font-geist-sans font-bold text-base tracking-tighter">
+						<div className="mt-2 flex flex-col items-center justify-center gap-y-1">
+							<p className="font-bold font-geist-sans text-base tracking-tighter">
 								{TextMapping[name] || name}
 							</p>
 							<p className="font-geist-sans font-medium text-xs tracking-tighter">
