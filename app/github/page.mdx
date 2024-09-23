@@ -1,0 +1,67 @@
+import { Suspense } from 'react';
+import { contributionsGitHub } from '@/actions/github/contributions.action';
+import { githubUser } from '@/actions/github/user.action';
+import { AnimatedName } from '@/app/animated-name.tsx';
+import { GitHubStatsOverall } from '@/app/github/GitHubStatsOverall';
+import { Spinner } from '@/components/ui/Spinner';
+import { ContributionsTable } from '@/app/github/ContributionsTable';
+import { ContributionsGraph } from '@/app/github/ContributionsGraph';
+import { Motion } from '@/components/motion';
+import {
+    variantsOne,
+    variantsTwo,
+    variantsThree,
+} from '@/components/motion.variants';
+
+export const metadata = {
+    title: 'Activité et statistiques de mon profil GitHub',
+    alternates: {
+        canonical: '/github',
+    },
+};
+
+export const GitHubContributionsGraph = async () => {
+    const { login, name, avatar } = await githubUser();
+    const {
+        contributionCalendar: { weeks, colors },
+    } = await contributionsGitHub();
+
+    return (
+        <ContributionsGraph
+            weeks={weeks}
+            colors={colors}
+            login={login}
+            name={name}
+            avatar={avatar}
+        />
+    )
+}
+
+# Activité et statistiques de mon profil GitHub
+
+<AnimatedName />
+
+<Motion className="mt-8" variants={variantsOne} asChild>
+    Toutes mes statistiques GitHub (nombre de commits, abonnés, suivis)
+    de l'année {new Date().getFullYear() - 1} - {new Date().getFullYear()} sont affichées ici.
+</Motion>
+
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="mt-4" variants={variantsOne}>
+        <GitHubStatsOverall />
+    </Motion>
+</Suspense>
+
+<Motion className="mt-8" variants={variantsTwo} asChild>
+    Mon graphique de contributions GitHub :
+</Motion>
+<Motion className="mt-4" variants={variantsTwo}>
+    <GitHubContributionsGraph />
+</Motion>
+
+<Motion className="mt-8" variants={variantsThree} asChild>
+    Plus de détails sur la semaine passée :
+</Motion>
+<Motion className="mt-4" variants={variantsThree}>
+    <ContributionsTable />
+</Motion>
