@@ -75,6 +75,11 @@ export const variantsSeven: Variants = createVariant(
 	VariantDelays.Seven,
 );
 
+export const variantsEight: Variants = createVariant(
+	VariantDurations.Eight,
+	VariantDelays.Eight,
+);
+
 //
 //
 //
