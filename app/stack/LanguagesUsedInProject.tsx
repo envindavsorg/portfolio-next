@@ -9,6 +9,7 @@ import { Motion } from '@/components/motion';
 import { defaultVariants } from '@/components/motion.variants';
 import { Card } from '@/components/ui/Card';
 import { env } from '@/env/server';
+import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
 
 type Icons = {
@@ -25,6 +26,7 @@ const icons: Icons = {
 };
 
 export const LanguagesUsedInProject = async () => {
+	noStore();
 	const { languages, commits } = await projectInfo(env.GITHUB_REPO);
 	languages.unshift({ name: 'Contributions', percentage: commits });
 
