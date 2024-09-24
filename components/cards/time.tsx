@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/variants';
 import { motion } from 'framer-motion';
 import type React from 'react';
 import { useEffect, useState } from 'react';

@@ -15,7 +15,7 @@ import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
 import { WeFixIcon } from '@/components/icons/WeFix';
 import { SocialLink } from '@/components/links/SocialLink';
-import { Motion } from '@/components/motion';
+import { Motion } from '@/components/motion/Motion';
 import {
 	variantsFive,
 	variantsFour,
@@ -23,7 +23,7 @@ import {
 	variantsSix,
 	variantsThree,
 	variantsTwo,
-} from '@/components/motion.variants';
+} from '@/components/motion/variants';
 import { Badge } from '@/components/ui/Badge';
 import { env } from '@/env/client';
 import {
