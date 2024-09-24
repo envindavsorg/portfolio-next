@@ -1,17 +1,14 @@
+import React from 'react';
 import { Suspense } from 'react';
-import { contributionsGitHub } from '@/actions/github/contributions.action';
-import { githubUser } from '@/actions/github/user.action';
-import { AnimatedName } from '@/app/animated-name.tsx';
-import { GitHubStatsOverall } from '@/app/github/GitHubStatsOverall';
+import { GitHubStatsServer } from '@/components/github/stats/GitHubStatsServer';
+import { ContributionsGraphServer } from '@/components/github/contributions/ContributionsServer';
+import { ContributionsTableServer } from '@/components/github/contributions/ContributionsServer';
 import { Spinner } from '@/components/ui/Spinner';
-import { ContributionsTable } from '@/app/github/ContributionsTable';
-import { ContributionsGraph } from '@/app/github/ContributionsGraph';
-import { Motion } from '@/components/motion';
+import { Motion } from '@/components/motion/Motion';
 import {
-    variantsOne,
-    variantsTwo,
-    variantsThree,
-} from '@/components/motion.variants';
+    variantsOne, variantsTwo, variantsThree,
+} from '@/components/motion/variants';
+import { AnimatedName } from '@/app/animated-name.tsx';
 
 export const metadata = {
     title: 'Activité et statistiques de mon profil GitHub',
@@ -20,48 +17,31 @@ export const metadata = {
     },
 };
 
-export const GitHubContributionsGraph = async () => {
-    const { login, name, avatar } = await githubUser();
-    const {
-        contributionCalendar: { weeks, colors },
-    } = await contributionsGitHub();
-
-    return (
-        <ContributionsGraph
-            weeks={weeks}
-            colors={colors}
-            login={login}
-            name={name}
-            avatar={avatar}
-        />
-    )
-}
-
 # Activité et statistiques de mon profil GitHub
 
 <AnimatedName />
 
-<Motion className="mt-8" variants={variantsOne} asChild>
+<Motion className="mt-12" variants={variantsOne} asChild>
     Toutes mes statistiques GitHub (nombre de commits, abonnés, suivis)
     de l'année {new Date().getFullYear() - 1} - {new Date().getFullYear()} sont affichées ici.
 </Motion>
 
 <Suspense fallback={<Spinner className="h-52" />}>
     <Motion className="mt-4" variants={variantsOne}>
-        <GitHubStatsOverall />
+        <GitHubStatsServer />
     </Motion>
 </Suspense>
 
-<Motion className="mt-8" variants={variantsTwo} asChild>
-    Mon graphique de contributions GitHub :
+<Motion className="mt-12" variants={variantsTwo} asChild>
+    Mon graphique de contributions GitHub sur l'année dernière
 </Motion>
 <Motion className="mt-4" variants={variantsTwo}>
-    <GitHubContributionsGraph />
+    <ContributionsGraphServer />
 </Motion>
 
-<Motion className="mt-8" variants={variantsThree} asChild>
-    Plus de détails sur la semaine passée :
+<Motion className="mt-12" variants={variantsThree} asChild>
+    Plus de détails sur mon nombre de commits de la semaine dernière
 </Motion>
 <Motion className="mt-4" variants={variantsThree}>
-    <ContributionsTable />
+    <ContributionsTableServer />
 </Motion>

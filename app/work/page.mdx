@@ -15,13 +15,13 @@ import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
 import { VuetifyIcon } from '@/components/icons/Vuetify';
 import React from 'react';
-import { Motion } from '@/components/motion';
+import { Motion } from '@/components/motion/Motion';
 import {
     variantsFour,
     variantsOne,
     variantsThree,
     variantsTwo,
-} from '@/components/motion.variants';
+} from '@/components/motion/variants';
 
 export const metadata = {
     title: "Entreprises pour lesquelles j'ai travaillé",
@@ -38,7 +38,7 @@ export const Small = ({ children }) => (
 
 <AnimatedName />
 
-<Motion variants={variantsOne} asChild>
+<Motion className="mt-12" variants={variantsOne} asChild>
     Je travaille actuellement chez WeFix, une entreprise leader dans la réparation des appareils
     électroniques, que j’ai rejoint en 2020 en tant que développeur web. Depuis mon arrivée,
     j’ai participé à de nombreux projets visant à améliorer les plateformes en ligne et les
@@ -47,22 +47,22 @@ export const Small = ({ children }) => (
     entreprises de tailles variées, des startups aux grandes entreprises.
 </Motion>
 
-<Motion variants={variantsTwo} asChild>
+<Motion className="mt-12" variants={variantsTwo} asChild>
     ## WeFix by Fnac (jan. 2020 - aujourd'hui)
 </Motion>
-<Motion variants={variantsTwo} asChild>
+<Motion className="mt-4" variants={variantsTwo} asChild>
     <Small>Développeur Front</Small>
 </Motion>
-<Motion variants={variantsTwo} asChild>
+<Motion className="mt-4" variants={variantsTwo} asChild>
     J'ai rejoint WeFix (groupe Fnac & Darty) en 2020, en tant que développeur web. J'ai eu la chance de
     travailler sur des projets variés, de la refonte du site web à la mise en place de nouvelles
     fonctionnalités, en interne comme chez de nouveaux partenaires
     comme Bouygues Telecom, Garantie Privée, Assurant, Fnac, etc.
 </Motion>
-<Motion variants={variantsTwo} asChild>
+<Motion className="mt-4" variants={variantsTwo} asChild>
     ### Technologies utilisées : React, Next.js, Tailwind CSS, TypeScript, Express, MongoDB, etc.
 </Motion>
-<Motion className="mt-3" variants={variantsTwo} asChild>
+<Motion className="mt-4" variants={variantsTwo} asChild>
     <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
         <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
             <TypeScriptIcon className="size-7 shrink-0" />
@@ -102,7 +102,7 @@ export const Small = ({ children }) => (
         </div>
     </div>
 </Motion>
-<Motion className="mt-2" variants={variantsTwo} asChild>
+<Motion className="mt-4" variants={variantsTwo} asChild>
     <div className="flex items-center space-x-3">
         <svg
             className="size-6 flex-none"
@@ -131,22 +131,22 @@ export const Small = ({ children }) => (
     </div>
 </Motion>
 
-<Motion variants={variantsThree} asChild>
+<Motion className="mt-12" variants={variantsThree} asChild>
     ## SpinalCom (juil. 2019 - jan. 2020)
 </Motion>
-<Motion variants={variantsThree} asChild>
+<Motion className="mt-4" variants={variantsThree} asChild>
     <Small>Développeur / Designer Web</Small>
 </Motion>
-<Motion variants={variantsThree} asChild>
+<Motion className="mt-4" variants={variantsThree} asChild>
     Durant ma dernière année d'alternance, j'ai rejoint SpinalCom, une startup spécialisée
     dans le développement de solution pour le bâtiment connecté. J'ai eu l'opportunité de travailler
     sur la dashboard de gestion des équipements connectés, la refonte du
     site web et la création de maquettes pour de nouveaux projets.
 </Motion>
-<Motion variants={variantsThree} asChild>
+<Motion className="mt-4" variants={variantsThree} asChild>
     ### Technologies utilisées : Vue, Vuetify, JavaScript, etc.
 </Motion>
-<Motion className="mt-3" variants={variantsThree} asChild>
+<Motion className="mt-4" variants={variantsThree} asChild>
     <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
         <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
             <JavaScriptIcon className="size-7 shrink-0" />
@@ -169,21 +169,21 @@ export const Small = ({ children }) => (
     </div>
 </Motion>
 
-<Motion variants={variantsFour} asChild>
+<Motion className="mt-12" variants={variantsFour} asChild>
     ## Économat des Armées (jan. 2018 - juil. 2019)
 </Motion>
-<Motion variants={variantsFour} asChild>
+<Motion className="mt-4" variants={variantsFour} asChild>
     <Small>Développeur web / multiplateformes</Small>
 </Motion>
-<Motion variants={variantsFour} asChild>
+<Motion className="mt-4" variants={variantsFour} asChild>
     Durant ma première année d'alternance, j'ai rejoint l'Économat des Armées, une entreprise
     partenaire du soutien des forces armées. J'ai travaillé sur la création d'un site sur
     l'intranet du Ministère des Armées, et d'un annuaire interne à l'entreprise.
 </Motion>
-<Motion variants={variantsFour} asChild>
+<Motion className="mt-4" variants={variantsFour} asChild>
     ### Technologies utilisées : Python, Flask, React, HTML, CSS, JavaScript, etc.
 </Motion>
-<Motion className="mt-3" variants={variantsFour} asChild>
+<Motion className="mt-4" variants={variantsFour} asChild>
     <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
         <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
             <FlaskIcon className="size-7 shrink-0" />
