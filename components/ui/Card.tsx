@@ -1,7 +1,7 @@
 'use client';
 
 import { DotPattern } from '@/components/background/DotPattern';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/variants';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import type React from 'react';
@@ -59,7 +59,7 @@ export const Card = ({
 
 			{title && (
 				<div className="z-20 flex flex-col">
-					<h3 className="font-extrabold font-geist-sans text-base tracking-tighter sm:text-lg">
+					<h3 className="font-extrabold font-geist-sans text-lg tracking-tighter md:text-xl">
 						{title}
 					</h3>
 					{comment && (
