@@ -5,7 +5,7 @@ import { LinkedInCard } from '@/components/cards/linkedin';
 import { LocationCard } from '@/components/cards/location';
 import { MeCard } from '@/components/cards/me';
 import { TimeCard } from '@/components/cards/time';
-import { Motion } from '@/components/motion';
+import { Motion } from '@/components/motion/Motion';
 
 export const Cards = async () => {
 	const { followers, stars } = await getGithubStats();
