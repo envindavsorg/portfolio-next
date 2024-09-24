@@ -2,7 +2,7 @@
 
 import type { getGithubContributions } from '@/app/actions';
 import { contributionsColorMap } from '@/components/cards/constants';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/variants';
 import { cn } from '@/lib/utils';
 import { GithubLogo } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
