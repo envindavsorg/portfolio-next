@@ -1,4 +1,3 @@
-import { contributionsGitHub } from '@/actions/github/contributions.action';
 import {
 	Table,
 	TableBody,
@@ -11,14 +10,23 @@ import {
 import { dayjs } from '@/lib/dayjs';
 import type React from 'react';
 
-export const ContributionsTable = async () => {
-	// get GitHub contributions data
-	const { contributionCalendar } = await contributionsGitHub();
+interface Props {
+	weeks: {
+		contributionDays: {
+			color: string;
+			contributionCount: number;
+			date: string;
+		}[];
+		firstDay: string;
+	}[];
+}
+
+export const ContributionsTableClient = async ({ weeks }: Props) => {
 	const currentDate: Date = new Date();
 	const currentMonth: number = currentDate.getMonth();
 	const currentYear: number = currentDate.getFullYear();
 
-	const currentMonthWeeks = contributionCalendar.weeks.filter((week) => {
+	const currentMonthWeeks = weeks.filter((week) => {
 		const weekDate = new Date(week.firstDay);
 		return (
 			weekDate.getMonth() === currentMonth &&

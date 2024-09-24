@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/variants';
 import { GithubLogo } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
