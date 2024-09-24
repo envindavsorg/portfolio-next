@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/variants';
 import { env } from '@/env/client';
 import { Globe } from '@phosphor-icons/react';
 import createGlobe from 'cobe';
