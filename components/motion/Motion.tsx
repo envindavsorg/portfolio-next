@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultVariants } from '@/components/motion.variants';
+import { defaultVariants } from '@/components/motion/variants';
 import { Slot } from '@radix-ui/react-slot';
 import {
 	type ForwardRefComponent,

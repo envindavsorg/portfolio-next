@@ -1,6 +1,6 @@
 'use client';
 
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/variants';
 import portrait from '@/images/portrait.webp';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
