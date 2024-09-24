@@ -32,6 +32,7 @@ import {
 } from '@/components/motion/variants';
 import { MostUsedLanguages } from '@/app/stack/MostUsedLanguages';
 import { LanguagesUsedInProject } from '@/app/stack/LanguagesUsedInProject';
+import { HowToScroll } from '@/components/blocs/HowToScroll';
 
 export const metadata = {
     title: "Technologies que j'utilise",
@@ -74,6 +75,9 @@ export const metadata = {
             <FastifyIcon className="size-7 shrink-0" />
         </div>
     </div>
+</Motion>
+<Motion className="sm:hidden block mt-4" variants={variantsOne} asChild>
+    <HowToScroll />
 </Motion>
 
 <Motion className="mt-12" variants={variantsTwo} asChild>

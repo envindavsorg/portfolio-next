@@ -1,5 +1,6 @@
 import { Channels } from '@/components/Channels';
 import { Stars } from '@/components/Stars';
+import { HowToScroll } from '@/components/blocs/HowToScroll';
 import { CSSIcon } from '@/components/icons/CSS';
 import { ExpressIcon } from '@/components/icons/Express';
 import { FastifyIcon } from '@/components/icons/Fastify';
@@ -79,7 +80,7 @@ const Home = (): React.JSX.Element => (
 	<>
 		<AnimatedName />
 
-		<div className="mt-8 space-y-4 leading-snug">
+		<div className="mt-12 space-y-4 leading-snug">
 			<Motion variants={variantsOne} asChild>
 				<p className="leading-8">
 					Bonjour, je m'appelle{' '}
@@ -122,7 +123,7 @@ const Home = (): React.JSX.Element => (
 			</Motion>
 		</div>
 
-		<Motion className="mt-10" variants={variantsThree} asChild>
+		<Motion className="mt-12" variants={variantsThree} asChild>
 			<div className="flex gap-6">
 				<SocialLink
 					href={`https://www.linkedin.com/in/${env.NEXT_PUBLIC_WEBSITE_PREFIX}`}
@@ -157,7 +158,7 @@ const Home = (): React.JSX.Element => (
 			</div>
 		</Motion>
 
-		<Motion className="mt-10" variants={variantsFour} asChild>
+		<Motion className="mt-12" variants={variantsFour} asChild>
 			<div className="space-y-4 leading-snug">
 				<p className="leading-8">
 					En{' '}
@@ -231,36 +232,11 @@ const Home = (): React.JSX.Element => (
 					</div>
 				</div>
 
-				<div className="flex items-center space-x-3">
-					<svg
-						className="size-6 flex-none"
-						viewBox="0 0 20 20"
-						fill="none"
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						aria-hidden="true"
-					>
-						<path
-							d="m9.813 9.25.346-5.138a1.276 1.276 0 0 0-2.54-.235L6.75 11.25 5.147 9.327a1.605 1.605 0 0 0-2.388-.085.018.018 0 0 0-.004.019l1.98 4.87a5 5 0 0 0 4.631 3.119h3.885a4 4 0 0 0 4-4v-1a3 3 0 0 0-3-3H9.813Z"
-							className="stroke-switch"
-						/>
-						<path
-							d="M3 5s.35-.47 1.25-.828m9.516-.422c2.078.593 3.484 1.5 3.484 1.5"
-							className="stroke-theme"
-						/>
-					</svg>
-					<p className="text-sm">
-						Vous pouvez scroller de{' '}
-						<span className="font-medium text-theme">gauche</span> à{' '}
-						<span className="font-medium text-theme">droite</span> pour voir
-						toutes les technologies que j'utilise.
-					</p>
-				</div>
+				<HowToScroll />
 			</div>
 		</Motion>
 
-		<Motion className="mt-10" variants={variantsFive} asChild>
+		<Motion className="mt-12" variants={variantsFive} asChild>
 			<div className="space-y-4 leading-snug">
 				<p className="leading-8">
 					J'ai ensuite{' '}
@@ -325,7 +301,7 @@ const Home = (): React.JSX.Element => (
 			</div>
 		</Motion>
 
-		<Motion className="mt-10" variants={variantsSix} asChild>
+		<Motion className="mt-12" variants={variantsSix} asChild>
 			<div className="space-y-4 leading-snug">
 				<p className="leading-8">
 					Je suis présent sur{' '}
