@@ -1,5 +1,5 @@
 import { projectStars } from '@/actions/github/stars.action';
-import { Counter } from '@/components/Counter';
+import { Counter } from '@/components/text/Counter';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
