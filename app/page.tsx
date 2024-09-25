@@ -45,7 +45,7 @@ const Home = (): React.JSX.Element => (
 	<>
 		<AnimatedName />
 
-		<div className="mt-12 space-y-4 leading-snug">
+		<div className="mt-8 space-y-4 leading-snug">
 			<Motion variants={variantsOne} asChild>
 				<p className="leading-8">
 					Bonjour, je m'appelle{' '}

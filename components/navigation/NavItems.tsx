@@ -13,7 +13,7 @@ export const navItems: NavItems[] = [
 		position: 1,
 	},
 	{
-		name: 'Professionnel',
+		name: 'Travail',
 		description: 'Mon parcours professionnel',
 		link: '/work',
 		position: 8,

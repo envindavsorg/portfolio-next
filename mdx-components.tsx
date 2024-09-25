@@ -13,13 +13,13 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 const components: MDXComponents = {
 	h1: (props: HeadingProps) => (
 		<h1
-			className="fade-in mb-0 pt-12 font-bold font-geist-sans text-xl"
+			className="fade-in mb-0 pt-12 font-geist-sans font-medium text-lg"
 			{...props}
 		/>
 	),
 	h2: (props: HeadingProps) => (
 		<h2
-			className="mt-8 mb-3 font-bold font-geist-sans text-gray-800 text-lg"
+			className="mt-8 mb-3 font-bold font-geist-sans text-base text-gray-800"
 			{...props}
 		/>
 	),

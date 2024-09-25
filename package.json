@@ -60,6 +60,7 @@
 		"react": "19.0.0-rc-5dcb0097-20240918",
 		"react-dom": "19.0.0-rc-5dcb0097-20240918",
 		"react-spring": "^9.7.4",
+		"react-transition-progress": "^0.0.4",
 		"sugar-high": "^0.7.0",
 		"tslog": "^4.9.3",
 		"zod": "^3.23.8"

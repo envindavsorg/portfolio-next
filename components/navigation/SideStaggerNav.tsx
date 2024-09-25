@@ -99,15 +99,24 @@ const LinkLine = ({
 			<Link href={link || '#'} aria-label={description}>
 				<motion.div
 					ref={ref}
-					className="group relative bg-neutral-500 transition-colors hover:bg-theme"
-					style={{ width: linkWidth, height: 2 }}
+					className="group relative bg-switch transition-colors hover:bg-theme"
+					style={{
+						width: linkWidth,
+						height: 2,
+					}}
 				>
 					<AnimatePresence>
 						{isHovered && (
 							<motion.span
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								exit={{ opacity: 0 }}
+								initial={{
+									opacity: 0,
+								}}
+								animate={{
+									opacity: 1,
+								}}
+								exit={{
+									opacity: 0,
+								}}
 								className="absolute top-0 left-0 z-10 w-full pt-2 font-bold font-geist-sans text-switch transition-colors group-hover:text-theme"
 							>
 								{title}
@@ -122,8 +131,11 @@ const LinkLine = ({
 	return (
 		<motion.div
 			ref={ref}
-			className="relative bg-neutral-500"
-			style={{ width: lineWidth, height: 2 }}
+			className="relative bg-switch"
+			style={{
+				width: lineWidth,
+				height: 1.5,
+			}}
 		/>
 	);
 };
