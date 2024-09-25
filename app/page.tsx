@@ -1,6 +1,6 @@
-import { Channels } from '@/components/Channels';
-import { Stars } from '@/components/Stars';
+import { Channels } from '@/components/blocs/Channels';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
+import { Stars } from '@/components/blocs/Stars';
 import { CSSIcon } from '@/components/icons/CSS';
 import { ExpressIcon } from '@/components/icons/Express';
 import { FastifyIcon } from '@/components/icons/Fastify';
@@ -25,6 +25,7 @@ import {
 	variantsThree,
 	variantsTwo,
 } from '@/components/motion/variants';
+import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { env } from '@/env/client';
 import {
@@ -36,42 +37,6 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
-
-const AnimatedName = (): React.JSX.Element => (
-	<h1 className="pt-12 font-bold font-geist-sans text-3xl transition-element md:text-4xl">
-		<span className="sr-only">
-			{env.NEXT_PUBLIC_NAME} {env.NEXT_PUBLIC_SURNAME}
-		</span>
-		<span aria-hidden="true" className="group relative block overflow-hidden">
-			<span className="group-hover:-translate-y-full inline-block transition-all duration-300 ease-in-out">
-				{`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`
-					.split('')
-					.map((letter, index) => (
-						<span
-							key={index}
-							className="inline-block"
-							style={{ transitionDelay: `${index * 25}ms` }}
-						>
-							{letter === ' ' ? '\u00A0' : letter}
-						</span>
-					))}
-			</span>
-			<span className="absolute top-0 left-0 inline-block translate-y-full transition-all duration-300 ease-in-out group-hover:translate-y-0">
-				{env.NEXT_PUBLIC_GITHUB_USERNAME.split('').map(
-					(letter: string, index: number) => (
-						<span
-							key={index}
-							className="inline-block"
-							style={{ transitionDelay: `${index * 25}ms` }}
-						>
-							{letter}
-						</span>
-					),
-				)}
-			</span>
-		</span>
-	</h1>
-);
 
 const age: number = new Date().getFullYear() - 1994;
 const experience: number = new Date().getFullYear() - 2018;

@@ -1,28 +1,28 @@
-import { AnimatedName } from '@/app/animated-name.tsx';
-import { CSSIcon } from '@/components/icons/CSS';
-import { ExpressIcon } from '@/components/icons/Express';
-import { FastifyIcon } from '@/components/icons/Fastify';
-import { FlaskIcon } from '@/components/icons/Flask';
-import { HTML5Icon } from '@/components/icons/HTML';
-import { JavaScriptIcon } from '@/components/icons/JavaScript';
-import { MarkdownIcon } from '@/components/icons/Markdown';
-import { MongoDBIcon } from '@/components/icons/MongoDB';
-import { NextJSIcon } from '@/components/icons/Next';
-import { ReactIcon } from '@/components/icons/React';
-import { SassIcon } from '@/components/icons/Sass';
-import { TailwindCSSIcon } from '@/components/icons/Tailwind';
-import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { VueIcon } from '@/components/icons/Vue';
-import { VuetifyIcon } from '@/components/icons/Vuetify';
 import React from 'react';
-import { Motion } from '@/components/motion/Motion';
-import {
-    variantsFour,
-    variantsOne,
-    variantsThree,
-    variantsTwo,
-} from '@/components/motion/variants';
-import { HowToScroll } from '@/components/blocs/HowToScroll';
+import { Minus } from '@phosphor-icons/react/dist/ssr';
+import { Badge } from '../../components/ui/Badge';
+import { HowToScroll } from '../../components/blocs/HowToScroll';
+import { CSSIcon } from '../../components/icons/CSS';
+import { ExpressIcon } from '../../components/icons/Express';
+import { FastifyIcon } from '../../components/icons/Fastify';
+import { FlaskIcon } from '../../components/icons/Flask';
+import { HTML5Icon } from '../../components/icons/HTML';
+import { JavaScriptIcon } from '../../components/icons/JavaScript';
+import { MarkdownIcon } from '../../components/icons/Markdown';
+import { MongoDBIcon } from '../../components/icons/MongoDB';
+import { NextJSIcon } from '../../components/icons/Next';
+import { PostgreIcon } from '../../components/icons/Postgre';
+import { PugIcon } from '../../components/icons/Pug';
+import { ReactIcon } from '../../components/icons/React';
+import { SassIcon } from '../../components/icons/Sass';
+import { StorybookIcon } from '../../components/icons/Storybook';
+import { TailwindCSSIcon } from '../../components/icons/Tailwind';
+import { TypeScriptIcon } from '../../components/icons/TypeScript';
+import { VueIcon } from '../../components/icons/Vue';
+import { VuetifyIcon } from '../../components/icons/Vuetify';
+import { Motion } from '../../components/motion/Motion';
+import { variantsOne, variantsTwo, variantsThree, variantsFour } from '../../components/motion/variants';
+import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 
 export const metadata = {
     title: "Entreprises pour lesquelles j'ai travaillé",
@@ -32,158 +32,205 @@ export const metadata = {
 };
 
 export const Small = ({ children }) => (
-    <small className="flex text-sm text-neutral-600 dark:text-neutral-400 -mt-3 mb-3">{children}</small>
+    <small className="flex items-center gap-x-2 text-sm text-theme font-bold -mt-3">
+        <Minus weight="bold" /> {children}
+    </small>
+);
+
+export const Strong = ({ children }) => (
+    <strong className="text-theme font-bold -mt-3">
+        {children}
+    </strong>
 );
 
 # Expériences professionnelles
 
-<AnimatedName />
+<AnimatedNameLink />
 
-<Motion className="mt-12" variants={variantsOne} asChild>
-    Je travaille actuellement chez WeFix, une entreprise leader dans la réparation des appareils
-    électroniques, que j’ai rejoint en 2020 en tant que développeur web. Depuis mon arrivée,
-    j’ai participé à de nombreux projets visant à améliorer les plateformes en ligne et les
-    services numériques de l’entreprise.
+<Motion className="mt-8" variants={variantsOne} asChild>
+    Je travaille actuellement chez **WeFix**, une entreprise leader dans la **réparation** des
+    appareils électroniques, que j’ai rejoint en **2020** en tant que **développeur web**.
+    Depuis mon arrivée, j’ai participé à de nombreux projets visant à améliorer les plateformes
+    en ligne et les services numériques de l’entreprise.
     Au fil de ma carrière, j’ai eu l’occasion de collaborer avec des
-    entreprises de tailles variées, des startups aux grandes entreprises.
+    entreprises de tailles variées, des **startups** aux **grandes entreprises**.
 </Motion>
 
-<Motion className="mt-12" variants={variantsTwo} asChild>
-    ## WeFix by Fnac (jan. 2020 - aujourd'hui)
+<Motion className="text-xl sm:text-2xl mt-14" variants={variantsTwo} asChild>
+    ## WeFix by Fnac
 </Motion>
-<Motion className="mt-4" variants={variantsTwo} asChild>
-    <Small>Développeur Front</Small>
+<Motion variants={variantsTwo} asChild>
+    <Small>Développeur web (jan. 2020 - aujourd'hui)</Small>
 </Motion>
-<Motion className="mt-4" variants={variantsTwo} asChild>
-    J'ai rejoint WeFix (groupe Fnac & Darty) en 2020, en tant que développeur web. J'ai eu la chance de
-    travailler sur des projets variés, de la refonte du site web à la mise en place de nouvelles
-    fonctionnalités, en interne comme chez de nouveaux partenaires
-    comme Bouygues Telecom, Garantie Privée, Assurant, Fnac, etc.
-</Motion>
-<Motion className="mt-4" variants={variantsTwo} asChild>
-    ### Technologies utilisées : React, Next.js, Tailwind CSS, TypeScript, Express, MongoDB, etc.
-</Motion>
-<Motion className="mt-4" variants={variantsTwo} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <TypeScriptIcon className="size-7 shrink-0" />
+<div className="mt-4 space-y-4 leading-snug">
+    <Motion variants={variantsTwo} asChild>
+        <div className="flex items-center gap-x-2">
+            <Badge>WeFix</Badge>
+            <Badge>Entreprise</Badge>
+            <Badge>CDI</Badge>
         </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <JavaScriptIcon className="size-7 shrink-0" />
+    </Motion>
+    <Motion variants={variantsTwo} asChild>
+        J'ai rejoint **WeFix (groupe Fnac & Darty)** en **2020**, en tant que développeur web.
+        J'ai eu la chance de travailler sur des projets variés, de la refonte du site web
+        à la mise en place de nouvelles fonctionnalités, en interne comme chez de nouveaux
+        partenaires comme **Bouygues Telecom**, **Garantie Privée**, **Assurant**, **Fnac**, etc.
+    </Motion>
+    <Motion className="text-sm" variants={variantsTwo} asChild>
+        <Strong>Technologies utilisées:</Strong> React, Next.js, Tailwind CSS,
+        TypeScript, Express, MongoDB, Fastify, JavaScript, Sass, CSS, Pug etc.
+    </Motion>
+    <Motion variants={variantsTwo} asChild>
+        <div className="flex flex-col gap-y-2">
+            <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <TypeScriptIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <JavaScriptIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <ReactIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <NextJSIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <MongoDBIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <CSSIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <SassIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <TailwindCSSIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <MarkdownIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <HTML5Icon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <FastifyIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <ExpressIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <PugIcon className="size-7 shrink-0" />
+                </div>
+            </div>
+            <HowToScroll />
         </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <ReactIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <NextJSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <MongoDBIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <CSSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <SassIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <TailwindCSSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <MarkdownIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <HTML5Icon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <FastifyIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <ExpressIcon className="size-7 shrink-0" />
-        </div>
-    </div>
-</Motion>
-<Motion className="mt-4" variants={variantsTwo} asChild>
-    <HowToScroll />
-</Motion>
+    </Motion>
+</div>
 
-<Motion className="mt-12" variants={variantsThree} asChild>
-    ## SpinalCom (juil. 2019 - jan. 2020)
+<Motion className="text-xl sm:text-2xl mt-14" variants={variantsThree} asChild>
+    ## SpinalCom
 </Motion>
-<Motion className="mt-4" variants={variantsThree} asChild>
-    <Small>Développeur / Designer Web</Small>
+<Motion variants={variantsThree} asChild>
+    <Small>Développeur / Designer Web (juil. 2019 - jan. 2020)</Small>
 </Motion>
-<Motion className="mt-4" variants={variantsThree} asChild>
-    Durant ma dernière année d'alternance, j'ai rejoint SpinalCom, une startup spécialisée
-    dans le développement de solution pour le bâtiment connecté. J'ai eu l'opportunité de travailler
-    sur la dashboard de gestion des équipements connectés, la refonte du
-    site web et la création de maquettes pour de nouveaux projets.
-</Motion>
-<Motion className="mt-4" variants={variantsThree} asChild>
-    ### Technologies utilisées : Vue, Vuetify, JavaScript, etc.
-</Motion>
-<Motion className="mt-4" variants={variantsThree} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <JavaScriptIcon className="size-7 shrink-0" />
+<div className="mt-4 space-y-4 leading-snug">
+    <Motion variants={variantsTwo} asChild>
+        <div className="flex items-center gap-x-2">
+            <Badge>SpinalCom</Badge>
+            <Badge>Startup</Badge>
+            <Badge>Alternance</Badge>
         </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <VueIcon className="size-7 shrink-0" />
+    </Motion>
+    <Motion variants={variantsThree} asChild>
+        Durant ma **dernière année d'alternance**, j'ai rejoint **SpinalCom**,
+        une startup spécialisée dans le **développement** de solutions pour le **bâtiment connecté**.
+        J'ai eu l'opportunité de travailler sur un dashboard de gestion des équipements connectés,
+        la **refonte du site web** et la **création de maquettes** pour de nouveaux projets.
+    </Motion>
+    <Motion className="text-sm" variants={variantsThree} asChild>
+        <Strong>Technologies utilisées:</Strong> Vue, Vuetify, JavaScript, TypeScript, HTML,
+        CSS, Sass, Webpack, MongoDB, PostgreSQL etc.
+    </Motion>
+    <Motion variants={variantsThree} asChild>
+        <div className="flex flex-col gap-y-2">
+            <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <JavaScriptIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <VueIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <VuetifyIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <CSSIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <SassIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <HTML5Icon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <TypeScriptIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <StorybookIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <MongoDBIcon className="size-7 shrink-0" />
+                </div>
+                <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    <PostgreIcon className="size-7 shrink-0" />
+                </div>
+            </div>
+            <HowToScroll />
         </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <VuetifyIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <CSSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <SassIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <HTML5Icon className="size-7 shrink-0" />
-        </div>
-    </div>
-</Motion>
-<Motion className="sm:hidden block mt-4" variants={variantsThree} asChild>
-    <HowToScroll />
-</Motion>
+    </Motion>
+</div>
 
-<Motion className="mt-12" variants={variantsFour} asChild>
-    ## Économat des Armées (jan. 2018 - juil. 2019)
+<Motion className="text-xl sm:text-2xl mt-14" variants={variantsFour} asChild>
+    ## Économat des Armées
 </Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
-    <Small>Développeur web / multiplateformes</Small>
+<Motion variants={variantsFour} asChild>
+    <Small>Développeur web (jan. 2018 - juil. 2019)</Small>
 </Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
-    Durant ma première année d'alternance, j'ai rejoint l'Économat des Armées, une entreprise
-    partenaire du soutien des forces armées. J'ai travaillé sur la création d'un site sur
-    l'intranet du Ministère des Armées, et d'un annuaire interne à l'entreprise.
-</Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
-    ### Technologies utilisées : Python, Flask, React, HTML, CSS, JavaScript, etc.
-</Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <FlaskIcon className="size-7 shrink-0" />
+<div className="mt-4 space-y-4 leading-snug">
+    <Motion variants={variantsTwo} asChild>
+        <div className="flex items-center gap-x-2">
+            <Badge>Économat des Armées</Badge>
+            <Badge>Startup</Badge>
+            <Badge>Alternance</Badge>
         </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <JavaScriptIcon className="size-7 shrink-0" />
+    </Motion>
+    <Motion variants={variantsFour} asChild>
+        Durant ma **première année d'alternance**, j'ai rejoint **l'Économat des Armées**,
+        une entreprise partenaire du soutien des **forces armées**.
+        J'ai travaillé sur la **création d'un site** sur l'intranet du **Ministère des Armées**,
+        et d'un **annuaire interne** à l'entreprise.
+    </Motion>
+    <Motion className="text-sm" variants={variantsFour} asChild>
+        <Strong>Technologies utilisées:</Strong> Python, Flask, React, HTML, CSS, JavaScript, Parcel, Bootstrap etc.
+    </Motion>
+    <Motion variants={variantsFour} asChild>
+        <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
+            <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                <FlaskIcon className="size-7 shrink-0" />
+            </div>
+            <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                <JavaScriptIcon className="size-7 shrink-0" />
+            </div>
+            <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                <ReactIcon className="size-7 shrink-0" />
+            </div>
+            <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                <HTML5Icon className="size-7 shrink-0" />
+            </div>
+            <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                <CSSIcon className="size-7 shrink-0" />
+            </div>
         </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <ReactIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <HTML5Icon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <CSSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <JavaScriptIcon className="size-7 shrink-0" />
-        </div>
-    </div>
-</Motion>
-<Motion className="sm:hidden block mt-4" variants={variantsFour} asChild>
-    <HowToScroll />
-</Motion>
+    </Motion>
+</div>
