@@ -2,6 +2,7 @@ import './globals.css';
 import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
 import { Footer } from '@/components/navigation/Footer';
+import { SideStaggerNavigation } from '@/components/navigation/SideStaggerNav';
 import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
@@ -59,6 +60,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			>
 				<Providers>
 					<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-switch md:pt-8">
+						<SideStaggerNavigation />
 						<main className="mx-auto w-full max-w-[60ch] pb-5">{children}</main>
 						<Footer />
 

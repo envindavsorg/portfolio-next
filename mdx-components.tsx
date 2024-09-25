@@ -41,7 +41,7 @@ const components: MDXComponents = {
 		<em className="font-medium" {...props} />
 	),
 	strong: (props: ComponentPropsWithoutRef<'strong'>) => (
-		<strong className="font-medium" {...props} />
+		<strong className="font-extrabold" {...props} />
 	),
 	a: ({ href, children, ...props }: AnchorProps) => {
 		const className = 'text-blue-500 hover:text-blue-700';
