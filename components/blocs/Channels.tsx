@@ -1,6 +1,6 @@
 import { githubUser } from '@/actions/github/user.action';
 import { linkedInData } from '@/actions/linkedin/data.action';
-import { Counter } from '@/components/Counter';
+import { Counter } from '@/components/text/Counter';
 import { cn } from '@/lib/utils';
 import {
 	ArrowUpRight,
