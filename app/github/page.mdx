@@ -8,8 +8,7 @@ import { Motion } from '@/components/motion/Motion';
 import {
     variantsOne, variantsTwo, variantsThree,
 } from '@/components/motion/variants';
-import { AnimatedName } from '@/app/animated-name.tsx';
-import { HowToScroll } from '@/components/blocs/HowToScroll';
+import { AnimatedNameLink } from '@/components/text/AnimatedName.tsx';
 
 export const metadata = {
     title: 'Activité et statistiques de mon profil GitHub',
@@ -20,7 +19,7 @@ export const metadata = {
 
 # Activité et statistiques de mon profil GitHub
 
-<AnimatedName />
+<AnimatedNameLink />
 
 <Motion className="mt-12" variants={variantsOne} asChild>
     Toutes mes statistiques GitHub (nombre de commits, abonnés, suivis)
