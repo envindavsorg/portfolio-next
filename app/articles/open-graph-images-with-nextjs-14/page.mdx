@@ -50,7 +50,7 @@ Ouvrez votre **terminal** et exécutez la commande suivante :
 ```bash
 npx create-next-app@latest
 ```
-<Alert>
+<Alert className="mb-6">
     <AlertDescription className="flex items-center gap-3">
         <Info className="size-6 shrink-0 text-theme" />{' '}
         <span className="text-sm">
@@ -241,10 +241,10 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 ```
 
 Explication du code :
-1. Importation de types et de la police Inter depuis Google Fonts.
-2. Récupération des paramètres de la requête, du protocole et de l’hôte (ce qui nous permettra de tester la route en développement sans se soucier du chemin de l'image)
-3. Utilisation de ImageResponse pour générer une image et mise en page avec des styles CSS inline pour afficher le fond, le titre du post, et les informations de l’auteur.
-4. Pour finir, la taille de l’image générée est de 1500x800 pixels.
+- Importation de types et de la police Inter depuis Google Fonts.
+- Récupération des paramètres de la requête, du protocole et de l’hôte (ce qui nous permettra de tester la route en développement sans se soucier du chemin de l'image)
+- Utilisation de ImageResponse pour générer une image et mise en page avec des styles CSS inline pour afficher le fond, le titre du post, et les informations de l’auteur.
+- Pour finir, la taille de l’image générée est de 1500x800 pixels.
 
 ### Étape 3 : Test de la route
 

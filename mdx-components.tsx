@@ -20,7 +20,7 @@ const components: MDXComponents = {
 	),
 	h2: (props: HeadingProps) => (
 		<h2
-			className="mt-8 mb-3 font-bold font-geist-sans text-base text-foreground"
+			className="mt-8 mb-3 font-bold font-geist-sans text-foreground text-lg"
 			{...props}
 		/>
 	),
