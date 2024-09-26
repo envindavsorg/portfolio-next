@@ -1,7 +1,7 @@
 'use client';
 
 import useThemeColor from '@/hooks/useThemeColor';
-import { ThemeProvider, useTheme } from 'next-themes';
+import { ThemeProvider } from 'next-themes';
 import { usePathname } from 'next/navigation';
 import type React from 'react';
 import { type MutableRefObject, createContext, useEffect, useRef } from 'react';
@@ -14,30 +14,6 @@ const usePrevious = <T,>(value: T) => {
 	}, [value]);
 
 	return ref.current;
-};
-
-const ThemeWatcher = () => {
-	const { resolvedTheme, setTheme } = useTheme();
-
-	useEffect(() => {
-		const media = window.matchMedia('(prefers-color-scheme: dark)');
-
-		const onMediaChange = () => {
-			const systemTheme: string = media.matches ? 'dark' : 'light';
-			if (resolvedTheme === systemTheme) {
-				setTheme('system');
-			}
-		};
-
-		onMediaChange();
-		media.addEventListener('change', onMediaChange);
-
-		return () => {
-			media.removeEventListener('change', onMediaChange);
-		};
-	}, [resolvedTheme, setTheme]);
-
-	return null;
 };
 
 interface AppContextProps {
@@ -63,7 +39,6 @@ export const Providers = ({ children }: AppProviderProps) => {
 				defaultTheme="dark"
 				disableTransitionOnChange
 			>
-				<ThemeWatcher />
 				{children}
 			</ThemeProvider>
 		</AppContext.Provider>
