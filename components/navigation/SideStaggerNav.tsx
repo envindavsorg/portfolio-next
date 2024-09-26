@@ -117,7 +117,7 @@ const LinkLine = ({
 								exit={{
 									opacity: 0,
 								}}
-								className="absolute top-0 left-0 z-10 w-full pt-2 font-bold font-geist-sans text-switch transition-colors group-hover:text-theme"
+								className="absolute top-0 left-0 z-10 w-full pt-2 font-geist-sans font-medium text-switch transition-colors group-hover:text-theme"
 							>
 								{title}
 							</motion.span>
