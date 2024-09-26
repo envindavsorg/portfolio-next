@@ -5,20 +5,20 @@ import { useContext } from 'react';
 import { createContext } from 'react';
 import { useState } from 'react';
 
-interface NavbarMobileContextProps {
+interface NavBarMobileContextProps {
 	isOpen: boolean;
 	toggleNavbar: () => void;
 }
 
-const NavbarContext = createContext<NavbarMobileContextProps | undefined>(
+const NavBarContext = createContext<NavBarMobileContextProps | undefined>(
 	undefined,
 );
 
-interface NavbarProviderProps {
+interface NavBarProviderProps {
 	children: React.ReactNode;
 }
 
-export const NavbarProvider = ({ children }: NavbarProviderProps) => {
+export const NavBarProvider = ({ children }: NavBarProviderProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleNavbar = (): void => {
@@ -26,15 +26,15 @@ export const NavbarProvider = ({ children }: NavbarProviderProps) => {
 	};
 
 	return (
-		<NavbarContext.Provider value={{ isOpen, toggleNavbar }}>
+		<NavBarContext.Provider value={{ isOpen, toggleNavbar }}>
 			{children}
-		</NavbarContext.Provider>
+		</NavBarContext.Provider>
 	);
 };
 
-export const useNavbarMobile = (): NavbarMobileContextProps => {
-	const context: NavbarMobileContextProps | undefined =
-		useContext(NavbarContext);
+export const useNavBarMobile = (): NavBarMobileContextProps => {
+	const context: NavBarMobileContextProps | undefined =
+		useContext(NavBarContext);
 
 	if (!context) {
 		throw new Error('useNavbarMobile must be used within a NavbarProvider !');

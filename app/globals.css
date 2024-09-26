@@ -8,7 +8,6 @@
 		--background: #FAFAFA;
 		--foreground: #000000;
 		--border: #E5E5E5;
-
 		--code: #020617;
 		--primary: #18181b;
 		--primary-foreground: #fafafa;
@@ -20,7 +19,6 @@
 		--accent-foreground: #18181b;
 		--destructive: #dc2626;
 		--destructive-foreground: #fafafa;
-
 		--radius: 0.5rem;
 	}
 
@@ -29,7 +27,6 @@
 		--background: #000000;
 		--foreground: #FAFAFA;
 		--border: #404040;
-
 		--code: #0f172a;
 		--primary: #fafafa;
 		--primary-foreground: #18181b;

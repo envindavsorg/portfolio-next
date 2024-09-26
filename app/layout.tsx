@@ -5,8 +5,7 @@ import { Footer } from '@/components/navigation/Footer';
 import { NavBar } from '@/components/navigation/NavBar';
 import { navItems } from '@/components/navigation/NavItems';
 import { SideStaggerNavigation } from '@/components/navigation/SideStaggerNav';
-import { NavbarProvider } from '@/components/navigation/modules/NavBarProvider';
-import { ThemeSwitch } from '@/components/theme/ThemeSwitch';
+import { NavBarProvider } from '@/components/navigation/modules/NavBarProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
@@ -70,13 +69,9 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
 							<SideStaggerNavigation />
 							<main className="mx-auto w-full max-w-[60ch] pb-5">
-								<NavbarProvider>
+								<NavBarProvider>
 									<NavBar navItems={navItems} />
-								</NavbarProvider>
-
-								<div className="hidden items-center justify-end lg:flex">
-									<ThemeSwitch />
-								</div>
+								</NavBarProvider>
 
 								{children}
 							</main>

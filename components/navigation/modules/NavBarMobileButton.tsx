@@ -1,6 +1,6 @@
 'use client';
 
-import { useNavbarMobile } from '@/components/navigation/modules/NavBarProvider';
+import { useNavBarMobile } from '@/components/navigation/modules/NavBarProvider';
 import type { Variants } from 'framer-motion';
 import { MotionConfig, motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
@@ -10,7 +10,7 @@ const bottomPosition: string = '23.5%';
 
 export const NavbarMobileButton = forwardRef<HTMLButtonElement>(
 	(_props, ref) => {
-		const { isOpen, toggleNavbar } = useNavbarMobile();
+		const { isOpen, toggleNavbar } = useNavBarMobile();
 
 		return (
 			<MotionConfig
