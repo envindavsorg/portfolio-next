@@ -1,0 +1,235 @@
+import React from 'react';
+import image from './js.webp';
+import { AnimatedNameLink } from '../../../components/text/AnimatedName.tsx';
+
+export const article = {
+  author: 'Cuzeac Florin',
+  date: '2024-07-21',
+  title: 'Quelques snippets JavaScript utiles',
+  description: "Quelques snippets JavaScript utiles et à connaître absolument.",
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+# Quelques snippets JavaScript utiles
+
+<AnimatedNameLink />
+
+**JavaScript** est un langage essentiel pour le développement web.
+Que vous soyez débutant ou développeur expérimenté, les snippets **JavaScript** peuvent vous
+aider à résoudre des problèmes courants plus facilement et plus rapidement.
+
+Ces **petits morceaux de code réutilisables** peuvent vous faire gagner du temps dans vos projets.
+
+<Image className="my-8 rounded-md" src={image} alt={article.title} />
+
+Voici une **sélection** des **20 meilleurs snippets**
+que tout développeur JavaScript devrait connaître.
+
+## 1. Date et heure
+
+```js
+const date = new Date();
+console.log(date); // 2024-07-21T12:00:00.000Z
+```
+
+## 2. Vérifiez si une variable est un tableau
+
+```js
+Array.isArray(variable);
+
+// Exemple
+const arr = [1, 2, 3];
+console.log(Array.isArray(arr)); // true
+
+const str = 'Hello';
+console.log(Array.isArray(str)); // false
+```
+
+## 3. Fusionnez deux tableaux
+
+```js
+const newArr = arr1.concat(arr2);
+
+// Exemple
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const arrMerged = arr1.concat(arr2);
+console.log(arrMerged); // [1, 2, 3, 4, 5, 6]
+```
+
+## 4. Supprimez les doublons d'un tableau
+
+```js
+const uniqueArr = [...new Set(arr)];
+
+// Exemple
+const arr = [1, 2, 2, 3, 4, 4, 5];
+const uniqueArr = [...new Set(arr)];
+console.log(uniqueArr); // [1, 2, 3, 4, 5]
+```
+
+## 5. Triez un tableau par ordre croissant
+
+```js
+arr.sort((a, b) => a - b);
+
+// Exemple
+const arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+arr.sort((a, b) => a - b);
+console.log(arr); // [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+```
+
+## 6. Inversez un tableau
+
+```js
+arr.reverse();
+
+// Exemple
+const arr = [1, 2, 3, 4, 5];
+arr.reverse();
+console.log(arr); // [5, 4, 3, 2, 1]
+```
+
+## 7. Convertissez la chaîne en nombre
+
+```js
+const num = parseInt(str, 10);
+
+// Exemple
+const str = '42';
+const num = parseInt(str, 10);
+console.log(num); // 42
+```
+
+## 8. Générez un nombre aléatoire entre deux valeurs
+
+```js
+const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
+// Exemple
+const min = 1;
+const max = 10;
+const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+console.log(randomNum); // Un nombre aléatoire entre 1 et 10
+```
+
+## 9. Vérifiez si une chaîne contient une sous-chaîne
+
+```js
+const isSubstring = str.includes(substring);
+
+// Exemple
+const str = 'Hello, world!';
+const substring = 'world';
+const isSubstring = str.includes(substring);
+console.log(isSubstring); // true
+```
+
+## 10. Obtenez la longueur d'un objet
+
+```js
+const objLength = Object.keys(obj).length;
+
+// Exemple
+const obj = { a: 1, b: 2, c: 3 };
+const objLength = Object.keys(obj).length;
+console.log(objLength); // 3
+```
+
+## 11. Convertir un objet en tableau
+
+```js
+const arr = Object.entries(obj);
+
+// Exemple
+const obj = { a: 1, b: 2, c: 3 };
+const arr = Object.entries(obj);
+console.log(arr); // [['a', 1], ['b', 2], ['c', 3]]
+```
+
+## 12. Vérifiez si un objet est vide
+
+```js
+const array = Object.entries(object);
+
+// Exemple
+const obj = {};
+const isEmpty = Object.entries(obj).length === 0 && obj.constructor === Object;
+console.log(isEmpty); // true
+```
+
+## 13. Obtenez l'URL actuelle
+
+```js
+const url = window.location.href;
+
+// Exemple
+const currentUrl = window.location.href;
+console.log(currentUrl); // https://example.com/page
+```
+
+## 14. Redirection vers une nouvelle URL
+
+```js
+window.location.href = 'https://example.com';
+
+// Exemple
+window.location.href = 'https://example.com';
+```
+
+## 15. Définissez un cookie
+
+```js
+document.cookie = 'name=value; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
+
+// Exemple
+document.cookie = 'name=John Doe; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
+```
+
+## 16. Obtenez un cookie
+
+```js
+const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/, '$1');
+```
+
+## 17. Vérifiez si un cookie existe
+
+```js
+const cookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('name='));
+```
+
+## 18. Supprimer un cookie
+
+```js
+document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+```
+
+## 19. Obtenez les dimensions actuelles de la fenêtre
+
+```js
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+
+console.log(windowWidth, windowHeight); // Largeur et hauteur de la fenêtre
+```
+
+## 20. Copiez le texte dans le presse-papiers
+
+```js
+navigator.clipboard.writeText(text);
+```
+
+<div className="pt-8"/>
+
+Ces **20 snippets JavaScript** ne sont que la pointe de l’iceberg des possibilités offertes
+par ce langage. En incorporant ces snippets dans vos projets,
+vous pouvez améliorer votre efficacité et la qualité de votre code.
+Que ce soit pour manipuler des chaînes de caractères, gérer les cookies,
+ou même améliorer les performances de votre application,
+ces petits morceaux de code peuvent faire une grande différence.
+N’hésitez pas à les adapter à vos besoins spécifiques et à explorer davantage
+les vastes capacités de **JavaScript**.

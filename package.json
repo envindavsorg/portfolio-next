@@ -56,6 +56,7 @@
 		"cmdk": "^1.0.0",
 		"cobe": "^0.6.3",
 		"dayjs": "^1.11.13",
+		"fast-glob": "^3.3.2",
 		"figma-squircle": "^1.1.0",
 		"framer-motion": "^11.7.0",
 		"jiti": "^1.21.6",

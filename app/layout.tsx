@@ -1,4 +1,5 @@
 import './globals.css';
+import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
 import { Footer } from '@/components/navigation/Footer';
 import { NavBar } from '@/components/navigation/NavBar';
@@ -64,45 +65,47 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 					geistMono.variable,
 				)}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					disableTransitionOnChange
-				>
-					<ThemeMeta />
-					<ProgressBarProvider>
-						<ProgressBar className="fixed top-0 h-1 bg-theme" />
-						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
-							<SideStaggerNavigation />
-							<main className="mx-auto w-full max-w-[60ch] pb-5">
-								<NavBarProvider>
-									<NavBar navItems={navItems} />
-								</NavBarProvider>
+				<Providers>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="dark"
+						disableTransitionOnChange
+					>
+						<ThemeMeta />
+						<ProgressBarProvider>
+							<ProgressBar className="fixed top-0 h-1 bg-theme" />
+							<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
+								<SideStaggerNavigation />
+								<main className="mx-auto w-full max-w-[60ch] pb-5">
+									<NavBarProvider>
+										<NavBar navItems={navItems} />
+									</NavBarProvider>
 
-								{children}
-							</main>
-							<Footer />
+									{children}
+								</main>
+								<Footer />
 
-							<Sparkles density={50} />
-							<Toaster position="bottom-right" />
-						</div>
-					</ProgressBarProvider>
-				</ThemeProvider>
+								<Sparkles density={50} />
+								<Toaster position="bottom-right" />
+							</div>
+						</ProgressBarProvider>
+					</ThemeProvider>
 
-				{process.env.NODE_ENV === 'production' && (
-					<>
-						<Analytics mode={'production'} debug={true} />
-						<SpeedInsights debug={false} />
+					{process.env.NODE_ENV === 'production' && (
+						<>
+							<Analytics mode={'production'} debug={true} />
+							<SpeedInsights debug={false} />
 
-						{process.env.NODE_ENV === 'production' && (
-							<Script
-								defer
-								src={server.UMAMI_SCRIPT}
-								data-website-id={server.UMAMI_WEBSITE_ID}
-							/>
-						)}
-					</>
-				)}
+							{process.env.NODE_ENV === 'production' && (
+								<Script
+									defer
+									src={server.UMAMI_SCRIPT}
+									data-website-id={server.UMAMI_WEBSITE_ID}
+								/>
+							)}
+						</>
+					)}
+				</Providers>
 			</body>
 		</html>
 	</ViewTransitions>

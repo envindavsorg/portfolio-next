@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types';
 import { Link } from 'next-view-transitions';
+import Image, { type ImageProps } from 'next/image';
 import React, { type ComponentPropsWithoutRef } from 'react';
 import { highlight } from 'sugar-high';
 
@@ -19,22 +20,22 @@ const components: MDXComponents = {
 	),
 	h2: (props: HeadingProps) => (
 		<h2
-			className="mt-8 mb-3 font-bold font-geist-sans text-base text-gray-800"
+			className="mt-8 mb-3 font-bold font-geist-sans text-base text-foreground"
 			{...props}
 		/>
 	),
 	h3: (props: HeadingProps) => (
-		<h3 className="mt-8 mb-3 font-medium text-gray-800" {...props} />
+		<h3 className="mt-8 mb-3 font-medium text-swi" {...props} />
 	),
 	h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
 	p: (props: ParagraphProps) => (
-		<p className="text-gray-800 leading-snug" {...props} />
+		<p className="text-foreground leading-snug" {...props} />
 	),
 	ol: (props: ListProps) => (
-		<ol className="list-decimal space-y-2 pl-5 text-gray-800" {...props} />
+		<ol className="list-decimal space-y-2 pl-5 text-foreground" {...props} />
 	),
 	ul: (props: ListProps) => (
-		<ul className="list-disc space-y-1 pl-5 text-gray-800" {...props} />
+		<ul className="list-disc space-y-1 pl-5 text-foreground" {...props} />
 	),
 	li: (props: ListItemProps) => <li className="pl-1" {...props} />,
 	em: (props: ComponentPropsWithoutRef<'em'>) => (
@@ -88,4 +89,5 @@ export const useMDXComponents = (
 ): MDXComponents => ({
 	...otherComponents,
 	...components,
+	Image: (props: ImageProps) => <Image {...props} />,
 });
