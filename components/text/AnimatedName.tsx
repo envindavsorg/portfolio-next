@@ -3,7 +3,7 @@ import { Link } from 'next-view-transitions';
 import type React from 'react';
 
 export const AnimatedName = (): React.JSX.Element => (
-	<h1 className="pt-12 font-bold font-geist-sans text-3xl transition-element md:text-4xl">
+	<h1 className="pt-16 font-bold font-geist-sans text-3xl transition-element md:text-4xl">
 		<span className="sr-only">
 			{env.NEXT_PUBLIC_NAME} {env.NEXT_PUBLIC_SURNAME}
 		</span>
