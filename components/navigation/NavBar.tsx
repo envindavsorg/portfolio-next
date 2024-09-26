@@ -16,8 +16,8 @@ import useScroll from '@/hooks/useScroll';
 import avatar from '@/images/avatar.webp';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type React from 'react';
 

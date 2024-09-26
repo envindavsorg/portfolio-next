@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import type React from 'react';
 
 interface NavBarItemProps {
