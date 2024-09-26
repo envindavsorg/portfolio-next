@@ -5,6 +5,7 @@ import { NavBar } from '@/components/navigation/NavBar';
 import { navItems } from '@/components/navigation/NavItems';
 import { SideStaggerNavigation } from '@/components/navigation/SideStaggerNav';
 import { NavBarProvider } from '@/components/navigation/modules/NavBarProvider';
+import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { env as client } from '@/env/client';
@@ -68,6 +69,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 					defaultTheme="dark"
 					disableTransitionOnChange
 				>
+					<ThemeMeta />
 					<ProgressBarProvider>
 						<ProgressBar className="fixed top-0 h-1 bg-theme" />
 						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">

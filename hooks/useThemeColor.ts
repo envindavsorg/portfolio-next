@@ -2,10 +2,13 @@ import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
 
 const useThemeColor = (): void => {
-	const { resolvedTheme } = useTheme();
+	const { systemTheme, theme } = useTheme();
+	const currentTheme: string | undefined =
+		theme === 'system' ? systemTheme : theme;
+	console.log(currentTheme, systemTheme, theme);
 
 	useEffect(() => {
-		const updateThemeColor = (theme: string) => {
+		const updateThemeColor = (theme: string | undefined) => {
 			let themeColorMetaTag = document.querySelector(
 				'meta[name="theme-color"]',
 			) as HTMLMetaElement;
@@ -20,8 +23,8 @@ const useThemeColor = (): void => {
 			themeColorMetaTag.content = theme === 'dark' ? '#000000' : '#FAFAFA';
 		};
 
-		updateThemeColor(resolvedTheme!);
-	}, [resolvedTheme]);
+		updateThemeColor(currentTheme);
+	}, [currentTheme]);
 };
 
 export default useThemeColor;

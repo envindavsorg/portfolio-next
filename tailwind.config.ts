@@ -5,7 +5,6 @@ const config = {
 	content: {
 		files: [
 			'./app/**/*.{ts,tsx,mdx}',
-
 			'./components/**/*.{ts,tsx}',
 			'./config/**/*.{ts,tsx}',
 			'./content/**/*.{md,mdx}',
