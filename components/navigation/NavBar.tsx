@@ -5,6 +5,7 @@ import type { NavItems } from '@/components/navigation/NavItems';
 import { NavbarMobileButton } from '@/components/navigation/modules/NavBarMobileButton';
 import { useNavBarMobile } from '@/components/navigation/modules/NavBarProvider';
 import { ThemeSwitch } from '@/components/theme/ThemeSwitch';
+import { Button } from '@/components/ui/Button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -15,10 +16,11 @@ import { env } from '@/env/client';
 import useScroll from '@/hooks/useScroll';
 import avatar from '@/images/avatar.webp';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
+import { ArrowLeft } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import type React from 'react';
 
 interface NavBarProps {
@@ -27,16 +29,52 @@ interface NavBarProps {
 }
 
 export const NavBar = ({ navItems, className }: NavBarProps) => {
+	const router = useRouter();
 	const { isOpen, toggleNavbar } = useNavBarMobile();
 	const scrolled: boolean = useScroll(50);
 	const pathname: string | null = usePathname();
+	const isHome: boolean = pathname === '/';
 
 	return (
 		<>
-			<div className="hidden items-center justify-end gap-x-6 lg:flex">
-				<CommandMenu navItems={navItems} pathname={pathname} />
-				<ThemeSwitch />
+			<div
+				className={cn(
+					'hidden items-center lg:flex',
+					isHome ? 'justify-end' : 'justify-between',
+				)}
+			>
+				{!isHome && (
+					<motion.div
+						initial={{
+							opacity: 0,
+							y: -20,
+						}}
+						animate={{
+							y: 0,
+							opacity: 1,
+						}}
+						transition={{
+							duration: 0.5,
+							delay: 0.4,
+							ease: 'backOut',
+						}}
+					>
+						<Button
+							variant="ghost"
+							size="icon"
+							className="flex shrink-0 rounded-none"
+							onClick={() => router.back()}
+						>
+							<ArrowLeft className="text-2xl" />
+						</Button>
+					</motion.div>
+				)}
+				<div className="flex items-center justify-between gap-x-6">
+					<CommandMenu navItems={navItems} pathname={pathname} />
+					<ThemeSwitch />
+				</div>
 			</div>
+
 			<div className="sticky top-4 z-50 w-full max-w-[60ch]">
 				<motion.div
 					initial={{

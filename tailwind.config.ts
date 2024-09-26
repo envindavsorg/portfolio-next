@@ -234,7 +234,7 @@ const config = {
 			'geist-mono': ['var(--font-geist-mono)'],
 		},
 	},
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
 } satisfies Config;
 
 export default config;

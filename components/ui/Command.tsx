@@ -167,7 +167,7 @@ const CommandItem = forwardRef<
 		className={cn(
 			'relative h-12 cursor-pointer select-none rounded-lg px-4 py-0 text-sm outline-none',
 			'flex items-center gap-2',
-			'duration transition-all transition-none ease-[ease] will-change-[background,color]',
+			'duration transition-all transition-none ease-in will-change-[background,color]',
 			'aria-selected:bg-accent aria-selected:text-accent-foreground',
 			'data-[disabled="true"]:pointer-events-none data-[disabled="true"]:opacity-50',
 			className,

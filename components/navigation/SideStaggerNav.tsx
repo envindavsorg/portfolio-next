@@ -1,6 +1,7 @@
 'use client';
 
 import { type NavItems, navItems } from '@/components/navigation/NavItems';
+import { cn, getRouterLastPathSegment } from '@/lib/utils';
 import {
 	AnimatePresence,
 	type MotionValue,
@@ -10,12 +11,14 @@ import {
 	useTransform,
 } from 'framer-motion';
 import { Link } from 'next-view-transitions';
+import { usePathname } from 'next/navigation';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 const NUM_LINES: number = 30;
 
 export const SideStaggerNavigation = (): React.JSX.Element => {
+	const pathname: string | null = usePathname();
 	const [isHovered, setIsHovered] = useState(false);
 	const mouseY: MotionValue<number> = useMotionValue(Number.POSITIVE_INFINITY);
 
@@ -35,6 +38,12 @@ export const SideStaggerNavigation = (): React.JSX.Element => {
 				const linkContent: NavItems | undefined = navItems.find(
 					(item) => item.position === i + 1,
 				);
+				const active: boolean =
+					linkContent?.link === '/blog'
+						? pathname!.startsWith(linkContent?.link)
+						: getRouterLastPathSegment(pathname!) ===
+								linkContent?.link.split('/').pop() ||
+							getRouterLastPathSegment(pathname!) === linkContent?.link;
 
 				return (
 					<LinkLine
@@ -44,6 +53,7 @@ export const SideStaggerNavigation = (): React.JSX.Element => {
 						isHovered={isHovered}
 						mouseY={mouseY}
 						key={i}
+						active={active}
 					/>
 				);
 			})}
@@ -63,6 +73,7 @@ interface LinkLineProps {
 	link: string | undefined;
 	description: string | undefined;
 	isHovered: boolean;
+	active: boolean;
 }
 
 const LinkLine = ({
@@ -71,6 +82,7 @@ const LinkLine = ({
 	title,
 	link,
 	description,
+	active,
 }: LinkLineProps): React.JSX.Element => {
 	const ref = useRef<HTMLDivElement>(null);
 	const distance = useTransform(mouseY, (val) => {
@@ -99,7 +111,10 @@ const LinkLine = ({
 			<Link href={link || '#'} aria-label={description}>
 				<motion.div
 					ref={ref}
-					className="group relative bg-foreground transition-colors hover:bg-theme"
+					className={cn(
+						'group relative bg-foreground transition-colors hover:bg-theme',
+						active && 'bg-theme',
+					)}
 					style={{
 						width: linkWidth,
 						height: 2,
@@ -117,7 +132,12 @@ const LinkLine = ({
 								exit={{
 									opacity: 0,
 								}}
-								className="absolute top-0 left-0 z-10 w-full pt-2 font-geist-sans font-medium text-foreground transition-colors group-hover:text-theme"
+								className={cn(
+									'absolute top-0 left-0 z-10 w-full pt-2',
+									'font-geist-sans font-medium text-foreground',
+									'transition-colors group-hover:text-theme',
+									active && 'font-extrabold text-theme',
+								)}
 							>
 								{title}
 							</motion.span>

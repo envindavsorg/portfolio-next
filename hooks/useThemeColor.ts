@@ -5,7 +5,6 @@ const useThemeColor = (): void => {
 	const { systemTheme, theme } = useTheme();
 	const currentTheme: string | undefined =
 		theme === 'system' ? systemTheme : theme;
-	console.log(currentTheme, systemTheme, theme);
 
 	useEffect(() => {
 		const updateThemeColor = (theme: string | undefined) => {
