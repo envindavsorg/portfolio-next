@@ -78,7 +78,7 @@ export const ContributionsTableClient = async ({ weeks }: Props) => {
 					<TableCell className="font-medium text-neutral-600 dark:text-neutral-400">
 						Total
 					</TableCell>
-					<TableCell className="text-right font-bold text-base text-switch">
+					<TableCell className="text-right font-bold text-base text-foreground">
 						{sortedCurrentMonthContributions
 							.slice(0, 7)
 							.reduce((prev, curr) => prev + curr.contributionCount, 0)}{' '}

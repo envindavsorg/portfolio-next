@@ -239,7 +239,7 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 								) : (
 									<div className="flex flex-col items-center justify-center gap-y-3 px-3 py-6">
 										<LoadingAnimation variant="blue" />
-										<p className="text-switch text-xs">
+										<p className="text-foreground text-xs">
 											Chargement des articles ...
 										</p>
 									</div>

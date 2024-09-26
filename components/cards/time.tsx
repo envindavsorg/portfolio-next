@@ -23,7 +23,7 @@ export const TimeCard = (): React.JSX.Element => {
 			}}
 			className="relative col-span-4 col-start-5 row-start-1 flex items-center justify-center gap-2 overflow-hidden rounded-md border border-border bg-white p-4 md:col-span-2 md:col-start-6 md:row-span-0 dark:bg-neutral-900"
 		>
-			<h2 className="font-bold text-3xl text-switch md:text-4xl">
+			<h2 className="font-bold text-3xl text-foreground md:text-4xl">
 				{time?.toLocaleTimeString('fr-FR', {
 					hour: '2-digit',
 					minute: '2-digit',

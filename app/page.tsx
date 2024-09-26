@@ -291,7 +291,15 @@ const Home = (): React.JSX.Element => (
 						(retrouvez toute mon activité et mes statistiques)
 					</Link>
 					, n'hésitez pas à me rendre une petite visite sur mes profils et
-					pourquoi pas me laisser un message :)
+					pourquoi pas{' '}
+					<Link
+						href="/contact"
+						aria-label="Contactez-moi"
+						className="font-bold text-theme underline"
+					>
+						me laisser un message
+					</Link>{' '}
+					:)
 				</p>
 
 				<Channels className="mt-2" />

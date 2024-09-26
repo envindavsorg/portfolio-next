@@ -5,12 +5,10 @@
 @layer base {
 	:root {
 		--theme: #ea580c;
-		--switch: #000000;
-		--background: #fefce8;
+		--background: #FAFAFA;
 		--foreground: #000000;
-		--border: #000000;
-		--divide: #000000;
-		--input: #000000;
+		--border: #E5E5E5;
+
 		--code: #020617;
 		--primary: #18181b;
 		--primary-foreground: #fafafa;
@@ -28,12 +26,10 @@
 
 	.dark {
 		--theme: #fde047;
-		--switch: #ffffff;
 		--background: #000000;
-		--foreground: #fafafa;
-		--border: #737373;
-		--divide: #737373;
-		--input: #737373;
+		--foreground: #FAFAFA;
+		--border: #404040;
+
 		--code: #0f172a;
 		--primary: #fafafa;
 		--primary-foreground: #18181b;

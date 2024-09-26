@@ -31,7 +31,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 	const pathname: string | null = usePathname();
 
 	return (
-		<div className="sticky top-4 z-50 w-full max-w-[60ch] lg:hidden">
+		<div className="sticky top-4 z-50 w-full max-w-[60ch]">
 			<motion.div
 				initial={{
 					opacity: 0,
@@ -47,7 +47,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 					ease: 'backOut',
 				}}
 				className={cn(
-					'mx-auto flex items-center justify-between',
+					'mx-auto flex items-center justify-between lg:hidden',
 					'rounded-md border border-neutral-200 px-3.5 py-3 dark:border-neutral-700',
 					scrolled ? 'backdrop-blur-xl' : 'bg-neutral-50 dark:bg-neutral-800',
 					className,
@@ -57,8 +57,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 					src={avatar}
 					alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
 					className={cn(
-						'size-8 rounded-full object-cover object-center',
-						'transition-colors duration-200',
+						'size-8 rounded-full object-cover object-center transition-colors duration-200',
 						scrolled
 							? 'border border-theme'
 							: 'border border-neutral-200 dark:border-neutral-700',
@@ -140,7 +139,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 																			'flex w-full items-center justify-between text-base',
 																			active
 																				? '*:font-bold *:text-theme'
-																				: '*:font-normal *:text-switch',
+																				: '*:font-normal *:text-foreground',
 																		)}
 																		onClick={toggleNavbar}
 																	>

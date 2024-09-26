@@ -36,7 +36,7 @@ export const Footer = (): React.JSX.Element => {
 						href={link.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-switch transition-colors duration-200 hover:text-theme"
+						className="text-foreground transition-colors duration-200 hover:text-theme"
 					>
 						{link.name}
 					</a>

@@ -18,7 +18,7 @@ export const HowToScroll = ({ className }: Props): React.JSX.Element => (
 		>
 			<path
 				d="m9.813 9.25.346-5.138a1.276 1.276 0 0 0-2.54-.235L6.75 11.25 5.147 9.327a1.605 1.605 0 0 0-2.388-.085.018.018 0 0 0-.004.019l1.98 4.87a5 5 0 0 0 4.631 3.119h3.885a4 4 0 0 0 4-4v-1a3 3 0 0 0-3-3H9.813Z"
-				className="stroke-switch"
+				className="stroke-foreground"
 			/>
 			<path
 				d="M3 5s.35-.47 1.25-.828m9.516-.422c2.078.593 3.484 1.5 3.484 1.5"

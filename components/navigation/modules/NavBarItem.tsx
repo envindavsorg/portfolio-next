@@ -30,7 +30,7 @@ export const NavBarItem = ({
 		<p
 			className={cn(
 				'hidden text-sm sm:block',
-				active ? 'font-semibold text-theme' : 'font-normal text-switch',
+				active ? 'font-semibold text-theme' : 'font-normal text-foreground',
 			)}
 		>
 			/{name.toLowerCase()}

@@ -110,6 +110,6 @@ const BlinkingCursor = () => (
 	<motion.span
 		variants={cursorVariants}
 		animate="blinking"
-		className="inline-block h-4 w-px translate-y-1 bg-switch"
+		className="inline-block h-4 w-px translate-y-1 bg-foreground"
 	/>
 );

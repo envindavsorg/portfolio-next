@@ -99,7 +99,7 @@ const LinkLine = ({
 			<Link href={link || '#'} aria-label={description}>
 				<motion.div
 					ref={ref}
-					className="group relative bg-switch transition-colors hover:bg-theme"
+					className="group relative bg-foreground transition-colors hover:bg-theme"
 					style={{
 						width: linkWidth,
 						height: 2,
@@ -117,7 +117,7 @@ const LinkLine = ({
 								exit={{
 									opacity: 0,
 								}}
-								className="absolute top-0 left-0 z-10 w-full pt-2 font-geist-sans font-medium text-switch transition-colors group-hover:text-theme"
+								className="absolute top-0 left-0 z-10 w-full pt-2 font-geist-sans font-medium text-foreground transition-colors group-hover:text-theme"
 							>
 								{title}
 							</motion.span>
@@ -131,7 +131,7 @@ const LinkLine = ({
 	return (
 		<motion.div
 			ref={ref}
-			className="relative bg-switch"
+			className="relative bg-foreground"
 			style={{
 				width: lineWidth,
 				height: 1.5,

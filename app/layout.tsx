@@ -6,6 +6,8 @@ import { NavBar } from '@/components/navigation/NavBar';
 import { navItems } from '@/components/navigation/NavItems';
 import { SideStaggerNavigation } from '@/components/navigation/SideStaggerNav';
 import { NavbarProvider } from '@/components/navigation/modules/NavBarProvider';
+import { ThemeSwitch } from '@/components/theme/ThemeSwitch';
+import { Toaster } from '@/components/ui/Sonner';
 import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
@@ -65,18 +67,23 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 				<Providers>
 					<ProgressBarProvider>
 						<ProgressBar className="fixed top-0 h-1 bg-theme" />
-						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-switch md:pt-8">
+						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
 							<SideStaggerNavigation />
 							<main className="mx-auto w-full max-w-[60ch] pb-5">
 								<NavbarProvider>
 									<NavBar navItems={navItems} />
 								</NavbarProvider>
 
+								<div className="hidden items-center justify-end lg:flex">
+									<ThemeSwitch />
+								</div>
+
 								{children}
 							</main>
 							<Footer />
 
 							<Sparkles density={50} />
+							<Toaster position="bottom-right" />
 						</div>
 					</ProgressBarProvider>
 				</Providers>

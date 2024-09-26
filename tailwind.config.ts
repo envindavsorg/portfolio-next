@@ -19,12 +19,9 @@ const config = {
 		extend: {
 			colors: {
 				theme: 'var(--theme)',
-				switch: 'var(--switch)',
 				background: 'var(--background)',
 				foreground: 'var(--foreground)',
 				border: 'var(--border)',
-				divide: 'var(--divide)',
-				input: 'var(--input)',
 				primary: {
 					DEFAULT: 'var(--primary)',
 					foreground: 'var(--primary-foreground)',
