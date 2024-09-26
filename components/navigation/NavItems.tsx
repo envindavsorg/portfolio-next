@@ -21,7 +21,7 @@ export const navItems: NavItems[] = [
 	{
 		name: 'Mes projets',
 		description: 'Mes projets réalisés au fil du temps',
-		link: '/activity',
+		link: '/projects',
 		position: 14,
 	},
 	{

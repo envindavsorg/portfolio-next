@@ -76,20 +76,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 			</div>
 
 			<div className="sticky top-4 z-50 w-full max-w-[60ch]">
-				<motion.div
-					initial={{
-						opacity: 0,
-						y: -20,
-					}}
-					animate={{
-						y: 0,
-						opacity: 1,
-					}}
-					transition={{
-						duration: 0.5,
-						delay: 0.4,
-						ease: 'backOut',
-					}}
+				<div
 					className={cn(
 						'mx-auto flex items-center justify-between lg:hidden',
 						'rounded-md border border-neutral-200 px-3.5 py-3 dark:border-neutral-700',
@@ -97,17 +84,44 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 						className,
 					)}
 				>
-					<Image
-						src={avatar}
-						alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
-						className={cn(
-							'size-8 rounded-full object-cover object-center transition-colors duration-200',
-							scrolled
-								? 'border border-theme'
-								: 'border border-neutral-200 dark:border-neutral-700',
-						)}
-						priority
-					/>
+					{isHome ? (
+						<Image
+							src={avatar}
+							alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
+							className={cn(
+								'size-8 rounded-full object-cover object-center transition-colors duration-200',
+								scrolled
+									? 'border border-theme'
+									: 'border border-neutral-200 dark:border-neutral-700',
+							)}
+							priority
+						/>
+					) : (
+						<motion.div
+							initial={{
+								opacity: 0,
+								y: -20,
+							}}
+							animate={{
+								y: 0,
+								opacity: 1,
+							}}
+							transition={{
+								duration: 0.5,
+								delay: 0.4,
+								ease: 'backOut',
+							}}
+						>
+							<Button
+								variant="ghost"
+								size="icon"
+								className="flex shrink-0 rounded-none"
+								onClick={() => router.back()}
+							>
+								<ArrowLeft className="text-2xl" />
+							</Button>
+						</motion.div>
+					)}
 
 					<div className="flex items-center gap-x-4">
 						<CommandMenu navItems={navItems} pathname={pathname} />
@@ -203,7 +217,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 							</DropdownMenu>
 						</div>
 					</div>
-				</motion.div>
+				</div>
 			</div>
 		</>
 	);
