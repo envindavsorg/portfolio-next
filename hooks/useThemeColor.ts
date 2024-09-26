@@ -17,7 +17,7 @@ const useThemeColor = (): void => {
 				document.head.appendChild(themeColorMetaTag);
 			}
 
-			themeColorMetaTag.content = theme === 'dark' ? '#000000' : '#FEFCE8';
+			themeColorMetaTag.content = theme === 'dark' ? '#000000' : '#FAFAFA';
 		};
 
 		updateThemeColor(resolvedTheme!);

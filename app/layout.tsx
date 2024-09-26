@@ -1,11 +1,11 @@
 import './globals.css';
-import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
 import { Footer } from '@/components/navigation/Footer';
 import { NavBar } from '@/components/navigation/NavBar';
 import { navItems } from '@/components/navigation/NavItems';
 import { SideStaggerNavigation } from '@/components/navigation/SideStaggerNav';
 import { NavBarProvider } from '@/components/navigation/modules/NavBarProvider';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
@@ -63,7 +63,11 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 					geistMono.variable,
 				)}
 			>
-				<Providers>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					disableTransitionOnChange
+				>
 					<ProgressBarProvider>
 						<ProgressBar className="fixed top-0 h-1 bg-theme" />
 						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
@@ -81,7 +85,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 							<Toaster position="bottom-right" />
 						</div>
 					</ProgressBarProvider>
-				</Providers>
+				</ThemeProvider>
 
 				{process.env.NODE_ENV === 'production' && (
 					<>
