@@ -1,36 +1,39 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 
-async function getNoteSlugs(dir: string) {
-  const entries = await fs.readdir(dir, {
-    recursive: true,
-    withFileTypes: true,
-  });
-  return entries
-    .filter((entry) => entry.isFile() && entry.name === 'page.mdx')
-    .map((entry) => {
-      const relativePath = path.relative(
-        dir,
-        path.join(entry.parentPath, entry.name)
-      );
-      return path.dirname(relativePath);
-    })
-    .map((slug) => slug.replace(/\\/g, '/'));
-}
+const getNoteSlugs = async (dir: string): Promise<string[]> => {
+	const entries = await fs.readdir(dir, {
+		recursive: true,
+		withFileTypes: true,
+	});
 
-export default async function sitemap() {
-  const notesDirectory = path.join(process.cwd(), 'app', 'n');
-  const slugs = await getNoteSlugs(notesDirectory);
+	return entries
+		.filter((entry) => entry.isFile() && entry.name === 'page.mdx')
+		.map((entry) => {
+			const relativePath = path.relative(
+				dir,
+				path.join(entry.parentPath, entry.name),
+			);
+			return path.dirname(relativePath);
+		})
+		.map((slug) => slug.replace(/\\/g, '/'));
+};
 
-  const notes = slugs.map((slug) => ({
-    url: `https://leerob.com/n/${slug}`,
-    lastModified: new Date().toISOString(),
-  }));
+const sitemap = async () => {
+	const notesDirectory = path.join(process.cwd(), 'app');
+	const slugs = await getNoteSlugs(notesDirectory);
 
-  const routes = ['', '/work'].map((route) => ({
-    url: `https://leerob.com${route}`,
-    lastModified: new Date().toISOString(),
-  }));
+	const notes = slugs.map((slug) => ({
+		url: `https://cuzeac-florin.app/${slug}`,
+		lastModified: new Date().toISOString(),
+	}));
 
-  return [...routes, ...notes];
-}
+	const routes = ['', '/contact'].map((route) => ({
+		url: `https://cuzeac-florin.app${route}`,
+		lastModified: new Date().toISOString(),
+	}));
+
+	return [...routes, ...notes];
+};
+
+export default sitemap;
