@@ -1,6 +1,7 @@
 import './globals.css';
 import { Providers } from '@/app/providers';
 import { Sparkles } from '@/components/background/Sparkles';
+import { Bento } from '@/components/bento/Bento';
 import { Footer } from '@/components/navigation/Footer';
 import { NavBar } from '@/components/navigation/NavBar';
 import { navItems } from '@/components/navigation/NavItems';
@@ -83,6 +84,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 
 									{children}
 								</main>
+
 								<Footer />
 
 								<Sparkles density={50} />

@@ -29,6 +29,7 @@ import {
 import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
+import { LocationWidget } from '@/components/widgets/LocationWidget';
 import { env } from '@/env/client';
 import { getAllArticles } from '@/lib/articles';
 import { formatDate } from '@/lib/formatDate';
@@ -54,15 +55,35 @@ const Home = async (): Promise<React.JSX.Element> => {
 	return (
 		<>
 			<AnimatedName />
+			<p className="mt-1 font-bold text-sm text-theme sm:text-base">
+				- bienvenue sur mon portfolio !
+			</p>
 
-			<div className="mt-8 space-y-4 leading-snug">
-				<Motion variants={variantsOne} asChild>
+			<Motion className="mt-8" variants={variantsOne} asChild>
+				<div className="flex flex-col items-center gap-6 min-[530px]:flex-row">
+					<div className="flex flex-col gap-y-3">
+						<p className="leading-8">
+							Bonjour, je m'appelle{' '}
+							<span className="font-bold text-theme">
+								{env.NEXT_PUBLIC_SURNAME}
+							</span>
+							, j'ai <span className="font-bold">{age} ans</span> et j'habite et
+							travaille actuellement à <span className="font-bold">Paris</span>.
+						</p>
+						<p className="leading-8">
+							J'ai commencé à travailler sur le web en{' '}
+							<span className="font-bold">2014</span> et je n'ai jamais arrêté
+							depuis.
+						</p>
+					</div>
+					<LocationWidget className="shrink-0" />
+				</div>
+			</Motion>
+
+			<div className="mt-12 space-y-4 leading-snug">
+				<Motion variants={variantsTwo} asChild>
 					<p className="leading-8">
-						Bonjour, je m'appelle{' '}
-						<span className="font-bold">{env.NEXT_PUBLIC_SURNAME}</span>, j'ai{' '}
-						<span className="font-bold">{age} ans</span> et j'habite
-						actuellement à <span className="font-bold">Paris</span>. Je suis un{' '}
-						<span className="font-bold">développeur</span> et{' '}
+						Je suis un <span className="font-bold">développeur</span> et{' '}
 						<span className="font-bold">designer web</span> depuis{' '}
 						<span className="font-bold">{experience} ans</span>, passionné par
 						la création d’applications <span>belles</span> et{' '}
@@ -352,7 +373,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 										</Link>
 									</h2>
 
-									<div className="mt-2 flex items-center gap-x-12 text-sm">
+									<div className="mt-2 flex flex-col gap-x-12 gap-y-1 text-sm sm:flex-row sm:items-center">
 										<div className="flex items-center gap-x-2">
 											<Calendar className="size-4 shrink-0" weight="regular" />
 											<time dateTime={date}>{formatDate(date)}</time>

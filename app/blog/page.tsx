@@ -38,7 +38,7 @@ const Blog = async (): Promise<React.JSX.Element> => {
 								</Link>
 							</h2>
 
-							<div className="mt-2 flex items-center gap-x-12 text-sm">
+							<div className="mt-2 flex flex-col gap-x-12 gap-y-1 text-sm sm:flex-row sm:items-center">
 								<div className="flex items-center gap-x-2">
 									<Calendar className="size-4 shrink-0" weight="regular" />
 									<time dateTime={date}>{formatDate(date)}</time>
