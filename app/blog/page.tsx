@@ -30,11 +30,10 @@ const Blog = async (): Promise<React.JSX.Element> => {
 					{articles.map(({ slug, date, title, description, readingTime }) => (
 						<article
 							key={slug}
-							className="flex max-w-xl flex-col items-start justify-between"
+							className="group flex max-w-xl flex-col items-start justify-between"
 						>
 							<h2 className="font-bold font-geist-sans text-foreground text-xl sm:text-2xl">
 								<Link href={`/articles/${slug}`} aria-label={description}>
-									<span className="absolute inset-0" />
 									{title}
 								</Link>
 							</h2>
@@ -55,7 +54,7 @@ const Blog = async (): Promise<React.JSX.Element> => {
 							</p>
 
 							<Link
-								className="mt-5 flex items-center gap-x-2 font-bold text-sm"
+								className="mt-5 flex items-center gap-x-2 font-bold text-sm transition-colors duration-200 group-hover:text-theme"
 								href={`/articles/${slug}`}
 								aria-label={description}
 							>
