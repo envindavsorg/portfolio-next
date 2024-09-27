@@ -33,6 +33,9 @@ import { env } from '@/env/client';
 import { getAllArticles } from '@/lib/articles';
 import { formatDate } from '@/lib/formatDate';
 import {
+	ArrowRight,
+	Book,
+	Calendar,
 	ChatCircle,
 	ChatsCircle,
 	EnvelopeSimple,
@@ -47,7 +50,6 @@ const experience: number = new Date().getFullYear() - 2018;
 
 const Home = async (): Promise<React.JSX.Element> => {
 	const articles = await getAllArticles();
-	console.log(articles);
 
 	return (
 		<>
@@ -337,30 +339,45 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</p>
 
 					<div className="mt-6 flex flex-col gap-y-10">
-						{articles.slice(0, 3).map(({ slug, date, title, description }) => (
-							<article
-								key={slug}
-								className="flex max-w-xl flex-col items-start justify-between"
-							>
-								<div className="flex items-center gap-x-4 text-sm">
-									<time dateTime={date} className="text-muted-foreground">
-										{formatDate(date)}
-									</time>
-									<Badge>Développement</Badge>
-								</div>
-								<div className="group relative">
-									<h3 className="mt-3 font-bold font-geist-sans text-foreground text-lg group-hover:text-theme">
+						{articles
+							.slice(0, 3)
+							.map(({ slug, date, title, description, readingTime }) => (
+								<article
+									key={slug}
+									className="flex max-w-xl flex-col items-start justify-between"
+								>
+									<h2 className="font-bold font-geist-sans text-foreground text-lg sm:text-xl">
 										<Link href={`/articles/${slug}`} aria-label={description}>
 											<span className="absolute inset-0" />
 											{title}
 										</Link>
-									</h3>
-									<p className="mt-2 line-clamp-3 text-foreground leading-6">
+									</h2>
+
+									<div className="mt-2 flex items-center gap-x-12 text-sm">
+										<div className="flex items-center gap-x-2">
+											<Calendar className="size-4 shrink-0" weight="regular" />
+											<time dateTime={date}>{formatDate(date)}</time>
+										</div>
+										<div className="flex items-center gap-x-2">
+											<Book className="size-4 shrink-0" weight="regular" />
+											<p>{readingTime}</p>
+										</div>
+									</div>
+
+									<p className="mt-4 line-clamp-3 text-foreground leading-6">
 										{description}
 									</p>
-								</div>
-							</article>
-						))}
+
+									<Link
+										className="mt-5 flex items-center gap-x-2 font-bold text-sm"
+										href={`/articles/${slug}`}
+										aria-label={description}
+									>
+										Lire l'article{' '}
+										<ArrowRight className="size-4 shrink-0" weight="bold" />
+									</Link>
+								</article>
+							))}
 					</div>
 				</div>
 			</Motion>
