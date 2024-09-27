@@ -65,7 +65,7 @@ const DialogHeader = ({
 		{children}
 		<DialogPrimitive.Close
 			className={cn(
-				'rounded-sm outline-0',
+				'ms-auto rounded-sm outline-0',
 				'data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
 				'disabled:pointer-events-none',
 				'focus:outline-none focus:outline-0 focus:ring-0',
