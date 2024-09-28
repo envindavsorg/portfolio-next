@@ -347,7 +347,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 					<h2 className="font-bold font-geist-sans text-foreground text-xl sm:text-2xl">
 						Mes derniers articles :
 					</h2>
-					<p className="mt-1">
+					<p className="mt-1 text-sm sm:text-base">
 						Découvrez les derniers articles de{' '}
 						<Link
 							href="/blog"
