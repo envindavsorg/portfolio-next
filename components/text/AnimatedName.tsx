@@ -44,3 +44,18 @@ export const AnimatedNameLink = (): React.JSX.Element => (
 		{env.NEXT_PUBLIC_NAME} {env.NEXT_PUBLIC_SURNAME}
 	</Link>
 );
+
+interface AnimatedNameArticleProps {
+	title: string;
+}
+
+export const AnimatedNameArticle = ({
+	title,
+}: AnimatedNameArticleProps): React.JSX.Element => (
+	<Link
+		href="/"
+		className="fade-in mb-8 flex font-bold font-geist-sans text-3xl text-theme md:text-4xl"
+	>
+		{title}
+	</Link>
+);
