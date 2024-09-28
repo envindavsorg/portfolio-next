@@ -55,17 +55,16 @@ interface StarsProps {
 export const Stars = async ({
 	className,
 }: StarsProps): Promise<React.JSX.Element> => {
-	const [next, react] = await Promise.all([
+	const [next, react, typescript, tailwind] = await Promise.all([
 		projectStars('vercel', 'next.js'),
 		projectStars('facebook', 'react'),
+		projectStars('microsoft', 'typescript'),
+		projectStars('tailwindlabs', 'tailwindcss'),
 	]);
 
 	return (
 		<div
-			className={cn(
-				'flex w-full flex-col space-x-0 space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0',
-				className,
-			)}
+			className={cn('grid w-full grid-cols-1 gap-4 sm:grid-cols-2', className)}
 		>
 			<Star
 				img={next.avatar}
@@ -78,6 +77,18 @@ export const Stars = async ({
 				name={`@${react.name}`}
 				link={`https://github.com/${react.owner}/${react.name}`}
 				subs={Math.round(react.stars)}
+			/>
+			<Star
+				img={typescript.avatar}
+				name={`@${typescript.name}`}
+				link={`https://github.com/${typescript.owner}/${typescript.name}`}
+				subs={Math.round(typescript.stars)}
+			/>
+			<Star
+				img={tailwind.avatar}
+				name={`@${tailwind.name}`}
+				link={`https://github.com/${tailwind.owner}/${tailwind.name}`}
+				subs={Math.round(tailwind.stars)}
 			/>
 		</div>
 	);
