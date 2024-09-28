@@ -9,10 +9,11 @@ import { useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
 
 interface LocationWidgetProps {
+	ip: string;
 	className?: string;
 }
 
-export const LocationWidget = memo(({ className }: LocationWidgetProps) => {
+export const LocationWidget = memo(({ ip, className }: LocationWidgetProps) => {
 	const { resolvedTheme } = useTheme();
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -100,6 +101,7 @@ export const LocationWidget = memo(({ className }: LocationWidgetProps) => {
 			<h3 className="absolute top-8 left-10 z-30 font-bold font-geist-sans text-4xl min-[530px]:top-4 min-[530px]:left-6 min-[530px]:text-5xl">
 				Paris
 			</h3>
+			<p className="absolute top-20 left-10 min-[530px]:hidden">IP: {ip}</p>
 
 			<div className="min-[530px]:-translate-x-5 absolute inset-x-0 bottom-[-90%] z-20 aspect-square h-96 translate-x-32">
 				<div className="flex size-full place-content-center place-items-center overflow-visible">
