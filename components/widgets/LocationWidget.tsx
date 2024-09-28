@@ -2,9 +2,10 @@
 
 import { Meteors } from '@/components/background/Meteors';
 import { WidgetCard } from '@/components/widgets/WidgetCard';
+import { cn } from '@/lib/utils';
 import createGlobe from 'cobe';
 import { useTheme } from 'next-themes';
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
 
@@ -12,6 +13,28 @@ interface LocationWidgetProps {
 	ip: string;
 	className?: string;
 }
+
+// Function to calculate distance between two points using the Haversine formula
+const deg2rad = (deg: number) => deg * (Math.PI / 180);
+export const calculateDistanceFromTwoPoints = (
+	lat1: number,
+	lon1: number,
+	lat2: number,
+	lon2: number,
+) => {
+	const R: number = 6371; // Radius of the Earth in km
+	const dLat: number = deg2rad(lat2 - lat1);
+	const dLon: number = deg2rad(lon2 - lon1);
+	const a: number =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(deg2rad(lat1)) *
+			Math.cos(deg2rad(lat2)) *
+			Math.sin(dLon / 2) *
+			Math.sin(dLon / 2);
+	const c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	return R * c;
+};
 
 export const LocationWidget = memo(({ ip, className }: LocationWidgetProps) => {
 	const { resolvedTheme } = useTheme();
@@ -96,11 +119,65 @@ export const LocationWidget = memo(({ ip, className }: LocationWidgetProps) => {
 		return () => globe.destroy();
 	}, [r, resolvedTheme]);
 
+	const [location, setLocation] = useState({ lat: '', long: '' });
+
+	useEffect(() => {
+		const cachedLocation = localStorage.getItem('location');
+		const cachedTime = localStorage.getItem('location_time');
+		const oneDay = 24 * 60 * 60 * 1000;
+
+		if (
+			cachedLocation &&
+			cachedTime &&
+			new Date().getTime() - new Date(cachedTime).getTime() < oneDay
+		) {
+			setLocation(JSON.parse(cachedLocation));
+		} else {
+			const fetchLocation = async () => {
+				const response = await fetch(
+					`http://api.ipapi.com/${ip}?access_key=52d55f642adcdec48b42cb7e9327a2b5`,
+				);
+				const data = await response.json();
+
+				if (data) {
+					const loc = {
+						lat: data.latitude,
+						long: data.longitude,
+					};
+					setLocation(loc);
+					localStorage.setItem('location', JSON.stringify(loc));
+					localStorage.setItem('location_time', new Date().toISOString());
+				}
+			};
+
+			fetchLocation();
+		}
+	}, []);
+
+	const distance = calculateDistanceFromTwoPoints(
+		Number(location.lat),
+		Number(location.long),
+		48.866667,
+		2.333333,
+	);
+
 	return (
 		<WidgetCard className={className} column>
-			<h3 className="absolute top-8 left-10 z-30 font-bold font-geist-sans text-4xl min-[530px]:top-4 min-[530px]:left-6 min-[530px]:text-5xl">
+			<h3
+				className={cn(
+					'absolute top-8 z-30 font-bold font-geist-sans text-4xl min-[530px]:top-4 min-[530px]:left-6 min-[530px]:text-5xl',
+					distance ? 'left-4' : 'left-10',
+				)}
+			>
 				Paris
 			</h3>
+			{distance && (
+				<p className="absolute top-20 left-4 text-sm min-[530px]:hidden">
+					Vous êtes à<br />
+					<span className="font-bold text-theme">{distance.toFixed(2)}</span> km
+					de moi :)
+				</p>
+			)}
 
 			<div className="min-[530px]:-translate-x-5 absolute inset-x-0 bottom-[-90%] z-20 aspect-square h-96 translate-x-32">
 				<div className="flex size-full place-content-center place-items-center overflow-visible">
@@ -165,3 +242,57 @@ export const LocationWidget = memo(({ ip, className }: LocationWidgetProps) => {
 		</WidgetCard>
 	);
 });
+
+/*
+* import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const LocationFetcher = () => {
+  const [location, setLocation] = useState({ lat: '', long: '' });
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const cachedLocation = localStorage.getItem('location');
+    const cachedTime = localStorage.getItem('location_time');
+    const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+    // Check if location exists and is not older than 24 hours
+    if (cachedLocation && cachedTime && (new Date() - new Date(cachedTime)) < oneDay) {
+      setLocation(JSON.parse(cachedLocation));
+    } else {
+      const fetchLocation = async () => {
+        try {
+          const response = await axios.get('https://ipapi.co/json/');
+
+          if (response.data) {
+            const loc = {
+              lat: response.data.latitude,
+              long: response.data.longitude
+            };
+            setLocation(loc);
+            localStorage.setItem('location', JSON.stringify(loc));
+            localStorage.setItem('location_time', new Date());
+          }
+        } catch (error) {
+          setError('Error fetching location');
+        }
+      };
+
+      fetchLocation();
+    }
+  }, []);
+
+  return (
+    <div>
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <p>
+          Latitude: {location.lat}, Longitude: {location.long}
+        </p>
+      )}
+    </div>
+  );
+};
+
+export default LocationFetcher;*/
