@@ -44,7 +44,6 @@ import {
 	Phone,
 } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
-import { headers } from 'next/headers';
 import type React from 'react';
 
 const age: number = new Date().getFullYear() - 1994;
@@ -52,9 +51,6 @@ const experience: number = new Date().getFullYear() - 2018;
 
 const Home = async (): Promise<React.JSX.Element> => {
 	const articles = await getAllArticles();
-
-	const header = headers();
-	const ip = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
 
 	return (
 		<>
@@ -80,7 +76,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 							depuis.
 						</p>
 					</div>
-					<LocationWidget className="shrink-0" ip={ip} />
+					<LocationWidget className="shrink-0" />
 				</div>
 			</Motion>
 
