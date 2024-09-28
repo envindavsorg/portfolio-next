@@ -16,7 +16,9 @@ export const WidgetCard = ({
 }: WidgetCardProps) => (
 	<div
 		className={cn(
-			'relative flex aspect-square w-56 items-center justify-between overflow-hidden rounded-md border border-border bg-background p-2',
+			'relative flex items-center justify-between overflow-hidden rounded-md border border-border bg-background p-2',
+			'min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56',
+			'h-56 w-full',
 			row && 'flex-row',
 			column && 'flex-col',
 			className,

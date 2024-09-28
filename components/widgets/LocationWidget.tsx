@@ -97,11 +97,11 @@ export const LocationWidget = memo(({ className }: LocationWidgetProps) => {
 
 	return (
 		<WidgetCard className={className} column>
-			<h3 className="absolute top-4 left-6 z-30 font-bold font-geist-sans text-4xl sm:text-5xl">
+			<h3 className="absolute top-8 left-10 z-30 font-bold font-geist-sans text-4xl min-[530px]:top-4 min-[530px]:left-6 min-[530px]:text-5xl">
 				Paris
 			</h3>
 
-			<div className="-translate-x-5 absolute inset-x-0 bottom-[-90%] z-20 aspect-square h-96">
+			<div className="min-[530px]:-translate-x-5 absolute inset-x-0 bottom-[-90%] z-20 aspect-square h-96 translate-x-32">
 				<div className="flex size-full place-content-center place-items-center overflow-visible">
 					<div
 						style={{
