@@ -3,10 +3,14 @@ import type React from 'react';
 
 interface Props {
 	className?: string;
+	children: React.ReactNode;
 }
 
-export const HowToScroll = ({ className }: Props): React.JSX.Element => (
-	<div className={cn('flex items-center space-x-3', className)}>
+export const HowToScroll = ({
+	className,
+	children,
+}: Props): React.JSX.Element => (
+	<div className={cn('flex items-center space-x-3 text-xs', className)}>
 		<svg
 			className="size-6 flex-none"
 			viewBox="0 0 20 20"
@@ -25,11 +29,6 @@ export const HowToScroll = ({ className }: Props): React.JSX.Element => (
 				className="stroke-theme"
 			/>
 		</svg>
-		<p className="text-sm">
-			Vous pouvez scroller de{' '}
-			<span className="font-medium text-theme">gauche</span> à{' '}
-			<span className="font-medium text-theme">droite</span> pour voir toutes
-			les technologies que j'utilise.
-		</p>
+		{children}
 	</div>
 );
