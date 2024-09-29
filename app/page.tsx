@@ -228,7 +228,15 @@ const Home = async (): Promise<React.JSX.Element> => {
 						</div>
 					</div>
 
-					<HowToScroll />
+					<HowToScroll>
+						<p>
+							Vous pouvez scroller de{' '}
+							<span className="font-medium text-theme">gauche</span> à{' '}
+							<span className="font-medium text-theme">droite</span> pour voir
+							toutes les technologies et langages que j'utilise et que je
+							maîtrise.
+						</p>
+					</HowToScroll>
 				</div>
 			</Motion>
 

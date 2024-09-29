@@ -163,7 +163,15 @@ export const ContributionsGraphClient = memo(
 					</div>
 				</div>
 
-				<HowToScroll className="mt-4" />
+				<HowToScroll className="mt-4">
+					<p>
+						Vous pouvez scroller de{' '}
+						<span className="font-medium text-theme">gauche</span> à{' '}
+						<span className="font-medium text-theme">droite</span> pour voir
+						toutes les contributions que j'ai faites sur GitHub au cours de
+						l'année.
+					</p>
+				</HowToScroll>
 			</>
 		);
 	},

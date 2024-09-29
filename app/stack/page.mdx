@@ -77,7 +77,14 @@ export const metadata = {
     </div>
 </Motion>
 <Motion className="sm:hidden block mt-4" variants={variantsOne} asChild>
-    <HowToScroll />
+    <HowToScroll>
+        <p>
+            Vous pouvez scroller de{' '}
+            <span className="font-medium text-theme">gauche</span> à{' '}
+            <span className="font-medium text-theme">droite</span> pour voir
+            toutes les technologies.
+        </p>
+    </HowToScroll>
 </Motion>
 
 <Motion className="mt-12" variants={variantsTwo} asChild>
