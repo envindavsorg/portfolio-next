@@ -45,7 +45,7 @@ export const AnalyticsWidget = memo(
 							<Users className="size-5 shrink-0 sm:size-7" weight="duotone" />{' '}
 							{visitors}
 						</div>
-						<p className="text-switch opacity-50">|</p>
+						<p className="opacity-50">|</p>
 						<div className="flex items-center gap-2 px-2 font-bold text-base text-green-600 sm:text-lg dark:text-green-200">
 							{pageViews}{' '}
 							<Browsers
