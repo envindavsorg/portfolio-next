@@ -1,5 +1,6 @@
 import { Channels } from '@/components/blocs/Channels';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
+import { LocationWidget } from '@/components/blocs/LocationWidget';
 import { Stars } from '@/components/blocs/Stars';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
@@ -23,7 +24,6 @@ import {
 import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
-import { LocationWidget } from '@/components/widgets/LocationWidget';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
 import {
 	type LanguagesIcons,
