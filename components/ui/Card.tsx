@@ -1,7 +1,7 @@
 'use client';
 
 import { DotPattern } from '@/components/background/DotPattern';
-import { defaultVariantsNoDelay } from '@/components/motion/variants';
+import { variantsOne } from '@/components/motion/variants';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import type React from 'react';
@@ -49,7 +49,7 @@ export const Card = ({
 	return (
 		<MotionComponent
 			{...motionProps}
-			variants={defaultVariantsNoDelay}
+			variants={variantsOne}
 			className={cn(
 				className,
 				'relative overflow-hidden rounded-md border border-neutral-200 bg-background p-4 dark:border-neutral-700',

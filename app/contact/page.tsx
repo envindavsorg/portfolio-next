@@ -8,14 +8,7 @@ import {
 	variantsTwo,
 } from '@/components/motion/variants';
 import { AnimatedNameLink } from '@/components/text/AnimatedName';
-import { env } from '@/env/client';
-import {
-	ChatCircle,
-	ChatsCircle,
-	EnvelopeSimple,
-	LinkedinLogo,
-	Phone,
-} from '@phosphor-icons/react/dist/ssr';
+import { type ContactMe, contactMe } from '@/content/ContactMe';
 import type React from 'react';
 
 export const metadata = {
@@ -47,36 +40,15 @@ const Contact = (): React.JSX.Element => (
 
 		<Motion className="mt-12" variants={variantsTwo} asChild>
 			<div className="flex gap-6">
-				<SocialLink
-					href={`https://www.linkedin.com/in/${env.NEXT_PUBLIC_WEBSITE_PREFIX}`}
-					aria-label="Envoyez-moi un message sur LinkedIn"
-					icon={LinkedinLogo}
-					iconProps={{ weight: 'regular' }}
-				/>
-				<SocialLink
-					href={`tel:${env.NEXT_PUBLIC_PHONE}`}
-					aria-label="N'hésitez pas à m'appeler"
-					icon={Phone}
-					iconProps={{ weight: 'regular' }}
-				/>
-				<SocialLink
-					href={`sms:${env.NEXT_PUBLIC_PHONE}`}
-					aria-label="N'hésitez pas à m'envoyer un SMS"
-					icon={ChatCircle}
-					iconProps={{ weight: 'regular' }}
-				/>
-				<SocialLink
-					href={`mailto:${env.NEXT_PUBLIC_EMAIL}`}
-					aria-label="N'hésitez pas à m'envoyer un email"
-					icon={EnvelopeSimple}
-					iconProps={{ weight: 'regular' }}
-				/>
-				<SocialLink
-					href="/"
-					aria-label="N'hésitez pas à m'envoyer un message"
-					icon={ChatsCircle}
-					iconProps={{ weight: 'regular' }}
-				/>
+				{contactMe.map(({ title, url, icon }: ContactMe, idx: number) => (
+					<SocialLink
+						key={`${idx}-contact`}
+						href={url}
+						aria-label={title}
+						icon={icon}
+						iconProps={{ weight: 'regular' }}
+					/>
+				))}
 			</div>
 		</Motion>
 

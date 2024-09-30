@@ -44,7 +44,7 @@ export const ThemeSwitch = ({ size = 26 }: ThemeSwitchProps) => {
 			onClick={toggleTheme}
 			variant="ghost"
 			size="icon"
-			className="flex shrink-0 rounded-none transition-transform duration-300"
+			className="z-20 flex shrink-0 rounded-none transition-transform duration-300"
 		>
 			<div
 				className="cursor-pointer overflow-hidden"

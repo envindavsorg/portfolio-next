@@ -16,7 +16,7 @@ type BaseMotionProps = {
 	asChild?: boolean;
 } & MotionProps;
 
-export function Motion({
+export const Motion = ({
 	children,
 	className,
 	asChild,
@@ -25,7 +25,7 @@ export function Motion({
 	exit,
 	variants,
 	...props
-}: BaseMotionProps) {
+}: BaseMotionProps): React.JSX.Element => {
 	const Comp = asChild
 		? (motion.create(Slot) as ForwardRefComponent<
 				HTMLDivElement,
@@ -39,9 +39,10 @@ export function Motion({
 		exit: exit || 'hidden',
 		variants: variants || defaultVariants,
 	};
+
 	return (
 		<Comp {...defaultProps} className={className} {...props}>
 			{children}
 		</Comp>
 	);
-}
+};

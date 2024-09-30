@@ -133,7 +133,7 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 			<Button
 				variant="ghost"
 				size="icon"
-				className="flex shrink-0 rounded-none"
+				className="z-20 flex shrink-0 rounded-none"
 				onClick={() => setOpen((open: boolean) => !open)}
 			>
 				<MagnifyingGlass className="text-2xl" />

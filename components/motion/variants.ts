@@ -1,5 +1,21 @@
 import type { Variants } from 'framer-motion';
 
+export const defaultVariants: Variants = {
+	hidden: {
+		opacity: 0,
+		y: 20,
+	},
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.35,
+			delay: 0.25,
+			ease: 'backOut',
+		},
+	},
+};
+
 const base: Variants = {
 	hidden: {
 		opacity: 0,
@@ -79,54 +95,3 @@ export const variantsEight: Variants = createVariant(
 	VariantDurations.Eight,
 	VariantDelays.Eight,
 );
-
-//
-//
-//
-//
-export const defaultVariants: Variants = {
-	hidden: {
-		opacity: 0,
-		y: 20,
-	},
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.35,
-			delay: 0.25,
-			ease: 'backOut',
-		},
-	},
-};
-
-export const defaultVariantsFast: Variants = {
-	hidden: {
-		opacity: 0,
-		y: 20,
-	},
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.5,
-			delay: 0.5,
-			ease: 'backOut',
-		},
-	},
-};
-
-export const defaultVariantsNoDelay: Variants = {
-	hidden: {
-		opacity: 0,
-		y: 20,
-	},
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.35,
-			ease: 'backOut',
-		},
-	},
-};

@@ -30,6 +30,7 @@ interface NavBarProps {
 
 export const NavBar = ({ navItems, className }: NavBarProps) => {
 	const router = useRouter();
+
 	const { isOpen, toggleNavbar } = useNavBarMobile();
 	const scrolled: boolean = useScroll(50);
 	const pathname: string | null = usePathname();
@@ -37,17 +38,48 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 
 	return (
 		<>
-			<div
-				className={cn(
-					'hidden items-center lg:flex',
-					isHome ? 'justify-end' : 'justify-between',
-				)}
-			>
+			<div className="sticky top-8 z-50 hidden items-center justify-between lg:flex">
 				{!isHome && (
+					<>
+						<div
+							className={cn(
+								'-left-1.5 absolute z-10 size-10 rounded-full',
+								scrolled && 'backdrop-blur-xl',
+							)}
+						/>
+						<motion.div
+							className="z-20"
+							initial={{
+								opacity: 0,
+								y: -20,
+							}}
+							animate={{
+								y: 0,
+								opacity: 1,
+							}}
+							transition={{
+								duration: 0.5,
+								delay: 0.4,
+								ease: 'backOut',
+							}}
+						>
+							<Button
+								variant="ghost"
+								size="icon"
+								className="flex shrink-0 rounded-none"
+								onClick={() => router.back()}
+							>
+								<ArrowLeft className="text-2xl" />
+							</Button>
+						</motion.div>
+					</>
+				)}
+
+				{isHome && (
 					<motion.div
 						initial={{
 							opacity: 0,
-							y: -20,
+							y: 20,
 						}}
 						animate={{
 							y: 0,
@@ -59,18 +91,34 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 							ease: 'backOut',
 						}}
 					>
-						<Button
-							variant="ghost"
-							size="icon"
-							className="flex shrink-0 rounded-none"
-							onClick={() => router.back()}
-						>
-							<ArrowLeft className="text-2xl" />
-						</Button>
+						<Image
+							src={avatar}
+							alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
+							className={cn(
+								'size-8 rounded-full object-cover object-center transition-colors duration-200',
+								scrolled
+									? 'border border-theme'
+									: 'border border-neutral-200 dark:border-neutral-700',
+							)}
+							priority
+						/>
 					</motion.div>
 				)}
-				<div className="flex items-center justify-between gap-x-6">
+
+				<div className="relative flex items-center justify-between gap-x-6">
+					<div
+						className={cn(
+							'-left-1.5 absolute z-10 size-10 rounded-full',
+							scrolled && 'backdrop-blur-xl',
+						)}
+					/>
 					<CommandMenu navItems={navItems} pathname={pathname} />
+					<div
+						className={cn(
+							'-right-1.5 absolute z-10 size-10 rounded-full',
+							scrolled && 'backdrop-blur-xl',
+						)}
+					/>
 					<ThemeSwitch />
 				</div>
 			</div>
