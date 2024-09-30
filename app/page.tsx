@@ -302,7 +302,9 @@ const Home = async (): Promise<React.JSX.Element> => {
 						, qui est un framework incroyable de styling, puissant et modulaire.
 					</p>
 
-					<Stars className="mt-2" />
+					<div className="mt-2">
+						<Stars />
+					</div>
 				</div>
 			</Motion>
 
@@ -342,7 +344,9 @@ const Home = async (): Promise<React.JSX.Element> => {
 						:)
 					</p>
 
-					<Channels className="mt-2" />
+					<div className="mt-2">
+						<Channels />
+					</div>
 				</div>
 			</Motion>
 
