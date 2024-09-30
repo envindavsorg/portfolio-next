@@ -1,6 +1,5 @@
 'use client';
 
-import { WidgetCard } from '@/components/widgets/WidgetCard';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { dayjs } from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
@@ -52,7 +51,7 @@ export const GitHubWidget = memo(
 		).reduce((prev, curr) => prev + curr.contributionCount, 0);
 
 		return (
-			<WidgetCard column>
+			<div>
 				<div className="flex w-full items-center justify-between">
 					<div className="flex flex-col">
 						<h3 className="font-bold font-geist-sans text-sm sm:text-base">
@@ -148,7 +147,7 @@ export const GitHubWidget = memo(
 						</>
 					)}
 				</div>
-			</WidgetCard>
+			</div>
 		);
 	},
 );

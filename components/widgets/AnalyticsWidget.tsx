@@ -1,6 +1,5 @@
 import type { OpenStatusProps } from '@/actions/status/status.action';
 import { Counter } from '@/components/text/Counter';
-import { WidgetCard } from '@/components/widgets/WidgetCard';
 import { cn } from '@/lib/utils';
 import { Browsers, Users } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
@@ -16,7 +15,7 @@ interface AnalyticsWidgetProps {
 
 export const AnalyticsWidget = memo(
 	({ visits, visitors, pageViews, stats }: AnalyticsWidgetProps) => (
-		<WidgetCard column>
+		<div>
 			<h3 className="font-bold font-geist-sans text-sm sm:text-base">
 				Statistiques du site
 			</h3>
@@ -90,6 +89,6 @@ export const AnalyticsWidget = memo(
 					/>
 				</span>
 			</div>
-		</WidgetCard>
+		</div>
 	),
 );

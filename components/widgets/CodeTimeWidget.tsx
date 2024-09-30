@@ -2,7 +2,6 @@
 
 import { EmptyState } from '@/components/pictures/EmptyState';
 import { type ChartConfig, ChartContainer } from '@/components/ui/Chart';
-import { WidgetCard } from '@/components/widgets/WidgetCard';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { Trophy } from '@phosphor-icons/react/dist/ssr';
 import React, { memo } from 'react';
@@ -31,7 +30,7 @@ export const CodeTimeWidget = memo(({ content, best }: CodeTimeWidgetProps) => {
 	});
 
 	return (
-		<WidgetCard column>
+		<div>
 			<div className="flex flex-col items-center justify-center">
 				<h3 className="font-bold font-geist-sans text-sm sm:text-base">
 					Temps de code
@@ -51,7 +50,7 @@ export const CodeTimeWidget = memo(({ content, best }: CodeTimeWidgetProps) => {
 			) : (
 				<EmptyState />
 			)}
-		</WidgetCard>
+		</div>
 	);
 });
 
