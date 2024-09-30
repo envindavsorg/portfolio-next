@@ -20,7 +20,7 @@ import { ViewTransitions } from 'next-view-transitions';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import type React from 'react';
-import { ProgressBar, ProgressBarProvider } from 'react-transition-progress';
+import { Suspense } from 'react';
 
 const geistSans = localFont({
 	src: '../fonts/GeistSansVF.woff2',
@@ -72,24 +72,23 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 						disableTransitionOnChange
 					>
 						<ThemeMeta />
-						<ProgressBarProvider>
-							<ProgressBar className="fixed top-0 h-1 bg-theme" />
-							<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
-								<SideStaggerNavigation />
-								<main className="mx-auto w-full max-w-[60ch] pb-5">
-									<NavBarProvider>
-										<NavBar navItems={navItems} />
-									</NavBarProvider>
+						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
+							<SideStaggerNavigation />
+							<main className="mx-auto w-full max-w-[60ch] pb-5">
+								<NavBarProvider>
+									<NavBar navItems={navItems} />
+								</NavBarProvider>
 
-									{children}
-								</main>
+								{children}
+							</main>
 
+							<Suspense>
 								<Footer />
+							</Suspense>
 
-								<Sparkles density={50} />
-								<Toaster position="bottom-right" />
-							</div>
-						</ProgressBarProvider>
+							<Sparkles density={50} />
+							<Toaster position="bottom-right" />
+						</div>
 					</ThemeProvider>
 
 					{process.env.NODE_ENV === 'production' && (
