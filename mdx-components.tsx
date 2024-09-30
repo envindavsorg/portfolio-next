@@ -25,7 +25,7 @@ const components: MDXComponents = {
 		/>
 	),
 	h3: (props: HeadingProps) => (
-		<h3 className="mt-8 mb-3 font-medium text-swi" {...props} />
+		<h3 className="mt-8 mb-3 font-medium" {...props} />
 	),
 	h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
 	p: (props: ParagraphProps) => (

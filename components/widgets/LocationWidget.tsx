@@ -13,28 +13,6 @@ interface LocationWidgetProps {
 	className?: string;
 }
 
-// Function to calculate distance between two points using the Haversine formula
-const deg2rad = (deg: number) => deg * (Math.PI / 180);
-export const calculateDistanceFromTwoPoints = (
-	lat1: number,
-	lon1: number,
-	lat2: number,
-	lon2: number,
-) => {
-	const R: number = 6371; // Radius of the Earth in km
-	const dLat: number = deg2rad(lat2 - lat1);
-	const dLon: number = deg2rad(lon2 - lon1);
-	const a: number =
-		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-		Math.cos(deg2rad(lat1)) *
-			Math.cos(deg2rad(lat2)) *
-			Math.sin(dLon / 2) *
-			Math.sin(dLon / 2);
-	const c: number = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-	return R * c;
-};
-
 export const LocationWidget = memo(({ className }: LocationWidgetProps) => {
 	const { resolvedTheme } = useTheme();
 
@@ -193,57 +171,3 @@ export const LocationWidget = memo(({ className }: LocationWidgetProps) => {
 		</WidgetCard>
 	);
 });
-
-/*
-* import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const LocationFetcher = () => {
-  const [location, setLocation] = useState({ lat: '', long: '' });
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const cachedLocation = localStorage.getItem('location');
-    const cachedTime = localStorage.getItem('location_time');
-    const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-    // Check if location exists and is not older than 24 hours
-    if (cachedLocation && cachedTime && (new Date() - new Date(cachedTime)) < oneDay) {
-      setLocation(JSON.parse(cachedLocation));
-    } else {
-      const fetchLocation = async () => {
-        try {
-          const response = await axios.get('https://ipapi.co/json/');
-
-          if (response.data) {
-            const loc = {
-              lat: response.data.latitude,
-              long: response.data.longitude
-            };
-            setLocation(loc);
-            localStorage.setItem('location', JSON.stringify(loc));
-            localStorage.setItem('location_time', new Date());
-          }
-        } catch (error) {
-          setError('Error fetching location');
-        }
-      };
-
-      fetchLocation();
-    }
-  }, []);
-
-  return (
-    <div>
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <p>
-          Latitude: {location.lat}, Longitude: {location.long}
-        </p>
-      )}
-    </div>
-  );
-};
-
-export default LocationFetcher;*/
