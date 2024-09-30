@@ -238,9 +238,7 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 								) : (
 									<div className="flex flex-col items-center justify-center gap-y-3 px-3 py-6">
 										<Spinner variant="blue" />
-										<p className="text-switch text-xs">
-											Chargement des articles ...
-										</p>
+										<p className="text-xs">Chargement des articles ...</p>
 									</div>
 								)}
 							</CardContent>
