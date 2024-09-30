@@ -1,6 +1,5 @@
 import { projectStars } from '@/actions/github/stars.action';
 import { Counter } from '@/components/text/Counter';
-import { cn } from '@/lib/utils';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import type React from 'react';
@@ -26,7 +25,6 @@ const Star = ({ img, link, name, subs }: StarProps): React.JSX.Element => (
 					src={img}
 					height={64}
 					width={64}
-					sizes="33vw"
 					className="size-14 rounded-full border border-neutral-200 dark:border-neutral-700"
 					priority
 				/>
@@ -48,48 +46,45 @@ const Star = ({ img, link, name, subs }: StarProps): React.JSX.Element => (
 	</div>
 );
 
-interface StarsProps {
-	className?: string;
-}
-
-export const Stars = async ({
-	className,
-}: StarsProps): Promise<React.JSX.Element> => {
-	const [next, react, typescript, tailwind] = await Promise.all([
+export const Stars = async (): Promise<React.JSX.Element> => {
+	const [next, react] = await Promise.all([
 		projectStars('vercel', 'next.js'),
 		projectStars('facebook', 'react'),
-		projectStars('microsoft', 'typescript'),
-		projectStars('tailwindlabs', 'tailwindcss'),
 	]);
 
+	interface ProvidersProps {
+		img: string;
+		name: string;
+		link: string;
+		stars: number;
+	}
+
+	const providers: ProvidersProps[] = [
+		{
+			img: next.avatar,
+			name: next.name,
+			link: `https://github.com/${next.owner}/${next.name}`,
+			stars: next.stars,
+		},
+		{
+			img: react.avatar,
+			name: react.name,
+			link: `https://github.com/${react.owner}/${react.name}`,
+			stars: react.stars,
+		},
+	];
+
 	return (
-		<div
-			className={cn('grid w-full grid-cols-1 gap-4 sm:grid-cols-2', className)}
-		>
-			<Star
-				img={next.avatar}
-				name={`@${next.name}`}
-				link={`https://github.com/${next.owner}/${next.name}`}
-				subs={Math.round(next.stars)}
-			/>
-			<Star
-				img={react.avatar}
-				name={`@${react.name}`}
-				link={`https://github.com/${react.owner}/${react.name}`}
-				subs={Math.round(react.stars)}
-			/>
-			<Star
-				img={typescript.avatar}
-				name={`@${typescript.name}`}
-				link={`https://github.com/${typescript.owner}/${typescript.name}`}
-				subs={Math.round(typescript.stars)}
-			/>
-			<Star
-				img={tailwind.avatar}
-				name={`@${tailwind.name}`}
-				link={`https://github.com/${tailwind.owner}/${tailwind.name}`}
-				subs={Math.round(tailwind.stars)}
-			/>
+		<div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
+			{providers.map(({ img, name, link, stars }: ProvidersProps) => (
+				<Star
+					key={link}
+					img={img}
+					name={`@${name}`}
+					link={link}
+					subs={Math.round(stars)}
+				/>
+			))}
 		</div>
 	);
 };

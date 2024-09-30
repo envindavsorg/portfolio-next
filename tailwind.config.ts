@@ -103,8 +103,7 @@ const config = {
 				'fade-in-left': 'fade-in-left 1s ease-out forwards',
 				'fade-in-up': 'fade-in-up 1s ease-out forwards',
 				'fade-in-down': 'fade-in-down 1s ease-out forwards',
-				'logo-cloud': 'logo-cloud 18s linear infinite',
-				'shimmer-effect': 'shimmer 8s infinite',
+				shine: 'shine var(--duration) infinite linear',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -205,20 +204,15 @@ const config = {
 						transform: 'translateY(0)',
 					},
 				},
-				'logo-cloud': {
-					from: {
-						transform: 'translateX(0)',
+				shine: {
+					'0%': {
+						'background-position': '0% 0%',
+					},
+					'50%': {
+						'background-position': '100% 100%',
 					},
 					to: {
-						transform: 'translateX(calc(-100% - 1.805rem))',
-					},
-				},
-				shimmer: {
-					'0%, 90%, 100%': {
-						'background-position': 'calc(-100% - var(--shimmer-width)) 0',
-					},
-					'30%, 60%': {
-						'background-position': 'calc(100% + var(--shimmer-width)) 0',
+						'background-position': '0% 0%',
 					},
 				},
 			},
