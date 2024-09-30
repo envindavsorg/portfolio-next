@@ -1,7 +1,6 @@
 import { githubUser } from '@/actions/github/user.action';
 import { linkedInData } from '@/actions/linkedin/data.action';
 import { Counter } from '@/components/text/Counter';
-import { cn } from '@/lib/utils';
 import {
 	ArrowUpRight,
 	GithubLogo,
@@ -58,22 +57,11 @@ const Channel = ({
 	</div>
 );
 
-interface ChannelsProps {
-	className?: string;
-}
-
-export const Channels = async ({
-	className,
-}: ChannelsProps): Promise<React.JSX.Element> => {
+export const Channels = async (): Promise<React.JSX.Element> => {
 	const [github, linkedin] = await Promise.all([githubUser(), linkedInData()]);
 
 	return (
-		<div
-			className={cn(
-				'flex w-full flex-col space-x-0 space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0',
-				className,
-			)}
-		>
+		<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
 			<div className="flex w-full flex-col-reverse gap-y-2">
 				<div className="flex items-center gap-x-2">
 					<GithubLogo className="text-lg" weight="bold" />
