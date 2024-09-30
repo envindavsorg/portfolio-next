@@ -38,10 +38,13 @@ const importArticle = async (
 };
 
 export const getAllArticles = async () => {
-	const articleFilenames = await glob('*/page.mdx', {
+	const articleFilenames: string[] = await glob('*/page.mdx', {
 		cwd: './app/articles',
 	});
 
-	const articles = await Promise.all(articleFilenames.map(importArticle));
+	const articles: Awaited<ArticleWithSlug>[] = await Promise.all(
+		articleFilenames.map(importArticle),
+	);
+
 	return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date));
 };
