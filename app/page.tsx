@@ -114,15 +114,17 @@ const Home = async (): Promise<React.JSX.Element> => {
 
 			<Motion className="mt-12" variants={variantsThree} asChild>
 				<div className="flex gap-6">
-					{contactMe.map(({ title, url, icon }: ContactMe, idx: number) => (
-						<SocialLink
-							key={`${idx}-contact`}
-							href={url}
-							aria-label={title}
-							icon={icon}
-							iconProps={{ weight: 'regular' }}
-						/>
-					))}
+					{contactMe
+						.filter((_, idx) => idx !== 3)
+						.map(({ description, url, icon }: ContactMe, idx: number) => (
+							<SocialLink
+								key={`${idx}-contact`}
+								href={url}
+								aria-label={description}
+								icon={icon}
+								iconProps={{ weight: 'regular' }}
+							/>
+						))}
 				</div>
 			</Motion>
 
@@ -157,31 +159,34 @@ const Home = async (): Promise<React.JSX.Element> => {
 						</Badge>
 						, bien évidemment.
 					</p>
-
-					<div className="scrollbar-hide mt-2 flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-						{myLanguagesIcons.map(
-							({ icon, name }: LanguagesIcons, idx: number) => (
-								<div
-									key={`${idx}-languages`}
-									className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
-								>
-									{icon}
-									<p className="sr-only">{name}</p>
-								</div>
-							),
-						)}
-					</div>
-
-					<HowToScroll>
-						<p>
-							Vous pouvez scroller de{' '}
-							<span className="font-medium text-theme">gauche</span> à{' '}
-							<span className="font-medium text-theme">droite</span> pour voir
-							toutes les technologies et langages que j'utilise et que je
-							maîtrise.
-						</p>
-					</HowToScroll>
 				</div>
+			</Motion>
+
+			<Motion className="mt-3" variants={variantsFour} asChild>
+				<div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
+					{myLanguagesIcons.map(
+						({ icon, name }: LanguagesIcons, idx: number) => (
+							<div
+								key={`${idx}-languages`}
+								className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
+							>
+								{icon}
+								<p className="sr-only">{name}</p>
+							</div>
+						),
+					)}
+				</div>
+			</Motion>
+			<Motion className="mt-3" variants={variantsFour} asChild>
+				<HowToScroll>
+					<p>
+						Vous pouvez scroller de{' '}
+						<span className="font-medium text-theme">gauche</span> à{' '}
+						<span className="font-medium text-theme">droite</span> pour voir
+						toutes les technologies et langages que j'utilise et que je
+						maîtrise.
+					</p>
+				</HowToScroll>
 			</Motion>
 
 			<Motion className="mt-12" variants={variantsFive} asChild>

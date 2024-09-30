@@ -40,11 +40,11 @@ const Contact = (): React.JSX.Element => (
 
 		<Motion className="mt-12" variants={variantsTwo} asChild>
 			<div className="flex gap-6">
-				{contactMe.map(({ title, url, icon }: ContactMe, idx: number) => (
+				{contactMe.map(({ description, url, icon }: ContactMe, idx: number) => (
 					<SocialLink
 						key={`${idx}-contact`}
 						href={url}
-						aria-label={title}
+						aria-label={description}
 						icon={icon}
 						iconProps={{ weight: 'regular' }}
 					/>
