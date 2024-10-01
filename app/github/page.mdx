@@ -1,4 +1,7 @@
 import React from 'react';
+import { env } from '../../env/server';
+import { unstable_noStore as noStore } from 'next/cache';
+import { githubUser } from '../../actions/github/user.action';
 import { Suspense } from 'react';
 import { Motion } from '../../components/motion/Motion';
 import {
@@ -6,12 +9,31 @@ import {
     variantsTwo,
     variantsThree,
 } from '../../components/motion/variants';
+import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
+import { Spinner } from '../../components/ui/Spinner';
+import { GitHubStatsClient } from '../../components/github/stats/GitHubStatsClient';
 
-import { GitHubStatsServer } from '@/components/github/stats/GitHubStatsServer';
 import { ContributionsGraphServer } from '@/components/github/contributions/ContributionsServer';
 import { ContributionsTableServer } from '@/components/github/contributions/ContributionsServer';
-import { Spinner } from '@/components/ui/Spinner';
-import { AnimatedNameLink } from '@/components/text/AnimatedName.tsx';
+
+export const GitHubStatsServer = async () => {
+    noStore();
+
+    const { following, followers, commits } = await githubUser(
+        env.GITHUB_USERNAME,
+    );
+
+    return (
+        <GitHubStatsClient
+            followers={followers}
+            following={following}
+            thisYear={commits.thisYear}
+            thisWeek={commits.thisWeek}
+            bestDay={commits.bestDay}
+            perDay={commits.perDay}
+        />
+    );
+};
 
 export const metadata = {
     title: 'Activité et statistiques de mon profil GitHub',
