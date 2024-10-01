@@ -1,13 +1,16 @@
 import React from 'react';
 import { Suspense } from 'react';
+import { Motion } from '../../components/motion/Motion';
+import {
+    variantsOne,
+    variantsTwo,
+    variantsThree,
+} from '../../components/motion/variants';
+
 import { GitHubStatsServer } from '@/components/github/stats/GitHubStatsServer';
 import { ContributionsGraphServer } from '@/components/github/contributions/ContributionsServer';
 import { ContributionsTableServer } from '@/components/github/contributions/ContributionsServer';
 import { Spinner } from '@/components/ui/Spinner';
-import { Motion } from '@/components/motion/Motion';
-import {
-    variantsOne, variantsTwo, variantsThree,
-} from '@/components/motion/variants';
 import { AnimatedNameLink } from '@/components/text/AnimatedName.tsx';
 
 export const metadata = {
@@ -21,7 +24,7 @@ export const metadata = {
 
 <AnimatedNameLink />
 
-<Motion className="mt-12" variants={variantsOne} asChild>
+<Motion className="mt-10" variants={variantsOne} asChild>
     Toutes mes statistiques GitHub (nombre de commits, abonnés, suivis)
     de l'année {new Date().getFullYear() - 1} - {new Date().getFullYear()} sont affichées ici.
 </Motion>

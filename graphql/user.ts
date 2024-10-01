@@ -1,6 +1,6 @@
 export const query: string = String.raw`
-	query ($login: String!) {
-		user(login: $login) {
+	query ($username: String!) {
+		user(login: $username) {
 			login
 			name
 			avatarUrl
@@ -9,6 +9,25 @@ export const query: string = String.raw`
 			}
 			following {
 				totalCount
+			}
+			contributionsCollection {
+				contributionCalendar {
+			        colors
+			        totalContributions
+			        months {
+			            firstDay
+			            name
+			            totalWeeks
+			        }
+			        weeks {
+			            contributionDays {
+			                color
+			                contributionCount
+			                date
+			            }
+			            firstDay
+			        }
+		        }
 			}
 		}
 	}

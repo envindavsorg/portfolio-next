@@ -99,27 +99,6 @@ interface ContributionsGitHubResponse {
 
 export type { ContributionsGitHub, ContributionsGitHubResponse };
 
-// fetch data about a specific GitHub user
-interface GitHubUser {
-	login: string;
-	name: string;
-	avatar: string;
-	followers: number;
-	following: number;
-}
-
-interface GitHubUserResponse {
-	user: {
-		login: string;
-		name: string;
-		avatarUrl: string;
-		followers: { totalCount: number };
-		following: { totalCount: number };
-	};
-}
-
-export type { GitHubUser, GitHubUserResponse };
-
 // fetch starred repositories on GitHub
 interface StarredRepos {
 	repos: {

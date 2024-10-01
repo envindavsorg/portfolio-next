@@ -25,17 +25,19 @@ import type React from 'react';
 interface Props {
 	followers: number;
 	following: number;
-	totalContributions: number;
-	contributions: number[];
-	contributionsThisWeek: number;
+	thisYear: number;
+	thisWeek: number;
+	bestDay: number;
+	perDay: number;
 }
 
 export const GitHubStatsClient = ({
 	followers,
 	following,
-	totalContributions,
-	contributions,
-	contributionsThisWeek,
+	thisYear,
+	thisWeek,
+	bestDay,
+	perDay,
 }: Props) => (
 	<Motion className="flex flex-col" asChild variants={defaultVariants}>
 		<div className="grid grid-cols-4 gap-3">
@@ -46,7 +48,7 @@ export const GitHubStatsClient = ({
 				<Card
 					tag="static"
 					icon={<GitCommit className="text-theme" weight="duotone" />}
-					title={`${totalContributions} commit${totalContributions > 1 ? 's' : ''}`}
+					title={`${thisYear} commit${thisYear > 1 ? 's' : ''}`}
 					comment="(sur l'année)"
 					className="flex flex-row-reverse items-center justify-between gap-3"
 				/>
@@ -58,7 +60,7 @@ export const GitHubStatsClient = ({
 				<Card
 					tag="static"
 					icon={<CalendarCheck className="text-theme" weight="duotone" />}
-					title={`${contributionsThisWeek} commit${contributionsThisWeek > 1 ? 's' : ''}`}
+					title={`${thisWeek} commit${thisWeek > 1 ? 's' : ''}`}
 					comment="(cette semaine)"
 					className="flex flex-row-reverse items-center justify-between gap-3"
 				/>
@@ -70,7 +72,7 @@ export const GitHubStatsClient = ({
 				<Card
 					tag="static"
 					icon={<Trophy className="text-theme" weight="duotone" />}
-					title={`${Math.max(...contributions)} commit${Math.max(...contributions) > 1 ? 's' : ''}`}
+					title={`${bestDay} commit${bestDay > 1 ? 's' : ''}`}
 					comment="(en un jour)"
 					className="flex flex-row-reverse items-center justify-between gap-3"
 				/>
@@ -82,7 +84,7 @@ export const GitHubStatsClient = ({
 				<Card
 					tag="static"
 					icon={<ChartPie className="text-theme" weight="duotone" />}
-					title={`${Math.round(totalContributions / contributions.length)} commit${Math.round(totalContributions / contributions.length) > 1 ? 's' : ''}`}
+					title={`${perDay} commit${perDay > 1 ? 's' : ''}`}
 					comment="(en moyenne par jour)"
 					className="flex flex-row-reverse items-center justify-between gap-3"
 				/>

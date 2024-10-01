@@ -1,6 +1,7 @@
 import { githubUser } from '@/actions/github/user.action';
 import { linkedInData } from '@/actions/linkedin/data.action';
 import { Counter } from '@/components/text/Counter';
+import { env } from '@/env/server';
 import {
 	ArrowUpRight,
 	GithubLogo,
@@ -58,11 +59,14 @@ const Channel = ({
 );
 
 export const Channels = async (): Promise<React.JSX.Element> => {
-	const [github, linkedin] = await Promise.all([githubUser(), linkedInData()]);
+	const [github, linkedin] = await Promise.all([
+		githubUser(env.GITHUB_USERNAME),
+		linkedInData(),
+	]);
 
 	return (
 		<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
-			<div className="flex w-full flex-col-reverse gap-y-2">
+			<div className="flex w-full flex-col gap-y-2">
 				<div className="flex items-center gap-x-2">
 					<GithubLogo className="text-lg" weight="bold" />
 					<p className="text-sm leading-snug">Sur GitHub :</p>
@@ -74,7 +78,7 @@ export const Channels = async (): Promise<React.JSX.Element> => {
 					subs={Math.round(github.followers + github.following)}
 				/>
 			</div>
-			<div className="group flex w-full flex-col-reverse gap-y-2">
+			<div className="group flex w-full flex-col gap-y-2">
 				<div className="flex items-center gap-x-2">
 					<LinkedinLogo className="text-lg" weight="bold" />
 					<p className="text-sm leading-snug">Sur LinkedIn :</p>
