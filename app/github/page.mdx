@@ -3,6 +3,9 @@ import { env } from '../../env/server';
 import { unstable_noStore as noStore } from 'next/cache';
 import { githubUser } from '../../actions/github/user.action';
 import { Suspense } from 'react';
+import { Graph } from '../../components/github/Graph';
+import { Stats } from '../../components/github/Stats';
+import { GitHubTable } from '../../components/github/Table';
 import { Motion } from '../../components/motion/Motion';
 import {
     variantsOne,
@@ -10,13 +13,10 @@ import {
     variantsThree,
 } from '../../components/motion/variants';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
+import { Separator } from '../../components/ui/Separator';
 import { Spinner } from '../../components/ui/Spinner';
-import { GitHubStatsClient } from '../../components/github/stats/GitHubStatsClient';
 
-import { ContributionsGraphServer } from '@/components/github/contributions/ContributionsServer';
-import { ContributionsTableServer } from '@/components/github/contributions/ContributionsServer';
-
-export const GitHubStatsServer = async () => {
+export const GitHubStats = async () => {
     noStore();
 
     const { following, followers, commits } = await githubUser(
@@ -24,7 +24,7 @@ export const GitHubStatsServer = async () => {
     );
 
     return (
-        <GitHubStatsClient
+        <Stats
             followers={followers}
             following={following}
             thisYear={commits.thisYear}
@@ -35,6 +35,45 @@ export const GitHubStatsServer = async () => {
     );
 };
 
+export const GitHubContributions = async () => {
+    noStore();
+
+    const { login, name, avatar, commits: {
+        all: {
+            contributionCalendar: { weeks, colors }
+        }
+    } } = await githubUser(
+        env.GITHUB_USERNAME,
+    );
+
+    return (
+        <Graph
+            weeks={weeks}
+            colors={colors}
+            login={login}
+            name={name}
+            avatar={avatar}
+        />
+    );
+};
+
+export const GitHubContributionsTable = async () => {
+    noStore();
+
+    const { commits: {
+            all: {
+                contributionCalendar: { weeks }
+            }
+        }
+    } = await githubUser(
+        env.GITHUB_USERNAME,
+    );
+
+    return (
+        <GitHubTable weeks={weeks} />
+    );
+};
+
 export const metadata = {
     title: 'Activité et statistiques de mon profil GitHub',
     alternates: {
@@ -42,31 +81,43 @@ export const metadata = {
     },
 };
 
-# Activité et statistiques de mon profil GitHub
+# Activité et statistiques
 
 <AnimatedNameLink />
 
 <Motion className="mt-10" variants={variantsOne} asChild>
-    Toutes mes statistiques GitHub (nombre de commits, abonnés, suivis)
-    de l'année {new Date().getFullYear() - 1} - {new Date().getFullYear()} sont affichées ici.
+    Toutes mes **statistiques GitHub** (nombre de commits, abonnés, suivis)
+    de l'année **{new Date().getFullYear() - 1}** - **{new Date().getFullYear()}** sont affichées ici.
 </Motion>
-
 <Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="mt-4" variants={variantsOne}>
-        <GitHubStatsServer />
+    <Motion className="mt-6" variants={variantsOne}>
+        <GitHubStats />
     </Motion>
 </Suspense>
 
-<Motion className="mt-12" variants={variantsTwo} asChild>
-    Mon graphique de contributions GitHub sur l'année dernière
-</Motion>
-<Motion className="mt-4" variants={variantsTwo}>
-    <ContributionsGraphServer />
-</Motion>
+<Separator className="my-14" />
 
-<Motion className="mt-12" variants={variantsThree} asChild>
-    Plus de détails sur mon nombre de commits de la semaine dernière
+<Motion variants={variantsTwo} asChild>
+    Mon graphique de **contributions GitHub** sur
+    l'année **{new Date().getFullYear() - 1}** - **{new Date().getFullYear()}**.
+    J'essaie tous les jours de **contribuer** et de **créer** de nouveaux projets.
+    Je suis toujours à la **recherche** de nouvelles **idées**
+    que je puisse les matérialiser sur GitHub.
 </Motion>
-<Motion className="mt-4" variants={variantsThree}>
-    <ContributionsTableServer />
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="mt-6" variants={variantsTwo}>
+        <GitHubContributions />
+    </Motion>
+</Suspense>
+
+<Separator className="my-14" />
+
+<Motion variants={variantsThree} asChild>
+    Plus de détails sur mon **nombre de commits** effectués
+    de la semaine dernière, **jour** par **jour**.
 </Motion>
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="mt-6" variants={variantsThree}>
+        <GitHubContributionsTable />
+    </Motion>
+</Suspense>

@@ -1,8 +1,29 @@
-interface GitHubCommits {
+export interface GitHubCollection {
+	contributionCalendar: {
+		colors: string[];
+		totalContributions: number;
+		months: {
+			firstDay: string;
+			name: string;
+			totalWeeks: number;
+		}[];
+		weeks: {
+			contributionDays: {
+				color: string;
+				contributionCount: number;
+				date: string;
+			}[];
+			firstDay: string;
+		}[];
+	};
+}
+
+export interface GitHubCommits {
 	thisYear: number;
 	thisWeek: number;
 	bestDay: number;
 	perDay: number;
+	all: GitHubCollection;
 }
 
 export interface GitHubData {
@@ -24,25 +45,7 @@ export interface GitHubResponse {
 	following: {
 		totalCount: number;
 	};
-	contributionsCollection: {
-		contributionCalendar: {
-			colors: string[];
-			totalContributions: number;
-			months: {
-				firstDay: string;
-				name: string;
-				totalWeeks: number;
-			}[];
-			weeks: {
-				contributionDays: {
-					color: string;
-					contributionCount: number;
-					date: string;
-				}[];
-				firstDay: string;
-			}[];
-		};
-	};
+	contributionsCollection: GitHubCollection;
 }
 
 export const totalCommitsThisYear = (data: GitHubResponse): number =>

@@ -45,60 +45,6 @@ interface MDX {
 
 export type { Metadata, Post, Posts, MDX };
 
-// fetch all GitHub contributions for the last year
-interface ContributionsGitHub {
-	contributionCalendar: {
-		colors: string[];
-		totalContributions: number;
-		months: {
-			firstDay: string;
-			name: string;
-			totalWeeks: number;
-		}[];
-		weeks: {
-			contributionDays: {
-				color: string;
-				contributionCount: number;
-				date: string;
-			}[];
-			firstDay: string;
-		}[];
-	};
-}
-
-export type WeeksWithContributionCounts = Pick<
-	ContributionsGitHub['contributionCalendar'],
-	'weeks'
->;
-export type ContributionDays =
-	WeeksWithContributionCounts['weeks'][number]['contributionDays'][number];
-
-interface ContributionsGitHubResponse {
-	user: {
-		contributionsCollection: {
-			contributionCalendar: {
-				colors: string[];
-				totalContributions: number;
-				months: {
-					firstDay: string;
-					name: string;
-					totalWeeks: number;
-				}[];
-				weeks: {
-					contributionDays: {
-						color: string;
-						contributionCount: number;
-						date: string;
-					}[];
-					firstDay: string;
-				}[];
-			};
-		};
-	};
-}
-
-export type { ContributionsGitHub, ContributionsGitHubResponse };
-
 // fetch starred repositories on GitHub
 interface StarredRepos {
 	repos: {

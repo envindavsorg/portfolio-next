@@ -31,7 +31,7 @@ interface Props {
 	perDay: number;
 }
 
-export const GitHubStatsClient = ({
+export const Stats = ({
 	followers,
 	following,
 	thisYear,
@@ -42,7 +42,7 @@ export const GitHubStatsClient = ({
 	<Motion className="flex flex-col" asChild variants={defaultVariants}>
 		<div className="grid grid-cols-4 gap-3">
 			<motion.div
-				className="col-span-full sm:col-span-2"
+				className="col-span-full min-[530px]:col-span-2"
 				variants={variantsTwo}
 			>
 				<Card
@@ -54,7 +54,7 @@ export const GitHubStatsClient = ({
 				/>
 			</motion.div>
 			<motion.div
-				className="col-span-full sm:col-span-2"
+				className="col-span-full min-[530px]:col-span-2"
 				variants={variantsThree}
 			>
 				<Card
@@ -66,7 +66,7 @@ export const GitHubStatsClient = ({
 				/>
 			</motion.div>
 			<motion.div
-				className="col-span-full sm:col-span-2"
+				className="col-span-full min-[530px]:col-span-2"
 				variants={variantsFour}
 			>
 				<Card
@@ -78,7 +78,7 @@ export const GitHubStatsClient = ({
 				/>
 			</motion.div>
 			<motion.div
-				className="col-span-full sm:col-span-2"
+				className="col-span-full min-[530px]:col-span-2"
 				variants={variantsFive}
 			>
 				<Card
@@ -90,7 +90,7 @@ export const GitHubStatsClient = ({
 				/>
 			</motion.div>
 			<motion.div
-				className="col-span-full sm:col-span-2"
+				className="col-span-full min-[530px]:col-span-2"
 				variants={variantsSix}
 			>
 				<Card
@@ -102,13 +102,13 @@ export const GitHubStatsClient = ({
 				/>
 			</motion.div>
 			<motion.div
-				className="col-span-full sm:col-span-2"
+				className="col-span-full min-[530px]:col-span-2"
 				variants={variantsSeven}
 			>
 				<Card
 					tag="static"
 					icon={<UserPlus className="text-theme" weight="duotone" />}
-					title={`${following} abonnement${following > 1 ? 's' : ''}`}
+					title={`${following} suivi${following > 1 ? 's' : ''}`}
 					comment="(sur GitHub)"
 					className="flex flex-row-reverse items-center justify-between gap-3"
 				/>

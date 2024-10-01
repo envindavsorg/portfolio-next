@@ -21,20 +21,8 @@ interface Props {
 	}[];
 }
 
-export const ContributionsTableClient = async ({ weeks }: Props) => {
-	const currentDate: Date = new Date();
-	const currentMonth: number = currentDate.getMonth();
-	const currentYear: number = currentDate.getFullYear();
-
-	const currentMonthWeeks = weeks.filter((week) => {
-		const weekDate = new Date(week.firstDay);
-		return (
-			weekDate.getMonth() === currentMonth &&
-			weekDate.getFullYear() === currentYear
-		);
-	});
-
-	const currentMonthContributions = currentMonthWeeks.flatMap(
+export const GitHubTable = async ({ weeks }: Props) => {
+	const currentMonthContributions = weeks.flatMap(
 		(week) => week.contributionDays,
 	);
 

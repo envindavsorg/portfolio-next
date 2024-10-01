@@ -38,6 +38,7 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 				thisWeek: totalCommitsThisWeek(user),
 				bestDay: totalCommitsBestDay(user),
 				perDay: totalCommitsPerDay(user),
+				all: user.contributionsCollection,
 			},
 		};
 	} catch (error) {

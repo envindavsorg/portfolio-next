@@ -1,0 +1,220 @@
+'use client';
+
+import { HowToScroll } from '@/components/blocs/HowToScroll';
+import {
+	FADE_DOWN_ANIMATION_VARIANTS,
+	FADE_UP_ANIMATION_VARIANTS,
+} from '@/components/motion/variants';
+import { Alert, AlertDescription } from '@/components/ui/Alert';
+import { dayjs } from '@/lib/dayjs';
+import { GitDiff, GithubLogo } from '@phosphor-icons/react/dist/ssr';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import type React from 'react';
+import { useEffect, useRef } from 'react';
+import { memo, useState } from 'react';
+
+interface ContributionsGraphProps {
+	weeks: {
+		contributionDays: {
+			color: string;
+			contributionCount: number;
+			date: string;
+		}[];
+		firstDay: string;
+	}[];
+	colors: string[];
+	login: string;
+	name: string;
+	avatar: string;
+	className?: string;
+}
+
+type Contributions = {
+	contributionCount: number | null;
+	date: string | null;
+};
+
+export const Graph = memo(
+	({
+		weeks,
+		colors,
+		login,
+		name,
+		avatar,
+	}: ContributionsGraphProps): React.JSX.Element => {
+		const [selectContribution, setSelectContribution] = useState<Contributions>(
+			{
+				contributionCount: null,
+				date: null,
+			},
+		);
+		const [isVisible, setIsVisible] = useState(false);
+
+		const handleContributionClick = (
+			contributionCount: number,
+			date: string,
+		) => {
+			if (
+				selectContribution.contributionCount === contributionCount &&
+				selectContribution.date === date
+			) {
+				setIsVisible(false);
+				setTimeout(() => {
+					setSelectContribution({ contributionCount: null, date: null });
+				}, 300);
+			} else {
+				setSelectContribution({ contributionCount, date });
+				setIsVisible(true);
+			}
+		};
+
+		const numberOfContributions: number = (
+			weeks[weeks.length - 1].contributionDays || []
+		).reduce((prev, curr) => prev + curr.contributionCount, 0);
+
+		const containerRef = useRef<HTMLDivElement>(null);
+
+		useEffect(() => {
+			if (containerRef.current) {
+				containerRef.current.scrollLeft = containerRef.current.scrollWidth;
+			}
+		}, [weeks]);
+
+		return (
+			<>
+				<div className="flex w-full items-center justify-between">
+					<div className="flex items-center gap-x-3">
+						<Image
+							src={avatar}
+							alt={name}
+							width={60}
+							height={60}
+							priority={false}
+							quality={100}
+							fetchPriority="low"
+							loading="lazy"
+							className="size-10 rounded-full border-2 border-theme object-cover object-center sm:size-12"
+						/>
+						<div className="flex flex-col">
+							<h3 className="font-bold font-geist-sans text-lg sm:text-xl">
+								@{login}
+							</h3>
+							<p className="text-xs sm:text-sm">
+								<span className="font-bold text-theme">
+									{numberOfContributions} commits
+								</span>{' '}
+								/ sem.
+							</p>
+						</div>
+					</div>
+					<GithubLogo className="size-8" weight="duotone" />
+				</div>
+
+				<div
+					ref={containerRef}
+					className="scrollbar-hide mt-6 w-full overflow-x-auto"
+				>
+					<div className="flex w-full min-w-max justify-end gap-0.5">
+						{weeks.map(({ firstDay, contributionDays }, idx: number) => (
+							<div key={`${firstDay}-${idx}`} className="flex flex-col gap-0.5">
+								{contributionDays.map(
+									({ contributionCount, color, date }, idx: number) => {
+										const background: string =
+											contributionCount > 0 ? color : '#4B5563';
+
+										return (
+											<motion.span
+												key={`${date}-${idx}`}
+												className="size-4 cursor-pointer rounded-xs"
+												style={background ? { background } : undefined}
+												whileHover={{
+													scale: 1.1,
+												}}
+												onClick={() =>
+													handleContributionClick(contributionCount, date)
+												}
+											/>
+										);
+									},
+								)}
+							</div>
+						))}
+					</div>
+				</div>
+				<div className="mt-2 flex w-full items-center justify-end">
+					<div className="flex items-center gap-x-2 sm:gap-x-4">
+						<span className="font-medium text-sm">Moins</span>
+						<ul className="flex gap-0.5">
+							<li className="size-2 rounded-xs bg-[#4B5563]" />
+							{colors.map((item, idx: number) => (
+								<li
+									key={`${item}-${idx}`}
+									className="size-2 rounded-xs"
+									style={{ backgroundColor: item }}
+								/>
+							))}
+						</ul>
+						<span className="font-medium text-sm">Plus</span>
+					</div>
+				</div>
+
+				<HowToScroll className="mt-3">
+					<p>
+						Vous pouvez scroller de{' '}
+						<span className="font-medium text-theme">gauche</span> à{' '}
+						<span className="font-medium text-theme">droite</span> pour voir
+						toutes les contributions que j'ai faites sur GitHub au cours de
+						l'année. Vous pouvez cliquer sur un commit pour voir le nombre de
+						commits effectués en un jour.
+					</p>
+				</HowToScroll>
+
+				{selectContribution.contributionCount != null && (
+					<motion.div
+						initial="hidden"
+						animate="show"
+						viewport={{ once: true }}
+						variants={{
+							hidden: {},
+							show: {
+								transition: {
+									staggerChildren: 0.15,
+								},
+							},
+						}}
+					>
+						<motion.div
+							className="mt-6"
+							variants={
+								isVisible
+									? FADE_UP_ANIMATION_VARIANTS
+									: FADE_DOWN_ANIMATION_VARIANTS
+							}
+						>
+							<Alert>
+								<AlertDescription className="flex items-center gap-3">
+									<GitDiff className="size-6 shrink-0 text-theme" />{' '}
+									<span className="text-sm">
+										Le{' '}
+										<span className="font-bold">
+											{dayjs(selectContribution.date).format(
+												'dddd DD MMM YYYY',
+											)}
+										</span>
+										, j'ai effectué en tout{' '}
+										<span className="font-bold text-theme">
+											{selectContribution.contributionCount} commit
+											{selectContribution.contributionCount > 1 ? 's' : ''}
+										</span>
+										.
+									</span>
+								</AlertDescription>
+							</Alert>
+						</motion.div>
+					</motion.div>
+				)}
+			</>
+		);
+	},
+);
