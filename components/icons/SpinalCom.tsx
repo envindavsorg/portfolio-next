@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const SpinalcomIcon = (props: SVGProps<SVGSVGElement>) => (
+export const SpinalComIcon = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		viewBox="0 0 79 115"
 		xmlns="http://www.w3.org/2000/svg"
