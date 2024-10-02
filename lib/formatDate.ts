@@ -3,6 +3,5 @@ export const formatDate = (dateString: string) =>
 		day: 'numeric',
 		month: 'short',
 		year: 'numeric',
-		weekday: 'short',
 		timeZone: 'UTC',
 	});

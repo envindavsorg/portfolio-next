@@ -47,6 +47,21 @@
 	}
 }
 
+@layer utilities {
+	::selection {
+		@apply text-white dark:text-black bg-theme;
+	}
+
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+}
+
 :root {
 	--sh-class: #7aa2f7;
 	--sh-sign: #89ddff;
@@ -220,20 +235,17 @@ input[type="email"] {
 	}
 }
 
-::selection {
-	@apply text-white dark:text-black bg-theme;
-}
-
-.scrollbar-hide {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-	display: none;
-}
-
 /* map */
 .mapboxgl-control-container {
 	display: none;
+}
+
+@media (hover: hover) {
+	.animated-list:hover li {
+		opacity: 0.5;
+	}
+
+	.animated-list:hover li:hover {
+		opacity: 1;
+	}
 }
