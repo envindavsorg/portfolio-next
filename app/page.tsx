@@ -10,6 +10,7 @@ import { TailwindCSSIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
 import { SocialLink } from '@/components/links/SocialLink';
+import { Map } from '@/components/map/Map';
 import { Motion } from '@/components/motion/Motion';
 import {
 	variantsFive,
@@ -21,6 +22,12 @@ import {
 	variantsTwo,
 } from '@/components/motion/variants';
 import { AnimatedName } from '@/components/text/AnimatedName';
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from '@/components/ui/Accordion';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
@@ -37,6 +44,10 @@ import type React from 'react';
 
 const age: number = new Date().getFullYear() - 1994;
 const experience: number = new Date().getFullYear() - 2018;
+
+// coordinates (of Paris)
+const latitude: number = 48.858093;
+const longitude: number = 2.294694;
 
 const WeFixIcon = (props: React.SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
@@ -82,10 +93,25 @@ const Home = async (): Promise<React.JSX.Element> => {
 								depuis.
 							</p>
 						</div>
-						<LocationWidget />
+						<LocationWidget latitude={latitude} longitude={longitude} />
 					</div>
 				</Motion>
 			</div>
+
+			<Accordion
+				type="single"
+				collapsible
+				className="mt-3 w-full min-[530px]:mt-6"
+			>
+				<AccordionItem value="map">
+					<AccordionTrigger className="text-theme">
+						Voir sur la carte :)
+					</AccordionTrigger>
+					<AccordionContent>
+						<Map longitude={longitude} latitude={latitude} />
+					</AccordionContent>
+				</AccordionItem>
+			</Accordion>
 
 			<div className="mt-12 space-y-4 leading-snug">
 				<Motion variants={variantsTwo} asChild>
