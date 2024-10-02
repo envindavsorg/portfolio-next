@@ -232,3 +232,8 @@ input[type="email"] {
 .scrollbar-hide::-webkit-scrollbar {
 	display: none;
 }
+
+/* map */
+.mapboxgl-control-container {
+	display: none;
+}
