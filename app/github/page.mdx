@@ -2,15 +2,18 @@ import React from 'react';
 import { env } from '../../env/server';
 import { unstable_noStore as noStore } from 'next/cache';
 import { githubUser } from '../../actions/github/user.action';
+import { wakatimeStats } from '../../actions/wakatime/stats.action';
 import { Suspense } from 'react';
 import { Graph } from '../../components/github/Graph';
 import { Stats } from '../../components/github/Stats';
 import { GitHubTable } from '../../components/github/Table';
+import { Wakatime } from '../../components/wakatime/Wakatime';
 import { Motion } from '../../components/motion/Motion';
 import {
     variantsOne,
     variantsTwo,
     variantsThree,
+    variantsFour
 } from '../../components/motion/variants';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Separator } from '../../components/ui/Separator';
@@ -74,6 +77,13 @@ export const GitHubContributionsTable = async () => {
     );
 };
 
+export const CodingStats = async () => {
+    noStore();
+
+    const stats = await wakatimeStats(env.WAKATIME_DATA_URL);
+    return <Wakatime stats={stats.data} />;
+};
+
 export const metadata = {
     title: 'Activité et statistiques de mon profil GitHub',
     alternates: {
@@ -113,11 +123,24 @@ export const metadata = {
 <Separator className="my-14" />
 
 <Motion variants={variantsThree} asChild>
+    Mes statistiques hebdomadaires de **temps de code** sur Wakatime.
+    Vous pouvez retrouver mon temps de code moyen, mon temps de code total sur la
+    semaine passée, mon meilleur jour et les langages que j'utilise le plus.
+</Motion>
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="mt-6" variants={variantsFour}>
+        <CodingStats />
+    </Motion>
+</Suspense>
+
+<Separator className="my-14" />
+
+<Motion variants={variantsFour} asChild>
     Plus de détails sur mon **nombre de commits** effectués
     de la semaine dernière, **jour** par **jour**.
 </Motion>
 <Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="mt-6" variants={variantsThree}>
+    <Motion className="mt-6" variants={variantsFour}>
         <GitHubContributionsTable />
     </Motion>
 </Suspense>
