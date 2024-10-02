@@ -23,10 +23,11 @@ export interface OpenStatusProps {
 	slug?: string;
 	label: string;
 	color: string;
+	text: string;
 	status: string;
 }
 
-const websiteStatus = async (slug: string): Promise<OpenStatusProps> => {
+export const websiteStatus = async (slug: string): Promise<OpenStatusProps> => {
 	const { status } = await getStatus(slug);
 
 	const parsed = schema.safeParse({ status });
@@ -35,13 +36,12 @@ const websiteStatus = async (slug: string): Promise<OpenStatusProps> => {
 		logger.error(parsed.error);
 	}
 
-	const { label, color } = dictionary[parsed.data!.status];
+	const { label, color, text } = dictionary[parsed.data!.status];
 
 	return {
 		label,
 		color,
+		text,
 		status: parsed.data!.status,
 	};
 };
-
-export { websiteStatus };
