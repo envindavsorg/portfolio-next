@@ -2,6 +2,7 @@ import { Channels } from '@/components/blocs/Channels';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
 import { LocationWidget } from '@/components/blocs/LocationWidget';
 import { Stars } from '@/components/blocs/Stars';
+import { ArticlesList } from '@/components/blog/ArticlesList';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
@@ -37,8 +38,7 @@ import {
 } from '@/content/LanguagesIcons';
 import { env } from '@/env/client';
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
-import { formatDate } from '@/lib/formatDate';
-import { ArrowRight, Book, Calendar } from '@phosphor-icons/react/dist/ssr';
+import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
 
@@ -96,22 +96,24 @@ const Home = async (): Promise<React.JSX.Element> => {
 						<LocationWidget latitude={latitude} longitude={longitude} />
 					</div>
 				</Motion>
-			</div>
 
-			<Accordion
-				type="single"
-				collapsible
-				className="mt-3 w-full min-[530px]:mt-6"
-			>
-				<AccordionItem value="map">
-					<AccordionTrigger className="text-theme">
-						Voir sur la carte :)
-					</AccordionTrigger>
-					<AccordionContent>
-						<Map longitude={longitude} latitude={latitude} />
-					</AccordionContent>
-				</AccordionItem>
-			</Accordion>
+				<Motion variants={variantsOne} asChild>
+					<Accordion
+						type="single"
+						collapsible
+						className="mt-3 w-full min-[530px]:mt-6"
+					>
+						<AccordionItem value="map">
+							<AccordionTrigger className="text-theme">
+								Voir sur la carte :)
+							</AccordionTrigger>
+							<AccordionContent>
+								<Map longitude={longitude} latitude={latitude} />
+							</AccordionContent>
+						</AccordionItem>
+					</Accordion>
+				</Motion>
+			</div>
 
 			<div className="mt-12 space-y-4 leading-snug">
 				<Motion variants={variantsTwo} asChild>
@@ -344,64 +346,22 @@ const Home = async (): Promise<React.JSX.Element> => {
 			</Motion>
 
 			<Motion variants={variantsSeven} asChild>
-				<div className="flex flex-col">
-					<h2 className="font-bold font-geist-sans text-foreground text-xl sm:text-2xl">
-						Mes derniers articles :
-					</h2>
-					<p className="mt-1 text-sm sm:text-base">
-						Découvrez les derniers articles de{' '}
-						<Link
-							href="/blog"
-							aria-label="Voir mon blog"
-							className="font-bold text-theme underline"
-						>
-							mon blog
-						</Link>{' '}
-						!
+				<div className="space-y-3">
+					<Link
+						className="group flex items-center gap-2 font-bold tracking-tight"
+						href="/blog"
+					>
+						Mes derniers articles
+						<ArrowUpRight className="size-4 transition-all group-hover:text-theme" />
+					</Link>
+					<p>
+						J'écris occasionnellement des articles sur des sujets variés, comme
+						le développement web, le design, la programmation, la marketing,
+						etc.
 					</p>
-
-					<div className="mt-6 flex flex-col gap-y-10">
-						{articles
-							.slice(0, 3)
-							.map(({ slug, date, title, description, readingTime }) => (
-								<article
-									key={slug}
-									className="group flex max-w-xl flex-col items-start justify-between"
-								>
-									<h2 className="font-bold font-geist-sans text-foreground text-lg sm:text-xl">
-										<Link href={`/articles/${slug}`} aria-label={description}>
-											{title}
-										</Link>
-									</h2>
-
-									<div className="mt-2 flex flex-col gap-x-12 gap-y-1 text-sm sm:flex-row sm:items-center">
-										<div className="flex items-center gap-x-2">
-											<Calendar className="size-4 shrink-0" weight="regular" />
-											<time dateTime={date}>{formatDate(date)}</time>
-										</div>
-										<div className="flex items-center gap-x-2">
-											<Book className="size-4 shrink-0" weight="regular" />
-											<p>{readingTime}</p>
-										</div>
-									</div>
-
-									<p className="mt-4 line-clamp-3 text-foreground leading-6">
-										{description}
-									</p>
-
-									<Link
-										className="mt-5 flex items-center gap-x-2 font-bold text-sm transition-colors duration-200 group-hover:text-theme"
-										href={`/articles/${slug}`}
-										aria-label={description}
-									>
-										Lire l'article{' '}
-										<ArrowRight className="size-4 shrink-0" weight="bold" />
-									</Link>
-								</article>
-							))}
-					</div>
 				</div>
 			</Motion>
+			<ArticlesList posts={articles.slice(0, 3)} />
 		</>
 	);
 };
