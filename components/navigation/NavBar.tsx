@@ -68,6 +68,8 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 								size="icon"
 								className="flex shrink-0 rounded-none"
 								onClick={() => router.back()}
+								aria-labelledby="Retourner à la page précédente"
+								aria-label="Retourner à la page précédente"
 							>
 								<ArrowLeft className="text-2xl" />
 							</Button>
@@ -165,6 +167,8 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 								size="icon"
 								className="flex shrink-0 rounded-none"
 								onClick={() => router.back()}
+								aria-labelledby="Retourner à la page précédente"
+								aria-label="Retourner à la page précédente"
 							>
 								<ArrowLeft className="text-2xl" />
 							</Button>

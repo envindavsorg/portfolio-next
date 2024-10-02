@@ -1,7 +1,7 @@
 import ContactEmailTemplate from '@/emails/contact';
 import { env } from '@/env/server';
 import { type NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import { type CreateEmailResponse, Resend } from 'resend';
 
 const resend: Resend = new Resend(env.RESEND_API_KEY);
 
@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest) => {
 	const { name, surname, mail, content } = await json;
 
 	try {
-		const data = await resend.emails.send({
+		const data: CreateEmailResponse = await resend.emails.send({
 			from: 'Mon portfolio <onboarding@resend.dev>',
 			to: ['cuzeacflo@gmail.com'],
 			subject: 'Contact -> Mon portfolio personnel',
@@ -20,6 +20,8 @@ export const POST = async (req: NextRequest) => {
 
 		return NextResponse.json(data);
 	} catch (error) {
-		return NextResponse.json({ error });
+		return NextResponse.json({
+			error,
+		});
 	}
 };

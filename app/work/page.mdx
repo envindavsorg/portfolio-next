@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Briefcase, LinkSimple, Minus } from '@phosphor-icons/react/dist/ssr';
+import { Minus } from '@phosphor-icons/react/dist/ssr';
 import { HowToScroll } from '../../components/blocs/HowToScroll';
 import { Motion } from '../../components/motion/Motion';
 import {
@@ -11,17 +11,13 @@ import {
 } from '../../components/motion/variants';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Badge } from '../../components/ui/Badge';
-import { Button } from '../../components/ui/Button';
-import { EconomatIcon } from '../../components/icons/Economat';
-import { SpinalComIcon } from '../../components/icons/SpinalCom';
-import { WeFixIcon } from '../../components/icons/WeFix';
 import { Separator } from '../../components/ui/Separator';
-import { wefix } from './WeFix';
-import { spinalCom } from './SpinalCom';
-import { economat } from './EdA';
+import { wefix } from '../../content/work/WeFix';
+import { spinalCom } from '../../content/work/SpinalCom';
+import { economat } from '../../content/work/EdA';
 
 export const metadata = {
-    title: "Entreprises pour lesquelles j'ai travaillé",
+    title: "Toutes les entreprises pour lesquelles j'ai travaillé",
     alternates: {
       canonical: '/work',
     },
@@ -52,85 +48,17 @@ export const Strong = ({ children }) => (
     entreprises de tailles variées, des **startups** aux **grandes entreprises**.
 </Motion>
 
-<Motion className="w-full max-w-md mx-auto mt-14" variants={variantsOne} asChild>
-    <div className="rounded-md border border-neutral-200 p-6 dark:border-neutral-700">
-        <div className="flex items-center gap-3">
-            <Briefcase className="size-5 sm:size-6 flex-none" weight="duotone" />
-            <span className="text-base sm:text-lg font-bold font-geist-sans">
-                Entreprises
-            </span>
-        </div>
-        <ol className="mt-6 space-y-4">
-            <li className="flex gap-4">
-                <div className="relative flex size-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-                    <WeFixIcon className="size-7 rounded-full object-cover" />
-                </div>
-                <dl className="flex flex-auto flex-wrap gap-x-2">
-                    <dt className="sr-only">Nom de l'entreprise</dt>
-                    <dd className="flex-none text-base font-extrabold">
-                        WeFix by Fnac
-                    </dd>
-                    <dt className="sr-only">Date de début</dt>
-                    <dd className="ml-auto text-sm font-bold">
-                        2020
-                    </dd>
-                    <dt className="sr-only">Poste occupé</dt>
-                    <dd className="w-full text-xs">
-                        Développeur web
-                    </dd>
-                </dl>
-            </li>
-            <li className="flex gap-4">
-                <div className="relative flex size-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-                    <SpinalComIcon className="size-5 rounded-full object-cover" />
-                </div>
-                <dl className="flex flex-auto flex-wrap gap-x-2">
-                    <dt className="sr-only">Nom de l'entreprise</dt>
-                    <dd className="flex-none text-base font-extrabold">
-                        SpinalCom
-                    </dd>
-                    <dt className="sr-only">Date de début</dt>
-                    <dd className="ml-auto text-sm font-bold">
-                        <time>2019</time>{' '}
-                        <span aria-hidden="true">—</span>{' '}
-                        <time>2020</time>
-                    </dd>
-                    <dt className="sr-only">Poste occupé</dt>
-                    <dd className="w-full text-xs">
-                        Designer Web
-                    </dd>
-                </dl>
-            </li>
-            <li className="flex gap-4">
-                <div className="relative flex size-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-                    <EconomatIcon className="size-6 rounded-full object-cover" />
-                </div>
-                <dl className="flex flex-auto flex-wrap gap-x-2">
-                    <dt className="sr-only">Nom de l'entreprise</dt>
-                    <dd className="flex-none text-base font-extrabold">
-                        <span className="sm:inline-block hidden">Économat</span>
-                        <span className="sm:hidden">Éc.</span> des Armées
-                    </dd>
-                    <dt className="sr-only">Date de début</dt>
-                    <dd className="ml-auto text-sm font-bold">
-                        <time>2018</time>{' '}
-                        <span aria-hidden="true">—</span>{' '}
-                        <time>2019</time>
-                    </dd>
-                    <dt className="sr-only">Poste occupé</dt>
-                    <dd className="w-full text-xs">
-                        Développeur web
-                    </dd>
-                </dl>
-            </li>
-        </ol>
-    </div>
-</Motion>
-
 <div className="mt-14">
-    <Motion className="!text-2xl sm:!text-3xl" variants={variantsTwo} asChild>
-        ## WeFix by Fnac
-    </Motion>
+    <Link
+        href="https://wefix.net/"
+        aria-label="Site web de WeFix"
+        target="_blank"
+        rel="noreferrer noopener"
+    >
+        <Motion className="!text-2xl sm:!text-3xl underline" variants={variantsTwo} asChild>
+            ## WeFix by Fnac
+        </Motion>
+    </Link>
     <Motion variants={variantsTwo} asChild>
         <Small>Développeur web (jan. 2020 - aujourd'hui)</Small>
     </Motion>
@@ -172,25 +100,19 @@ export const Strong = ({ children }) => (
             les technologies et langages que j'utilise et que j'ai consolidés dans cette entreprise.
         </HowToScroll>
     </Motion>
-    <Motion className="mt-6" variants={variantsTwo} asChild>
-        <Button size="lg" variant="outline" className="flex items-center gap-x-2 font-semibold">
-            <Link
-                href="https://wefix.net/"
-                aria-label="Site web de WeFix"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex items-center gap-x-2 font-semibold">
-                <LinkSimple className="size-4 shrink-0" />
-                Site web de WeFix
-            </Link>
-        </Button>
-    </Motion>
 
     <Separator className="my-14" />
 
-    <Motion className="!text-2xl sm:!text-3xl" variants={variantsThree} asChild>
-        ## SpinalCom
-    </Motion>
+    <Link
+        href="https://www.spinalcom.com/en/"
+        aria-label="Site web de SpinalCom"
+        target="_blank"
+        rel="noreferrer noopener"
+    >
+        <Motion className="!text-2xl sm:!text-3xl underline" variants={variantsThree} asChild>
+            ## SpinalCom
+        </Motion>
+    </Link>
     <Motion variants={variantsThree} asChild>
         <Small>Designer Web (juil. 2019 - jan. 2020)</Small>
     </Motion>
@@ -234,25 +156,19 @@ export const Strong = ({ children }) => (
             les technologies et langages que j'utilise et que j'ai consolidés dans cette entreprise.
         </HowToScroll>
     </Motion>
-    <Motion className="mt-6" variants={variantsThree} asChild>
-        <Button size="lg" variant="outline" className="flex items-center gap-x-2 font-semibold">
-            <Link
-                href="https://www.spinalcom.com/en/"
-                aria-label="Site web de SpinalCom"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex items-center gap-x-2 font-semibold">
-                <LinkSimple className="size-4 shrink-0" />
-                Site web de SpinalCom
-            </Link>
-        </Button>
-    </Motion>
 
     <Separator className="my-14" />
 
-    <Motion className="!text-2xl sm:!text-3xl" variants={variantsFour} asChild>
-        ## Économat des Armées
-    </Motion>
+    <Link
+        href="https://www.economat-armees.com/"
+        aria-label="Site web de l'Économat"
+        target="_blank"
+        rel="noreferrer noopener"
+    >
+        <Motion className="!text-2xl sm:!text-3xl underline" variants={variantsFour} asChild>
+            ## Économat des Armées
+        </Motion>
+    </Link>
     <Motion variants={variantsFour} asChild>
         <Small>Développeur web (jan. 2018 - juil. 2019)</Small>
     </Motion>
@@ -284,18 +200,5 @@ export const Strong = ({ children }) => (
                 </div>
             ))}
         </div>
-    </Motion>
-    <Motion className="mt-6" variants={variantsThree} asChild>
-        <Button size="lg" variant="outline" className="flex items-center gap-x-2 font-semibold">
-            <Link
-                href="https://www.economat-armees.com/"
-                aria-label="Site web de l'Économat"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="flex items-center gap-x-2 font-semibold">
-                <LinkSimple className="size-4 shrink-0" />
-                Site web de l'Économat
-            </Link>
-        </Button>
     </Motion>
 </div>

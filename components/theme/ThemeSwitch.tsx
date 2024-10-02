@@ -45,6 +45,8 @@ export const ThemeSwitch = ({ size = 26 }: ThemeSwitchProps) => {
 			variant="ghost"
 			size="icon"
 			className="z-20 flex shrink-0 rounded-none transition-transform duration-300"
+			aria-labelledby="Activer ou désactiver le thème clair ou sombre sur le site"
+			aria-label="Activer ou désactiver le thème clair ou sombre sur le site"
 		>
 			<div
 				className="cursor-pointer overflow-hidden"

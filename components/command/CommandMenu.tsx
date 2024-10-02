@@ -135,6 +135,8 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 				size="icon"
 				className="z-20 flex shrink-0 rounded-none"
 				onClick={() => setOpen((open: boolean) => !open)}
+				aria-labelledby="Effectuer une recherche sur mon site"
+				aria-label="Effectuer une recherche sur mon site"
 			>
 				<MagnifyingGlass className="text-2xl" />
 			</Button>
@@ -145,7 +147,7 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 				</DialogTitle>
 
 				<DialogHeader>
-					{navItems.map(({ name, link }, idx) => {
+					{navItems.map(({ name, link }: NavItems, idx) => {
 						const isActive: boolean =
 							link === '/blog' ? pathname.startsWith(link) : pathname === link;
 

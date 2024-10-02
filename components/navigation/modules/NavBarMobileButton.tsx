@@ -25,6 +25,8 @@ export const NavbarMobileButton = forwardRef<HTMLButtonElement>(
 					animate={isOpen ? 'open' : 'closed'}
 					onClick={toggleNavbar}
 					className="relative flex size-7 shrink-0 cursor-pointer rounded-none"
+					aria-labelledby="Ouvrir ou fermer le menu de navigation mobile"
+					aria-label="Ouvrir ou fermer le menu de navigation mobile"
 				>
 					<motion.span
 						variants={top}
