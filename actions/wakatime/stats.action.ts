@@ -8,27 +8,21 @@ const headers = {
 	Authorization: `Basic ${env.WAKATIME_API_KEY}`,
 };
 
-const fetchWakatimeData = async (url: string) => {
-	const response: Response = await fetch(url, {
-		headers,
-		cache: 'no-cache',
-	});
-
-	if (!response.ok) {
-		throw new Error(`HTTP error! Status: ${response.status}`);
+export const wakatimeStats = async (url: string) => {
+	if (!url) {
+		logger.error('→ url parameter is required !');
+		throw new Error('→ WAKATIME_DATA_URL env variable is not set ...');
 	}
 
-	return response.json();
-};
-
-export const wakatimeStats = async () => {
-	const url: string = env.WAKATIME_DATA_URL;
-
 	try {
-		const [stats] = await fetchWakatimeData(url);
-		return stats;
+		const response: Response = await fetch(url, {
+			headers,
+			cache: 'no-cache',
+		});
+
+		return response.json();
 	} catch (error) {
-		logger.error('Error fetching Wakatime stats data:', error);
-		throw new Error('Error fetching Wakatime stats data');
+		logger.error('→ there is an error fetching Wakatime data: ', error);
+		throw new Error('→ failed to fetch Wakatime data ...');
 	}
 };
