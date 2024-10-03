@@ -47,13 +47,13 @@ export const FlipCard = ({
 			>
 				<div
 					style={{ backfaceVisibility: 'hidden' }}
-					className="absolute flex size-full flex-col"
+					className="absolute z-10 flex size-full flex-col bg-white dark:bg-black"
 				>
 					<LocationWidget latitude={latitude} longitude={longitude} />
 				</div>
 
 				<div
-					className="absolute flex size-full flex-col"
+					className="absolute z-10 flex size-full flex-col bg-white dark:bg-black"
 					style={{
 						backfaceVisibility: 'hidden',
 						transform: 'rotateY(180deg)',
