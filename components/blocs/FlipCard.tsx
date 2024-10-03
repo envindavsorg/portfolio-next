@@ -4,7 +4,9 @@ import { LocationWidget } from '@/components/blocs/LocationWidget';
 import { Map } from '@/components/map/Map';
 import { motion } from 'framer-motion';
 import type React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useWindowSize } from 'usehooks-ts';
 
 interface FlipCardProps {
 	latitude: number;
@@ -16,10 +18,23 @@ export const FlipCard = ({
 	longitude,
 }: FlipCardProps): React.JSX.Element => {
 	const [flipped, setFlipped] = useState(false);
+	const [clientWidth, setClientWidth] = useState<number | null>(null);
 
 	const handleFlip = (): void => {
 		setFlipped(!flipped);
 	};
+
+	const { width = 0 } = useWindowSize();
+	useEffect(() => {
+		setClientWidth(width);
+	}, [width]);
+
+	const dynamicWidth =
+		clientWidth === null
+			? null
+			: clientWidth < 530 && clientWidth > 360
+				? clientWidth - 64
+				: null;
 
 	return (
 		<div>
@@ -28,9 +43,6 @@ export const FlipCard = ({
 				animate={flipped ? 'flipped' : 'notFlipped'}
 				whileHover={{
 					scale: 0.95,
-				}}
-				style={{
-					transformStyle: 'preserve-3d',
 				}}
 				transition={{
 					type: 'spring',
@@ -43,7 +55,13 @@ export const FlipCard = ({
 						translateY: 0,
 					},
 				}}
-				className="relative flex h-56 w-56 shrink-0 flex-col hover:cursor-pointer min-[530px]:aspect-square min-[530px]:h-full min-[375px]:w-72 min-[440px]:w-96 min-[530px]:w-56"
+				className="relative flex h-56 w-56 shrink-0 flex-col hover:cursor-pointer min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56"
+				style={
+					{
+						transformStyle: 'preserve-3d',
+						width: dynamicWidth === null ? undefined : dynamicWidth,
+					} as React.CSSProperties
+				}
 			>
 				<div
 					style={{ backfaceVisibility: 'hidden' }}
@@ -59,7 +77,7 @@ export const FlipCard = ({
 						transform: 'rotateY(180deg)',
 					}}
 				>
-					<Map longitude={longitude} latitude={latitude} />
+					<Map longitude={longitude} latitude={latitude} width={dynamicWidth} />
 				</div>
 			</motion.div>
 		</div>

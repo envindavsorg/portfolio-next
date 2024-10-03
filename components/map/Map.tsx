@@ -12,6 +12,7 @@ interface MapProps {
 	latitude: number;
 	zoom?: number;
 	pitch?: number;
+	width: number | null;
 }
 
 export const Map = ({
@@ -19,6 +20,7 @@ export const Map = ({
 	latitude,
 	zoom = 7,
 	pitch = 25,
+	width,
 }: MapProps) => {
 	const { resolvedTheme } = useTheme();
 
@@ -62,11 +64,23 @@ export const Map = ({
 	}, [mapTheme, resolvedTheme]);
 
 	return (
-		<div className="w-56 overflow-clip min-[530px]:aspect-square min-[530px]:h-full min-[375px]:w-72 min-[440px]:w-96 min-[530px]:w-56">
+		<div
+			className="overflow-clip min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56"
+			style={
+				{
+					width: width === null ? undefined : width,
+				} as React.CSSProperties
+			}
+		>
 			<div
 				ref={mapContainer}
 				id="map-container"
-				className="h-56 w-56 rounded-md min-[375px]:w-72 min-[440px]:w-96 min-[530px]:w-56"
+				className="h-56 rounded-md min-[530px]:w-56"
+				style={
+					{
+						width: width === null ? undefined : width,
+					} as React.CSSProperties
+				}
 			/>
 		</div>
 	);
