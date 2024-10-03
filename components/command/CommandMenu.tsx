@@ -1,6 +1,5 @@
 'use client';
 
-import type { GetBlogPosts } from '@/app/api/blog-posts/route';
 import {
 	Card,
 	CardContent,
@@ -20,9 +19,7 @@ import {
 	CommandList,
 } from '@/components/ui/Command';
 import { DialogHeader, DialogTitle } from '@/components/ui/Dialog';
-import { Spinner } from '@/components/ui/Spinner';
 import { env } from '@/env/client';
-import { fetcher } from '@/lib/fetcher';
 import { cn } from '@/lib/utils';
 import {
 	ArrowsOut,
@@ -39,18 +36,6 @@ import { useTheme } from 'next-themes';
 import type React from 'react';
 import { type ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import useSWR from 'swr';
-
-const getBlogPosts: () => {
-	data: GetBlogPosts[] | undefined;
-	error: Error;
-} = () => {
-	const { data, error } = useSWR('/api/blog-posts', fetcher);
-	return {
-		data: data ? (JSON.parse(data) as GetBlogPosts[]) : undefined,
-		error: error,
-	};
-};
 
 interface CommandMenuProps {
 	navItems: NavItems[];
@@ -83,7 +68,6 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 		window.open(url, '_blank');
 	};
 
-	const { data, error } = getBlogPosts();
 	const { systemTheme, theme, setTheme } = useTheme();
 	const [currentTheme, setCurrentTheme] = useState<string | undefined>(
 		undefined,
@@ -196,53 +180,6 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 										{description}
 									</CommandItem>
 								))}
-							</CardContent>
-						</Card>
-					</CommandGroup>
-
-					<div className="my-4" />
-
-					<CommandGroup>
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-blue-600 text-sm dark:text-blue-300">
-									Articles de mon blog :
-								</CardTitle>
-								<CardDescription className="text-xs">
-									- choisissez un élément dans la liste ci-dessous.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
-								{error ? null : data ? (
-									data.length > 0 ? (
-										data
-											.sort(
-												(a, b) =>
-													new Date(b.date).getTime() -
-													new Date(a.date).getTime(),
-											)
-											.map(({ title, slug }, idx: number) => (
-												<CommandItem
-													key={`${slug}-${idx}`}
-													onSelect={() => {
-														setOpen(false);
-														window.open(`/blog/${slug}`, '_self');
-													}}
-												>
-													<div className="font-bold text-blue-600 text-sm dark:text-blue-300">
-														{idx + 1}.
-													</div>
-													<span>{title}</span>
-												</CommandItem>
-											))
-									) : null
-								) : (
-									<div className="flex flex-col items-center justify-center gap-y-3 px-3 py-6">
-										<Spinner variant="blue" />
-										<p className="text-xs">Chargement des articles ...</p>
-									</div>
-								)}
 							</CardContent>
 						</Card>
 					</CommandGroup>

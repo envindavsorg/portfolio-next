@@ -9,6 +9,8 @@ interface Article {
 	author: string;
 	date: string;
 	readingTime: string;
+	readingTimeShort: string;
+	image: string;
 }
 
 export interface ArticleWithSlug extends Article {
@@ -29,6 +31,11 @@ const importArticle = async (
 		wordsPerMinute: 100,
 		emoji: false,
 	}).replace('min read', 'minutes de lecture');
+
+	article.readingTimeShort = readingDuration(content, {
+		wordsPerMinute: 100,
+		emoji: false,
+	}).replace('min read', 'minutes');
 
 	return {
 		slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),

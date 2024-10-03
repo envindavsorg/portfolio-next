@@ -1,67 +1,124 @@
+import type { ArticleWithSlug } from '@/lib/articles';
 import { formatDate } from '@/lib/formatDate';
+import { cn } from '@/lib/utils';
+import { LineVertical } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import React from 'react';
-import { Section } from './Section';
+import type React from 'react';
 
-export const Article = ({ post, mousePosition }: any) => {
-	const { date, slug, title, image } = post;
-	const imageHeight = 150;
-	const imageWidth = 300;
-	const imageOffset = 24;
+interface ArticleProps {
+	isLanding?: boolean;
+	isBlog?: boolean;
+	article: ArticleWithSlug;
+	mousePosition: {
+		x: number;
+		y: number;
+	};
+}
+
+export const Article = ({
+	isLanding,
+	isBlog,
+	article,
+	mousePosition,
+}: ArticleProps): React.JSX.Element => {
+	const { date, slug, title, image, readingTimeShort } = article;
+	const { x, y } = mousePosition;
+
+	const imageHeight: number = 100;
+	const imageWidth: number = 200;
+	const imageOffset: number = 24;
 
 	return (
 		<li className="group py-3 transition-opacity first:pt-0 last:pb-0">
-			<Link href={`/articles/${slug}`}>
+			<Link href={`/articles/${slug}`} aria-label={title}>
 				<div className="transition-opacity">
-					{image && mousePosition && (
+					{isLanding && (
 						<motion.div
 							animate={{
-								top: mousePosition.y - imageHeight - imageOffset,
-								left: mousePosition.x - imageWidth / 2,
+								top: y - imageHeight - imageOffset,
+								left: x - imageWidth / 2,
 							}}
 							initial={false}
-							transition={{ ease: 'easeOut' }}
-							style={{ width: imageWidth, height: imageHeight }}
-							className="pointer-events-none absolute z-10 hidden overflow-hidden rounded bg-tertiary shadow-sm sm:group-hover:block"
+							transition={{
+								ease: 'easeOut',
+							}}
+							style={{
+								width: imageWidth,
+								height: imageHeight,
+							}}
+							className="pointer-events-none absolute z-10 hidden items-center justify-center overflow-hidden rounded-md border border-neutral-200 sm:group-hover:flex dark:border-neutral-700"
 						>
 							<Image
 								src={image}
 								alt={title}
 								width={imageWidth}
 								height={imageHeight}
+								className="size-56 object-contain object-center"
 							/>
 						</motion.div>
 					)}
+
 					<div className="flex items-center justify-between gap-6">
-						<Section heading={formatDate(date)} invert>
-							<span className="font-medium leading-tight">{title}</span>
-						</Section>
-						<div className="relative flex aspect-square h-24 w-24 min-w-24 items-center justify-center rounded-md border border-secondary bg-secondary shadow-sm md:hidden">
-							{image ? (
-								<Image
-									src={image}
-									alt={title}
-									fill
-									className="rounded-md object-cover object-center"
-								/>
-							) : (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									fill="none"
-									viewBox="0 0 24 24"
-									strokeWidth="1.5"
-									stroke="currentColor"
-									className="h-6 w-6 text-secondary"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
-									/>
-								</svg>
+						<div
+							className={cn(
+								'flex gap-2',
+								isLanding &&
+									'flex-col-reverse md:flex-row md:items-center md:gap-9',
+								isBlog && 'flex-col-reverse',
 							)}
+						>
+							<div
+								className={cn(
+									'flex items-center',
+									isLanding && 'gap-1',
+									isBlog && 'gap-1.5 min-[530px]:gap-3',
+								)}
+							>
+								<h3
+									className={cn(
+										'shrink-0 font-medium text-theme text-xs tracking-tight min-[530px]:text-sm',
+										isLanding && 'md:w-32',
+									)}
+								>
+									{formatDate(date)}
+								</h3>
+								<LineVertical
+									className={cn('size-4', isLanding && 'md:hidden')}
+								/>
+								<h3
+									className={cn(
+										'shrink-0 font-extrabold text-foreground text-xs tracking-tight min-[530px]:text-sm',
+										isLanding && 'md:hidden md:w-32',
+									)}
+								>
+									{readingTimeShort}
+								</h3>
+							</div>
+							<span
+								className={cn(
+									'font-bold font-geist-sans leading-tight',
+									isBlog && 'text-lg min-[530px]:text-xl',
+								)}
+							>
+								{title}
+							</span>
+						</div>
+
+						<div
+							className={cn(
+								'relative aspect-square size-20 min-w-20 items-center justify-center rounded-md border border-neutral-200 dark:border-neutral-700',
+								isLanding && 'flex md:hidden',
+								isBlog && 'flex',
+							)}
+						>
+							<Image
+								src={image}
+								alt={title}
+								fill
+								className="rounded-md object-cover object-center"
+							/>
 						</div>
 					</div>
 				</div>

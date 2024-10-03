@@ -1,10 +1,6 @@
-import { Motion } from '@/components/motion/Motion';
-import { variantsOne } from '@/components/motion/variants';
+import { Articles } from '@/components/blog/Articles';
 import { AnimatedNameLink } from '@/components/text/AnimatedName';
-import { getAllArticles } from '@/lib/articles';
-import { formatDate } from '@/lib/formatDate';
-import { ArrowRight, Book, Calendar } from '@phosphor-icons/react/dist/ssr';
-import { Link } from 'next-view-transitions';
+import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import type React from 'react';
 
 export const metadata = {
@@ -15,56 +11,23 @@ export const metadata = {
 };
 
 const Blog = async (): Promise<React.JSX.Element> => {
-	const articles = await getAllArticles();
+	const articles: Awaited<ArticleWithSlug>[] = await getAllArticles();
 
 	return (
 		<>
 			<h1 className="fade-in mb-0 pt-16 font-geist-sans font-medium text-lg lg:pt-12">
 				Mes articles de blog
 			</h1>
-
 			<AnimatedNameLink />
+			<p>
+				<span className="font-bold text-theme">{articles.length} articles</span>{' '}
+				pour l'instant.{' '}
+				<span className="font-bold">Restez branchés pour la suite !</span>
+			</p>
 
-			<Motion className="mt-8" variants={variantsOne}>
-				<div className="flex flex-col gap-y-12">
-					{articles.map(({ slug, date, title, description, readingTime }) => (
-						<article
-							key={slug}
-							className="group flex max-w-xl flex-col items-start justify-between"
-						>
-							<h2 className="font-bold font-geist-sans text-foreground text-xl sm:text-2xl">
-								<Link href={`/articles/${slug}`} aria-label={description}>
-									{title}
-								</Link>
-							</h2>
-
-							<div className="mt-2 flex flex-col gap-x-12 gap-y-1 text-sm sm:flex-row sm:items-center">
-								<div className="flex items-center gap-x-2">
-									<Calendar className="size-4 shrink-0" weight="regular" />
-									<time dateTime={date}>{formatDate(date)}</time>
-								</div>
-								<div className="flex items-center gap-x-2">
-									<Book className="size-4 shrink-0" weight="regular" />
-									<p>{readingTime}</p>
-								</div>
-							</div>
-
-							<p className="mt-4 line-clamp-3 text-foreground leading-6">
-								{description}
-							</p>
-
-							<Link
-								className="mt-5 flex items-center gap-x-2 font-bold text-sm transition-colors duration-200 group-hover:text-theme"
-								href={`/articles/${slug}`}
-								aria-label={description}
-							>
-								Lire l'article{' '}
-								<ArrowRight className="size-4 shrink-0" weight="bold" />
-							</Link>
-						</article>
-					))}
-				</div>
-			</Motion>
+			<div className="mt-10">
+				<Articles articles={articles} isBlog />
+			</div>
 		</>
 	);
 };

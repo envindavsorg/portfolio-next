@@ -2,7 +2,7 @@ import { Channels } from '@/components/blocs/Channels';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
 import { LocationWidget } from '@/components/blocs/LocationWidget';
 import { Stars } from '@/components/blocs/Stars';
-import { ArticlesList } from '@/components/blog/ArticlesList';
+import { Articles } from '@/components/blog/Articles';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
@@ -351,17 +351,24 @@ const Home = async (): Promise<React.JSX.Element> => {
 						className="group flex items-center gap-2 font-bold tracking-tight"
 						href="/blog"
 					>
-						Mes derniers articles
-						<ArrowUpRight className="size-4 transition-all group-hover:text-theme" />
+						<h2 className="font-bold font-geist-sans text-xl md:text-2xl">
+							Mes derniers articles
+						</h2>
+						<ArrowUpRight
+							className="text-xl transition-all group-hover:text-theme md:text-2xl"
+							weight="bold"
+						/>
 					</Link>
 					<p>
 						J'écris occasionnellement des articles sur des sujets variés, comme
-						le développement web, le design, la programmation, la marketing,
-						etc.
+						le <span className="font-bold">développement web</span>, le{' '}
+						<span className="font-bold">design</span>, la{' '}
+						<span className="font-bold">programmation</span>, le{' '}
+						<span className="font-bold">marketing</span>, etc.
 					</p>
 				</div>
 			</Motion>
-			<ArticlesList posts={articles.slice(0, 3)} />
+			<Articles articles={articles.slice(0, 3)} isLanding />
 		</>
 	);
 };
