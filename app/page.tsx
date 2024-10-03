@@ -1,6 +1,6 @@
 import { Channels } from '@/components/blocs/Channels';
+import { FlipCard } from '@/components/blocs/FlipCard';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
-import { LocationWidget } from '@/components/blocs/LocationWidget';
 import { Stars } from '@/components/blocs/Stars';
 import { Articles } from '@/components/blog/Articles';
 import { CSSIcon } from '@/components/icons/CSS';
@@ -11,7 +11,6 @@ import { TailwindCSSIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
 import { SocialLink } from '@/components/links/SocialLink';
-import { Map } from '@/components/map/Map';
 import { Motion } from '@/components/motion/Motion';
 import {
 	variantsFive,
@@ -23,12 +22,6 @@ import {
 	variantsTwo,
 } from '@/components/motion/variants';
 import { AnimatedName } from '@/components/text/AnimatedName';
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from '@/components/ui/Accordion';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
@@ -93,25 +86,13 @@ const Home = async (): Promise<React.JSX.Element> => {
 								depuis.
 							</p>
 						</div>
-						<LocationWidget latitude={latitude} longitude={longitude} />
+						<div className="flex flex-col gap-y-2">
+							<FlipCard latitude={latitude} longitude={longitude} />
+							<HowToScroll>
+								<p>Cliquer sur la carte :)</p>
+							</HowToScroll>
+						</div>
 					</div>
-				</Motion>
-
-				<Motion variants={variantsOne} asChild>
-					<Accordion
-						type="single"
-						collapsible
-						className="mt-3 w-full min-[530px]:mt-6"
-					>
-						<AccordionItem value="map">
-							<AccordionTrigger className="text-theme">
-								Voir sur la carte :)
-							</AccordionTrigger>
-							<AccordionContent>
-								<Map longitude={longitude} latitude={latitude} />
-							</AccordionContent>
-						</AccordionItem>
-					</Accordion>
 				</Motion>
 			</div>
 

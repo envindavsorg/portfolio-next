@@ -17,7 +17,7 @@ interface MapProps {
 export const Map = ({
 	longitude,
 	latitude,
-	zoom = 15,
+	zoom = 7,
 	pitch = 25,
 }: MapProps) => {
 	const { resolvedTheme } = useTheme();
@@ -38,7 +38,7 @@ export const Map = ({
 			const map = new mapboxgl.Map({
 				container: mapContainer.current,
 				center: [longitude, latitude],
-				minZoom: 13,
+				minZoom: 7,
 				zoom: zoom,
 				maxZoom: 15,
 				pitch: pitch,
@@ -47,7 +47,6 @@ export const Map = ({
 
 			map.on('style.load', () => {
 				map.setConfigProperty('basemap', 'lightPreset', mapTheme);
-				map.setPadding({ left: 150 });
 
 				const el: HTMLSpanElement = document.createElement('span');
 				el.className =
@@ -63,23 +62,12 @@ export const Map = ({
 	}, [mapTheme, resolvedTheme]);
 
 	return (
-		<div className="relative rounded-md border border-neutral-200 dark:border-neutral-700">
+		<div className="w-56 overflow-clip min-[530px]:aspect-square min-[530px]:h-full min-[375px]:w-72 min-[440px]:w-96 min-[530px]:w-56">
 			<div
-				className="overflow-clip"
-				style={{ height: '400px' } as React.CSSProperties}
-			>
-				<div
-					ref={mapContainer}
-					id="map-container"
-					className="size-full rounded-md"
-				/>
-			</div>
-			<div className="absolute bottom-3 left-3 flex flex-col gap-y-0.5 rounded-md border border-neutral-200 bg-white px-4 py-2 leading-none dark:border-neutral-700 dark:bg-black">
-				<p className="font-medium text-xs">Localisation</p>
-				<p className="font-bold text-xl">
-					Paris,<span className="ms-1 font-semibold text-sm">France</span>
-				</p>
-			</div>
+				ref={mapContainer}
+				id="map-container"
+				className="h-56 w-56 rounded-md min-[375px]:w-72 min-[440px]:w-96 min-[530px]:w-56"
+			/>
 		</div>
 	);
 };
