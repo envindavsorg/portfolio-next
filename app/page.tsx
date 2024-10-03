@@ -21,6 +21,7 @@ import {
 	variantsThree,
 	variantsTwo,
 } from '@/components/motion/variants';
+import { Status } from '@/components/status/Status';
 import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
@@ -134,6 +135,17 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</p>
 				</Motion>
 			</div>
+
+			<Motion className="mt-12" variants={variantsTwo} asChild>
+				<p className="leading-8">
+					J'ai décidé de créer ce site pour{' '}
+					<span className="font-bold">partager mes expériences</span> et{' '}
+					<span className="font-bold">mes compétences</span> avec tout le monde.
+				</p>
+			</Motion>
+			<Motion className="mt-3" variants={variantsTwo}>
+				<Status />
+			</Motion>
 
 			<Motion className="mt-12" variants={variantsThree} asChild>
 				<div className="flex gap-6">

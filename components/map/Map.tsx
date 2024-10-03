@@ -43,7 +43,6 @@ export const Map = ({
 			);
 		}
 	}, [width]);
-	console.log(mapWidth);
 
 	useEffect(() => {
 		mapboxgl.accessToken = env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;

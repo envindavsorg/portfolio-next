@@ -1,4 +1,3 @@
-import { Status } from '@/components/status/Status';
 import { Separator } from '@/components/ui/Separator';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
 import type React from 'react';
@@ -30,9 +29,5 @@ export const Footer = (): React.JSX.Element => (
 			<span className="font-bold">{new Date().getFullYear()}</span> - Cuzeac
 			Florin
 		</p>
-
-		<div className="mx-auto mt-6 w-full max-w-[60ch]">
-			<Status />
-		</div>
 	</footer>
 );
