@@ -28,7 +28,7 @@ const sitemap = async () => {
 		lastModified: new Date().toISOString(),
 	}));
 
-	const routes = ['', '/contact'].map((route) => ({
+	const routes = ['/contact', '/blog'].map((route) => ({
 		url: `https://cuzeac-florin.app${route}`,
 		lastModified: new Date().toISOString(),
 	}));

@@ -5,6 +5,7 @@ import { env } from '@/env/client';
 import mapboxgl from 'mapbox-gl';
 import { useTheme } from 'next-themes';
 import type React from 'react';
+import { useState } from 'react';
 import { useEffect, useRef } from 'react';
 
 interface MapProps {
@@ -32,6 +33,17 @@ export const Map = ({
 	}
 
 	const mapContainer = useRef<HTMLDivElement>(null);
+
+	const [mapWidth, setMapWidth] = useState<number | null>(null);
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			setMapWidth(
+				width === null && window.innerWidth < 530 ? window.innerWidth : width,
+			);
+		}
+	}, [width]);
+	console.log(mapWidth);
 
 	useEffect(() => {
 		mapboxgl.accessToken = env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
@@ -66,27 +78,13 @@ export const Map = ({
 	return (
 		<div
 			className="overflow-clip min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56"
-			style={
-				{
-					width:
-						width === null && window.innerWidth < 530
-							? window.innerWidth
-							: width,
-				} as React.CSSProperties
-			}
+			style={{ width: mapWidth } as React.CSSProperties}
 		>
 			<div
 				ref={mapContainer}
 				id="map-container"
-				className="h-56 rounded-md min-[530px]:w-56"
-				style={
-					{
-						width:
-							width === null && window.innerWidth < 530
-								? window.innerWidth
-								: width,
-					} as React.CSSProperties
-				}
+				className="h-56 w-[100vw] rounded-md min-[530px]:w-56"
+				style={{ width: mapWidth } as React.CSSProperties}
 			/>
 		</div>
 	);
