@@ -1,7 +1,5 @@
 'use client';
 
-import { Motion } from '@/components/motion/Motion';
-import { variantsSeven } from '@/components/motion/variants';
 import { Alert, AlertDescription } from '@/components/ui/Alert';
 import type { ArticleWithSlug } from '@/lib/articles';
 import { getRelativeCoordinates } from '@/lib/utils';
@@ -33,33 +31,31 @@ export const Articles = ({
 	};
 
 	return (
-		<Motion variants={variantsSeven}>
-			<ul
-				ref={listRef}
-				onMouseMove={(event) => handleMouseMove(event)}
-				className="animated-list mt-6 flex flex-col"
-			>
-				{articles.length === 0 && (
-					<Alert>
-						<AlertDescription className="flex items-center gap-3">
-							<ArticleNyTimes className="size-6 shrink-0 text-theme" />{' '}
-							<span className="text-sm">
-								Aucun article pour le moment, venez voir plus tard !
-							</span>
-						</AlertDescription>
-					</Alert>
-				)}
+		<ul
+			ref={listRef}
+			onMouseMove={(event) => handleMouseMove(event)}
+			className="animated-list mt-6 flex flex-col"
+		>
+			{articles.length === 0 && (
+				<Alert>
+					<AlertDescription className="flex items-center gap-3">
+						<ArticleNyTimes className="size-6 shrink-0 text-theme" />{' '}
+						<span className="text-sm">
+							Aucun article pour le moment, venez voir plus tard !
+						</span>
+					</AlertDescription>
+				</Alert>
+			)}
 
-				{articles.map((article: ArticleWithSlug, idx: number) => (
-					<Article
-						key={`${article.slug}-${idx}`}
-						article={article}
-						mousePosition={mousePosition}
-						isLanding={isLanding}
-						isBlog={isBlog}
-					/>
-				))}
-			</ul>
-		</Motion>
+			{articles.map((article: ArticleWithSlug, idx: number) => (
+				<Article
+					key={`${article.slug}-${idx}`}
+					article={article}
+					mousePosition={mousePosition}
+					isLanding={isLanding}
+					isBlog={isBlog}
+				/>
+			))}
+		</ul>
 	);
 };
