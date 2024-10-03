@@ -1,4 +1,6 @@
 import React from 'react';
+import { slugify } from '../../../lib/slug';
+import { ViewsCounter } from '../../../components/blog/ViewsCounter';
 import { AnimatedNameArticle } from '../../../components/text/AnimatedName.tsx';
 import image from './js.webp';
 import cover from './cover.png';
@@ -18,7 +20,11 @@ export const metadata = {
 
 # Mes articles de blog
 
-<AnimatedNameArticle title="Quelques snippets JavaScript utiles" />
+<AnimatedNameArticle title={article.title} />
+
+<div className="mb-10">
+    <ViewsCounter article={article} slug={slugify(article.title)} />
+</div>
 
 **JavaScript** est un langage essentiel pour le développement web.
 Que vous soyez débutant ou développeur expérimenté, les snippets **JavaScript** peuvent vous

@@ -1,4 +1,6 @@
 import { Filters } from './Filters';
+import { slugify } from '../../../lib/slug';
+import { ViewsCounter } from '../../../components/blog/ViewsCounter';
 import { AnimatedNameArticle } from '../../../components/text/AnimatedName.tsx';
 import cat from './cat.webp';
 import cover from './cover.png';
@@ -19,6 +21,10 @@ export const metadata = {
 # Mes articles de blog
 
 <AnimatedNameArticle title="Les différents filtres CSS pour les images" />
+
+<div className="mb-10">
+    <ViewsCounter article={article} slug={slugify(article.title)} />
+</div>
 
 Découvrez comment appliquer des filtres CSS à vos images
 pour les rendre plus attrayantes et dynamiques.

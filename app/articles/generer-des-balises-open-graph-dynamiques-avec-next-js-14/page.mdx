@@ -1,5 +1,7 @@
 import React from 'react';
 import { Alert, AlertDescription } from '../../../components/ui/Alert';
+import { slugify } from '../../../lib/slug';
+import { ViewsCounter } from '../../../components/blog/ViewsCounter';
 import { AnimatedNameArticle } from '../../../components/text/AnimatedName.tsx';
 import { Info } from '@phosphor-icons/react/dist/ssr';
 import openGraph from './open-graph.png';
@@ -22,6 +24,10 @@ export const metadata = {
 # Mes articles de blog
 
 <AnimatedNameArticle title="Générer des balises Open Graph dynamiques avec Next.js 14" />
+
+<div className="mb-10">
+    <ViewsCounter article={article} slug={slugify(article.title)} />
+</div>
 
 Une façon puissante d’améliorer le **partage de liens** de votre site web
 sur les réseaux sociaux est de mettre en œuvre ce qu'on appelle
