@@ -62,6 +62,7 @@ const nextConfig: NextConfig = {
 	},
 	experimental: {
 		mdxRs: true,
+		ppr: true,
 	},
 };
 
