@@ -68,7 +68,10 @@ export const Map = ({
 			className="overflow-clip min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56"
 			style={
 				{
-					width: width === null ? undefined : width,
+					width:
+						width === null && window.innerWidth < 530
+							? window.innerWidth
+							: width,
 				} as React.CSSProperties
 			}
 		>
@@ -78,7 +81,10 @@ export const Map = ({
 				className="h-56 rounded-md min-[530px]:w-56"
 				style={
 					{
-						width: width === null ? undefined : width,
+						width:
+							width === null && window.innerWidth < 530
+								? window.innerWidth
+								: width,
 					} as React.CSSProperties
 				}
 			/>
