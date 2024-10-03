@@ -1,4 +1,6 @@
 import { Articles } from '@/components/blog/Articles';
+import { Motion } from '@/components/motion/Motion';
+import { variantsOne, variantsTwo } from '@/components/motion/variants';
 import { AnimatedNameLink } from '@/components/text/AnimatedName';
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import type React from 'react';
@@ -19,15 +21,19 @@ const Blog = async (): Promise<React.JSX.Element> => {
 				Mes articles de blog
 			</h1>
 			<AnimatedNameLink />
-			<p>
-				<span className="font-bold text-theme">{articles.length} articles</span>{' '}
-				pour l'instant.{' '}
-				<span className="font-bold">Restez branchés pour la suite !</span>
-			</p>
+			<Motion variants={variantsOne}>
+				<p>
+					<span className="font-bold text-theme">
+						{articles.length} articles
+					</span>{' '}
+					pour l'instant.{' '}
+					<span className="font-bold">Restez branchés pour la suite !</span>
+				</p>
+			</Motion>
 
-			<div className="mt-10">
+			<Motion className="mt-10" variants={variantsTwo}>
 				<Articles articles={articles} isBlog />
-			</div>
+			</Motion>
 		</>
 	);
 };

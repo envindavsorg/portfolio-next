@@ -368,7 +368,9 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</p>
 				</div>
 			</Motion>
-			<Articles articles={articles.slice(0, 3)} isLanding />
+			<Motion variants={variantsSeven}>
+				<Articles articles={articles.slice(0, 3)} isLanding />
+			</Motion>
 		</>
 	);
 };
