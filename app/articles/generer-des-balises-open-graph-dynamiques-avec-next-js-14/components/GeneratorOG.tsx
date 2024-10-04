@@ -5,12 +5,12 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight, Image, Spinner, TextAa } from '@phosphor-icons/react';
+import confetti from 'canvas-confetti';
 import type React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -48,6 +48,7 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 			setImageUrl(url);
 
 			await new Promise((resolve) => setTimeout(resolve, 1000));
+			confetti();
 		} finally {
 			setIsLoading(false);
 		}
@@ -61,18 +62,16 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 				<Image className="size-8 shrink-0" weight="bold" />
 			</div>
 			<Form {...form}>
+				<p>Essayez avec un autre titre :</p>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
-					className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
+					className="-mt-1 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
 				>
 					<FormField
 						control={form.control}
 						name="title"
 						render={({ field }) => (
 							<FormItem className="flex-1">
-								<FormLabel className="font-geist-sans text-base">
-									Essayez avec un autre titre :
-								</FormLabel>
 								<FormControl>
 									<Input placeholder="..." {...field} />
 								</FormControl>
