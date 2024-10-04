@@ -88,10 +88,6 @@ h4 {
 	text-wrap: balance;
 }
 
-p {
-	@apply text-balance;
-}
-
 /* Lists */
 ul {
 	@apply mt-4 list-disc space-y-1 pl-5 text-foreground;
