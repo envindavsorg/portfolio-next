@@ -1,8 +1,14 @@
+import { BashIcon } from '@/components/icons/Bash';
+import { CSSIcon } from '@/components/icons/CSS';
+import { HTML5Icon } from '@/components/icons/HTML';
+import { JavaScriptIcon } from '@/components/icons/JavaScript';
+import { ReactIcon } from '@/components/icons/React';
 import { CopyButton } from '@/components/ui/CopyButton';
 import type { MDXComponents } from 'mdx/types';
 import { Link } from 'next-view-transitions';
 import Image, { type ImageProps } from 'next/image';
-import React, { type ComponentPropsWithoutRef } from 'react';
+import type React from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { highlight } from 'sugar-high';
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>;
@@ -73,17 +79,38 @@ const components: MDXComponents = {
 			</a>
 		);
 	},
-	code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
-		const codeHTML = highlight(children as string);
+	code: ({
+		className,
+		children,
+		...props
+	}: ComponentPropsWithoutRef<'code'>) => {
+		const codeHTML: string = highlight(children as string);
+
+		const languageIcons: Record<string, React.ReactNode> = {
+			bash: <BashIcon className="size-5 shrink-0" />,
+			js: <JavaScriptIcon className="size-5 shrink-0" />,
+			css: <CSSIcon className="size-5 shrink-0" />,
+			tsx: <ReactIcon className="size-5 shrink-0" />,
+			html: <HTML5Icon className="size-5 shrink-0" />,
+		};
+		const match: RegExpExecArray | null = /language-(\w+)/.exec(
+			className || '',
+		);
+		const language: string | null = match ? match[1] : null;
 
 		return (
 			<div className="flex flex-col gap-y-6">
-				<div className="flex items-center justify-between">
-					<p className="font-bold font-geist-sans text-sm sm:text-base">
-						Snippet de code :
-					</p>
-					<CopyButton value={children as string} aria-label="Copy code" />
-				</div>
+				{language !== 'text' && (
+					<div className="flex items-center justify-between">
+						<div className="flex items-center gap-x-3">
+							{language && languageIcons[language]}
+							<p className="font-bold font-geist-sans text-sm sm:text-base">
+								{language ? language : 'Snippet de code'}
+							</p>
+						</div>
+						<CopyButton value={children as string} aria-label="Copy code" />
+					</div>
+				)}
 				<code
 					dangerouslySetInnerHTML={{ __html: codeHTML }}
 					{...props}

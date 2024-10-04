@@ -3,8 +3,9 @@ import { Alert, AlertDescription } from '../../../components/ui/Alert';
 import { slugify } from '../../../lib/slug';
 import { ViewsCounter } from '../../../components/blog/ViewsCounter';
 import { AnimatedNameArticle } from '../../../components/text/AnimatedName.tsx';
+import { Separator } from '../../../components/ui/Separator';
+import { GeneratorOG } from './components/GeneratorOG';
 import { Info } from '@phosphor-icons/react/dist/ssr';
-import openGraph from './open-graph.png';
 import appRouter from './app-router.png';
 import cover from './cover.png';
 
@@ -33,27 +34,23 @@ Une façon puissante d’améliorer le **partage de liens** de votre site web
 sur les réseaux sociaux est de mettre en œuvre ce qu'on appelle
 des balises méta **Open Graph** dynamiques.
 Dans ce tutoriel, nous allons explorer comment vous pouvez y parvenir facilement
-avec **Next.js 14**.
-
-<Image className="my-8 rounded-md" src={openGraph} alt={article.title} />
+avec *Next.js 14*.<br/><br/>
 
 Avant de plonger dans les détails de l’implémentation, comprenons l’importance d’**Open Graph**.
-Développé par Facebook, Open Graph est un protocole internet qui standardise
-l’incorporation de métadonnées sur une page web pour représenter son contenu.
+Développé par **Facebook**, **Open Graph** est un protocole internet qui standardise
+l’incorporation de métadonnées sur une page web pour **représenter** son contenu.
 
 ## Implémentation d’une balise Open Graph dynamique avec Next.js 14 et App Router
 
-Adoptons une approche pratique et voyons comment nous pouvons implémenter des balises
-Open Graph dynamiques avec Next.js.
+Adoptons une **approche pratique** et voyons comment nous pouvons implémenter des balises
+**Open Graph dynamiques** avec *Next.js*. Le code suivant montre comment générer des images
+**Open Graph dynamiques** basées sur le *titre d’un article*.
 
 <Image className="my-8 rounded-md" src={appRouter} alt='Implémentation d’une balise Open Graph dynamique avec Next.js 14 et App Router' />
 
-Le code suivant montre comment générer des images Open Graph dynamiques basées
-sur le titre d’un article.
+## *Étape 1* : Créer un nouveau projet Next.js à l'aide du terminal
 
-### Étape 1 : Créer un nouveau projet Next.js à l'aide du terminal
-
-Commencez par créer un nouveau projet **Next.js**.
+Commencez par créer un nouveau projet **Next.js**.<br/><br/>
 Ouvrez votre **terminal** et exécutez la commande suivante :
 ```bash
 npx create-next-app@latest
@@ -77,9 +74,11 @@ Et **lancez** l'application :
 pnpm run dev
 ```
 
-### Étape 2 : Implémenter la route Open Graph dynamique
+<Separator className="my-10" />
 
-Maintenant, passons au code.
+## *Étape 2* : Implémenter la route Open Graph dynamique
+
+Maintenant, passons au code.<br/>
 Une fois l'installation terminée, ouvrez votre éditeur de code et
 créez un nouveau fichier **route.tsx** dans le dossier **app**/**og**.
 
@@ -248,27 +247,51 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 };
 ```
 
-Explication du code :
-- Importation de types et de la police Inter depuis Google Fonts.
-- Récupération des paramètres de la requête, du protocole et de l’hôte (ce qui nous permettra de tester la route en développement sans se soucier du chemin de l'image)
-- Utilisation de ImageResponse pour générer une image et mise en page avec des styles CSS inline pour afficher le fond, le titre du post, et les informations de l’auteur.
-- Pour finir, la taille de l’image générée est de 1500x800 pixels.
+Voici une explication du code :
+1. Imports :
+    - Le type *NextFont* et la police **Inter** sont importés pour styliser le texte en utilisant la police **Inter** de **Google**.
+    - *ImageResponse* et *NextRequest* sont importés de **next/og** et **next/server** respectivement, pour gérer les réponses d'images et les types de requêtes.
+2. Exécution **Edge** :
+    - *runtime = 'edge'* spécifie que cette fonction doit s'exécuter dans un environnement de type **edge**, offrant une latence plus faible.
+3. Configuration de la police :
+    - La constante *inter* est configurée comme un **NextFont** en utilisant la **police Inter** avec un poids de **'400'** et un sous-ensemble **'latin'**.
+4. Fonction *GET* :
+    - C'est une **fonction asynchrone** qui répond aux requêtes *GET*, prenant un objet *NextRequest*.
+    - Elle extrait les paramètres de **recherche**, l'**hôte** et le **protocole** de l'**URL** de la requête.
+    - Construit les **URLs** pour une image de fond et une image de l'auteur en utilisant le **protocole** et l'**hôte**.
+    - Récupère un titre de publication à partir des paramètres de recherche.
+   Rendu de l'Image :
+5. *ImageResponse* génère une image **Open Graph**.
+    - Le conteneur principal utilise une mise en page **Flexbox** pour centrer le contenu et applique des styles comme un **fond noir**, du **padding**, et une **classe** de **police Inter** pour le style.
+    - Deux **divs** enfants : l'un pour l'**URL** du site et le **titre** de la **publication**, et l'autre pour les **informations de l'auteur**.
+    - Le titre de la publication est affiché dans une grande police en gras.
+    - Les informations de l'auteur comprennent une image et une description **("Cuzeac Florin", "Développeur Web")**.
+    - *ImageResponse* spécifie des dimensions d'image de **1500x800** pixels pour le rendu final.
 
-### Étape 3 : Test de la route
+<Separator className="my-10" />
+
+## *Étape 3* : Test de la route
+
+J'ai créé un composant **GeneratorOG** pour générer des images **Open Graph** dynamiques.
+Vous pouvez le tester en renseignant un titre de publication dans le champ ci-dessous.
+<GeneratorOG name={article.title} />
 
 Maintenant, testons la route. Suivez ces étapes :
-1.	Démarrez votre serveur de développement **Next.js** avec **pnpm run dev**
-2.	Ouvrez votre navigateur et accédez à **http://localhost:3000/og?title=VotreTitreDynamique**.
++ Démarrez votre serveur de développement **Next.js** avec *pnpm run dev*, dans votre terminal.
++ Ouvrez votre **navigateur** et accédez à *http://localhost:3000/og?title=VotreTitreDynamique*.
 
-Remplacez **“VotreTitreDynamique”** par le titre souhaité pour votre image Open Graph.
+<br/><br/>Remplacez **“VotreTitreDynamique”** par le titre souhaité pour votre image Open Graph.
 
-### Étape 4 : Implémenter les balises méta Open Graph dynamiques
+<Separator className="my-10" />
+
+## *Étape 4* : Implémenter les balises méta Open Graph dynamiques
 
 **Next.js 14** utilise un objet appelé **metadata** pour décrire les attributs **SEO** de la page,
-y compris les attributs **OG**. (peut être placé dans **layout.jsx/tsx** / **page.jsx/tsx**)
+y compris les attributs **OG**. (peut être placé dans *layout.jsx/tsx* / *page.jsx/tsx*)
 
 ```tsx
-import { Metadata } from 'next'; // si vous utilisez TypeScript
+// si vous utilisez TypeScript
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	openGraph: {
@@ -319,10 +342,9 @@ Le code ci-dessus générera les balises méta suivantes :
 <meta property="og:type" content="website" />
 ```
 
-<div className="pt-8"/>
-
-Avec ces étapes, vous avez réussi à implémenter et tester des balises **Open Graph** dynamiques
+<br/><br/>Avec ces étapes, vous avez réussi à implémenter et tester des balises **Open Graph** dynamiques
 dans votre projet **Next.js**. Cette fonctionnalité améliore le partage de liens de votre site web
 sur les réseaux sociaux et offre une **représentation visuelle attrayante** de votre contenu.
 
-Pour plus d’informations, consultez la documentation officielle sur [Open Graph](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image).
+<br/><br/>Pour plus d’informations,
+consultez la documentation officielle sur *[Open Graph](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image)*.

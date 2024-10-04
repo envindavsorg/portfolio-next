@@ -1,8 +1,8 @@
-import { Filters } from './Filters';
+import { Filters } from './components/Filters';
 import { slugify } from '../../../lib/slug';
 import { ViewsCounter } from '../../../components/blog/ViewsCounter';
 import { AnimatedNameArticle } from '../../../components/text/AnimatedName.tsx';
-import cat from './cat.webp';
+import { Separator } from '../../../components/ui/Separator';
 import cover from './cover.png';
 
 export const article = {
@@ -29,10 +29,10 @@ export const metadata = {
 Découvrez comment appliquer des filtres CSS à vos images
 pour les rendre plus attrayantes et dynamiques.
 
-## blur
+## 1. La fonction *blur*
 
-La fonction CSS **blur()** permet d'appliquer un flou gaussien sur l'image d'entrée.
-Le résultat de cette fonction est une valeur **filter-function**.
+La fonction CSS *blur()* permet d'appliquer un **flou gaussien** sur l'image d'entrée.
+Le résultat de cette fonction est une valeur *filter-function*.
 
 ```css
 img {
@@ -40,18 +40,20 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **blur()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *blur()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "blur(2px)", label: "2px" },
     { filter: "blur(5px)", label: "5px" }
 ]} />
 
-## brightness
+<Separator className="my-10" />
 
-La fonction CSS **brightness()** applique un multiplicateur linéaire sur une image
+## 2. La fonction *brightness*
+
+La fonction CSS *brightness()* applique un **multiplicateur linéaire** sur une image
 afin de la rendre plus claire ou plus sombre.
-Le résultat obtenu est une valeur de type **filter-function**.
+Le résultat obtenu est une valeur de type *filter-function*.
 
 ```css
 img {
@@ -59,17 +61,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **brightness()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *brightness()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "brightness(50%)", label: "50%" },
     { filter: "brightness(150%)", label: "150%" }
 ]} />
 
-## contrast
+<Separator className="my-10" />
 
-La fonction CSS **contrast()** permet d'ajuster le contraste d'une image.
-Le résultat de cette fonction est une valeur de type **filter-function**.
+## 3. La fonction *contrast*
+
+La fonction CSS *contrast()* permet d'ajuster le **contraste** d'une image.
+Le résultat de cette fonction est une valeur de type *filter-function*.
 
 ```css
 img {
@@ -77,17 +81,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **contrast()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *contrast()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "contrast(25%)", label: "25%" },
     { filter: "contrast(150%)", label: "150%" }
 ]} />
 
-## drop-shadow
+<Separator className="my-10" />
 
-La fonction CSS **drop-shadow()** permet d'appliquer une ombre portée sur une image.
-Le résultat obtenu par cette fonction est une valeur **filter-function**.
+## 4. La fonction *drop-shadow*
+
+La fonction CSS *drop-shadow()* permet d'appliquer une **ombre portée** sur une image.
+Le résultat obtenu par cette fonction est une valeur *filter-function*.
 
 ```css
 img {
@@ -95,17 +101,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **drop-shadow()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *drop-shadow()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "drop-shadow(4px 4px 8px #999999)", label: "4px/8px" },
     { filter: "drop-shadow(8px 8px 16px #999999)", label: "8px/16px" }
 ]} />
 
-## grayscale
+<Separator className="my-10" />
 
-La fonction CSS **grayscale()** convertit une image en niveaux de gris.
-Le résultat de cette fonction est une valeur **filter-function**.
+## 5. La fonction *grayscale*
+
+La fonction CSS *grayscale()* convertit une image en **niveaux de gris**.
+Le résultat de cette fonction est une valeur *filter-function*.
 
 ```css
 img {
@@ -113,17 +121,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **grayscale()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *grayscale()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "grayscale(50%)", label: "50%" },
     { filter: "grayscale(100%)", label: "100%" }
 ]} />
 
-## hue-rotate
+<Separator className="my-10" />
 
-La fonction CSS **hue-rotate()** permet d'appliquer une rotation de teinte sur une image.
-Le résultat de cette fonction est une valeur **filter-function**.
+## 6. La fonction *hue-rotate*
+
+La fonction CSS *hue-rotate()* permet d'appliquer une **rotation de teinte** sur une image.
+Le résultat de cette fonction est une valeur *filter-function*.
 
 ```css
 img {
@@ -131,17 +141,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **hue-rotate()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *hue-rotate()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "hue-rotate(120deg)", label: "120deg" },
     { filter: "hue-rotate(240deg)", label: "240deg" }
 ]} />
 
-## saturate
+<Separator className="my-10" />
 
-La fonction CSS **saturate()** permet d'accentuer ou de réduire la saturation d'une image.
-La valeur obtenue par cette fonction est une valeur de type **filter-function**.
+## 7. La fonction *saturate*
+
+La fonction CSS *saturate()* permet d'**accentuer** ou de **réduire la saturation** d'une image.
+La valeur obtenue par cette fonction est une valeur de type *filter-function*.
 
 ```css
 img {
@@ -149,17 +161,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **saturate()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *saturate()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "saturate(50%)", label: "50%" },
     { filter: "saturate(150%)", label: "150%" }
 ]} />
 
-## invert
+<Separator className="my-10" />
 
-La fonction CSS **invert()** permet d'inverser les couleurs de l'image.
-La valeur obtenue par cette fonction est de type **filter-function**.
+## 8. La fonction *invert*
+
+La fonction CSS *invert()* permet d'**inverser les couleurs** de l'image.
+La valeur obtenue par cette fonction est de type *filter-function*.
 
 ```css
 img {
@@ -167,17 +181,19 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **invert()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *invert()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "invert(25%)", label: "25%" },
     { filter: "invert(100%)", label: "100%" }
 ]} />
 
-## opacity
+<Separator className="my-10" />
 
-La fonction CSS **opacity()** permet de modifier la transparence de l'image.
-Le résultat obtenu par cette fonction est une valeur **filter-function**.
+## 9. La fonction *opacity*
+
+La fonction CSS *opacity()* permet de **modifier la transparence** de l'image.
+Le résultat obtenu par cette fonction est une valeur *filter-function*.
 
 ```css
 img {
@@ -185,18 +201,20 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **opacity()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *opacity()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "opacity(25%)", label: "25%" },
     { filter: "opacity(75%)", label: "75%" }
 ]} />
 
-## sepia
+<Separator className="my-10" />
 
-La fonction CSS **sepia()** convertit une image en sépia,
-lui donnant un aspect plus jaune/marron, voire vieilli.
-Le résultat obtenu est une valeur de type **filter-function**.
+## 10. La fonction *sepia*
+
+La fonction CSS *sepia()* convertit une image en **sépia**,
+lui donnant un aspect plus **jaune/marron**, voire **vieilli**.
+Le résultat obtenu est une valeur de type *filter-function*.
 
 ```css
 img {
@@ -204,16 +222,14 @@ img {
 }
 ```
 
-Un petit exemple visuel de la fonction **sepia()** :
-<Filters image={cat} data={[
+Un petit **exemple visuel** de la fonction *sepia()* :
+<Filters filters={[
     { filter: "none", label: "Originale" },
     { filter: "sepia(50%)", label: "50%" },
     { filter: "sepia(100%)", label: "100%" }
 ]} />
 
-<div className="pt-8"/>
-
-Nous avons vu comment appliquer des **filtres CSS** à vos images pour
+<br/><br/>Nous avons vu comment appliquer des **filtres CSS** à vos images pour
 les rendre plus attrayantes et dynamiques.
 Les **filtres CSS** sont un excellent moyen d'ajouter des effets visuels
 à vos images sans avoir à utiliser des logiciels de retouche d'image.
