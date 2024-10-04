@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	ArrowRight,
 	Image,
+	RocketLaunch,
 	Spinner as SpinnerIcon,
 	TextAa,
 } from '@phosphor-icons/react';
@@ -21,6 +22,7 @@ import type React from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { toast } from 'sonner';
 
 const FormSchema = z.object({
 	title: z.string().min(2, {
@@ -54,6 +56,15 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 			setImageUrl(url);
 
 			await new Promise((resolve) => setTimeout(resolve, 1000));
+			
+			toast("L'image a été changée avec succès !",
+			{
+				className: 'text-sm font-medium',
+				duration: 5000,
+				icon: <RocketLaunch className="text-green-600 text-xl dark:text-green-300" />,
+			},
+		);
+		
 			confetti();
 		} finally {
 			setIsLoading(false);
