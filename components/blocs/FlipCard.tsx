@@ -77,7 +77,12 @@ export const FlipCard = ({
 						transform: 'rotateY(180deg)',
 					}}
 				>
-					<Map longitude={longitude} latitude={latitude} width={dynamicWidth} />
+					<Map
+						longitude={longitude}
+						latitude={latitude}
+						width={dynamicWidth}
+						marker={false}
+					/>
 				</div>
 			</motion.div>
 		</div>

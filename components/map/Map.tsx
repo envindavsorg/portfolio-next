@@ -14,14 +14,16 @@ interface MapProps {
 	zoom?: number;
 	pitch?: number;
 	width: number | null;
+	marker: boolean;
 }
 
 export const Map = ({
 	longitude,
 	latitude,
-	zoom = 7,
+	zoom = 15,
 	pitch = 25,
 	width,
+	marker,
 }: MapProps) => {
 	const { resolvedTheme } = useTheme();
 
@@ -61,13 +63,15 @@ export const Map = ({
 			map.on('style.load', () => {
 				map.setConfigProperty('basemap', 'lightPreset', mapTheme);
 
-				const el: HTMLSpanElement = document.createElement('span');
-				el.className =
-					'pointer-events-none absolute size-6 rounded-full bg-theme transform translate-x-1/2 translate-y-1/2 border-[3px] border-white';
+				if (marker) {
+					const el: HTMLSpanElement = document.createElement('span');
+					el.className =
+						'pointer-events-none absolute size-6 rounded-full bg-theme transform translate-x-1/2 translate-y-1/2 border-[3px] border-white';
 
-				new mapboxgl.Marker({ element: el })
-					.setLngLat([longitude, latitude])
-					.addTo(map);
+					new mapboxgl.Marker({ element: el })
+						.setLngLat([longitude, latitude])
+						.addTo(map);
+				}
 			});
 
 			return () => map.remove();
