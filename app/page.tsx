@@ -77,12 +77,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 								<span className="font-bold text-theme">
 									{env.NEXT_PUBLIC_SURNAME}
 								</span>
-								, j'ai <span className="font-bold">{age} ans</span> et j'habite
-								et travaille actuellement à{' '}
-								<span className="font-bold">Paris</span>.
-							</p>
-							<p className="leading-8">
-								J'ai commencé à travailler sur le web en{' '}
+								, j'ai <span className="font-bold">{age} ans</span> et j'ai commencé à travailler sur le web en{' '}
 								<span className="font-bold">2014</span> et je n'ai jamais arrêté
 								depuis.
 							</p>
