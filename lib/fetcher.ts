@@ -1,2 +1,3 @@
-export const fetcher = (...args: [RequestInfo, RequestInit?]) =>
-	fetch(...args).then((res) => res.text());
+export const fetcher = (
+	...args: [RequestInfo, RequestInit?]
+): Promise<string> => fetch(...args).then((res) => res.text());

@@ -8,8 +8,14 @@ import {
 	FormMessage,
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
+import { Spinner } from '@/components/ui/Spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRight, Image, Spinner, TextAa } from '@phosphor-icons/react';
+import {
+	ArrowRight,
+	Image,
+	Spinner as SpinnerIcon,
+	TextAa,
+} from '@phosphor-icons/react';
 import confetti from 'canvas-confetti';
 import type React from 'react';
 import { useState } from 'react';
@@ -39,12 +45,12 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 		},
 	});
 
-	const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+	const onSubmit = async (data: z.infer<typeof FormSchema>): Promise<void> => {
 		setIsLoading(true);
 
 		try {
-			const encodedTitle = encodeURIComponent(data.title);
-			const url = `https://www.cuzeac-florin.app/og?title=${encodedTitle}`;
+			const encodedTitle: string = encodeURIComponent(data.title);
+			const url: string = `https://www.cuzeac-florin.app/og?title=${encodedTitle}`;
 			setImageUrl(url);
 
 			await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -55,7 +61,7 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 	};
 
 	return (
-		<div className="my-6 flex flex-col gap-y-3 rounded-md border border-neutral-200 p-3 dark:border-neutral-700">
+		<div className="my-6 flex flex-col gap-y-3 rounded-md border border-neutral-200 p-4 dark:border-neutral-700">
 			<div className="flex items-center gap-x-3">
 				<TextAa className="size-8 shrink-0" weight="bold" />
 				<ArrowRight className="size-4 shrink-0" weight="regular" />
@@ -80,11 +86,11 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 						)}
 					/>
 					<button
-						className="h-11 w-fit rounded-md border border-border bg-background px-3 py-2"
+						className="ms-auto h-11 w-fit rounded-md border border-border bg-background px-3 py-2"
 						type="submit"
 					>
 						{isLoading ? (
-							<Spinner className="animate-spin text-foreground text-lg" />
+							<SpinnerIcon className="animate-spin text-foreground text-lg" />
 						) : (
 							<span className="font-bold text-sm">Générer l’image</span>
 						)}
@@ -92,11 +98,10 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 				</form>
 			</Form>
 
-			{imageUrl && (
-				<div className="mt-3">
-					<img src={imageUrl} alt={name} />
-				</div>
-			)}
+			<div className="mt-3">
+				{isLoading && <Spinner className="h-52" />}
+				{imageUrl && !isLoading && <img src={imageUrl} alt={name} />}
+			</div>
 		</div>
 	);
 };

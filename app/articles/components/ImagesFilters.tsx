@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import type React from 'react';
-import cat from '../cat.webp';
+import cat from '../differents-filtres-css-pour-enrichir-toutes-vos-images/cat.webp';
 
 type Filter = {
 	filter: string;
@@ -11,7 +11,7 @@ interface FiltersProps {
 	filters: Filter[];
 }
 
-export const Filters = ({ filters }: FiltersProps) => (
+export const ImagesFilters = ({ filters }: FiltersProps) => (
 	<div className="mt-6 grid grid-cols-3 gap-x-6">
 		{filters.map(({ filter, label }: Filter, idx: number) => (
 			<div

@@ -11,6 +11,7 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
+import { getSitemapUrls } from '@/lib/sitemap';
 import { cn } from '@/lib/utils';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
 import { Analytics } from '@vercel/analytics/react';
@@ -18,6 +19,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
 import localFont from 'next/font/local';
+import { headers } from 'next/headers';
 import Script from 'next/script';
 import type React from 'react';
 import { Suspense } from 'react';
@@ -49,66 +51,89 @@ interface RootLayoutProps {
 	children: React.ReactNode;
 }
 
-const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
-	<ViewTransitions>
-		<html
-			lang="fr"
-			dir="ltr"
-			className="scrollbar-hide h-full scroll-smooth antialiased [scrollbar-gutter:stable]"
-			suppressHydrationWarning
-		>
-			<body
-				className={cn(
-					'font-geist-mono tracking-tight antialiased',
-					'bg-white dark:bg-black',
-					geistSans.variable,
-					geistMono.variable,
-				)}
+const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => {
+	const urls = await getSitemapUrls();
+	const pathname: string = headers().get('x-next-pathname') as string;
+	const isNormalPage: boolean = urls.some((entry) => entry.url === pathname);
+
+	return (
+		<ViewTransitions>
+			<html
+				lang="fr"
+				dir="ltr"
+				className="scrollbar-hide h-full scroll-smooth antialiased [scrollbar-gutter:stable]"
+				suppressHydrationWarning
 			>
-				<Providers>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="dark"
-						disableTransitionOnChange
-					>
-						<ThemeMeta />
-						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
-							<SideStaggerNavigation />
-							<main className="mx-auto w-full max-w-[60ch] pb-5">
-								<NavBarProvider>
-									<NavBar navItems={navItems} />
-								</NavBarProvider>
-
-								{children}
-							</main>
-
-							<Suspense>
-								<Footer />
-							</Suspense>
-
-							<Sparkles density={50} />
-							<Toaster position="bottom-right" />
-						</div>
-					</ThemeProvider>
-
-					{process.env.NODE_ENV === 'production' && (
-						<>
-							<Analytics mode={'production'} debug={true} />
-							<SpeedInsights debug={false} />
-
-							{process.env.NODE_ENV === 'production' && (
-								<Script
-									defer
-									src={server.UMAMI_SCRIPT}
-									data-website-id={server.UMAMI_WEBSITE_ID}
-								/>
-							)}
-						</>
+				<body
+					className={cn(
+						'font-geist-mono tracking-tight antialiased',
+						'bg-white dark:bg-black',
+						geistSans.variable,
+						geistMono.variable,
 					)}
-				</Providers>
-			</body>
-		</html>
-	</ViewTransitions>
-);
+				>
+					<Providers>
+						<ThemeProvider
+							attribute="class"
+							defaultTheme="dark"
+							disableTransitionOnChange
+						>
+							<ThemeMeta />
+							<div
+								className={cn(
+									'min-h-screen',
+									isNormalPage &&
+										'flex flex-col justify-between p-8 pt-0 text-foreground md:pt-8',
+									!isNormalPage && 'flex flex-col items-center justify-center',
+								)}
+							>
+								{isNormalPage && <SideStaggerNavigation />}
+								<main
+									className={cn(
+										'mx-auto w-full max-w-[60ch]',
+										isNormalPage && 'pb-5',
+									)}
+								>
+									{isNormalPage && (
+										<NavBarProvider>
+											<NavBar navItems={navItems} />
+										</NavBarProvider>
+									)}
+
+									{children}
+								</main>
+
+								{isNormalPage && (
+									<Suspense>
+										<Footer />
+									</Suspense>
+								)}
+
+								<Sparkles density={50} />
+
+								{isNormalPage && <Toaster position="bottom-right" />}
+							</div>
+						</ThemeProvider>
+
+						{process.env.NODE_ENV === 'production' && (
+							<>
+								<Analytics mode={'production'} debug={true} />
+								<SpeedInsights debug={false} />
+
+								{process.env.NODE_ENV === 'production' && (
+									<Script
+										defer
+										src={server.UMAMI_SCRIPT}
+										data-website-id={server.UMAMI_WEBSITE_ID}
+									/>
+								)}
+							</>
+						)}
+					</Providers>
+				</body>
+			</html>
+		</ViewTransitions>
+	);
+};
 
 export default RootLayout;

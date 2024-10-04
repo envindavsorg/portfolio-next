@@ -1,7 +1,7 @@
-import { Filters } from './components/Filters';
+import { ImagesFilters } from '../components/ImagesFilters';
 import { slugify } from '../../../lib/slug';
+import { ArticleTitle } from '../../../components/blog/ArticleTitle';
 import { ViewsCounter } from '../../../components/blog/ViewsCounter';
-import { AnimatedNameArticle } from '../../../components/text/AnimatedName.tsx';
 import { Separator } from '../../../components/ui/Separator';
 import cover from './cover.png';
 
@@ -20,14 +20,16 @@ export const metadata = {
 
 # Mes articles de blog
 
-<AnimatedNameArticle title="Les différents filtres CSS pour les images" />
+<ArticleTitle>
+    {article.title}
+</ArticleTitle>
 
 <div className="mb-10">
     <ViewsCounter article={article} slug={slugify(article.title)} />
 </div>
 
-Découvrez comment appliquer des filtres CSS à vos images
-pour les rendre plus attrayantes et dynamiques.
+Découvrez comment appliquer des **filtres CSS** à vos images
+pour les rendre plus **attrayantes** et **dynamiques**.
 
 ## 1. La fonction *blur*
 
@@ -41,7 +43,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *blur()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "blur(2px)", label: "2px" },
     { filter: "blur(5px)", label: "5px" }
@@ -62,7 +64,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *brightness()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "brightness(50%)", label: "50%" },
     { filter: "brightness(150%)", label: "150%" }
@@ -82,7 +84,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *contrast()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "contrast(25%)", label: "25%" },
     { filter: "contrast(150%)", label: "150%" }
@@ -102,7 +104,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *drop-shadow()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "drop-shadow(4px 4px 8px #999999)", label: "4px/8px" },
     { filter: "drop-shadow(8px 8px 16px #999999)", label: "8px/16px" }
@@ -122,7 +124,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *grayscale()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "grayscale(50%)", label: "50%" },
     { filter: "grayscale(100%)", label: "100%" }
@@ -142,7 +144,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *hue-rotate()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "hue-rotate(120deg)", label: "120deg" },
     { filter: "hue-rotate(240deg)", label: "240deg" }
@@ -162,7 +164,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *saturate()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "saturate(50%)", label: "50%" },
     { filter: "saturate(150%)", label: "150%" }
@@ -182,7 +184,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *invert()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "invert(25%)", label: "25%" },
     { filter: "invert(100%)", label: "100%" }
@@ -202,7 +204,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *opacity()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "opacity(25%)", label: "25%" },
     { filter: "opacity(75%)", label: "75%" }
@@ -223,7 +225,7 @@ img {
 ```
 
 Un petit **exemple visuel** de la fonction *sepia()* :
-<Filters filters={[
+<ImagesFilters filters={[
     { filter: "none", label: "Originale" },
     { filter: "sepia(50%)", label: "50%" },
     { filter: "sepia(100%)", label: "100%" }

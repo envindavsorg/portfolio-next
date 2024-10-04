@@ -1,12 +1,19 @@
-import ContactEmailTemplate from '@/emails/contact';
+import ContactEmailTemplate from '@/emails/Contact';
 import { env } from '@/env/server';
 import { type NextRequest, NextResponse } from 'next/server';
 import { type CreateEmailResponse, Resend } from 'resend';
 
 const resend: Resend = new Resend(env.RESEND_API_KEY);
 
-export const POST = async (req: NextRequest) => {
-	const json = req.json();
+export const POST = async (
+	req: NextRequest,
+): Promise<
+	| NextResponse<CreateEmailResponse>
+	| NextResponse<{
+			error: any;
+	  }>
+> => {
+	const json: Promise<any> = req.json();
 	const { name, surname, mail, content } = await json;
 
 	try {

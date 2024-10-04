@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
 
-export const GET = () => {
+export const GET = (): NextResponse => {
 	return new NextResponse('OK');
 };
