@@ -1,3 +1,4 @@
+import { CopyButton } from '@/components/ui/CopyButton';
 import type { MDXComponents } from 'mdx/types';
 import { Link } from 'next-view-transitions';
 import Image, { type ImageProps } from 'next/image';
@@ -39,7 +40,7 @@ const components: MDXComponents = {
 	),
 	li: (props: ListItemProps) => <li className="pl-1" {...props} />,
 	em: (props: ComponentPropsWithoutRef<'em'>) => (
-		<em className="font-medium" {...props} />
+		<em className="font-bold text-theme" {...props} />
 	),
 	strong: (props: ComponentPropsWithoutRef<'strong'>) => (
 		<strong className="font-extrabold" {...props} />
@@ -74,7 +75,22 @@ const components: MDXComponents = {
 	},
 	code: ({ children, ...props }: ComponentPropsWithoutRef<'code'>) => {
 		const codeHTML = highlight(children as string);
-		return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+
+		return (
+			<div className="flex flex-col gap-y-6">
+				<div className="flex items-center justify-between">
+					<p className="font-bold font-geist-sans text-sm sm:text-base">
+						Snippet de code :
+					</p>
+					<CopyButton value={children as string} aria-label="Copy code" />
+				</div>
+				<code
+					dangerouslySetInnerHTML={{ __html: codeHTML }}
+					{...props}
+					style={{ display: 'block', overflowX: 'auto' }}
+				/>
+			</div>
+		);
 	},
 	blockquote: (props: BlockquoteProps) => (
 		<blockquote

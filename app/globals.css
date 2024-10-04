@@ -88,13 +88,26 @@ h4 {
 	text-wrap: balance;
 }
 
+/* Lists */
+ul {
+	@apply mt-4 list-disc space-y-1 pl-5 text-foreground;
+}
+
+ol {
+	@apply mt-4 list-decimal space-y-2 pl-5 text-foreground;
+}
+
+li {
+	@apply pl-1;
+}
+
 pre {
-	background-color: #16161e;
-	border-radius: 0.5rem;
 	overflow-x: auto;
 	padding: 1rem;
 	margin: 1.5rem 0;
 	line-height: 1;
+
+	@apply bg-border bg-[#16161e] rounded-md scrollbar-hide;
 }
 
 pre::-webkit-scrollbar {
@@ -107,12 +120,7 @@ pre {
 }
 
 code {
-	font-family: "Menlo", "Monaco", "Courier New", monospace;
-	font-size: 14px;
-	padding: 0.2em 0.4em;
-	border-radius: 0.3em;
-
-	@apply bg-border;
+	@apply bg-border rounded-md p-1 text-base font-geist-mono;
 }
 
 pre code {
