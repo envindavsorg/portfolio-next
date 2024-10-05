@@ -24,6 +24,7 @@ import {
 import { Status } from '@/components/status/Status';
 import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
 import { Separator } from '@/components/ui/Separator';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
 import {
@@ -32,7 +33,7 @@ import {
 } from '@/content/LanguagesIcons';
 import { env } from '@/env/client';
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
+import { ArrowUpRight, Download } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
 
@@ -77,10 +78,27 @@ const Home = async (): Promise<React.JSX.Element> => {
 								<span className="font-bold text-theme">
 									{env.NEXT_PUBLIC_SURNAME}
 								</span>
-								, j'ai <span className="font-bold">{age} ans</span> et j'ai commencé à travailler sur le web en{' '}
+								, j'ai <span className="font-bold">{age} ans</span> et j'ai
+								commencé à travailler sur le web en{' '}
 								<span className="font-bold">2014</span> et je n'ai jamais arrêté
 								depuis.
 							</p>
+
+							<Link
+								href={`https://www.linkedin.com/in/${env.NEXT_PUBLIC_WEBSITE_PREFIX}`}
+								aria-label="Voir mon profil LinkedIn !"
+								target="_blank"
+								rel="noreferrer noopener"
+							>
+								<Button
+									className="mt-3 flex w-max items-center gap-x-2"
+									size="lg"
+									variant="outline"
+								>
+									Télécharger mon CV
+									<Download className="size-4 shrink-0" weight="bold" />
+								</Button>
+							</Link>
 						</div>
 						<div className="flex flex-col gap-y-2">
 							<FlipCard latitude={latitude} longitude={longitude} />

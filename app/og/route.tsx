@@ -103,6 +103,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 						}}
 					>
 						<div
+							className="font-bold text-xl"
 							style={{
 								fontSize: '28px',
 								fontWeight: '900',
