@@ -3,6 +3,7 @@ import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { ReactIcon } from '@/components/icons/React';
+import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { CopyButton } from '@/components/ui/CopyButton';
 import type { MDXComponents } from 'mdx/types';
 import { Link } from 'next-view-transitions';
@@ -89,6 +90,7 @@ const components: MDXComponents = {
 		const languageIcons: Record<string, React.ReactNode> = {
 			bash: <BashIcon className="size-5 shrink-0" />,
 			js: <JavaScriptIcon className="size-5 shrink-0" />,
+			ts: <TypeScriptIcon className="size-5 shrink-0" />,
 			css: <CSSIcon className="size-5 shrink-0" />,
 			tsx: <ReactIcon className="size-5 shrink-0" />,
 			html: <HTML5Icon className="size-5 shrink-0" />,
