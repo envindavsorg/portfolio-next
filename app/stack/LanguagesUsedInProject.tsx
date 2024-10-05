@@ -32,7 +32,7 @@ export const LanguagesUsedInProject = async () => {
 
 	return (
 		<Motion asChild variants={defaultVariants}>
-			<ul className="grid gap-3 sm:grid-cols-2">
+			<ul className="grid list-none gap-3 pl-0 sm:grid-cols-2">
 				{languages.map(({ name, percentage }, idx: number) => (
 					<li key={`${name}-${idx}`}>
 						<Card
