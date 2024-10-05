@@ -85,8 +85,8 @@ const Home = async (): Promise<React.JSX.Element> => {
 							</p>
 
 							<Link
-								href={`https://www.linkedin.com/in/${env.NEXT_PUBLIC_WEBSITE_PREFIX}`}
-								aria-label="Voir mon profil LinkedIn !"
+								href="/cv/cv.pdf"
+								aria-label="Télécharger mon CV"
 								target="_blank"
 								rel="noreferrer noopener"
 							>
