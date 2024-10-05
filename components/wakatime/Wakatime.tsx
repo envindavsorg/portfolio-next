@@ -184,7 +184,7 @@ const CodingActiveList = ({ stats }: CodingActiveListProps) => {
 					</div>
 
 					<div className="size-full rounded-lg bg-background">
-						<ul className="flex flex-col gap-2 p-2">
+						<ul className="flex list-none flex-col gap-2 p-2 pl-0">
 							{data?.map((subItem) => (
 								<li key={subItem?.name}>
 									<Progress data={subItem} className="bg-theme" />

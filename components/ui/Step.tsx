@@ -441,7 +441,7 @@ export const StepLabel = ({
 				<span
 					className={cn(
 						'stepper__step-label font-geist-sans',
-						'text-balance text-foreground tracking-tight',
+						'ms-3 text-foreground tracking-tight',
 						labelVariants({ size }),
 						styles?.['step-label'],
 						isCurrentStep ? 'font-extrabold' : 'font-medium',
