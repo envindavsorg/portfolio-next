@@ -151,13 +151,13 @@ export const LocationWidget = memo(
 
 		return (
 			<div className="relative flex h-56 w-full shrink-0 flex-col items-center justify-between overflow-hidden rounded-md border border-border bg-background p-2 min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56">
-				<h2 className="absolute top-8 left-4 z-30 font-bold font-geist-sans text-4xl min-[530px]:top-4 min-[530px]:left-4 min-[530px]:text-5xl">
+				<h2 className="absolute top-20 left-4 z-30 font-bold font-geist-sans text-4xl min-[530px]:top-4 min-[530px]:left-4 min-[530px]:text-5xl">
 					Paris
 				</h2>
-				<p className="absolute top-20 left-4 z-30 text-sm min-[530px]:hidden">
-					J'habite à <span className="font-bold text-theme">Paris</span>
+				<p className="absolute top-8 left-4 z-30 text-sm min-[530px]:hidden">
+					Ma <span className="font-bold text-theme">localisation</span>
 					<br />
-					depuis <span className="font-bold">8 ans</span> :)
+					actuelle :
 				</p>
 
 				<div className="min-[530px]:-translate-x-5 absolute inset-x-0 bottom-[-90%] z-20 aspect-square h-96 translate-x-32">
