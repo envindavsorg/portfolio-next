@@ -5,6 +5,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '../../components/ui/Accordion';
+import { Separator } from '../../components/ui/Separator';
 import { CSSIcon } from "../../components/icons/CSS";
 import { ExpressIcon } from '../../components/icons/Express';
 import { FastifyIcon } from '../../components/icons/Fastify';
@@ -45,7 +46,7 @@ export const metadata = {
 
 <AnimatedNameLink />
 
-<Motion className="mt-12" variants={variantsOne} asChild>
+<Motion className="mt-10" variants={variantsOne} asChild>
     Voici les technologies avec lesquelles je suis le plus productif.
 </Motion>
 <Motion className="mt-4" variants={variantsOne} asChild>
@@ -93,12 +94,16 @@ export const metadata = {
     <LanguagesUsedInProject />
 </Motion>
 
-<Motion className="mt-12" variants={variantsThree} asChild>
+<Separator className="my-14" />
+
+<Motion variants={variantsThree} asChild>
     Les langages que j'ai le plus utilisé cette semaine :
 </Motion>
-<Motion className="mt-4 pb-[68px]" variants={variantsThree}>
+<Motion className="mt-4 pb-[52px]" variants={variantsThree}>
     <MostUsedLanguages />
 </Motion>
+
+<Separator className="my-14" />
 
 <Motion variants={variantsFour} asChild>
     ## 1. Avec un framework plus orienté front (Next.js)
@@ -121,14 +126,14 @@ export const metadata = {
         </div>
     </div>
 </Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
+<Motion className="mt-6" variants={variantsFour} asChild>
     <p>Quelques patterns que j'utilise souvent avec Next.js</p>
 </Motion>
 <Motion className="mt-2" variants={variantsFour} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="fetching-data">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
-                Récupérer les données efficacement avec <span className="text-theme font-medium">Next.js</span>
+                <span className="text-theme font-extrabold">1.</span> Récupérer les données efficacement avec <span className="text-theme font-medium">Next.js</span>
             </AccordionTrigger>
             <AccordionContent>
                 J'évite d'utiliser des gestionnaires de route API pour récupérer des données dans mes
@@ -177,7 +182,7 @@ export const metadata = {
         </AccordionItem>
         <AccordionItem value="components-client-server">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
-                Utiliser les composants <span className="text-theme font-medium">client</span> et <span className="text-theme font-medium">serveur</span>
+                <span className="text-theme font-extrabold">2.</span> Utiliser les composants <span className="text-theme font-medium">client</span> et <span className="text-theme font-medium">serveur</span>
             </AccordionTrigger>
             <AccordionContent>
                 Comprendre la différence entre les composants client et serveur est crucial.
@@ -215,7 +220,7 @@ export const metadata = {
         </AccordionItem>
         <AccordionItem value="static-generation">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
-                Optimisation des images avec <span className="text-theme font-medium">next/image</span>
+                <span className="text-theme font-extrabold">3.</span> Optimisation des images avec <span className="text-theme font-medium">next/image</span>
             </AccordionTrigger>
             <AccordionContent>
                 L'optimisation des images est toujours un élément clé dans Next.js, et sur tous les sites web en général.
@@ -241,7 +246,9 @@ export const metadata = {
     </Accordion>
 </Motion>
 
-<Motion className="mt-12" variants={variantsFive} asChild>
+<Separator className="my-14" />
+
+<Motion variants={variantsFive} asChild>
     ## 2. Avec un framework plus orienté back (Express ou Fastify)
 </Motion>
 <Motion className="mt-4" variants={variantsFive} asChild>
@@ -324,7 +331,9 @@ export const metadata = {
     </Accordion>
 </Motion>
 
-<Motion className="mt-12" variants={variantsSix} asChild>
+<Separator className="my-14" />
+
+<Motion variants={variantsSix} asChild>
     ## 3. Design et interfaces (Tailwind CSS et shadcn/ui)
 </Motion>
 <Motion className="mt-4" variants={variantsSix} asChild>
@@ -382,7 +391,9 @@ export const metadata = {
     </Accordion>
 </Motion>
 
-<Motion className="mt-12" variants={variantsSeven} asChild>
+<Separator className="my-14" />
+
+<Motion variants={variantsSeven} asChild>
     ## 4. Base de données (MongoDB ou Postgres)
 </Motion>
 <Motion className="mt-4" variants={variantsSeven} asChild>
@@ -405,7 +416,9 @@ export const metadata = {
     </div>
 </Motion>
 
-<Motion className="mt-12" variants={variantsEight} asChild>
+<Separator className="my-14" />
+
+<Motion variants={variantsEight} asChild>
     ## 5. IA (v0, GitHub Copilot et ChatGPT)
 </Motion>
 <Motion className="mt-4" variants={variantsEight} asChild>

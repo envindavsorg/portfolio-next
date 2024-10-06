@@ -3,7 +3,8 @@
 import { cn } from '@/lib/utils';
 import { CaretDown } from '@phosphor-icons/react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import React, { forwardRef } from 'react';
+import type React from 'react';
+import { forwardRef } from 'react';
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -15,7 +16,7 @@ const AccordionItem = forwardRef<
 ));
 AccordionItem.displayName = 'AccordionItem';
 
-const AccordionTrigger = React.forwardRef<
+const AccordionTrigger = forwardRef<
 	React.ElementRef<typeof AccordionPrimitive.Trigger>,
 	React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
@@ -35,16 +36,16 @@ const AccordionTrigger = React.forwardRef<
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
-const AccordionContent = React.forwardRef<
+const AccordionContent = forwardRef<
 	React.ElementRef<typeof AccordionPrimitive.Content>,
 	React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
 	<AccordionPrimitive.Content
 		ref={ref}
-		className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+		className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
 		{...props}
 	>
-		<div className={cn('pt-0 pb-4', className)}>{children}</div>
+		<div className={cn('pt-3 pb-4', className)}>{children}</div>
 	</AccordionPrimitive.Content>
 ));
 

@@ -88,7 +88,9 @@ const Home = async (): Promise<React.JSX.Element> => {
 						</div>
 						<div className="flex flex-col gap-y-2">
 							<FlipCard latitude={latitude} longitude={longitude} />
-							<HowToScroll>Cliquer sur la carte :)</HowToScroll>
+							<HowToScroll>
+								<p>Cliquer sur la carte :)</p>
+							</HowToScroll>
 						</div>
 					</div>
 				</Motion>
@@ -211,10 +213,13 @@ const Home = async (): Promise<React.JSX.Element> => {
 			</Motion>
 			<Motion className="mt-3" variants={variantsFour} asChild>
 				<HowToScroll>
-					Vous pouvez scroller de{' '}
-					<span className="font-medium text-theme">gauche</span> à{' '}
-					<span className="font-medium text-theme">droite</span> pour voir
-					toutes les technologies et langages que j'utilise et que je maîtrise.
+					<p>
+						Vous pouvez scroller de{' '}
+						<span className="font-medium text-theme">gauche</span> à{' '}
+						<span className="font-medium text-theme">droite</span> pour voir
+						toutes les technologies et langages que j'utilise et que je
+						maîtrise.
+					</p>
 				</HowToScroll>
 			</Motion>
 
