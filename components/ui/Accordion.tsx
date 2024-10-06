@@ -24,13 +24,16 @@ const AccordionTrigger = forwardRef<
 		<AccordionPrimitive.Trigger
 			ref={ref}
 			className={cn(
-				'flex flex-1 items-center gap-x-6 py-2 text-start font-medium transition-all [&[data-state=open]>svg]:rotate-180',
+				'flex flex-1 items-center gap-x-6 py-3 text-start font-bold text-lg transition-all [&[data-state=open]>svg]:rotate-180',
 				className,
 			)}
 			{...props}
 		>
 			{children}
-			<CaretDown className="size-4 shrink-0 transition-transform duration-200" />
+			<CaretDown
+				className="size-4 shrink-0 text-foreground transition-transform duration-200"
+				weight="bold"
+			/>
 		</AccordionPrimitive.Trigger>
 	</AccordionPrimitive.Header>
 ));
@@ -45,7 +48,7 @@ const AccordionContent = forwardRef<
 		className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
 		{...props}
 	>
-		<div className={cn('pt-3 pb-4', className)}>{children}</div>
+		<div className={cn(className, 'pt-1.5')}>{children}</div>
 	</AccordionPrimitive.Content>
 ));
 

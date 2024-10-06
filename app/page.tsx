@@ -2,7 +2,7 @@ import { CV } from '@/components/blocs/CV';
 import { Channels } from '@/components/blocs/Channels';
 import { FlipCard } from '@/components/blocs/FlipCard';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
-import { Stars } from '@/components/blocs/Stars';
+import { FrontFrameworkStars } from '@/components/blocs/Stars';
 import { Articles } from '@/components/blog/Articles';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
@@ -286,7 +286,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</p>
 
 					<div className="mt-2">
-						<Stars />
+						<FrontFrameworkStars />
 					</div>
 				</div>
 			</Motion>

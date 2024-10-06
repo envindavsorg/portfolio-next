@@ -5,8 +5,8 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '../../components/ui/Accordion';
+import { Alert, AlertDescription } from '../../components/ui/Alert';
 import { Separator } from '../../components/ui/Separator';
-import { CSSIcon } from "../../components/icons/CSS";
 import { ExpressIcon } from '../../components/icons/Express';
 import { FastifyIcon } from '../../components/icons/Fastify';
 import { MongoDBIcon } from '../../components/icons/MongoDB';
@@ -17,7 +17,6 @@ import { TypeScriptIcon } from '../../components/icons/TypeScript';
 import { PostgreIcon } from '../../components/icons/Postgre';
 import { ChatGPTIcon } from '../../components/icons/ChatGPT';
 import { GitHubCopilotIcon } from '../../components/icons/GitHubCopilot';
-import { ShadcnIcon } from "../../components/icons/Shadcn";
 import { V0Icon } from '../../components/icons/V0';
 import React from 'react';
 import { Motion } from '../../components/motion/Motion';
@@ -34,6 +33,13 @@ import {
 import { MostUsedLanguages } from '../../components/stack/MostUsedLanguages';
 import { LanguagesUsedInProject } from '../../components/stack/LanguagesUsedInProject';
 import { HowToScroll } from '../../components/blocs/HowToScroll';
+import {
+    FrontFrameworkStars,
+    BackFrameworkStars,
+    DesignFrameworkStars,
+    DatabaseStars,
+} from '../../components/blocs/Stars';
+import { SealQuestion } from '@phosphor-icons/react/dist/ssr';
 
 export const metadata = {
     title: "Technologies que j'utilise",
@@ -47,9 +53,9 @@ export const metadata = {
 <AnimatedNameLink />
 
 <Motion className="mt-10" variants={variantsOne} asChild>
-    Voici les technologies avec lesquelles je suis le plus productif.
+    Voici les *technologies* avec lesquelles je suis le plus **productif**, et avec lesquelles je **démarre** chaque projet, sans me poser des questions.
 </Motion>
-<Motion className="mt-4" variants={variantsOne} asChild>
+<Motion className="mt-6" variants={variantsOne} asChild>
     <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
         <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
             <ReactIcon className="size-7 shrink-0" />
@@ -77,7 +83,7 @@ export const metadata = {
         </div>
     </div>
 </Motion>
-<Motion className="sm:hidden block mt-4" variants={variantsOne} asChild>
+<Motion className="sm:hidden block mt-3" variants={variantsOne} asChild>
     <HowToScroll>
         Vous pouvez scroller de{' '}
         <span className="font-medium text-theme">gauche</span> à{' '}
@@ -86,15 +92,21 @@ export const metadata = {
     </HowToScroll>
 </Motion>
 
-<Motion className="mt-12" variants={variantsTwo} asChild>
-    Les principales technologies que j'ai utilisées sur ce projet sont les suivantes,
-    en pourcentage d'utilisation :
+<Motion variants={variantsOne}>
+    <Separator className="my-14" />
 </Motion>
-<Motion className="mt-4" variants={variantsTwo}>
+
+<Motion variants={variantsTwo} asChild>
+    Les **principales technologies** que j'ai utilisées sur ce *projet* sont les suivantes,
+    en **pourcentage d'utilisation** :
+</Motion>
+<Motion className="mt-6" variants={variantsTwo}>
     <LanguagesUsedInProject />
 </Motion>
 
-<Separator className="my-14" />
+<Motion variants={variantsTwo}>
+    <Separator className="my-14" />
+</Motion>
 
 <Motion variants={variantsThree} asChild>
     Les langages que j'ai le plus utilisé cette semaine :
@@ -103,42 +115,41 @@ export const metadata = {
     <MostUsedLanguages />
 </Motion>
 
-<Separator className="my-14" />
+<Motion variants={variantsThree}>
+    <Separator className="my-14" />
+</Motion>
 
-<Motion variants={variantsFour} asChild>
-    ## 1. Avec un framework plus orienté front (Next.js)
-</Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
-    J'ai commencé à travailler avec React et Next.js en 2020, à la fin de mes études.
-    Depuis, j'ai eu l'occasion de développer plusieurs projets professionnels et personnels en
-    utilisant ces technologies. Leur flexibilité et leur puissance m'ont permis de créer des
-    applications web performantes et évolutives. Grâce à Next.js, j'ai pu tirer parti du rendu
-    côté serveur (SSR) et de la génération de sites statiques (SSG),
-    ce qui a considérablement amélioré les performances et le SEO de mes projets.
-</Motion>
-<Motion className="mt-4" variants={variantsFour} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <NextJSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <ReactIcon className="size-7 shrink-0" />
-        </div>
-    </div>
+<Motion className="!text-2xl sm:!text-3xl" variants={variantsFour} asChild>
+    ## 1. Avec un framework plus orienté *front* (React et Next.js)
 </Motion>
 <Motion className="mt-6" variants={variantsFour} asChild>
-    <p>Quelques patterns que j'utilise souvent avec Next.js</p>
+    J'ai commencé à travailler avec *React* et *Next.js* en **2020**, à la fin de mes études.
+    Depuis, j'ai eu l'occasion de développer plusieurs projets **professionnels**
+    et **personnels** en utilisant ces technologies.
 </Motion>
-<Motion className="mt-2" variants={variantsFour} asChild>
+<Motion className="mt-3" variants={variantsFour} asChild>
+    Leur **flexibilité** et leur **puissance** m'ont permis de créer des
+    applications web performantes et évolutives. Grâce à *Next.js*, j'ai pu tirer parti du rendu
+    côté serveur *(SSR)* et de la génération de sites statiques *(SSG)*,
+    ce qui a considérablement amélioré les **performances** et le **SEO** de mes projets.
+</Motion>
+<Motion className="my-8" variants={variantsFour}>
+    <FrontFrameworkStars />
+</Motion>
+<Motion variants={variantsFour} asChild>
+    Quelques patterns super utiles et efficaces que j'utilise souvent avec **Next.js**, dans tous mes projets :
+</Motion>
+<Motion className="mt-3" variants={variantsFour} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="fetching-data">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
                 <span className="text-theme font-extrabold">1.</span> Récupérer les données efficacement avec <span className="text-theme font-medium">Next.js</span>
             </AccordionTrigger>
             <AccordionContent>
-                J'évite d'utiliser des gestionnaires de route API pour récupérer des données dans mes
-                composants serveur. À la place, je récupère les données directement dans mes composants
-                serveur. Cette approche tire parti des optimisations et du caching de Next.js.
+                J'évite d'utiliser des gestionnaires de route **API** pour
+                récupérer des données dans mes composants serveur.
+                <br/>À la place, je **récupère** les données directement dans mes composants
+                serveur. Cette approche tire parti des **optimisations** et du **caching** de *Next.js*.
 
                 ```tsx
                 const Home = async () => {
@@ -151,7 +162,7 @@ export const metadata = {
                 export default Home;
                 ```
 
-                Pour une logique de récupération réutilisable, je crée des actions serveur
+                Pour une logique de récupération réutilisable, je crée des **actions serveur**
                 et je les importent là où c'est nécessaire.
                 Cette approche permet de réduire et de rendre le code plus lisible.
 
@@ -185,9 +196,9 @@ export const metadata = {
                 <span className="text-theme font-extrabold">2.</span> Utiliser les composants <span className="text-theme font-medium">client</span> et <span className="text-theme font-medium">serveur</span>
             </AccordionTrigger>
             <AccordionContent>
-                Comprendre la différence entre les composants client et serveur est crucial.
-                Par défaut, les pages sont des composants serveur, mais vous pouvez inclure
-                des composants client à l'intérieur pour l'interactivité.
+                Comprendre la différence entre les composants **client** et **serveur** est crucial.
+                Par défaut, les pages sont des composants **serveur**, mais vous pouvez inclure
+                des composants **client** à l'intérieur pour l'**interactivité**.
 
                 ```tsx
                 // composant client
@@ -223,8 +234,10 @@ export const metadata = {
                 <span className="text-theme font-extrabold">3.</span> Optimisation des images avec <span className="text-theme font-medium">next/image</span>
             </AccordionTrigger>
             <AccordionContent>
-                L'optimisation des images est toujours un élément clé dans Next.js, et sur tous les sites web en général.
-                Avec <span className="text-theme font-medium">next/image</span>, vous pouvez optimiser les images en utilisant des formats optimisés
+                L'**optimisation des images** est toujours un élément clé
+                dans *Next.js*, et sur tous les sites web en général.
+                Avec <span className="text-theme font-medium">next/image</span>, vous pouvez
+                optimiser les images en utilisant des **formats optimisés**
                 et en générant des images différentes selon les différents appareils.
 
                 ```tsx
@@ -246,33 +259,30 @@ export const metadata = {
     </Accordion>
 </Motion>
 
-<Separator className="my-14" />
+<Motion variants={variantsFour}>
+    <Separator className="my-14" />
+</Motion>
 
+<Motion className="!text-2xl sm:!text-3xl" variants={variantsFive} asChild>
+    ## 2. Avec un framework plus orienté *back* (Express ou Fastify)
+</Motion>
+<Motion className="mt-6" variants={variantsFive} asChild>
+    Pour les projets nécessitant un **backend** robuste, j'utilise des frameworks comme *Express* ou *Fastify*.
+    *Express* est un choix populaire grâce à sa **simplicité** et sa **flexibilité**, tandis que *Fastify*
+    se distingue par ses **performances élevées** et son **faible overhead**.
+</Motion>
+<Motion className="mt-3" variants={variantsFive} asChild>
+    Ces frameworks me permettent de créer des API rapides et scalables,
+    tout en offrant une grande liberté dans la structuration du code et l'intégration de middlewares.
+</Motion>
+<Motion className="my-8" variants={variantsFive}>
+    <BackFrameworkStars />
+</Motion>
 <Motion variants={variantsFive} asChild>
-    ## 2. Avec un framework plus orienté back (Express ou Fastify)
-</Motion>
-<Motion className="mt-4" variants={variantsFive} asChild>
-    Pour les projets nécessitant un backend robuste, j'utilise des frameworks comme Express ou Fastify.
-    Express est un choix populaire grâce à sa simplicité et sa flexibilité, tandis que Fastify
-    se distingue par ses performances élevées et son faible overhead. Ces frameworks me permettent
-    de créer des API rapides et scalables, tout en offrant une grande liberté dans la structuration
-    du code et l'intégration de middlewares.
-</Motion>
-<Motion className="mt-4" variants={variantsFive} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <ExpressIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <FastifyIcon className="size-7 shrink-0" />
-        </div>
-    </div>
-</Motion>
-<Motion className="mt-4" variants={variantsFive} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
-                Un petit exemple avec <span className="text-theme font-medium">Express</span>
+                <span className="text-theme font-extrabold">1.</span> Un petit exemple avec <span className="text-theme font-medium">Express</span>
             </AccordionTrigger>
             <AccordionContent>
                 Dans cet exemple, nous importons *express* et les types *Request* et *Response*.
@@ -298,7 +308,7 @@ export const metadata = {
         </AccordionItem>
         <AccordionItem value="fastify">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
-                Un petit exemple avec <span className="text-theme font-medium">Fastify</span>
+                <span className="text-theme font-extrabold">2.</span> Un petit exemple avec <span className="text-theme font-medium">Fastify</span>
             </AccordionTrigger>
             <AccordionContent>
                 Dans cet exemple, nous importons **Fastify** et créons une instance de serveur.
@@ -331,40 +341,39 @@ export const metadata = {
     </Accordion>
 </Motion>
 
-<Separator className="my-14" />
+<Motion variants={variantsFive}>
+    <Separator className="my-14" />
+</Motion>
 
+<Motion className="!text-2xl sm:!text-3xl" variants={variantsSix} asChild>
+    ## 3. Design et interfaces (*Tailwind CSS* et *shadcn/ui*)
+</Motion>
+<Motion className="mt-6" variants={variantsSix} asChild>
+    Construire des composants **flexibles** et **accessibles** est un défi.
+    On peut soit utiliser (et étendre) une **bibliothèque de composants**,
+    soit créer ses **propres composants**. C’est pour cette raison que j’utilise désormais *shadcn/ui*.
+</Motion>
+<Motion className="mt-3" variants={variantsSix} asChild>
+    Cette bibliothèque propose des composants bien **conçus** et **extensibles**,
+    basés sur des **primitives accessibles** et **non stylées**. Cela inclut des éléments de base comme
+    des **boutons** et des **champs de saisie**, mais aussi des **icônes**, des **graphiques**,
+    et même des **thèmes personnalisés**.
+</Motion>
+<Motion className="my-8" variants={variantsSix}>
+    <DesignFrameworkStars />
+</Motion>
 <Motion variants={variantsSix} asChild>
-    ## 3. Design et interfaces (Tailwind CSS et shadcn/ui)
-</Motion>
-<Motion className="mt-4" variants={variantsSix} asChild>
-    Construire des composants flexibles et accessibles est un défi.
-    On peut soit utiliser (et étendre) une bibliothèque de composants,
-    soit créer ses propres composants. C’est pour cette raison que j’utilise désormais shadcn/ui.
-</Motion>
-<Motion className="mt-4" variants={variantsSix} asChild>
-    Cette bibliothèque propose des composants bien conçus et extensibles,
-    basés sur des primitives accessibles et non stylées. Cela inclut des éléments de base comme
-    des boutons et des champs de saisie, mais aussi des icônes, des graphiques,
-    et même des thèmes personnalisés.
-</Motion>
-<Motion className="mt-4" variants={variantsSix} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <CSSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <TailwindCSSIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <ShadcnIcon className="size-7 shrink-0" />
-        </div>
-    </div>
-</Motion>
-<Motion className="mt-4" variants={variantsSix} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
-            <AccordionTrigger className="text-theme font-bold">
-                Pourquoi utiliser Tailwind CSS ?
+            <AccordionTrigger>
+                <Alert>
+                    <AlertDescription className="flex items-center gap-3">
+                        <SealQuestion className="size-6 shrink-0 text-theme" />{' '}
+                        <span className="font-bold text-lg">
+                            Pourquoi utiliser Tailwind CSS ?
+                    </span>
+                    </AlertDescription>
+                </Alert>
             </AccordionTrigger>
             <AccordionContent>
                 **Tailwind CSS** est un excellent outil pour accélérer la création de sites web
@@ -391,48 +400,54 @@ export const metadata = {
     </Accordion>
 </Motion>
 
-<Separator className="my-14" />
-
-<Motion variants={variantsSeven} asChild>
-    ## 4. Base de données (MongoDB ou Postgres)
-</Motion>
-<Motion className="mt-4" variants={variantsSeven} asChild>
-    Pour la gestion des bases de données, j'utilise principalement MongoDB et Postgres.
-    MongoDB est une base de données NoSQL qui offre une grande flexibilité grâce à son
-    modèle de documents, ce qui est idéal pour les applications nécessitant une structure
-    de données dynamique. D'autre part, Postgres est une base de données relationnelle robuste
-    et riche en fonctionnalités, parfaite pour les applications nécessitant des transactions
-    complexes et une intégrité des données stricte. Ces deux bases de données me permettent
-    de choisir la solution la plus adaptée en fonction des besoins spécifiques de chaque projet.
-</Motion>
-<Motion className="mt-4" variants={variantsSeven} asChild>
-    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <MongoDBIcon className="size-7 shrink-0" />
-        </div>
-        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-            <PostgreIcon className="size-7 shrink-0" />
-        </div>
-    </div>
+<Motion variants={variantsSix}>
+    <Separator className="my-14" />
 </Motion>
 
-<Separator className="my-14" />
-
-<Motion variants={variantsEight} asChild>
-    ## 5. IA (v0, GitHub Copilot et ChatGPT)
+<Motion className="!text-2xl sm:!text-3xl" variants={variantsSeven} asChild>
+    ## 4. Base de données (*MongoDB* ou *Postgres*)
 </Motion>
-<Motion className="mt-4" variants={variantsEight} asChild>
-    Pour améliorer ma productivité et la qualité de mon code, j'utilise plusieurs outils
-    d'intelligence artificielle comme v0, GitHub Copilot et ChatGPT.
-    v0 m'aide à éditer, refactoriser et déboguer le code, en particulier pour les refactorisations
-    fastidieuses ou la restructuration du code. GitHub Copilot fournit des suggestions de code en
+<Motion className="mt-6" variants={variantsSeven} asChild>
+    Pour la gestion des **bases de données**, j'utilise principalement *MongoDB* et *Postgres*.
+    *MongoDB* est une base de données **NoSQL** qui offre une grande flexibilité grâce à son
+    **modèle de documents**, ce qui est idéal pour les applications nécessitant une **structure
+    de données dynamique**.
+</Motion>
+<Motion className="mt-3" variants={variantsSeven} asChild>
+    D'autre part, *Postgres* est une **base de données relationnelle** robuste
+    et riche en fonctionnalités, parfaite pour les applications nécessitant des **transactions
+    complexes** et une **intégrité des données** stricte. Ces deux bases de données me permettent
+    de choisir la **solution la plus adaptée** en fonction des besoins spécifiques de chaque projet.
+</Motion>
+<Motion className="my-8" variants={variantsSeven}>
+    <DatabaseStars />
+</Motion>
+
+<Motion variants={variantsSeven}>
+    <Separator className="my-14" />
+</Motion>
+
+<Motion className="!text-2xl sm:!text-3xl" variants={variantsEight} asChild>
+    ## 5. IA (*v0*, *GitHub Copilot* et *ChatGPT*)
+</Motion>
+<Motion className="mt-6" variants={variantsEight} asChild>
+    Pour améliorer ma **productivité** et la **qualité** de mon code, j'utilise plusieurs outils
+    d'**intelligence artificielle** comme *v0*, *GitHub Copilot* et *ChatGPT*.
+</Motion>
+<Motion className="mt-3" variants={variantsEight} asChild>
+    *v0* m'aide à **générer** des snippets de code en Front.
+    *GitHub Copilot* fournit des **suggestions de code** en
     temps réel directement dans mon IDE, ce qui accélère le développement et réduit les erreurs.
-    ChatGPT est utile pour obtenir des explications détaillées,
-    des exemples de code et des solutions à des problèmes complexes.
-    Ces outils ne sont pas parfaits, mais ils représentent un gain de temps considérable
-    et améliorent la qualité globale de mes projets.
 </Motion>
-<Motion className="mt-4" variants={variantsEight} asChild>
+<Motion className="mt-3" variants={variantsEight} asChild>
+    *ChatGPT* est utile pour obtenir des **explications détaillées**,
+    des **exemples de code** et des **solutions à des problèmes complexes**.
+</Motion>
+<Motion className="mt-3" variants={variantsEight} asChild>
+    Ces outils ne sont pas parfaits, mais ils représentent un **gain de temps** considérable
+    et **améliorent la qualité globale** de mes projets.
+</Motion>
+<Motion className="mt-6" variants={variantsEight} asChild>
     <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
         <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
             <V0Icon className="size-7 shrink-0" />
