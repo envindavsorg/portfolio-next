@@ -145,16 +145,16 @@ export const Graph = memo(
 				<div className="mt-2 flex w-full items-center justify-end">
 					<div className="flex items-center gap-x-2 sm:gap-x-4">
 						<span className="font-medium text-sm">Moins</span>
-						<ul className="flex list-none gap-0.5 pl-0">
-							<li className="size-2 rounded-xs bg-[#4B5563]" />
+						<div className="flex gap-0.5">
+							<span className="size-2 rounded-xs bg-[#4B5563]" />
 							{colors.map((item, idx: number) => (
-								<li
+								<span
 									key={`${item}-${idx}`}
 									className="size-2 rounded-xs"
 									style={{ backgroundColor: item }}
 								/>
 							))}
-						</ul>
+						</div>
 						<span className="font-medium text-sm">Plus</span>
 					</div>
 				</div>

@@ -17,7 +17,6 @@ import {
 	variantsFive,
 	variantsFour,
 	variantsOne,
-	variantsSeven,
 	variantsSix,
 	variantsThree,
 	variantsTwo,
@@ -26,6 +25,7 @@ import { Status } from '@/components/status/Status';
 import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
+import { Spinner } from '@/components/ui/Spinner';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
 import {
 	type LanguagesIcons,
@@ -36,6 +36,7 @@ import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
+import { Suspense } from 'react';
 
 const age: number = new Date().getFullYear() - 1994;
 const experience: number = new Date().getFullYear() - 2018;
@@ -69,73 +70,86 @@ const Home = async (): Promise<React.JSX.Element> => {
 				- bienvenue sur mon portfolio !
 			</p>
 
-			<div className="mt-10">
-				<Motion variants={variantsOne} asChild>
-					<div className="flex flex-col items-center gap-6 min-[530px]:flex-row">
-						<div className="flex flex-col gap-y-3">
-							<p className="leading-8">
-								Bonjour, je m'appelle{' '}
-								<span className="font-bold text-theme">
-									{env.NEXT_PUBLIC_SURNAME}
-								</span>
-								, j'ai <span className="font-bold">{age} ans</span> et j'ai
-								commencé à travailler sur le web en{' '}
-								<span className="font-bold">2014</span> et je n'ai jamais arrêté
-								depuis.
-							</p>
+			<Motion className="mt-10" variants={variantsOne} asChild>
+				<div className="flex flex-col items-center gap-6 min-[530px]:flex-row">
+					<div className="flex flex-col gap-y-3">
+						<p className="leading-8">
+							Bonjour, je m'appelle{' '}
+							<span className="font-bold text-theme">
+								{env.NEXT_PUBLIC_SURNAME}
+							</span>
+							, j'ai <span className="font-bold">{age} ans</span> et j'ai
+							commencé à travailler sur le web en{' '}
+							<span className="font-bold">2014</span> et je n'ai jamais arrêté
+							depuis.
+						</p>
 
-							<CV className="mt-3" />
-						</div>
-						<div className="flex flex-col gap-y-2">
-							<FlipCard latitude={latitude} longitude={longitude} />
-							<HowToScroll>
-								<p>Cliquer sur la carte :)</p>
-							</HowToScroll>
+						<CV className="mt-6 sm:mt-3" />
+
+						<div className="mt-6 flex gap-6 sm:mt-3">
+							{contactMe
+								.filter((_, idx) => idx !== 3)
+								.map(({ description, url, icon }: ContactMe, idx: number) => (
+									<SocialLink
+										key={`${idx}-contact`}
+										href={url}
+										aria-label={description}
+										icon={icon}
+										iconProps={{ weight: 'regular' }}
+									/>
+								))}
 						</div>
 					</div>
-				</Motion>
-			</div>
 
-			<div className="mt-12 space-y-4 leading-snug">
-				<Motion variants={variantsTwo} asChild>
-					<p className="leading-8">
-						Je suis un <span className="font-bold">développeur</span> et{' '}
-						<span className="font-bold">designer web</span> depuis{' '}
-						<span className="font-bold">{experience} ans</span>, passionné par
-						la création d’applications <span>belles</span> et{' '}
-						<span>fonctionnelles</span>, le design et le développement web.
-					</p>
-				</Motion>
+					<div className="mt-3 flex flex-col gap-y-2 sm:mt-0">
+						<FlipCard latitude={latitude} longitude={longitude} />
+						<HowToScroll>
+							<p>Cliquer sur la carte :)</p>
+						</HowToScroll>
+					</div>
+				</div>
+			</Motion>
 
-				<Motion variants={variantsTwo} asChild>
-					<p className="leading-8">
-						Je{' '}
-						<Link
-							href="/work"
-							aria-label="Entreprises pour lesquelles j'ai travaillé"
-							className="font-bold text-theme underline"
-						>
-							travaille
-						</Link>{' '}
-						actuellement chez{' '}
-						<Link
-							href="https://wefix.net/"
-							aria-label="Voir le site WeFix !"
-							target="_blank"
-						>
-							<Badge>
-								<WeFixIcon className="me-0.5 size-4 shrink-0 pb-0.5" />
-								<span>WeFix</span>
-							</Badge>
-						</Link>{' '}
-						une <span className="font-bold">entreprise leader</span> dans la
-						réparation de smartphones, tablettes, ordinateurs portables et
-						consoles de jeux.
-					</p>
-				</Motion>
-			</div>
+			<Motion variants={variantsOne}>
+				<Separator className="my-14" />
+			</Motion>
 
-			<Motion className="mt-12" variants={variantsTwo} asChild>
+			<Motion variants={variantsTwo} asChild>
+				<p className="leading-8">
+					Je suis un <span className="font-bold text-theme">développeur</span>{' '}
+					et <span className="font-bold text-theme">designer web</span> depuis{' '}
+					<span className="font-bold">{experience} ans</span>, passionné par la
+					création d’applications <span>belles</span> et{' '}
+					<span>fonctionnelles</span>, le design et le développement web.
+				</p>
+			</Motion>
+			<Motion className="mt-3" variants={variantsTwo} asChild>
+				<p className="leading-8">
+					Je{' '}
+					<Link
+						href="/work"
+						aria-label="Entreprises pour lesquelles j'ai travaillé"
+						className="font-bold text-theme underline"
+					>
+						travaille
+					</Link>{' '}
+					actuellement chez{' '}
+					<Link
+						href="https://wefix.net/"
+						aria-label="Voir le site WeFix !"
+						target="_blank"
+					>
+						<Badge>
+							<WeFixIcon className="me-0.5 size-4 shrink-0 pb-0.5" />
+							<span>WeFix</span>
+						</Badge>
+					</Link>{' '}
+					une <span className="font-bold">entreprise leader</span> dans la
+					réparation de smartphones, tablettes, ordinateurs portables et
+					consoles de jeux.
+				</p>
+			</Motion>
+			<Motion className="mt-6" variants={variantsTwo} asChild>
 				<p className="leading-8">
 					J'ai décidé de créer ce site pour{' '}
 					<span className="font-bold">partager mes expériences</span> et{' '}
@@ -146,57 +160,42 @@ const Home = async (): Promise<React.JSX.Element> => {
 				<Status />
 			</Motion>
 
-			<Motion className="mt-12" variants={variantsThree} asChild>
-				<div className="flex gap-6">
-					{contactMe
-						.filter((_, idx) => idx !== 3)
-						.map(({ description, url, icon }: ContactMe, idx: number) => (
-							<SocialLink
-								key={`${idx}-contact`}
-								href={url}
-								aria-label={description}
-								icon={icon}
-								iconProps={{ weight: 'regular' }}
-							/>
-						))}
-				</div>
+			<Motion variants={variantsTwo}>
+				<Separator className="my-14" />
 			</Motion>
 
-			<Motion className="mt-12" variants={variantsFour} asChild>
-				<div className="space-y-4 leading-snug">
-					<p className="leading-8">
-						En{' '}
-						<span className="font-semibold">{experience} ans d'expérience</span>
-						, j'ai eu l'occasion de{' '}
-						<Link
-							href="/stack"
-							aria-label="Technologies que j'utilise"
-							className="font-bold text-theme underline"
-						>
-							travailler avec de nombreux langages et technologies
-						</Link>
-						, sur beaucoup de projets différents. J'ai commencé par le
-						développement web avec{' '}
-						<Badge>
-							<HTML5Icon className="me-1 size-4 shrink-0 pb-0.5" />
-							<span>HTML</span>
-						</Badge>
-						,{' '}
-						<Badge>
-							<CSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
-							<span>CSS</span>
-						</Badge>{' '}
-						et{' '}
-						<Badge>
-							<JavaScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
-							<span>JavaScript</span>
-						</Badge>
-						, bien évidemment.
-					</p>
-				</div>
+			<Motion variants={variantsThree} asChild>
+				<p className="leading-8">
+					En{' '}
+					<span className="font-semibold">{experience} ans d'expérience</span>,
+					j'ai eu l'occasion de{' '}
+					<Link
+						href="/stack"
+						aria-label="Technologies que j'utilise"
+						className="font-bold text-theme underline"
+					>
+						travailler avec de nombreux langages et technologies
+					</Link>
+					, sur beaucoup de projets différents. J'ai commencé par le
+					développement web avec{' '}
+					<Badge>
+						<HTML5Icon className="me-1 size-4 shrink-0 pb-0.5" />
+						<span>HTML</span>
+					</Badge>
+					,{' '}
+					<Badge>
+						<CSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
+						<span>CSS</span>
+					</Badge>{' '}
+					et{' '}
+					<Badge>
+						<JavaScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
+						<span>JavaScript</span>
+					</Badge>
+					, bien évidemment.
+				</p>
 			</Motion>
-
-			<Motion className="mt-3" variants={variantsFour} asChild>
+			<Motion className="mt-6" variants={variantsThree} asChild>
 				<div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
 					{myLanguagesIcons.map(
 						({ icon, name }: LanguagesIcons, idx: number) => (
@@ -211,7 +210,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 					)}
 				</div>
 			</Motion>
-			<Motion className="mt-3" variants={variantsFour} asChild>
+			<Motion className="mt-3" variants={variantsThree} asChild>
 				<HowToScroll>
 					<p>
 						Vous pouvez scroller de{' '}
@@ -223,121 +222,126 @@ const Home = async (): Promise<React.JSX.Element> => {
 				</HowToScroll>
 			</Motion>
 
-			<Motion className="mt-12" variants={variantsFive} asChild>
-				<div className="space-y-4 leading-snug">
-					<p className="leading-8">
-						J'ai ensuite{' '}
-						<Link
-							href="/stack"
-							aria-label="Technologies que j'utilise"
-							className="font-bold text-theme underline"
-						>
-							appris à utiliser
-						</Link>{' '}
-						des frameworks plus complexes comme{' '}
-						<Link
-							href="https://react.dev/"
-							aria-label="Voir le site de React !"
-							target="_blank"
-						>
-							<Badge>
-								<ReactIcon className="me-1 size-4 shrink-0 pb-0.5" />
-								<span>React</span>
-							</Badge>
-						</Link>{' '}
-						et{' '}
-						<Link
-							href="https://vuejs.org/"
-							aria-label="Voir le site de Vue !"
-							target="_blank"
-						>
-							<Badge>
-								<VueIcon className="me-1 size-4 shrink-0 pb-0.5" />
-								<span>Vue.js</span>
-							</Badge>
-						</Link>
-						, avec{' '}
-						<Link
-							href="https://www.typescriptlang.org/"
-							aria-label="Voir le site de Vue !"
-							target="_blank"
-						>
-							<Badge>
-								<TypeScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
-								<span>TypeScript</span>
-							</Badge>
-						</Link>{' '}
-						en parallèle, me permettant de développer des applications plus
-						robustes, belles et fonctionnelles. Pour le{' '}
-						<span className="font-bold">design</span> et l'
-						<span className="font-bold">UI</span> des mes applications,
-						j'utilise{' '}
-						<Link
-							href="https://tailwindcss.com/"
-							aria-label="Voir le site de Tailwind !"
-							target="_blank"
-						>
-							<Badge>
-								<TailwindCSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
-								<span>Tailwind CSS</span>
-							</Badge>
-						</Link>
-						, qui est un framework incroyable de styling, puissant et modulaire.
-					</p>
-
-					<div className="mt-2">
-						<FrontFrameworkStars />
-					</div>
-				</div>
+			<Motion variants={variantsThree}>
+				<Separator className="my-14" />
 			</Motion>
 
-			<Motion className="mt-12" variants={variantsSix} asChild>
-				<div className="space-y-4 leading-snug">
-					<p className="leading-8">
-						Je suis présent sur{' '}
-						<Link
-							href="https://linkedin.com/"
-							className="font-medium underline hover:text-theme"
-						>
-							LinkedIn
-						</Link>{' '}
-						et sur{' '}
-						<Link
-							href="https://github.com/"
-							className="font-medium underline hover:text-theme"
-						>
-							GitHub
-						</Link>{' '}
-						<Link
-							href="/github"
-							aria-label="Activité et statistiques de mon profil GitHub"
-							className="font-bold text-theme underline"
-						>
-							(retrouvez toute mon activité et mes statistiques)
-						</Link>
-						, n'hésitez pas à me rendre une petite visite sur mes profils et
-						pourquoi pas{' '}
-						<Link
-							href="/contact"
-							aria-label="Contactez-moi"
-							className="font-bold text-theme underline"
-						>
-							me laisser un message
-						</Link>{' '}
-						:)
-					</p>
+			<Motion className="mt-12" variants={variantsFour} asChild>
+				<p className="leading-8">
+					J'ai ensuite{' '}
+					<Link
+						href="/stack"
+						aria-label="Technologies que j'utilise"
+						className="font-bold text-theme underline"
+					>
+						appris à utiliser
+					</Link>{' '}
+					des frameworks plus complexes comme{' '}
+					<Link
+						href="https://react.dev/"
+						aria-label="Voir le site de React !"
+						target="_blank"
+					>
+						<Badge>
+							<ReactIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>React</span>
+						</Badge>
+					</Link>{' '}
+					et{' '}
+					<Link
+						href="https://vuejs.org/"
+						aria-label="Voir le site de Vue !"
+						target="_blank"
+					>
+						<Badge>
+							<VueIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>Vue.js</span>
+						</Badge>
+					</Link>
+					, avec{' '}
+					<Link
+						href="https://www.typescriptlang.org/"
+						aria-label="Voir le site de Vue !"
+						target="_blank"
+					>
+						<Badge>
+							<TypeScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>TypeScript</span>
+						</Badge>
+					</Link>{' '}
+					en parallèle, me permettant de développer des applications plus
+					robustes, belles et fonctionnelles. Pour le{' '}
+					<span className="font-bold">design</span> et l'
+					<span className="font-bold">UI</span> des mes applications, j'utilise{' '}
+					<Link
+						href="https://tailwindcss.com/"
+						aria-label="Voir le site de Tailwind !"
+						target="_blank"
+					>
+						<Badge>
+							<TailwindCSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
+							<span>Tailwind CSS</span>
+						</Badge>
+					</Link>
+					, qui est un framework incroyable de styling, puissant et modulaire.
+				</p>
+			</Motion>
+			<Suspense fallback={<Spinner className="h-52" />}>
+				<Motion className="mt-6" variants={variantsFour}>
+					<FrontFrameworkStars />
+				</Motion>
+			</Suspense>
 
-					<div className="mt-2">
-						<Channels />
-					</div>
-				</div>
+			<Motion variants={variantsFour}>
+				<Separator className="my-14" />
 			</Motion>
 
-			<Motion className="my-12" variants={variantsSeven} asChild>
-				<Separator />
+			<Motion variants={variantsFive} asChild>
+				<p className="leading-8">
+					Je suis présent sur{' '}
+					<Link
+						href="https://linkedin.com/"
+						className="font-medium underline hover:text-theme"
+					>
+						LinkedIn
+					</Link>{' '}
+					et sur{' '}
+					<Link
+						href="https://github.com/"
+						className="font-medium underline hover:text-theme"
+					>
+						GitHub
+					</Link>{' '}
+					<Link
+						href="/github"
+						aria-label="Activité et statistiques de mon profil GitHub"
+						className="font-bold text-theme underline"
+					>
+						(retrouvez toute mon activité et mes statistiques)
+					</Link>
+					, n'hésitez pas à me rendre une petite visite sur mes profils et
+					pourquoi pas{' '}
+					<Link
+						href="/contact"
+						aria-label="Contactez-moi"
+						className="font-bold text-theme underline"
+					>
+						me laisser un message
+					</Link>{' '}
+					:)
+				</p>
+			</Motion>
+			<Suspense fallback={<Spinner className="h-52" />}>
+				<Motion className="mt-6" variants={variantsFive}>
+					<Channels />
+				</Motion>
+			</Suspense>
+
+			<Motion variants={variantsFive}>
+				<Separator className="my-14" />
 			</Motion>
 
-			<Motion variants={variantsSeven} asChild>
+			<Motion variants={variantsSix} asChild>
 				<div className="space-y-3">
 					<Link
 						className="group flex items-center gap-2 font-bold tracking-tight"
@@ -360,7 +364,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</p>
 				</div>
 			</Motion>
-			<Motion variants={variantsSeven}>
+			<Motion variants={variantsSix}>
 				<Articles articles={articles.slice(0, 3)} isLanding />
 			</Motion>
 		</>

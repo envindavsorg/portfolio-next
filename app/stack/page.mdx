@@ -19,6 +19,8 @@ import { ChatGPTIcon } from '../../components/icons/ChatGPT';
 import { GitHubCopilotIcon } from '../../components/icons/GitHubCopilot';
 import { V0Icon } from '../../components/icons/V0';
 import React from 'react';
+import { Suspense } from 'react';
+import { Spinner } from '../../components/ui/Spinner';
 import { Motion } from '../../components/motion/Motion';
 import {
     variantsFive,
@@ -101,7 +103,9 @@ export const metadata = {
     en **pourcentage d'utilisation** :
 </Motion>
 <Motion className="mt-6" variants={variantsTwo}>
-    <LanguagesUsedInProject />
+    <Suspense fallback={<Spinner className="h-52" />}>
+        <LanguagesUsedInProject />
+    </Suspense>
 </Motion>
 
 <Motion variants={variantsTwo}>
@@ -112,7 +116,9 @@ export const metadata = {
     Les langages que j'ai le plus utilisé cette semaine :
 </Motion>
 <Motion className="mt-4 pb-[52px]" variants={variantsThree}>
-    <MostUsedLanguages />
+    <Suspense fallback={<Spinner className="h-52" />}>
+        <MostUsedLanguages />
+    </Suspense>
 </Motion>
 
 <Motion variants={variantsThree}>
@@ -133,9 +139,11 @@ export const metadata = {
     côté serveur *(SSR)* et de la génération de sites statiques *(SSG)*,
     ce qui a considérablement amélioré les **performances** et le **SEO** de mes projets.
 </Motion>
-<Motion className="my-8" variants={variantsFour}>
-    <FrontFrameworkStars />
-</Motion>
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="my-8" variants={variantsFour}>
+        <FrontFrameworkStars />
+    </Motion>
+</Suspense>
 <Motion variants={variantsFour} asChild>
     Quelques patterns super utiles et efficaces que j'utilise souvent avec **Next.js**, dans tous mes projets :
 </Motion>
@@ -275,9 +283,11 @@ export const metadata = {
     Ces frameworks me permettent de créer des API rapides et scalables,
     tout en offrant une grande liberté dans la structuration du code et l'intégration de middlewares.
 </Motion>
-<Motion className="my-8" variants={variantsFive}>
-    <BackFrameworkStars />
-</Motion>
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="my-8" variants={variantsFive}>
+        <BackFrameworkStars />
+    </Motion>
+</Suspense>
 <Motion variants={variantsFive} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
@@ -359,9 +369,11 @@ export const metadata = {
     des **boutons** et des **champs de saisie**, mais aussi des **icônes**, des **graphiques**,
     et même des **thèmes personnalisés**.
 </Motion>
-<Motion className="my-8" variants={variantsSix}>
-    <DesignFrameworkStars />
-</Motion>
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="my-8" variants={variantsSix}>
+        <DesignFrameworkStars />
+    </Motion>
+</Suspense>
 <Motion variants={variantsSix} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
@@ -419,9 +431,11 @@ export const metadata = {
     complexes** et une **intégrité des données** stricte. Ces deux bases de données me permettent
     de choisir la **solution la plus adaptée** en fonction des besoins spécifiques de chaque projet.
 </Motion>
-<Motion className="my-8" variants={variantsSeven}>
-    <DatabaseStars />
-</Motion>
+<Suspense fallback={<Spinner className="h-52" />}>
+    <Motion className="my-8" variants={variantsSeven}>
+        <DatabaseStars />
+    </Motion>
+</Suspense>
 
 <Motion variants={variantsSeven}>
     <Separator className="my-14" />
