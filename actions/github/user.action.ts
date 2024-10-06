@@ -11,10 +11,13 @@ import {
 	totalCommitsThisYear,
 } from '@/lib/github';
 import { logger } from '@/lib/logger';
+import { unstable_noStore as noStore } from 'next/cache';
 
 const { graphql } = octokit;
 
 export const githubUser = async (username: string): Promise<GitHubData> => {
+	noStore();
+
 	if (!username) {
 		logger.error('→ username parameter is required !');
 		throw new Error('→ GITHUB_USERNAME env variable is not set ...');
