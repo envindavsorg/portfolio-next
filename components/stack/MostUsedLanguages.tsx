@@ -1,5 +1,5 @@
 import { wakatimeStats } from '@/actions/wakatime/stats.action';
-import { MostUsedLanguagesCharts } from '@/app/stack/MostUsedLanguagesCharts';
+import { MostUsedLanguagesCharts } from '@/components/stack/MostUsedLanguagesCharts';
 import { env } from '@/env/server';
 import { unstable_noStore as noStore } from 'next/cache';
 

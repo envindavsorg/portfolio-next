@@ -24,13 +24,48 @@ interface Props {
 }
 
 export const MostUsedLanguagesCharts = ({ languages }: Props) => {
-	const content: Languages[] = languages
+	const data: Languages[] = languages
 		.slice(0, 5)
-		.map(({ name, percent }) => ({
+		.map(({ name, percent }: Languages) => ({
 			name: name,
 			percent: Math.round(percent),
 			color: 'bg-orange-600 dark:bg-yellow-300',
 		}));
+
+	const cssLanguage: Languages | undefined = languages.find(
+		({ name }: Languages) => name === 'CSS',
+	);
+
+	if (cssLanguage) {
+		const { name, percent } = cssLanguage;
+		data.push({
+			name: name,
+			percent: Math.round(percent),
+			color: 'bg-orange-600 dark:bg-yellow-300',
+		});
+	}
+
+	const content = data.reduce<Languages[]>((acc, curr) => {
+		if (curr.name === 'Jade' || curr.name === 'Pug') {
+			const existing: Languages | undefined = acc.find(
+				(item: Languages) => item.name === 'Pug',
+			);
+
+			if (existing) {
+				existing.percent += curr.percent;
+			} else {
+				acc.push({
+					name: 'Pug',
+					percent: curr.percent,
+					color: curr.color,
+				});
+			}
+		} else {
+			acc.push(curr);
+		}
+
+		return acc;
+	}, []);
 
 	const scaledContent = content.map((item) => ({
 		...item,

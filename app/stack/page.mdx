@@ -1,25 +1,25 @@
-import { AnimatedNameLink } from '@/components/text/AnimatedName.tsx';
+import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from '@/components/ui/Accordion';
-import { CSSIcon } from "@/components/icons/CSS";
-import { ExpressIcon } from '@/components/icons/Express';
-import { FastifyIcon } from '@/components/icons/Fastify';
-import { MongoDBIcon } from '@/components/icons/MongoDB';
-import { NextJSIcon } from '@/components/icons/Next';
-import { ReactIcon } from '@/components/icons/React';
-import { TailwindCSSIcon } from '@/components/icons/Tailwind';
-import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { PostgreIcon } from '@/components/icons/Postgre';
-import { ChatGPTIcon } from '@/components/icons/ChatGPT';
-import { GitHubCopilotIcon } from '@/components/icons/GitHubCopilot';
-import { ShadcnIcon } from "@/components/icons/Shadcn";
-import { V0Icon } from '@/components/icons/V0';
+} from '../../components/ui/Accordion';
+import { CSSIcon } from "../../components/icons/CSS";
+import { ExpressIcon } from '../../components/icons/Express';
+import { FastifyIcon } from '../../components/icons/Fastify';
+import { MongoDBIcon } from '../../components/icons/MongoDB';
+import { NextJSIcon } from '../../components/icons/Next';
+import { ReactIcon } from '../../components/icons/React';
+import { TailwindCSSIcon } from '../../components/icons/Tailwind';
+import { TypeScriptIcon } from '../../components/icons/TypeScript';
+import { PostgreIcon } from '../../components/icons/Postgre';
+import { ChatGPTIcon } from '../../components/icons/ChatGPT';
+import { GitHubCopilotIcon } from '../../components/icons/GitHubCopilot';
+import { ShadcnIcon } from "../../components/icons/Shadcn";
+import { V0Icon } from '../../components/icons/V0';
 import React from 'react';
-import { Motion } from '@/components/motion/Motion';
+import { Motion } from '../../components/motion/Motion';
 import {
     variantsFive,
     variantsFour,
@@ -29,10 +29,10 @@ import {
     variantsTwo,
     variantsSeven,
     variantsEight,
-} from '@/components/motion/variants';
-import { MostUsedLanguages } from '@/app/stack/MostUsedLanguages';
-import { LanguagesUsedInProject } from '@/app/stack/LanguagesUsedInProject';
-import { HowToScroll } from '@/components/blocs/HowToScroll';
+} from '../../components/motion/variants';
+import { MostUsedLanguages } from '../../components/stack/MostUsedLanguages';
+import { LanguagesUsedInProject } from '../../components/stack/LanguagesUsedInProject';
+import { HowToScroll } from '../../components/blocs/HowToScroll';
 
 export const metadata = {
     title: "Technologies que j'utilise",
@@ -78,12 +78,10 @@ export const metadata = {
 </Motion>
 <Motion className="sm:hidden block mt-4" variants={variantsOne} asChild>
     <HowToScroll>
-        <p>
-            Vous pouvez scroller de{' '}
-            <span className="font-medium text-theme">gauche</span> à{' '}
-            <span className="font-medium text-theme">droite</span> pour voir
-            toutes les technologies.
-        </p>
+        Vous pouvez scroller de{' '}
+        <span className="font-medium text-theme">gauche</span> à{' '}
+        <span className="font-medium text-theme">droite</span> pour voir
+        toutes les technologies.
     </HowToScroll>
 </Motion>
 
@@ -270,10 +268,10 @@ export const metadata = {
                 Un petit exemple avec <span className="text-theme font-medium">Express</span>
             </AccordionTrigger>
             <AccordionContent>
-                Dans cet exemple, nous importons express et les types Request et Response.
-                Nous créons une application Express.
-                Nous définissons une route GET pour la racine (/) qui renvoie "Hello, world!".
-                Nous démarrons le serveur sur le port 3000 et affichons un message dans la console.
+                Dans cet exemple, nous importons *express* et les types *Request* et *Response*.
+                Nous créons une application **Express**.
+                Nous définissons une *route GET* pour la racine (/) qui renvoie *"Hello, world!"*.
+                Nous démarrons le **serveur** sur le **port 3000** et affichons un message dans la **console**.
 
                 ```ts
                 import express, { Request, Response } from 'express';
@@ -296,9 +294,9 @@ export const metadata = {
                 Un petit exemple avec <span className="text-theme font-medium">Fastify</span>
             </AccordionTrigger>
             <AccordionContent>
-                Dans cet exemple, nous importons Fastify et créons une instance de serveur.
-                Nous définissons une route GET pour la racine (/) qui renvoie un objet JSON avec le message "Hello, world!".
-                Nous démarrons le serveur sur le port 3000 et affichons un message dans la console.
+                Dans cet exemple, nous importons **Fastify** et créons une instance de serveur.
+                Nous définissons une *route GET* pour la racine (/) qui renvoie un objet *JSON* avec le message *"Hello, world!"*.
+                Nous démarrons le serveur sur le **port 3000** et affichons un message dans la **console**.
 
                 ```ts
                 import Fastify from 'fastify';
@@ -360,16 +358,25 @@ export const metadata = {
                 Pourquoi utiliser Tailwind CSS ?
             </AccordionTrigger>
             <AccordionContent>
-                Tailwind CSS est un excellent outil pour accélérer la création de sites web
+                **Tailwind CSS** est un excellent outil pour accélérer la création de sites web
                 grâce à ses classes prêtes à l’emploi, permettant d’éviter d’écrire du CSS
-                personnalisé. On applique directement des classes aux éléments HTML, ce qui
-                simplifie le design tout en assurant un style cohérent et un code plus lisible.
+                personnalisé.
+                <br/>
+                On applique directement des classes aux éléments *HTML*, ce qui
+                simplifie le design tout en assurant un *style cohérent* et un *code plus lisible*.
                 Sa grande flexibilité permet de personnaliser facilement les styles via un
                 fichier de configuration, d’ajuster les points de rupture pour le responsive et
                 d’optimiser les performances en supprimant les classes inutilisées.
-                De plus, avec une large communauté et des outils comme Tailwind UI, il est
+                <br/>
+                De plus, avec une large communauté et des outils comme **Tailwind UI**, il est
                 facile de profiter de ressources supplémentaires, ce qui fait de Tailwind un
                 choix populaire pour des interfaces modernes et efficaces.
+
+                ```css
+                @tailwind base;
+                @tailwind components;
+                @tailwind utilities;
+                ```
             </AccordionContent>
         </AccordionItem>
     </Accordion>

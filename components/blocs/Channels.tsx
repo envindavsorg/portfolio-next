@@ -28,7 +28,7 @@ const Channel = ({
 			href={link}
 			target="_blank"
 			rel="noreferrer"
-			className="flex w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-4 transition-transform duration-300 group-hover:border-theme dark:border-neutral-700 dark:bg-black"
+			className="flex w-full items-center justify-between rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 transition-transform duration-300 group-hover:border-theme dark:border-neutral-700 dark:bg-neutral-800"
 		>
 			<div className="flex items-center space-x-4">
 				<Image
