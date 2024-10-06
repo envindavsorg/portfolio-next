@@ -1,6 +1,7 @@
 import { projectStars } from '@/actions/github/stars.action';
 import { Counter } from '@/components/numbers/Counter';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
+import { unstable_noStore as noStore } from 'next/cache';
 import Image from 'next/image';
 import type React from 'react';
 
@@ -47,6 +48,8 @@ const Star = ({ img, link, name, subs }: StarProps): React.JSX.Element => (
 );
 
 export const FrontFrameworkStars = async (): Promise<React.JSX.Element> => {
+	noStore();
+
 	const [next, react] = await Promise.all([
 		projectStars('vercel', 'next.js'),
 		projectStars('facebook', 'react'),
@@ -90,6 +93,8 @@ export const FrontFrameworkStars = async (): Promise<React.JSX.Element> => {
 };
 
 export const BackFrameworkStars = async (): Promise<React.JSX.Element> => {
+	noStore();
+
 	const [express, fastify] = await Promise.all([
 		projectStars('expressjs', 'express'),
 		projectStars('fastify', 'fastify'),
@@ -133,6 +138,8 @@ export const BackFrameworkStars = async (): Promise<React.JSX.Element> => {
 };
 
 export const DesignFrameworkStars = async (): Promise<React.JSX.Element> => {
+	noStore();
+
 	const [tailwind, shadcn] = await Promise.all([
 		projectStars('tailwindlabs', 'tailwindcss'),
 		projectStars('shadcn', 'ui'),
@@ -176,6 +183,8 @@ export const DesignFrameworkStars = async (): Promise<React.JSX.Element> => {
 };
 
 export const DatabaseStars = async (): Promise<React.JSX.Element> => {
+	noStore();
+
 	const [mongo, postgres] = await Promise.all([
 		projectStars('mongodb', 'mongo'),
 		projectStars('postgres', 'postgres'),
