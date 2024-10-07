@@ -36,9 +36,7 @@ import { LanguagesUsedInProject } from '../../components/stack/LanguagesUsedInPr
 import { HowToScroll } from '../../components/blocs/HowToScroll';
 import {
     FrontFrameworkStars,
-    BackFrameworkStars,
     DesignFrameworkStars,
-    DatabaseStars,
 } from '../../components/blocs/stars/Stars';
 import { StarsSkeleton } from '../../components/blocs/stars/StarsSkeleton';
 
@@ -280,12 +278,7 @@ export const metadata = {
     Ces frameworks me permettent de créer des API rapides et scalables,
     tout en offrant une grande liberté dans la structuration du code et l'intégration de middlewares.
 </Motion>
-<Motion className="my-8" variants={variantsFive}>
-    <Suspense fallback={<StarsSkeleton />}>
-        <BackFrameworkStars />
-    </Suspense>
-</Motion>
-<Motion variants={variantsFive} asChild>
+<Motion className="mt-8" variants={variantsFive} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
@@ -427,10 +420,15 @@ export const metadata = {
     complexes** et une **intégrité des données** stricte. Ces deux bases de données me permettent
     de choisir la **solution la plus adaptée** en fonction des besoins spécifiques de chaque projet.
 </Motion>
-<Motion className="my-8" variants={variantsFive}>
-    <Suspense fallback={<StarsSkeleton />}>
-        <DatabaseStars />
-    </Suspense>
+<Motion className="mt-6" variants={variantsEight} asChild>
+    <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
+        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+            <MongoDBIcon className="size-7 shrink-0" />
+        </div>
+        <div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+            <PostgreIcon className="size-7 shrink-0" />
+        </div>
+    </div>
 </Motion>
 
 <Motion variants={variantsSeven}>

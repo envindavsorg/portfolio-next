@@ -48,51 +48,6 @@ export const FrontFrameworkStars = async (): Promise<React.JSX.Element> => {
 	);
 };
 
-export const BackFrameworkStars = async (): Promise<React.JSX.Element> => {
-	noStore();
-
-	const [express, fastify] = await Promise.all([
-		projectStars('expressjs', 'express'),
-		projectStars('fastify', 'fastify'),
-	]);
-
-	interface ProvidersProps {
-		img: string;
-		name: string;
-		link: string;
-		stars: number;
-	}
-
-	const providers: ProvidersProps[] = [
-		{
-			img: express.avatar,
-			name: express.name,
-			link: `https://github.com/${express.owner}/${express.name}`,
-			stars: express.stars,
-		},
-		{
-			img: fastify.avatar,
-			name: fastify.name,
-			link: `https://github.com/${fastify.owner}/${fastify.name}`,
-			stars: fastify.stars,
-		},
-	];
-
-	return (
-		<div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-			{providers.map(({ img, name, link, stars }: ProvidersProps) => (
-				<Star
-					key={link}
-					img={img}
-					name={`@${name}`}
-					link={link}
-					subs={Math.round(stars)}
-				/>
-			))}
-		</div>
-	);
-};
-
 export const DesignFrameworkStars = async (): Promise<React.JSX.Element> => {
 	noStore();
 
@@ -120,51 +75,6 @@ export const DesignFrameworkStars = async (): Promise<React.JSX.Element> => {
 			name: `shadcn/${shadcn.name}`,
 			link: `https://github.com/${shadcn.owner}/${shadcn.name}`,
 			stars: shadcn.stars,
-		},
-	];
-
-	return (
-		<div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-			{providers.map(({ img, name, link, stars }: ProvidersProps) => (
-				<Star
-					key={link}
-					img={img}
-					name={`@${name}`}
-					link={link}
-					subs={Math.round(stars)}
-				/>
-			))}
-		</div>
-	);
-};
-
-export const DatabaseStars = async (): Promise<React.JSX.Element> => {
-	noStore();
-
-	const [mongo, postgres] = await Promise.all([
-		projectStars('mongodb', 'mongo'),
-		projectStars('postgres', 'postgres'),
-	]);
-
-	interface ProvidersProps {
-		img: string;
-		name: string;
-		link: string;
-		stars: number;
-	}
-
-	const providers: ProvidersProps[] = [
-		{
-			img: mongo.avatar,
-			name: mongo.name,
-			link: `https://github.com/${mongo.owner}/${mongo.name}`,
-			stars: mongo.stars,
-		},
-		{
-			img: postgres.avatar,
-			name: postgres.name,
-			link: `https://github.com/${postgres.owner}/${postgres.name}`,
-			stars: postgres.stars,
 		},
 	];
 
