@@ -7,7 +7,7 @@ import type { NextRequest } from 'next/server';
 export const runtime = 'edge';
 
 const inter: NextFont = Inter({
-	weight: '400',
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 	subsets: ['latin'],
 });
 

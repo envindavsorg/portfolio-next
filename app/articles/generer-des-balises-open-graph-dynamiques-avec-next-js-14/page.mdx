@@ -111,6 +111,7 @@ Voici la structure du projet final :
 
 Dans le fichier **route.tsx**, ajoutez le code suivant :
 ```tsx
+import { env } from '@/env/client';
 import type { NextFont } from 'next/dist/compiled/@next/font';
 import { Inter } from 'next/font/google';
 import { ImageResponse } from 'next/og';
@@ -119,9 +120,11 @@ import type { NextRequest } from 'next/server';
 export const runtime = 'edge';
 
 const inter: NextFont = Inter({
-	weight: '400',
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 	subsets: ['latin'],
 });
+
+const name: string = `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`;
 
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 	const { searchParams, host, protocol } = req.nextUrl;
@@ -136,107 +139,41 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 				height: '100%',
 				width: '100%',
 				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				justifyContent: 'center',
 				backgroundColor: '#000000',
-				paddingLeft: 20,
 				paddingRight: 20,
+				paddingLeft: 20,
 			}}
 		>
 			<div
+				tw="rounded-3xl w-full h-full p-16 flex flex-col justify-between"
 				style={{
-					height: '100%',
-					width: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					color: '#FFFFFF',
-					fontWeight: 'bold',
-					padding: '40px',
 					backgroundImage,
 					backgroundSize: 'cover',
 					backgroundRepeat: 'no-repeat',
-					borderRadius: 20,
 				}}
 			>
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-					}}
-				>
-					<p
-						style={{
-							fontSize: '30px',
-							fontWeight: '900',
-							letterSpacing: '-0.025em',
-							color: '#FFFFFF',
-						}}
-					>
+				<div tw="flex flex-col">
+					<p tw="font-medium text-3xl text-white">
 						{protocol}//{host}
 					</p>
-					<div
-						style={{
-							marginTop: '40px',
-							fontSize: '96px',
-							fontWeight: '900',
-							lineHeight: '6rem',
-							padding: '0 0 100px 0',
-							letterSpacing: '-0.025em',
-							color: '#FFFFFF',
-							lineClamp: 4,
-						}}
-					>
+					<h1 tw="text-8xl font-geist-sans text-white leading-[7rem]">
 						{postTitle}
-					</div>
+					</h1>
 				</div>
-				<div
-					style={{
-						width: '100%',
-						display: 'flex',
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'flex-end',
-						gap: '20px',
-					}}
-				>
+				<div tw="w-full flex flex-row items-center justify-end">
 					<img
 						src={authorImage}
 						alt="Cuzeac Florin"
-						style={{
-							width: '80px',
-							height: '80px',
-							objectFit: 'cover',
-							objectPosition: 'top',
-							borderRadius: '50%',
-						}}
+						tw="w-16 h-16 rounded-full object-cover object-top rounded-full mr-3"
 					/>
-					<div
-						style={{
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'flex-start',
-							justifyContent: 'center',
-						}}
-					>
-						<div
-							style={{
-								fontSize: '28px',
-								fontWeight: '900',
-								letterSpacing: '-0.025em',
-								color: '#FFFFFF',
-							}}
-						>
-							Cuzeac Florin
-						</div>
-						<div
-							style={{
-								fontSize: '16px',
-								fontWeight: '400',
-								letterSpacing: '-0.025em',
-								color: '#FFFFFF',
-							}}
-						>
-							Développeur Web
-						</div>
+					<div tw="flex flex-col items-start justify-center">
+						<h2 tw="text-2xl font-geist-sans text-white font-bold m-0">
+							{name}
+						</h2>
+						<p tw="m-0 text-white text-base">Développeur Web</p>
 					</div>
 				</div>
 			</div>
@@ -247,28 +184,44 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 		},
 	);
 };
+
 ```
 
+<br/>
 Voici une explication du code :
+<br/>
 1. Imports :
     - Le type *NextFont* et la police **Inter** sont importés pour styliser le texte en utilisant la police **Inter** de **Google**.
     - *ImageResponse* et *NextRequest* sont importés de **next/og** et **next/server** respectivement, pour gérer les réponses d'images et les types de requêtes.
+<br/>
 2. Exécution **Edge** :
     - *runtime = 'edge'* spécifie que cette fonction doit s'exécuter dans un environnement de type **edge**, offrant une latence plus faible.
+<br/>
 3. Configuration de la police :
     - La constante *inter* est configurée comme un **NextFont** en utilisant la **police Inter** avec un poids de **'400'** et un sous-ensemble **'latin'**.
+<br/>
 4. Fonction *GET* :
     - C'est une **fonction asynchrone** qui répond aux requêtes *GET*, prenant un objet *NextRequest*.
     - Elle extrait les paramètres de **recherche**, l'**hôte** et le **protocole** de l'**URL** de la requête.
     - Construit les **URLs** pour une image de fond et une image de l'auteur en utilisant le **protocole** et l'**hôte**.
     - Récupère un titre de publication à partir des paramètres de recherche.
    Rendu de l'Image :
+<br/>
 5. *ImageResponse* génère une image **Open Graph**.
     - Le conteneur principal utilise une mise en page **Flexbox** pour centrer le contenu et applique des styles comme un **fond noir**, du **padding**, et une **classe** de **police Inter** pour le style.
     - Deux **divs** enfants : l'un pour l'**URL** du site et le **titre** de la **publication**, et l'autre pour les **informations de l'auteur**.
     - Le titre de la publication est affiché dans une grande police en gras.
     - Les informations de l'auteur comprennent une image et une description **("Cuzeac Florin", "Développeur Web")**.
     - *ImageResponse* spécifie des dimensions d'image de **1500x800** pixels pour le rendu final.
+
+<Alert className="mt-6">
+    <AlertDescription className="flex items-center gap-3">
+        <Info className="size-6 shrink-0 text-theme" />{' '}
+        <span className="text-sm">
+            Pour utiliser **Tailwind CSS** pour styliser l'image **Open Graph**, au lieu d'utiliser *style*, on utilise <code>tw</code>.
+        </span>
+    </AlertDescription>
+</Alert>
 
 <Separator className="my-10" />
 

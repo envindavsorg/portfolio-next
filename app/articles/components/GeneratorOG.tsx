@@ -12,11 +12,12 @@ import { Spinner } from '@/components/ui/Spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	ArrowRight,
-	Image,
+	Image as ImageIcon,
 	Spinner as SpinnerIcon,
 	TextAa,
 } from '@phosphor-icons/react';
 import confetti from 'canvas-confetti';
+import Image from 'next/image';
 import type React from 'react';
 import { useState } from 'react';
 import {
@@ -67,13 +68,16 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 
 	return (
 		<div className="my-6 flex flex-col gap-y-3 rounded-md border border-neutral-200 p-4 dark:border-neutral-700">
-			<div className="flex items-center gap-x-3">
+			<div className="flex items-center gap-x-6 sm:mb-3 sm:gap-x-6">
 				<TextAa className="size-8 shrink-0" weight="bold" />
 				<ArrowRight className="size-4 shrink-0" weight="regular" />
-				<Image className="size-8 shrink-0" weight="bold" />
+				<ImageIcon className="size-8 shrink-0" weight="bold" />
 			</div>
 			<Form {...form}>
-				<p>Essayez avec un autre titre :</p>
+				<p className="text-sm">
+					Essayez avec un autre{' '}
+					<span className="font-bold text-theme">titre</span> :
+				</p>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					className="-mt-1 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"
@@ -109,10 +113,18 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 				</form>
 			</Form>
 
-			<div className="mt-3">
-				{isLoading && <Spinner className="h-52" />}
-				{imageUrl && !isLoading && <img src={imageUrl} alt={name} />}
-			</div>
+			{isLoading && <Spinner className="h-36" />}
+			{imageUrl && !isLoading && (
+				<div className="mt-3 size-full rounded-md border border-neutral-200 px-1 py-3 dark:border-neutral-700">
+					<Image
+						className="size-full"
+						src={imageUrl}
+						alt={name}
+						width={200}
+						height={200}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
