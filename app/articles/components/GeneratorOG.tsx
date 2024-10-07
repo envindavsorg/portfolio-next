@@ -19,7 +19,12 @@ import {
 import confetti from 'canvas-confetti';
 import type React from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import {
+	type ControllerFieldState,
+	type ControllerRenderProps,
+	type UseFormStateReturn,
+	useForm,
+} from 'react-hook-form';
 import { z } from 'zod';
 
 const FormSchema = z.object({
@@ -76,7 +81,13 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 					<FormField
 						control={form.control}
 						name="title"
-						render={({ field }) => (
+						render={({
+							field,
+						}: {
+							field: ControllerRenderProps<{ title: string }, 'title'>;
+							fieldState: ControllerFieldState;
+							formState: UseFormStateReturn<{ title: string }>;
+						}) => (
 							<FormItem className="flex-1">
 								<FormControl>
 									<Input placeholder="..." {...field} />

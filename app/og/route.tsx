@@ -1,3 +1,4 @@
+import { env } from '@/env/client';
 import type { NextFont } from 'next/dist/compiled/@next/font';
 import { Inter } from 'next/font/google';
 import { ImageResponse } from 'next/og';
@@ -9,6 +10,8 @@ const inter: NextFont = Inter({
 	weight: '400',
 	subsets: ['latin'],
 });
+
+const name: string = `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`;
 
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 	const { searchParams, host, protocol } = req.nextUrl;
@@ -23,106 +26,41 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 				height: '100%',
 				width: '100%',
 				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				justifyContent: 'center',
 				backgroundColor: '#000000',
+				paddingRight: 20,
+				paddingLeft: 20,
 			}}
 		>
 			<div
+				tw="rounded-3xl w-full h-full p-16 flex flex-col justify-between"
 				style={{
-					height: '100%',
-					width: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					color: '#FFFFFF',
-					fontWeight: 'bold',
-					padding: '40px',
 					backgroundImage,
 					backgroundSize: 'cover',
 					backgroundRepeat: 'no-repeat',
-					borderRadius: 20,
 				}}
 			>
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-					}}
-				>
-					<p
-						style={{
-							fontSize: '30px',
-							fontWeight: '900',
-							letterSpacing: '-0.025em',
-							color: '#FFFFFF',
-						}}
-					>
+				<div tw="flex flex-col">
+					<p tw="font-medium text-3xl text-white">
 						{protocol}//{host}
 					</p>
-					<div
-						style={{
-							marginTop: '40px',
-							fontSize: '96px',
-							fontWeight: '900',
-							lineHeight: '6rem',
-							padding: '0 0 100px 0',
-							letterSpacing: '-0.025em',
-							color: '#FFFFFF',
-							lineClamp: 4,
-						}}
-					>
+					<h1 tw="text-8xl font-geist-sans text-white leading-[7rem]">
 						{postTitle}
-					</div>
+					</h1>
 				</div>
-				<div
-					style={{
-						width: '100%',
-						display: 'flex',
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'flex-end',
-						gap: '20px',
-					}}
-				>
+				<div tw="w-full flex flex-row items-center justify-end">
 					<img
 						src={authorImage}
 						alt="Cuzeac Florin"
-						style={{
-							width: '80px',
-							height: '80px',
-							objectFit: 'cover',
-							objectPosition: 'top',
-							borderRadius: '50%',
-						}}
+						tw="w-16 h-16 rounded-full object-cover object-top rounded-full mr-3"
 					/>
-					<div
-						style={{
-							display: 'flex',
-							flexDirection: 'column',
-							alignItems: 'flex-start',
-							justifyContent: 'center',
-						}}
-					>
-						<div
-							className="font-bold text-xl"
-							style={{
-								fontSize: '28px',
-								fontWeight: '900',
-								letterSpacing: '-0.025em',
-								color: '#FFFFFF',
-							}}
-						>
-							Cuzeac Florin
-						</div>
-						<div
-							style={{
-								fontSize: '16px',
-								fontWeight: '400',
-								letterSpacing: '-0.025em',
-								color: '#FFFFFF',
-							}}
-						>
-							Développeur Web
-						</div>
+					<div tw="flex flex-col items-start justify-center">
+						<h2 tw="text-2xl font-geist-sans text-white font-bold m-0">
+							{name}
+						</h2>
+						<p tw="m-0 text-white text-base">Développeur Web</p>
 					</div>
 				</div>
 			</div>
