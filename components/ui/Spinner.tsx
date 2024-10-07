@@ -26,7 +26,12 @@ interface Props
 	extends React.ComponentProps<'div'>,
 		VariantProps<typeof loadingVariants> {}
 
-export const Spinner = ({ className, variant, size, ...props }: Props) => (
+export const Spinner = ({
+	className,
+	variant,
+	size,
+	...props
+}: Props): React.JSX.Element => (
 	<div
 		className={cn('flex items-center justify-center gap-1', className)}
 		{...props}

@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils';
 import { Slot, type SlotProps } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
-import React from 'react';
+import type React from 'react';
+import { forwardRef } from 'react';
 
 const buttonVariants = cva(
 	'inline-flex cursor-pointer items-center justify-center rounded-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-0 disabled:pointer-events-none disabled:opacity-50',
@@ -40,11 +41,11 @@ export interface ButtonProps
 	asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	(
 		{ className, variant, size, asChild = false, ...props }: ButtonProps,
 		ref,
-	) => {
+	): React.JSX.Element => {
 		const Comp:
 			| React.ForwardRefExoticComponent<
 					SlotProps & React.RefAttributes<HTMLElement>

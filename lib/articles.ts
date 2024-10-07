@@ -44,7 +44,7 @@ const importArticle = async (
 	};
 };
 
-export const getAllArticles = async () => {
+export const getAllArticles = async (): Promise<ArticleWithSlug[]> => {
 	const articleFilenames: string[] = await glob('*/page.mdx', {
 		cwd: './app/articles',
 	});
@@ -53,5 +53,5 @@ export const getAllArticles = async () => {
 		articleFilenames.map(importArticle),
 	);
 
-	return articles.sort((a, z) => +new Date(z.date) - +new Date(a.date));
+	return articles.sort((a, z): number => +new Date(z.date) - +new Date(a.date));
 };

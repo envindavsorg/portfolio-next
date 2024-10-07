@@ -1,16 +1,27 @@
 import { useEffect, useState } from 'react';
 
-const useMediaQuery = () => {
-	const [device, setDevice] = useState<'mobile' | 'tablet' | 'desktop' | null>(
-		null,
-	);
-	const [dimensions, setDimensions] = useState<{
-		width: number;
-		height: number;
-	} | null>(null);
+interface MediaQuery {
+	device: 'mobile' | 'tablet' | 'desktop' | null;
+	width: number | undefined;
+	height: number | undefined;
+	isMobile: boolean;
+	isTablet: boolean;
+	isDesktop: boolean;
+}
 
-	useEffect(() => {
-		const checkDevice = () => {
+type Device = 'mobile' | 'tablet' | 'desktop';
+
+type WindowSize = {
+	width: number;
+	height: number;
+};
+
+const useMediaQuery = (): MediaQuery => {
+	const [device, setDevice] = useState<Device | null>(null);
+	const [dimensions, setDimensions] = useState<WindowSize | null>(null);
+
+	useEffect((): (() => void) => {
+		const checkDevice = (): void => {
 			if (window.matchMedia('(max-width: 768px)').matches) {
 				setDevice('mobile');
 			} else if (
@@ -20,14 +31,18 @@ const useMediaQuery = () => {
 			} else {
 				setDevice('desktop');
 			}
-			setDimensions({ width: window.innerWidth, height: window.innerHeight });
+
+			setDimensions({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
 		};
 
 		checkDevice();
 
 		window.addEventListener('resize', checkDevice);
 
-		return () => {
+		return (): void => {
 			window.removeEventListener('resize', checkDevice);
 		};
 	}, []);

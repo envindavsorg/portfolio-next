@@ -4,7 +4,7 @@ import { Step, StepperProvider, useStepper } from '@/components/ui/Step';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
 import type { StepItem, StepProps, StepperProps } from '@/types/stepper';
-import React, { Fragment } from 'react';
+import React, { forwardRef, Fragment } from 'react';
 
 interface VariablesSizes {
 	md: string;
@@ -18,8 +18,8 @@ const VARIABLE_SIZES: VariablesSizes = {
 	lg: '44px',
 };
 
-const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
-	(props, ref: React.Ref<HTMLDivElement>) => {
+const Stepper = forwardRef<HTMLDivElement, StepperProps>(
+	(props, ref: React.Ref<HTMLDivElement>): React.JSX.Element => {
 		const {
 			className,
 			children,
@@ -123,7 +123,9 @@ interface VerticalContentProps {
 	children: React.ReactNode;
 }
 
-const VerticalContent = ({ children }: VerticalContentProps) => {
+const VerticalContent = ({
+	children,
+}: VerticalContentProps): React.JSX.Element => {
 	const { activeStep } = useStepper();
 
 	const childArr = React.Children.toArray(children);
@@ -159,7 +161,9 @@ interface HorizontalContentProps {
 	children: React.ReactNode;
 }
 
-const HorizontalContent = ({ children }: HorizontalContentProps) => {
+const HorizontalContent = ({
+	children,
+}: HorizontalContentProps): React.JSX.Element | null => {
 	const { activeStep } = useStepper();
 	const childArr = React.Children.toArray(children);
 
@@ -169,16 +173,19 @@ const HorizontalContent = ({ children }: HorizontalContentProps) => {
 
 	return (
 		<>
-			{React.Children.map(childArr[activeStep], (node) => {
-				if (!React.isValidElement(node)) {
-					return null;
-				}
+			{React.Children.map(
+				childArr[activeStep],
+				(node): React.JSX.Element | any => {
+					if (!React.isValidElement(node)) {
+						return null;
+					}
 
-				return React.Children.map(
-					node.props.children,
-					(childNode) => childNode,
-				);
-			})}
+					return React.Children.map(
+						node.props.children,
+						(childNode): React.JSX.Element | any => childNode,
+					);
+				},
+			)}
 		</>
 	);
 };

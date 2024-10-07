@@ -34,7 +34,7 @@ export const Card = ({
 	className,
 	patternColor = 'fill-theme',
 	...props
-}: CardProps) => {
+}: CardProps): React.JSX.Element => {
 	const MotionComponent = tag === 'link' ? motion.a : motion.div;
 	const motionProps =
 		tag === 'link'

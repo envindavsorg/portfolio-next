@@ -22,7 +22,7 @@ const ContactEmailTemplate = ({
 	surname,
 	mail,
 	content,
-}: Readonly<ContactEmailTemplateProps>) => (
+}: Readonly<ContactEmailTemplateProps>): React.JSX.Element => (
 	<Html>
 		<Head />
 		<Preview>

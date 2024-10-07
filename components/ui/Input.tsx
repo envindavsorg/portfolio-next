@@ -6,7 +6,7 @@ export interface InputProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-	({ className, type, ...props }, ref) => {
+	({ className, type, ...props }: InputProps, ref): React.JSX.Element => {
 		return (
 			<input
 				type={type}

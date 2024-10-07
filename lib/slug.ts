@@ -23,7 +23,7 @@ const accents: Accents = {
 export const slugify = (title: string): string =>
 	title
 		.split('')
-		.map((char) => accents[char] || char)
+		.map((char): string => accents[char] || char)
 		.join('')
 		.toLowerCase()
 		.replace(/[^a-z0-9]+/g, '-')

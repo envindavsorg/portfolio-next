@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { type VariantProps, cva } from 'class-variance-authority';
 import type React from 'react';
+import type { HTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 
 const alertVariants = cva(
@@ -22,38 +23,58 @@ const alertVariants = cva(
 const Alert = forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
->(({ className, variant, ...props }, ref) => (
-	<div
-		ref={ref}
-		role="alert"
-		className={cn(alertVariants({ variant }), className)}
-		{...props}
-	/>
-));
+>(
+	(
+		{
+			className,
+			variant,
+			...props
+		}: React.HTMLAttributes<HTMLDivElement> &
+			VariantProps<typeof alertVariants>,
+		ref,
+	): React.JSX.Element => (
+		<div
+			ref={ref}
+			role="alert"
+			className={cn(alertVariants({ variant }), className)}
+			{...props}
+		/>
+	),
+);
 Alert.displayName = 'Alert';
 
 const AlertTitle = forwardRef<
 	HTMLParagraphElement,
 	React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-	<h5
-		ref={ref}
-		className={cn('mb-1 font-medium leading-none tracking-tight', className)}
-		{...props}
-	/>
-));
+>(
+	(
+		{ className, ...props }: HTMLAttributes<HTMLHeadingElement>,
+		ref,
+	): React.JSX.Element => (
+		<h5
+			ref={ref}
+			className={cn('mb-1 font-medium leading-none tracking-tight', className)}
+			{...props}
+		/>
+	),
+);
 AlertTitle.displayName = 'AlertTitle';
 
 const AlertDescription = forwardRef<
 	HTMLParagraphElement,
 	React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-	<div
-		ref={ref}
-		className={cn('text-sm [&_p]:my-0 [&_p]:leading-relaxed', className)}
-		{...props}
-	/>
-));
+>(
+	(
+		{ className, ...props }: HTMLAttributes<HTMLParagraphElement>,
+		ref,
+	): React.JSX.Element => (
+		<div
+			ref={ref}
+			className={cn('text-sm [&_p]:my-0 [&_p]:leading-relaxed', className)}
+			{...props}
+		/>
+	),
+);
 AlertDescription.displayName = 'AlertDescription';
 
 export { Alert, AlertTitle, AlertDescription };

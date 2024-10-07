@@ -10,9 +10,17 @@ const Separator = forwardRef<
 	React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
 >(
 	(
-		{ className, orientation = 'horizontal', decorative = true, ...props },
+		{
+			className,
+			orientation = 'horizontal',
+			decorative = true,
+			...props
+		}: React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> & {
+			decorative?: boolean;
+			orientation?: 'horizontal' | 'vertical';
+		},
 		ref,
-	) => (
+	): React.JSX.Element => (
 		<SeparatorPrimitive.Root
 			ref={ref}
 			decorative={decorative}

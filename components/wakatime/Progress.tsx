@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { type Variants, motion } from 'framer-motion';
+import type React from 'react';
 
 interface ProgressProps {
 	data: {
@@ -9,7 +10,10 @@ interface ProgressProps {
 	className?: string;
 }
 
-export const Progress = ({ data, className }: ProgressProps) => {
+export const Progress = ({
+	data,
+	className,
+}: ProgressProps): React.JSX.Element => {
 	const { name, percent = 0 } = data;
 
 	const progressVariants: Variants = {

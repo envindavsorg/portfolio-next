@@ -6,7 +6,7 @@ export const cn = (...inputs: ClassValue[]): string => {
 	return twMerge(clsx(inputs));
 };
 
-export const getRouterLastPathSegment = (pathname: string) => {
+export const getRouterLastPathSegment = (pathname: string): string => {
 	const segment: string[] = pathname.split('/').filter(Boolean);
 
 	if (segment.length > 1) {
@@ -20,10 +20,15 @@ export const getRouterLastPathSegment = (pathname: string) => {
 	return '/';
 };
 
+interface GetRelativeCoordinates {
+	x: number;
+	y: number;
+}
+
 export const getRelativeCoordinates = (
 	event: React.MouseEvent<HTMLUListElement>,
 	referenceElement: any,
-) => {
+): GetRelativeCoordinates => {
 	const position = {
 		x: event.pageX,
 		y: event.pageY,

@@ -3,7 +3,7 @@
 import { Button, type ButtonProps } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { Check, Clipboard } from '@phosphor-icons/react';
-import React from 'react';
+import type React from 'react';
 import { useEffect, useState } from 'react';
 
 interface CopyButtonProps extends ButtonProps {
@@ -21,11 +21,11 @@ export const CopyButton = ({
 	src,
 	variant = 'outline',
 	...props
-}: CopyButtonProps) => {
+}: CopyButtonProps): React.JSX.Element => {
 	const [hasCopied, setHasCopied] = useState(false);
 
-	useEffect(() => {
-		setTimeout(() => {
+	useEffect((): void => {
+		setTimeout((): void => {
 			setHasCopied(false);
 		}, 2000);
 	});
@@ -38,7 +38,7 @@ export const CopyButton = ({
 				'size-8 text-foreground hover:bg-muted hover:text-foreground',
 				className,
 			)}
-			onClick={() => {
+			onClick={(): void => {
 				copyToClipboardWithMeta(value);
 				setHasCopied(true);
 			}}

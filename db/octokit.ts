@@ -6,8 +6,8 @@ export const octokit = new Octokit({
 	userAgent: 'Mon portfolio - Cuzeac Florin',
 	timeZone: 'UTC',
 	log: {
-		debug: () => {},
-		info: () => {},
+		debug: (): void => {},
+		info: (): void => {},
 		warn: console.warn,
 		error: console.error,
 	},

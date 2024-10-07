@@ -10,7 +10,14 @@ import type {
 import { Spinner, X } from '@phosphor-icons/react/dist/ssr';
 import { Check as CheckIcon } from '@phosphor-icons/react/dist/ssr/Check';
 import { cva } from 'class-variance-authority';
-import React, { forwardRef, useMemo } from 'react';
+import React, {
+	forwardRef,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 
 interface StepInternalConfig {
 	index: number;
@@ -19,8 +26,8 @@ interface StepInternalConfig {
 	isLastStep?: boolean;
 }
 
-export const Step = React.forwardRef<HTMLLIElement, StepProps>(
-	(props, ref: React.Ref<any>) => {
+export const Step = forwardRef<HTMLLIElement, StepProps>(
+	(props, ref: React.Ref<any>): React.JSX.Element => {
 		const {
 			children,
 			icon,
@@ -60,7 +67,7 @@ export const Step = React.forwardRef<HTMLLIElement, StepProps>(
 			onClickStep,
 		};
 
-		const renderStep = () => {
+		const renderStep = (): React.JSX.Element => {
 			switch (isVertical) {
 				case true:
 					return (
@@ -78,9 +85,9 @@ export const Step = React.forwardRef<HTMLLIElement, StepProps>(
 );
 
 const usePrevious = <T,>(value: T): T | undefined => {
-	const ref = React.useRef<T>();
+	const ref = useRef<T>();
 
-	React.useEffect(() => {
+	useEffect((): void => {
 		ref.current = value;
 	}, [value]);
 
@@ -88,7 +95,7 @@ const usePrevious = <T,>(value: T): T | undefined => {
 };
 
 export const useStepper = () => {
-	const context = React.useContext(StepperContext);
+	const context = useContext(StepperContext);
 
 	if (context === undefined) {
 		throw new Error('useStepper must be used within a StepperProvider');
@@ -145,8 +152,8 @@ const verticalStepVariants = cva(
 	},
 );
 
-export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
-	(props, ref) => {
+export const VerticalStep = forwardRef<HTMLDivElement, VerticalStepProps>(
+	(props, ref): React.JSX.Element => {
 		const {
 			children,
 			index,
@@ -191,12 +198,12 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
 		const checkIcon = checkIconProp || checkIconContext;
 		const errorIcon = errorIconProp || errorIconContext;
 
-		const renderChildren = () => {
+		const renderChildren = (): React.ReactNode => {
 			if (!expandVerticalSteps) {
 				return (
 					<Collapsible open={isCurrentStep}>
 						<CollapsibleContent
-							ref={(node) => {
+							ref={(node): void => {
 								if (
 									scrollTracking &&
 									((index === 0 &&
@@ -236,7 +243,7 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
 				data-active={active}
 				data-clickable={clickable || !!onClickStep}
 				data-invalid={localIsError}
-				onClick={() =>
+				onClick={(): void =>
 					onClickStep?.(index || 0, setStep) ||
 					onClickStepGeneral?.(index || 0, setStep)
 				}
@@ -290,8 +297,8 @@ export const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
 	},
 );
 
-export const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
-	(props, ref) => {
+export const HorizontalStep = forwardRef<HTMLDivElement, StepSharedProps>(
+	(props, ref): React.JSX.Element => {
 		const {
 			isError,
 			isLoading,
@@ -417,7 +424,7 @@ export const StepLabel = ({
 	isCurrentStep,
 	opacity,
 	label,
-}: StepLabelProps) => {
+}: StepLabelProps): React.JSX.Element | null => {
 	const { variant, styles, size, orientation } = useStepper();
 	const shouldRender = !!label;
 
@@ -480,7 +487,7 @@ const iconVariants = cva('', {
 });
 
 export const StepIcon = forwardRef<HTMLDivElement, StepIconProps>(
-	(props, ref) => {
+	(props, ref): React.JSX.Element => {
 		const { size } = useStepper();
 
 		const {
@@ -507,7 +514,7 @@ export const StepIcon = forwardRef<HTMLDivElement, StepIconProps>(
 			[CustomCheckIcon],
 		);
 
-		return useMemo(() => {
+		return useMemo((): React.JSX.Element => {
 			if (isCompletedStep) {
 				if (isError && isKeepError) {
 					return (
@@ -592,7 +599,7 @@ export const StepButtonContainer = ({
 	isError,
 	isLoading: isLoadingProp,
 	onClickStep,
-}: StepButtonContainerProps) => {
+}: StepButtonContainerProps): React.JSX.Element | null => {
 	const {
 		clickable,
 		isLoading: isLoadingContext,
@@ -663,27 +670,27 @@ export const StepperContext = React.createContext<
 	steps: [],
 	activeStep: 0,
 	initialStep: 0,
-	nextStep: () => {},
-	prevStep: () => {},
-	resetSteps: () => {},
-	setStep: () => {},
+	nextStep: (): void => {},
+	prevStep: (): void => {},
+	resetSteps: (): void => {},
+	setStep: (): void => {},
 });
 
 export const StepperProvider = ({
 	value,
 	children,
-}: StepperContextProviderProps) => {
+}: StepperContextProviderProps): React.JSX.Element => {
 	const isError: boolean = value.state === 'error';
 	const isLoading: boolean = value.state === 'loading';
 
-	const [activeStep, setActiveStep] = React.useState(value.initialStep);
+	const [activeStep, setActiveStep] = useState(value.initialStep);
 
 	const nextStep = (): void => {
-		setActiveStep((prev) => prev + 1);
+		setActiveStep((prev): number => prev + 1);
 	};
 
 	const prevStep = (): void => {
-		setActiveStep((prev) => prev - 1);
+		setActiveStep((prev): number => prev - 1);
 	};
 
 	const resetSteps = (): void => {

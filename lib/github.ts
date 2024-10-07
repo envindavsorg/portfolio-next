@@ -53,17 +53,19 @@ export const totalCommitsThisYear = (data: GitHubResponse): number =>
 
 export const totalCommitsThisWeek = (data: GitHubResponse): number => {
 	const weeks = data.contributionsCollection.contributionCalendar.weeks;
+
 	return weeks[weeks.length - 1].contributionDays.reduce(
-		(sum, day) => sum + day.contributionCount,
+		(sum, day): number => sum + day.contributionCount,
 		0,
 	);
 };
 
 export const totalCommitsBestDay = (data: GitHubResponse): number => {
 	const weeks = data.contributionsCollection.contributionCalendar.weeks;
+
 	return Math.max(
-		...weeks.flatMap((week) =>
-			week.contributionDays.map((day) => day.contributionCount),
+		...weeks.flatMap((week): number[] =>
+			week.contributionDays.map((day): number => day.contributionCount),
 		),
 	);
 };
@@ -72,8 +74,8 @@ export const totalCommitsPerDay = (data: GitHubResponse): number => {
 	const weeks = data.contributionsCollection.contributionCalendar.weeks;
 	return Math.round(
 		totalCommitsThisYear(data) /
-			weeks.flatMap((week) =>
-				week.contributionDays.map((day) => day.contributionCount),
+			weeks.flatMap((week): number[] =>
+				week.contributionDays.map((day): number => day.contributionCount),
 			).length,
 	);
 };

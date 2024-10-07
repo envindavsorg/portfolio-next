@@ -23,17 +23,17 @@ interface Props {
 const sumTotalFromArray = <T extends { hours: number; minutes: number }>(
 	data: T[],
 	key: keyof T,
-) => {
+): number => {
 	return (
 		data.reduce(
-			(previousValue, currentValue) =>
+			(previousValue, currentValue): number =>
 				previousValue + (currentValue[key] as number),
 			0,
 		) ?? 0
 	);
 };
 
-export const Wakatime = ({ stats }: Props) => (
+export const Wakatime = ({ stats }: Props): React.JSX.Element => (
 	<>
 		<Motion className="flex flex-col" asChild variants={defaultVariants}>
 			<div className="grid grid-cols-4 gap-3">
@@ -120,7 +120,9 @@ interface CodingActiveListProps {
 	};
 }
 
-const CodingActiveList = ({ stats }: CodingActiveListProps) => {
+const CodingActiveList = ({
+	stats,
+}: CodingActiveListProps): React.JSX.Element | null => {
 	const getLanguagesTotalHours = sumTotalFromArray<ItemProps>(
 		stats?.languages || [],
 		'hours',
@@ -173,23 +175,30 @@ const CodingActiveList = ({ stats }: CodingActiveListProps) => {
 
 	return (
 		<div className="mt-6 flex flex-col gap-6">
-			{actives.map(({ title, icon, data }: ActiveProps, idx: number) => (
-				<div key={`${title}-${idx}`} className="flex w-full flex-col gap-y-2">
-					<div className="flex items-center gap-x-2">
-						{icon}
-						<p className="text-sm leading-snug">{title}</p>
+			{actives.map(
+				(
+					{ title, icon, data }: ActiveProps,
+					idx: number,
+				): React.JSX.Element => (
+					<div key={`${title}-${idx}`} className="flex w-full flex-col gap-y-2">
+						<div className="flex items-center gap-x-2">
+							{icon}
+							<p className="text-sm leading-snug">{title}</p>
+						</div>
+						<div className="flex flex-1 flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
+							<ul className="m-0 flex list-none flex-col gap-3 p-0">
+								{data?.map(
+									(subItem): React.JSX.Element => (
+										<li key={subItem?.name}>
+											<Progress data={subItem} className="bg-theme" />
+										</li>
+									),
+								)}
+							</ul>
+						</div>
 					</div>
-					<div className="flex flex-1 flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
-						<ul className="m-0 flex list-none flex-col gap-3 p-0">
-							{data?.map((subItem) => (
-								<li key={subItem?.name}>
-									<Progress data={subItem} className="bg-theme" />
-								</li>
-							))}
-						</ul>
-					</div>
-				</div>
-			))}
+				),
+			)}
 		</div>
 	);
 };
