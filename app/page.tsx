@@ -1,8 +1,10 @@
 import { CV } from '@/components/blocs/CV';
-import { Channels } from '@/components/blocs/Channels';
 import { FlipCard } from '@/components/blocs/FlipCard';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
-import { FrontFrameworkStars } from '@/components/blocs/Stars';
+import { Channels } from '@/components/blocs/channels/Channels';
+import { ChannelsSkeleton } from '@/components/blocs/channels/ChannelsSkeleton';
+import { FrontFrameworkStars } from '@/components/blocs/stars/Stars';
+import { StarsSkeleton } from '@/components/blocs/stars/StarsSkeleton';
 import { Articles } from '@/components/blog/Articles';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
@@ -25,7 +27,6 @@ import { Status } from '@/components/status/Status';
 import { AnimatedName } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
-import { Spinner } from '@/components/ui/Spinner';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
 import {
 	type LanguagesIcons,
@@ -286,11 +287,11 @@ const Home = async (): Promise<React.JSX.Element> => {
 					, qui est un framework incroyable de styling, puissant et modulaire.
 				</p>
 			</Motion>
-			<Suspense fallback={<Spinner className="h-52" />}>
-				<Motion className="mt-6" variants={variantsFour}>
+			<Motion className="mt-6" variants={variantsFour}>
+				<Suspense fallback={<StarsSkeleton />}>
 					<FrontFrameworkStars />
-				</Motion>
-			</Suspense>
+				</Suspense>
+			</Motion>
 
 			<Motion variants={variantsFour}>
 				<Separator className="my-14" />
@@ -331,11 +332,11 @@ const Home = async (): Promise<React.JSX.Element> => {
 					:)
 				</p>
 			</Motion>
-			<Suspense fallback={<Spinner className="h-52" />}>
-				<Motion className="mt-6" variants={variantsFive}>
+			<Motion className="mt-6" variants={variantsFive}>
+				<Suspense fallback={<ChannelsSkeleton />}>
 					<Channels />
-				</Motion>
-			</Suspense>
+				</Suspense>
+			</Motion>
 
 			<Motion variants={variantsFive}>
 				<Separator className="my-14" />

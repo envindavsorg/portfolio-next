@@ -40,7 +40,8 @@ import {
     BackFrameworkStars,
     DesignFrameworkStars,
     DatabaseStars,
-} from '../../components/blocs/Stars';
+} from '../../components/blocs/stars/Stars';
+import { StarsSkeleton } from '../../components/blocs/stars/StarsSkeleton';
 import { SealQuestion } from '@phosphor-icons/react/dist/ssr';
 
 export const metadata = {
@@ -102,7 +103,7 @@ export const metadata = {
     Les **principales technologies** que j'ai utilisées sur ce *projet* sont les suivantes :
 </Motion>
 <Motion className="mt-6" variants={variantsTwo}>
-    <Suspense fallback={<Spinner className="h-52" />}>
+    <Suspense fallback={<Spinner className="h-32" />}>
         <LanguagesUsedInProject />
     </Suspense>
 </Motion>
@@ -138,11 +139,11 @@ export const metadata = {
     côté serveur *(SSR)* et de la génération de sites statiques *(SSG)*,
     ce qui a considérablement amélioré les **performances** et le **SEO** de mes projets.
 </Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="my-8" variants={variantsFour}>
+<Motion className="my-8" variants={variantsFour}>
+    <Suspense fallback={<StarsSkeleton />}>
         <FrontFrameworkStars />
-    </Motion>
-</Suspense>
+    </Suspense>
+</Motion>
 <Motion variants={variantsFour} asChild>
     Quelques patterns super utiles et efficaces que j'utilise souvent avec **Next.js**, dans tous mes projets :
 </Motion>
@@ -281,11 +282,11 @@ export const metadata = {
     Ces frameworks me permettent de créer des API rapides et scalables,
     tout en offrant une grande liberté dans la structuration du code et l'intégration de middlewares.
 </Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="my-8" variants={variantsFive}>
+<Motion className="my-8" variants={variantsFive}>
+    <Suspense fallback={<StarsSkeleton />}>
         <BackFrameworkStars />
-    </Motion>
-</Suspense>
+    </Suspense>
+</Motion>
 <Motion variants={variantsFive} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
@@ -367,11 +368,11 @@ export const metadata = {
     des **boutons** et des **champs de saisie**, mais aussi des **icônes**, des **graphiques**,
     et même des **thèmes personnalisés**.
 </Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="my-8" variants={variantsSix}>
+<Motion className="my-8" variants={variantsFive}>
+    <Suspense fallback={<StarsSkeleton />}>
         <DesignFrameworkStars />
-    </Motion>
-</Suspense>
+    </Suspense>
+</Motion>
 <Motion variants={variantsSix} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
@@ -429,11 +430,11 @@ export const metadata = {
     complexes** et une **intégrité des données** stricte. Ces deux bases de données me permettent
     de choisir la **solution la plus adaptée** en fonction des besoins spécifiques de chaque projet.
 </Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="my-8" variants={variantsSeven}>
+<Motion className="my-8" variants={variantsFive}>
+    <Suspense fallback={<StarsSkeleton />}>
         <DatabaseStars />
-    </Motion>
-</Suspense>
+    </Suspense>
+</Motion>
 
 <Motion variants={variantsSeven}>
     <Separator className="my-14" />
