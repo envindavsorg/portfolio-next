@@ -172,19 +172,15 @@ const CodingActiveList = ({ stats }: CodingActiveListProps) => {
 	}
 
 	return (
-		<div className="mt-6 flex flex-col gap-3">
-			{actives.map(({ title, icon, data }: ActiveProps) => (
-				<div
-					key={title}
-					className="flex flex-1 flex-col gap-2 rounded-md border border-neutral-200 bg-white px-3 py-4 dark:border-neutral-700 dark:bg-black"
-				>
+		<div className="mt-6 flex flex-col gap-6">
+			{actives.map(({ title, icon, data }: ActiveProps, idx: number) => (
+				<div key={`${title}-${idx}`} className="flex w-full flex-col gap-y-2">
 					<div className="flex items-center gap-x-2">
 						{icon}
-						<p className="font-bold text-sm leading-snug">{title}</p>
+						<p className="text-sm leading-snug">{title}</p>
 					</div>
-
-					<div className="size-full rounded-lg bg-background">
-						<ul className="flex list-none flex-col gap-2 p-2 pl-0">
+					<div className="flex flex-1 flex-col gap-2 rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
+						<ul className="m-0 flex list-none flex-col gap-3 p-0">
 							{data?.map((subItem) => (
 								<li key={subItem?.name}>
 									<Progress data={subItem} className="bg-theme" />

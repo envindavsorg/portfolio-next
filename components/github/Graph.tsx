@@ -142,7 +142,8 @@ export const Graph = memo(
 						))}
 					</div>
 				</div>
-				<div className="mt-2 flex w-full items-center justify-end">
+
+				<div className="mt-3 flex w-full items-center justify-end">
 					<div className="flex items-center gap-x-2 sm:gap-x-4">
 						<span className="font-medium text-sm">Moins</span>
 						<div className="flex gap-0.5">

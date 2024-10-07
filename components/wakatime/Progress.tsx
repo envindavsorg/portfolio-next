@@ -22,21 +22,23 @@ export const Progress = ({ data, className }: ProgressProps) => {
 
 	return (
 		<div className="flex items-center justify-between gap-3">
-			<div className="w-24">{name === 'Coding' ? 'Code' : name}</div>
-			<div className="relative flex h-3 flex-1 justify-center rounded-full bg-neutral-200 dark:bg-neutral-800">
+			<div className="w-24 text-sm leading-snug">
+				{name === 'Coding' ? 'Code' : name === 'Jade' ? 'Pug' : name}
+			</div>
+			<div className="relative flex h-2.5 flex-1 justify-center rounded-full bg-neutral-300 dark:bg-black">
 				<motion.span
 					initial="initial"
 					animate="animate"
 					variants={progressVariants}
 					className={cn(
 						className,
-						'absolute top-0 left-0 h-3 rounded-full px-3',
+						'absolute top-0 left-0 h-2.5 rounded-full px-3',
 					)}
 				>
 					&ensp;
 				</motion.span>
 			</div>
-			<div className="w-8 text-right text-neutral-600 dark:text-neutral-100">
+			<div className="w-8 text-right font-extrabold text-foreground">
 				{percent.toFixed(0)}%
 			</div>
 		</div>
