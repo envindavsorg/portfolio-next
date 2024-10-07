@@ -41,6 +41,7 @@ import {
 	LinkedinLogo,
 } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
+import { unstable_noStore as noStore } from 'next/cache';
 import type { StaticImageData } from 'next/image';
 import type React from 'react';
 import { Suspense } from 'react';
@@ -68,6 +69,8 @@ const WeFixIcon = (props: React.SVGProps<SVGSVGElement>): React.JSX.Element => (
 );
 
 const Subscribers = async (): Promise<React.JSX.Element> => {
+	noStore();
+
 	const { avatar, login, followers, following } = await githubUser(
 		server.GITHUB_USERNAME,
 	);
@@ -116,6 +119,8 @@ const Subscribers = async (): Promise<React.JSX.Element> => {
 };
 
 const Stars = async (): Promise<React.JSX.Element> => {
+	noStore();
+
 	const [next, react] = await Promise.all([
 		projectStars('vercel', 'next.js'),
 		projectStars('facebook', 'react'),
