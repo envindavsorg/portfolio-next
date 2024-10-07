@@ -1,10 +1,9 @@
+import { projectStars } from '@/actions/github/stars.action';
+import { githubUser } from '@/actions/github/user.action';
 import { CV } from '@/components/blocs/CV';
+import { Channel, ChannelSkeleton } from '@/components/blocs/Channel';
 import { FlipCard } from '@/components/blocs/FlipCard';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
-import { Channels } from '@/components/blocs/channels/Channels';
-import { ChannelsSkeleton } from '@/components/blocs/channels/ChannelsSkeleton';
-import { FrontFrameworkStars } from '@/components/blocs/stars/Stars';
-import { StarsSkeleton } from '@/components/blocs/stars/StarsSkeleton';
 import { Articles } from '@/components/blog/Articles';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
@@ -32,10 +31,17 @@ import {
 	type LanguagesIcons,
 	myLanguagesIcons,
 } from '@/content/LanguagesIcons';
-import { env } from '@/env/client';
+import { env as client } from '@/env/client';
+import { env as server } from '@/env/server';
+import avatarLinkedin from '@/images/avatar.webp';
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
+import {
+	ArrowUpRight,
+	GithubLogo,
+	LinkedinLogo,
+} from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
+import type { StaticImageData } from 'next/image';
 import type React from 'react';
 import { Suspense } from 'react';
 
@@ -61,6 +67,98 @@ const WeFixIcon = (props: React.SVGProps<SVGSVGElement>): React.JSX.Element => (
 	</svg>
 );
 
+const Subscribers = async (): Promise<React.JSX.Element> => {
+	const { avatar, login, followers, following } = await githubUser(
+		server.GITHUB_USERNAME,
+	);
+
+	interface Data {
+		avatar: string | StaticImageData;
+		login: string;
+		followers: number;
+		following: number;
+		icon: React.ReactNode;
+	}
+
+	const data: Data[] = [
+		{
+			avatar,
+			login: `@${login}`,
+			followers,
+			following,
+			icon: <GithubLogo />,
+		},
+		{
+			avatar: avatarLinkedin,
+			login: 'Florin Cuzeac',
+			followers: 2312,
+			following: 0,
+			icon: <LinkedinLogo />,
+		},
+	];
+
+	return (
+		<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+			{data.map(
+				({ avatar, login, followers, following, icon }: Data, idx: number) => (
+					<Channel
+						key={`${login}-${idx}`}
+						avatar={avatar}
+						name={login}
+						link={`https://github.com/${login}`}
+						subs={Math.round(followers + following)}
+						icon={icon}
+					/>
+				),
+			)}
+		</div>
+	);
+};
+
+const Stars = async (): Promise<React.JSX.Element> => {
+	const [next, react] = await Promise.all([
+		projectStars('vercel', 'next.js'),
+		projectStars('facebook', 'react'),
+	]);
+
+	interface Data {
+		avatar: string;
+		name: string;
+		link: string;
+		stars: number;
+	}
+
+	const data: Data[] = [
+		{
+			avatar: next.avatar,
+			name: next.name,
+			link: `https://github.com/${next.owner}/${next.name}`,
+			stars: next.stars,
+		},
+		{
+			avatar: react.avatar,
+			name: react.name,
+			link: `https://github.com/${react.owner}/${react.name}`,
+			stars: react.stars,
+		},
+	];
+
+	return (
+		<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+			{data.map(({ avatar, name, link, stars }: Data, idx: number) => (
+				<Channel
+					key={`${name}-${idx}`}
+					avatar={avatar}
+					name={`@${name}`}
+					link={link}
+					stars={Math.round(stars)}
+					icon={<GithubLogo />}
+				/>
+			))}
+		</div>
+	);
+};
+
 const Home = async (): Promise<React.JSX.Element> => {
 	const articles: Awaited<ArticleWithSlug>[] = await getAllArticles();
 
@@ -77,7 +175,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 						<p className="leading-8">
 							Bonjour, je m'appelle{' '}
 							<span className="font-bold text-theme">
-								{env.NEXT_PUBLIC_SURNAME}
+								{client.NEXT_PUBLIC_SURNAME}
 							</span>
 							, j'ai <span className="font-bold">{age} ans</span> et j'ai
 							commencé à travailler sur le web en{' '}
@@ -288,8 +386,16 @@ const Home = async (): Promise<React.JSX.Element> => {
 				</p>
 			</Motion>
 			<Motion className="mt-6" variants={variantsFour}>
-				<Suspense fallback={<StarsSkeleton />}>
-					<FrontFrameworkStars />
+				<Suspense
+					fallback={
+						<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+							{Array.from({ length: 2 }).map((_, idx: number) => (
+								<ChannelSkeleton key={`${idx}-channel-skeleton`} />
+							))}
+						</div>
+					}
+				>
+					<Stars />
 				</Suspense>
 			</Motion>
 
@@ -329,12 +435,20 @@ const Home = async (): Promise<React.JSX.Element> => {
 					>
 						me laisser un message
 					</Link>{' '}
-					:)
+					😃
 				</p>
 			</Motion>
 			<Motion className="mt-6" variants={variantsFive}>
-				<Suspense fallback={<ChannelsSkeleton />}>
-					<Channels />
+				<Suspense
+					fallback={
+						<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+							{Array.from({ length: 2 }).map((_, idx: number) => (
+								<ChannelSkeleton key={`${idx}-channel-skeleton`} />
+							))}
+						</div>
+					}
+				>
+					<Subscribers />
 				</Suspense>
 			</Motion>
 
@@ -357,8 +471,10 @@ const Home = async (): Promise<React.JSX.Element> => {
 						/>
 					</Link>
 					<p>
-						J'écris occasionnellement des articles sur des sujets variés, comme
-						le <span className="font-bold">développement web</span>, le{' '}
+						J'écris occasionnellement des{' '}
+						<span className="font-bold text-theme">articles</span> sur des
+						sujets variés, comme le{' '}
+						<span className="font-bold">développement web</span>, le{' '}
 						<span className="font-bold">design</span>, la{' '}
 						<span className="font-bold">programmation</span>, le{' '}
 						<span className="font-bold">marketing</span>, etc.

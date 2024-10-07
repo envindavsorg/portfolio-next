@@ -21,6 +21,9 @@ import React from 'react';
 import { Suspense } from 'react';
 import { Spinner } from '../../components/ui/Spinner';
 import { Motion } from '../../components/motion/Motion';
+import { Channel, ChannelSkeleton } from '../../components/blocs/Channel';
+import { projectStars } from '../../actions/github/stars.action';
+import { GithubLogo } from '@phosphor-icons/react/dist/ssr';
 import {
     variantsFive,
     variantsFour,
@@ -34,17 +37,49 @@ import {
 import { MostUsedLanguages } from '../../components/stack/MostUsedLanguages';
 import { LanguagesUsedInProject } from '../../components/stack/LanguagesUsedInProject';
 import { HowToScroll } from '../../components/blocs/HowToScroll';
-import {
-    FrontFrameworkStars,
-    DesignFrameworkStars,
-} from '../../components/blocs/stars/Stars';
-import { StarsSkeleton } from '../../components/blocs/stars/StarsSkeleton';
 
 export const metadata = {
     title: "Technologies que j'utilise",
     alternates: {
         canonical: '/stack',
     },
+};
+
+export const Stars = async () => {
+    const [next, react] = await Promise.all([
+        projectStars('vercel', 'next.js'),
+        projectStars('facebook', 'react'),
+    ]);
+
+	const data = [
+		{
+			avatar: next.avatar,
+			name: next.name,
+			link: `https://github.com/${next.owner}/${next.name}`,
+			stars: next.stars,
+		},
+		{
+			avatar: react.avatar,
+			name: react.name,
+			link: `https://github.com/${react.owner}/${react.name}`,
+			stars: react.stars,
+		},
+	];
+
+	return (
+		<div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+			{data.map(({ avatar, name, link, stars }, idx) => (
+				<Channel
+					key={`${name}-${idx}`}
+					avatar={avatar}
+					name={`@${name}`}
+					link={link}
+					stars={Math.round(stars)}
+					icon={<GithubLogo />}
+				/>
+			))}
+		</div>
+	);
 };
 
 # Technologies que j'utilise
@@ -109,9 +144,9 @@ export const metadata = {
 </Motion>
 
 <Motion variants={variantsThree} asChild>
-    Les langages que j'ai le plus utilisé cette semaine :
+    Les *langages* que j'ai le plus **utilisé** cette semaine, sont les suivants (en pourcentage d'utilisation) :
 </Motion>
-<Motion className="mt-4 pb-[52px]" variants={variantsThree}>
+<Motion className="mt-6 pb-[52px]" variants={variantsThree}>
     <Suspense fallback={<Spinner className="h-52" />}>
         <MostUsedLanguages />
     </Suspense>
@@ -136,8 +171,16 @@ export const metadata = {
     ce qui a considérablement amélioré les **performances** et le **SEO** de mes projets.
 </Motion>
 <Motion className="my-8" variants={variantsFour}>
-    <Suspense fallback={<StarsSkeleton />}>
-        <FrontFrameworkStars />
+    <Suspense
+        fallback={
+            <div className="flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                    <ChannelSkeleton key={`${idx}-channel-skeleton`} />
+                ))}
+            </div>
+        }
+    >
+        <Stars />
     </Suspense>
 </Motion>
 <Motion variants={variantsFour} asChild>
@@ -278,7 +321,7 @@ export const metadata = {
     Ces frameworks me permettent de créer des API rapides et scalables,
     tout en offrant une grande liberté dans la structuration du code et l'intégration de middlewares.
 </Motion>
-<Motion className="mt-8" variants={variantsFive} asChild>
+<Motion className="mt-3" variants={variantsFive} asChild>
     <Accordion type="single" collapsible>
         <AccordionItem value="express">
             <AccordionTrigger className="text-neutral-600 dark:text-neutral-400">
@@ -359,46 +402,32 @@ export const metadata = {
     des **boutons** et des **champs de saisie**, mais aussi des **icônes**, des **graphiques**,
     et même des **thèmes personnalisés**.
 </Motion>
-<Motion className="my-8" variants={variantsFive}>
-    <Suspense fallback={<StarsSkeleton />}>
-        <DesignFrameworkStars />
-    </Suspense>
+<Motion className="!text-lg sm:!text-xl mt-6" variants={variantsSix} asChild>
+    ### Pourquoi utiliser <span className="text-theme font-extrabold">Tailwind CSS</span> ?
+</Motion>
+<Motion className="mt-3" variants={variantsSix} asChild>
+    **Tailwind CSS** est un excellent outil pour accélérer la création de sites web
+    grâce à ses classes prêtes à l’emploi, permettant d’éviter d’écrire du CSS
+    personnalisé.
+</Motion>
+<Motion className="mt-3" variants={variantsSix} asChild>
+    On applique directement des classes aux éléments *HTML*, ce qui
+    simplifie le design tout en assurant un *style cohérent* et un *code plus lisible*.
+    Sa grande flexibilité permet de personnaliser facilement les styles via un
+    fichier de configuration, d’ajuster les points de rupture pour le responsive et
+    d’optimiser les performances en supprimant les classes inutilisées.
+</Motion>
+<Motion className="mt-3" variants={variantsSix} asChild>
+    De plus, avec une large communauté et des outils comme **Tailwind UI**, il est
+    facile de profiter de ressources supplémentaires, ce qui fait de Tailwind un
+    choix populaire pour des interfaces modernes et efficaces.
 </Motion>
 <Motion variants={variantsSix} asChild>
-    <Accordion type="single" collapsible>
-        <AccordionItem value="tailwind">
-            <AccordionTrigger>
-                <div className="flex items-center gap-x-2">
-                    <TailwindCSSIcon className="size-5 shrink-0" />
-                    <span className="text-neutral-600 dark:text-neutral-400">
-                        Pourquoi utiliser
-                        <span className="text-theme font-extrabold">Tailwind CSS</span> ?
-                    </span>
-                </div>
-            </AccordionTrigger>
-            <AccordionContent>
-                **Tailwind CSS** est un excellent outil pour accélérer la création de sites web
-                grâce à ses classes prêtes à l’emploi, permettant d’éviter d’écrire du CSS
-                personnalisé.
-                <br/>
-                On applique directement des classes aux éléments *HTML*, ce qui
-                simplifie le design tout en assurant un *style cohérent* et un *code plus lisible*.
-                Sa grande flexibilité permet de personnaliser facilement les styles via un
-                fichier de configuration, d’ajuster les points de rupture pour le responsive et
-                d’optimiser les performances en supprimant les classes inutilisées.
-                <br/>
-                De plus, avec une large communauté et des outils comme **Tailwind UI**, il est
-                facile de profiter de ressources supplémentaires, ce qui fait de Tailwind un
-                choix populaire pour des interfaces modernes et efficaces.
-
-                ```css
-                @tailwind base;
-                @tailwind components;
-                @tailwind utilities;
-                ```
-            </AccordionContent>
-        </AccordionItem>
-    </Accordion>
+    ```css
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    ```
 </Motion>
 
 <Motion variants={variantsSix}>
