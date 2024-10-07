@@ -55,7 +55,7 @@ export const FlipCard = ({
 						translateY: 0,
 					},
 				}}
-				className="relative flex h-56 w-56 shrink-0 flex-col hover:cursor-pointer min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56"
+				className="relative flex size-56 shrink-0 flex-col hover:cursor-pointer min-[530px]:aspect-square min-[530px]:h-full min-[530px]:w-56"
 				style={
 					{
 						transformStyle: 'preserve-3d',
