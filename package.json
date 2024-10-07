@@ -30,7 +30,6 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
-		"@linaria/react": "^6.2.1",
 		"@mdx-js/loader": "^3.0.1",
 		"@mdx-js/react": "^3.0.1",
 		"@next/mdx": "15.0.0-canary.143",
@@ -73,7 +72,7 @@
 		"reading-duration": "^1.1.2",
 		"resend": "^4.0.0",
 		"sonner": "^1.5.0",
-		"sugar-high": "^0.7.0",
+		"sugar-high": "^0.7.1",
 		"tslog": "^4.9.3",
 		"usehooks-ts": "^3.1.0",
 		"zod": "^3.23.8"

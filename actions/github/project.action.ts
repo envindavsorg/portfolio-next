@@ -6,11 +6,13 @@ import { query } from '@/graphql/project';
 import { logger } from '@/lib/logger';
 import type { ProjectInfo, ProjectInfoResponse } from '@/types';
 
-const fetchProjectInfo = async (
-	login: string,
-	repo: string,
-): Promise<ProjectInfo> => {
+export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
 	const { graphql } = octokit;
+
+	if (!repository) {
+		logger.error('→ GitHub repository parameter is required !');
+		throw new Error('→ GitHub repository parameter is required ! ...');
+	}
 
 	try {
 		const {
@@ -23,9 +25,10 @@ const fetchProjectInfo = async (
 				languages: { totalSize, edges },
 			},
 		} = await graphql<ProjectInfoResponse>(query, {
-			owner: login,
-			repo,
+			owner: env.GITHUB_USERNAME,
+			repo: repository,
 		});
+
 		return {
 			commits: totalCount,
 			languages: edges.map(({ size, node: { name } }) => ({
@@ -34,16 +37,7 @@ const fetchProjectInfo = async (
 			})),
 		};
 	} catch (error) {
-		logger.error('Error fetching GitHub project data:', error);
-		throw new Error('Failed to fetch GitHub project data');
+		logger.error('→ there is an error fetching GitHub project data: ', error);
+		throw new Error('→ failed to fetch GitHub project data ...');
 	}
-};
-
-export const projectInfo = async (repo: string) => {
-	const login: string = env.GITHUB_USERNAME;
-	if (!login) {
-		throw new Error('GITHUB_USERNAME environment variable is not set');
-	}
-
-	return fetchProjectInfo(login, repo);
 };

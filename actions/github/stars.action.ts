@@ -5,17 +5,23 @@ import { query } from '@/graphql/stars';
 import { logger } from '@/lib/logger';
 import type { ProjectStars, ProjectStarsResponse } from '@/types';
 
-const fetchProjectStars = async (
+export const projectStars = async (
 	owner: string,
 	project: string,
 ): Promise<ProjectStars> => {
 	const { graphql } = octokit;
+
+	if (!owner || !project) {
+		logger.error('→ GitHub owner and project parameters are required !');
+		throw new Error('→ GitHub owner and project parameters are required ! ...');
+	}
 
 	try {
 		const { repository } = await graphql<ProjectStarsResponse>(query, {
 			owner,
 			project,
 		});
+
 		return {
 			stars: repository.stargazers.totalCount,
 			owner: repository.owner.login,
@@ -27,6 +33,3 @@ const fetchProjectStars = async (
 		throw new Error('Failed to fetch GitHub project stars');
 	}
 };
-
-export const projectStars = async (owner: string, project: string) =>
-	fetchProjectStars(owner, project);
