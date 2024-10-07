@@ -4,7 +4,35 @@ import { octokit } from '@/db/octokit';
 import { env } from '@/env/server';
 import { query } from '@/graphql/project';
 import { logger } from '@/lib/logger';
-import type { ProjectInfo, ProjectInfoResponse } from '@/types';
+
+interface ProjectInfo {
+	commits: number;
+	languages: {
+		name: string;
+		percentage: number;
+	}[];
+}
+
+interface ProjectInfoResponse {
+	repository: {
+		ref: {
+			target: {
+				history: {
+					totalCount: number;
+				};
+			};
+		};
+		languages: {
+			totalSize: number;
+			edges: {
+				size: number;
+				node: {
+					name: string;
+				};
+			}[];
+		};
+	};
+}
 
 export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
 	const { graphql } = octokit;

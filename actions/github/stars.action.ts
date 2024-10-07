@@ -3,7 +3,26 @@
 import { octokit } from '@/db/octokit';
 import { query } from '@/graphql/stars';
 import { logger } from '@/lib/logger';
-import type { ProjectStars, ProjectStarsResponse } from '@/types';
+
+interface ProjectStars {
+	stars: number;
+	owner: string;
+	name: string;
+	avatar: string;
+}
+
+interface ProjectStarsResponse {
+	repository: {
+		stargazers: {
+			totalCount: number;
+		};
+		owner: {
+			login: string;
+			avatarUrl: string;
+		};
+		name: string;
+	};
+}
 
 export const projectStars = async (
 	owner: string,

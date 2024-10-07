@@ -6,6 +6,7 @@ import {
     AccordionTrigger,
 } from '../../components/ui/Accordion';
 import { Separator } from '../../components/ui/Separator';
+import { unstable_noStore as noStore } from 'next/cache';
 import { ExpressIcon } from '../../components/icons/Express';
 import { FastifyIcon } from '../../components/icons/Fastify';
 import { MongoDBIcon } from '../../components/icons/MongoDB';
@@ -46,6 +47,8 @@ export const metadata = {
 };
 
 export const Stars = async () => {
+    noStore();
+
     const [next, react] = await Promise.all([
         projectStars('vercel', 'next.js'),
         projectStars('facebook', 'react'),
