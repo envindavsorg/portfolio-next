@@ -60,7 +60,6 @@
 		"fast-glob": "^3.3.2",
 		"framer-motion": "^11.11.1",
 		"jiti": "^1.21.6",
-		"mapbox-gl": "^3.7.0",
 		"next": "15.0.0-canary.143",
 		"next-themes": "^0.3.0",
 		"next-view-transitions": "^0.3.2",
@@ -68,14 +67,12 @@
 		"react": "19.0.0-rc-5dcb0097-20240918",
 		"react-dom": "19.0.0-rc-5dcb0097-20240918",
 		"react-hook-form": "^7.53.0",
-		"react-intersection-observer": "^9.13.1",
 		"react-spring": "^9.7.4",
 		"reading-duration": "^1.1.2",
 		"resend": "^4.0.0",
 		"sonner": "^1.5.0",
 		"sugar-high": "^0.7.1",
 		"tslog": "^4.9.3",
-		"usehooks-ts": "^3.1.0",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {

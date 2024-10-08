@@ -243,11 +243,6 @@ input[type="email"] {
 	}
 }
 
-/* map */
-.mapboxgl-control-container {
-	display: none;
-}
-
 @media (hover: hover) {
 	.animated-list:hover li {
 		opacity: 0.5;

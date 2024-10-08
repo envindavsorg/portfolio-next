@@ -6,7 +6,13 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import type React from 'react';
 
-export const Status = async (): Promise<React.JSX.Element> => {
+interface StatusProps {
+	className?: string;
+}
+
+export const Status = async ({
+	className,
+}: StatusProps): Promise<React.JSX.Element> => {
 	const { label, color, text, status } = await websiteStatus(
 		env.NEXT_PUBLIC_WEBSITE_PREFIX,
 	);
@@ -17,6 +23,7 @@ export const Status = async (): Promise<React.JSX.Element> => {
 			target="_blank"
 			rel="noreferrer"
 			passHref
+			className={className}
 		>
 			<CardTemplate
 				className="flex items-center justify-between p-3 sm:px-6"

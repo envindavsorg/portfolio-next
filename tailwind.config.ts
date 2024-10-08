@@ -90,109 +90,17 @@ const config = {
 			scale: {
 				flip: '-1',
 			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'collapsible-down': 'collapsible-down 0.2s ease-out',
-				'collapsible-up': 'collapsible-up 0.2s ease-out',
-				'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
-				'meteor-effect': 'meteor 5s linear infinite',
-				'spin-slower': 'spin 6s linear infinite',
-				'fade-in': 'fade-in 1s ease-out forwards',
-				'fade-in-right': 'fade-in-right 1s ease-out forwards',
-				'fade-in-left': 'fade-in-left 1s ease-out forwards',
-				'fade-in-up': 'fade-in-up 1s ease-out forwards',
-				'fade-in-down': 'fade-in-down 1s ease-out forwards',
-				shine: 'shine var(--duration) infinite linear',
-			},
 			keyframes: {
-				'accordion-down': {
-					from: {
-						height: '0',
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)',
-					},
-				},
-				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)',
-					},
-					to: {
-						height: '0',
-					},
-				},
-				'collapsible-down': {
-					from: {
-						height: '0',
-					},
-					to: {
-						height: 'var(--radix-collapsible-content-height)',
-					},
-				},
-				'collapsible-up': {
-					from: {
-						height: 'var(--radix-collapsible-content-height)',
-					},
-					to: {
-						height: '0',
-					},
-				},
-				'border-beam': {
-					'100%': {
-						'offset-distance': '100%',
-					},
-				},
-				meteor: {
-					'0%': {
-						transform: 'rotate(215deg) translateX(0)',
-						opacity: '1',
-					},
-					'70%': {
-						opacity: '1',
-					},
-					'100%': {
-						transform: 'rotate(215deg) translateX(-500px)',
-						opacity: '0',
-					},
-				},
 				'fade-in': {
-					'0%': {
-						opacity: '0',
-					},
-					'100%': {
-						opacity: '1',
-					},
-				},
-				'fade-in-left': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateX(var(--fade-in-left-tx, 1rem))',
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateX(0)',
-					},
-				},
-				'fade-in-right': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateX(var(--fade-in-right-tx, -1rem))',
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateX(0)',
-					},
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
 				},
 				'fade-in-up': {
 					'0%': {
 						opacity: '0',
 						transform: 'translateY(var(--fade-in-up-ty, 1rem))',
 					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateY(0)',
-					},
+					'100%': { opacity: '1', transform: 'translateY(0)' },
 				},
 				'fade-in-down': {
 					'0%': {
@@ -204,17 +112,40 @@ const config = {
 						transform: 'translateY(0)',
 					},
 				},
-				shine: {
-					'0%': {
-						'background-position': '0% 0%',
-					},
-					'50%': {
-						'background-position': '100% 100%',
-					},
-					to: {
-						'background-position': '0% 0%',
+				'accordion-down': {
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' },
+				},
+				'accordion-up': {
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' },
+				},
+				'collapsible-down': {
+					from: { height: '0' },
+					to: { height: 'var(--radix-collapsible-content-height)' },
+				},
+				'collapsible-up': {
+					from: { height: 'var(--radix-collapsible-content-height)' },
+					to: { height: '0' },
+				},
+				meteors: {
+					'0%': { transform: 'rotate(215deg) translateX(0)', opacity: '1' },
+					'70%': { opacity: '1' },
+					'100%': {
+						transform: 'rotate(215deg) translateX(-500px)',
+						opacity: '0',
 					},
 				},
+			},
+			animation: {
+				'fade-in': 'fade-in 1s ease-out forwards',
+				'fade-in-up': 'fade-in-up 1s ease-out forwards',
+				'fade-in-down': 'fade-in-down 1s ease-out forwards',
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'collapsible-down': 'collapsible-down 0.2s ease-out',
+				'collapsible-up': 'collapsible-up 0.2s ease-out',
+				meteors: 'meteors 5s linear infinite',
 			},
 			transitionTimingFunction: {
 				slow: 'cubic-bezier(.405, 0, .025, 1)',

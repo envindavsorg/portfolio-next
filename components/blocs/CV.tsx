@@ -22,7 +22,9 @@ export const CV = ({ className }: CVProps) => {
 				variant="outline"
 			>
 				<span className="font-bold">
-					Télécharger <span className="font-extrabold text-theme">mon CV</span>
+					<span className="hidden sm:inline-block">Télécharger</span>
+					<span className="sm:hidden">Voir</span>{' '}
+					<span className="font-extrabold text-theme">mon CV</span>
 				</span>
 				<Download className="size-4 shrink-0" weight="duotone" />
 			</Button>

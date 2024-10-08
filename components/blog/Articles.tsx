@@ -34,7 +34,7 @@ export const Articles = ({
 		<ul
 			ref={listRef}
 			onMouseMove={(event) => handleMouseMove(event)}
-			className="animated-list mt-6 flex list-none flex-col pl-0"
+			className="animated-list flex list-none flex-col pl-0"
 		>
 			{articles.length === 0 && (
 				<Alert>

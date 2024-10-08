@@ -33,10 +33,10 @@ export const Channel = ({
 					<Image
 						alt={name}
 						src={avatar}
-						height={64}
-						width={64}
-						sizes="33vw"
 						className="size-14 rounded-full border border-neutral-200 dark:border-neutral-700"
+						width={64}
+						height={64}
+						sizes="33vw"
 						priority
 					/>
 					{icon && (

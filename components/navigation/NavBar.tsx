@@ -115,6 +115,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 						)}
 					/>
 					<CommandMenu navItems={navItems} pathname={pathname} />
+
 					<div
 						className={cn(
 							'-right-1.5 absolute z-10 size-10 rounded-full',

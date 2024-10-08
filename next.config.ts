@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
 		// !! WARN !!
 		ignoreBuildErrors: false,
 	},
+	devIndicators: {
+		buildActivity: false,
+		appIsrStatus: false,
+	},
 	images: {
 		remotePatterns: [
 			{

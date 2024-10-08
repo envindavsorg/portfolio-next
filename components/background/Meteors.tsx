@@ -34,7 +34,7 @@ export const Meteors = ({ number, className }: MeteorsProps) => {
 					key={`meteor${idx}`}
 					className={cn(
 						'absolute top-1/2 left-1/2 z-10 size-0.5',
-						'animate-meteor-effect rounded-[9999px] bg-black dark:bg-white',
+						'animate-meteors rounded-[9999px] bg-black dark:bg-white',
 						'rotate-[215deg] shadow-[0_0_0_1px_#ffffff10]',
 						'before:h-px before:w-[50px] before:content-[""]',
 						'before:-translate-y-[50%] before:absolute before:top-1/2 before:transform',
