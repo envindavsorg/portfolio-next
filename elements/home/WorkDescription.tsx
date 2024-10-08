@@ -22,7 +22,7 @@ export const WorkDescription = (): React.JSX.Element => (
 				<Link
 					href="/work"
 					aria-label="Entreprises pour lesquelles j'ai travaillé"
-					className="font-bold text-theme underline"
+					className="!underline font-bold text-theme"
 				>
 					travaille
 				</Link>{' '}
@@ -31,7 +31,7 @@ export const WorkDescription = (): React.JSX.Element => (
 					href="https://wefix.net/"
 					aria-label="Voir le site WeFix !"
 					target="_blank"
-					className="font-extrabold text-theme underline"
+					className="!underline font-extrabold text-theme"
 				>
 					WeFix
 				</Link>{' '}
