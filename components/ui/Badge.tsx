@@ -3,12 +3,12 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import type React from 'react';
 
 const badgeVariants = cva(
-	'inline-block rounded-md border px-1 py-0.5 font-semibold text-sm transition-colors *:inline-flex focus:outline-none',
+	'inline-flex items-center rounded-md p-1 font-bold text-sm leading-4 no-underline',
 	{
 		variants: {
 			variant: {
 				default:
-					'border border-neutral-200 bg-orange-50 dark:border-neutral-700 dark:bg-neutral-800',
+					'border border-neutral-200 bg-orange-50 text-foreground dark:border-neutral-700 dark:bg-neutral-800',
 			},
 		},
 		defaultVariants: {

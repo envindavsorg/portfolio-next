@@ -31,18 +31,18 @@ export const TechStack = (): React.JSX.Element => (
 				, sur beaucoup de projets différents. J'ai commencé par le développement
 				web avec{' '}
 				<Badge>
-					<HTML5Icon className="me-1 size-4 shrink-0 pb-0.5" />
-					<span>HTML</span>
+					<HTML5Icon />
+					&nbsp;HTML
 				</Badge>
 				,{' '}
 				<Badge>
-					<CSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
-					<span>CSS</span>
+					<CSSIcon />
+					&nbsp;CSS
 				</Badge>{' '}
 				et{' '}
 				<Badge>
-					<JavaScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
-					<span>JavaScript</span>
+					<JavaScriptIcon />
+					&nbsp;JavaScript
 				</Badge>
 				, bien évidemment.
 			</p>

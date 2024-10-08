@@ -1,14 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import { FadeIn, FadeInStagger } from '../../components/animations/FadeIn';
 import { Minus } from '@phosphor-icons/react/dist/ssr';
 import { HowToScroll } from '../../components/blocs/HowToScroll';
-import { Motion } from '../../components/motion/Motion';
-import {
-    variantsOne,
-    variantsTwo,
-    variantsThree,
-    variantsFour
-} from '../../components/motion/variants';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Badge } from '../../components/ui/Badge';
 import { Separator } from '../../components/ui/Separator';
@@ -36,169 +30,135 @@ export const Strong = ({ children }) => (
 );
 
 # Expériences professionnelles
-
 <AnimatedNameLink />
 
-<Motion className="mt-10" variants={variantsOne} asChild>
-    Je travaille actuellement chez **WeFix**, une entreprise leader dans la **réparation** des
-    appareils électroniques, que j’ai rejoint en **2020** en tant que **développeur web**.
-    Depuis mon arrivée, j’ai participé à de nombreux projets visant à améliorer les plateformes
-    en ligne et les services numériques de l’entreprise.
-    Au fil de ma carrière, j’ai eu l’occasion de collaborer avec des
-    entreprises de tailles variées, des **startups** aux **grandes entreprises**.
-</Motion>
+<FadeInStagger className="mt-10" faster>
+    <FadeIn>
+        Je travaille actuellement chez *WeFix*, une entreprise leader dans la **réparation** des
+        appareils électroniques, que j’ai rejoint en **2020** en tant que **développeur web**.
+        Depuis mon arrivée, j’ai participé à de nombreux projets visant à améliorer les **plateformes
+        en ligne** et les **services numériques** de l’entreprise.
+    </FadeIn>
+    <FadeIn className="mt-3">
+        Au fil de ma *carrière*, j’ai eu l’occasion de collaborer avec des
+        entreprises de tailles variées, des **startups** aux **grandes entreprises**.
+    </FadeIn>
 
-<div className="mt-14">
-    <Link
-        href="https://wefix.net/"
-        aria-label="Site web de WeFix"
-        target="_blank"
-        rel="noreferrer noopener"
-    >
-        <Motion className="!text-2xl sm:!text-3xl underline" variants={variantsTwo} asChild>
+    <Separator className="my-10" />
+
+    {/* WeFix */}
+    <FadeIn>
+        <Link href="https://wefix.net/" aria-label="Site web de WeFix" target="_blank" rel="noreferrer noopener" className="*:!text-2xl sm:*:!text-3xl">
             ## WeFix by Fnac
-        </Motion>
-    </Link>
-    <Motion variants={variantsTwo} asChild>
+        </Link>
+    </FadeIn>
+    <FadeIn>
         <Small>Développeur web (jan. 2020 - aujourd'hui)</Small>
-    </Motion>
-    <Motion className="mt-3" variants={variantsTwo} asChild>
-        <div className="flex items-center gap-x-2">
-            <Badge>WeFix</Badge>
-            <Badge>Entreprise</Badge>
-            <Badge>CDI</Badge>
-        </div>
-    </Motion>
-    <Motion className="mt-6" variants={variantsTwo} asChild>
+    </FadeIn>
+    <FadeIn className="mt-3 flex items-center gap-x-2">
+        <Badge>WeFix</Badge>
+        <Badge>Entreprise</Badge>
+        <Badge>CDI</Badge>
+    </FadeIn>
+    <FadeIn className="mt-6">
         J'ai rejoint **WeFix (groupe Fnac & Darty)** en **2020**, en tant que développeur web.
         J'ai eu la chance de travailler sur des projets variés, de la refonte du site web
         à la mise en place de nouvelles fonctionnalités, en interne comme chez de nouveaux
         partenaires comme **Bouygues Telecom**, **Garantie Privée**, **Assurant**, **Fnac**, etc.
-    </Motion>
-    <Motion className="mt-6 text-sm" variants={variantsTwo} asChild>
-        <Strong>Technologies utilisées:</Strong> React, Next.js, Tailwind CSS,
-        TypeScript, Express, MongoDB, Fastify, JavaScript, Sass, CSS, Pug etc.
-    </Motion>
-    <Motion className="mt-3" variants={variantsTwo} asChild>
+    </FadeIn>
+    <FadeIn className="mt-6 text-sm">
+        <Strong>Technologies utilisées:</Strong> React, Next.js, Tailwind CSS, TypeScript, Express, MongoDB, Fastify, JavaScript, Sass, CSS, Pug etc.
+    </FadeIn>
+    <FadeIn className="mt-3" asChild>
         <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
             {wefix.map(({ icon, title }, index) => (
-                <div
-                    key={index}
-                    className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
-                >
+                <div key={index} className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
                     {icon}
                     <p className="sr-only">{title}</p>
                 </div>
             ))}
         </div>
-    </Motion>
-    <Motion className="mt-3" variants={variantsTwo} asChild>
+    </FadeIn>
+    <FadeIn className="mt-3">
         <HowToScroll>
-            Vous pouvez scroller de{' '}
-            <span className="font-medium text-theme">gauche</span> à{' '}
-            <span className="font-medium text-theme">droite</span> pour voir toutes
-            les technologies et langages que j'utilise et que j'ai consolidés dans cette entreprise.
+            Vous pouvez scroller de <span className="font-medium text-theme">gauche</span> à <span className="font-medium text-theme">droite</span> pour voir toutes les technologies et langages que j'utilise et que j'ai consolidés dans cette entreprise.
         </HowToScroll>
-    </Motion>
+    </FadeIn>
 
-    <Separator className="my-14" />
+    <Separator className="my-10" />
 
-    <Link
-        href="https://www.spinalcom.com/en/"
-        aria-label="Site web de SpinalCom"
-        target="_blank"
-        rel="noreferrer noopener"
-    >
-        <Motion className="!text-2xl sm:!text-3xl underline" variants={variantsThree} asChild>
+    {/* SpinalCom */}
+    <FadeIn>
+        <Link href="https://www.spinalcom.com/en/" aria-label="Site web de SpinalCom" target="_blank" rel="noreferrer noopener" className="*:!text-2xl sm:*:!text-3xl">
             ## SpinalCom
-        </Motion>
-    </Link>
-    <Motion variants={variantsThree} asChild>
+        </Link>
+    </FadeIn>
+    <FadeIn>
         <Small>Designer Web (juil. 2019 - jan. 2020)</Small>
-    </Motion>
-    <Motion className="mt-3" variants={variantsTwo} asChild>
-        <div className="flex items-center gap-x-2">
-            <Badge>SpinalCom</Badge>
-            <Badge>Startup</Badge>
-            <Badge>Alternance</Badge>
-        </div>
-    </Motion>
-    <Motion className="mt-6" variants={variantsThree} asChild>
+    </FadeIn>
+    <FadeIn className="mt-3 flex items-center gap-x-2">
+        <Badge>SpinalCom</Badge>
+        <Badge>Startup</Badge>
+        <Badge>Alternance</Badge>
+    </FadeIn>
+    <FadeIn className="mt-6">
         Durant ma **dernière année d'alternance**, j'ai rejoint **SpinalCom**,
         une startup spécialisée dans le **développement** de solutions pour le **bâtiment connecté**.
         J'ai eu l'opportunité de travailler sur un dashboard de gestion des équipements connectés,
         la **refonte du site web** et la **création de maquettes** pour de nouveaux projets.
-    </Motion>
-    <Motion className="mt-6 text-sm" variants={variantsThree} asChild>
-        <Strong>Technologies utilisées:</Strong> Vue, Vuetify, JavaScript, TypeScript, HTML,
-        CSS, Sass, Webpack, MongoDB, PostgreSQL etc.
-    </Motion>
-    <Motion className="mt-3" variants={variantsThree} asChild>
+    </FadeIn>
+    <FadeIn className="mt-6 text-sm">
+        <Strong>Technologies utilisées:</Strong> Vue, Vuetify, JavaScript, TypeScript, HTML, CSS, Sass, Webpack, MongoDB, PostgreSQL etc.
+    </FadeIn>
+    <FadeIn className="mt-3" asChild>
         <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-            <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-                {spinalCom.map(({ icon, title }, index) => (
-                    <div
-                        key={index}
-                        className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
-                    >
-                        {icon}
-                        <p className="sr-only">{title}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-    </Motion>
-    <Motion className="mt-3" variants={variantsThree} asChild>
-        <HowToScroll>
-            Vous pouvez scroller de{' '}
-            <span className="font-medium text-theme">gauche</span> à{' '}
-            <span className="font-medium text-theme">droite</span> pour voir toutes
-            les technologies et langages que j'utilise et que j'ai consolidés dans cette entreprise.
-        </HowToScroll>
-    </Motion>
-
-    <Separator className="my-14" />
-
-    <Link
-        href="https://www.economat-armees.com/"
-        aria-label="Site web de l'Économat"
-        target="_blank"
-        rel="noreferrer noopener"
-    >
-        <Motion className="!text-2xl sm:!text-3xl underline" variants={variantsFour} asChild>
-            ## Économat des Armées
-        </Motion>
-    </Link>
-    <Motion variants={variantsFour} asChild>
-        <Small>Développeur web (jan. 2018 - juil. 2019)</Small>
-    </Motion>
-    <Motion className="mt-3" variants={variantsFour} asChild>
-        <div className="flex items-center gap-x-2">
-            <Badge>Économat des Armées</Badge>
-            <Badge>Startup</Badge>
-            <Badge>Alternance</Badge>
-        </div>
-    </Motion>
-    <Motion className="mt-6" variants={variantsFour} asChild>
-        Durant ma **première année d'alternance**, j'ai rejoint **l'Économat des Armées**,
-        une entreprise partenaire du soutien des **forces armées**.
-        J'ai travaillé sur la **création d'un site** sur l'intranet du **Ministère des Armées**,
-        et d'un **annuaire interne** à l'entreprise.
-    </Motion>
-    <Motion className="mt-6 text-sm" variants={variantsFour} asChild>
-        <Strong>Technologies utilisées:</Strong> Python, Flask, React, HTML, CSS, JavaScript, Parcel, Bootstrap etc.
-    </Motion>
-    <Motion className="mt-3" variants={variantsFour} asChild>
-        <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-            {economat.map(({ icon, title }, index) => (
-                <div
-                    key={index}
-                    className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
-                >
+            {spinalCom.map(({ icon, title }, index) => (
+                <div key={index} className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
                     {icon}
                     <p className="sr-only">{title}</p>
                 </div>
             ))}
         </div>
-    </Motion>
-</div>
+    </FadeIn>
+    <FadeIn className="mt-3">
+        <HowToScroll>
+            Vous pouvez scroller de <span className="font-medium text-theme">gauche</span> à <span className="font-medium text-theme">droite</span> pour voir toutes les technologies et langages que j'utilise et que j'ai consolidés dans cette entreprise.
+        </HowToScroll>
+    </FadeIn>
+
+    <Separator className="my-10" />
+
+    {/* Économat des Armées */}
+    <FadeIn>
+        <Link href="https://www.economat-armees.com/" aria-label="Site web de l'Économat" target="_blank" rel="noreferrer noopener" className="*:!text-2xl sm:*:!text-3xl">
+            ## Économat des Armées
+        </Link>
+    </FadeIn>
+    <FadeIn>
+        <Small>Développeur web (jan. 2018 - juil. 2019)</Small>
+    </FadeIn>
+    <FadeIn className="mt-3 flex items-center gap-x-2">
+        <Badge>Économat des Armées</Badge>
+        <Badge>Startup</Badge>
+        <Badge>Alternance</Badge>
+    </FadeIn>
+    <FadeIn className="mt-6">
+        Durant ma **première année d'alternance**, j'ai rejoint **l'Économat des Armées**,
+        une entreprise partenaire du soutien des **forces armées**.
+        J'ai travaillé sur la **création d'un site** sur l'intranet du **Ministère des Armées**,
+        et d'un **annuaire interne** à l'entreprise.
+    </FadeIn>
+    <FadeIn className="mt-6 text-sm">
+        <Strong>Technologies utilisées:</Strong> Python, Flask, React, HTML, CSS, JavaScript, Parcel, Bootstrap etc.
+    </FadeIn>
+    <FadeIn className="mt-3" asChild>
+        <div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
+            {economat.map(({ icon, title }, index) => (
+                <div key={index} className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800">
+                    {icon}
+                    <p className="sr-only">{title}</p>
+                </div>
+            ))}
+        </div>
+    </FadeIn>
+</FadeInStagger>

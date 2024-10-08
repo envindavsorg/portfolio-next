@@ -89,8 +89,8 @@ export const ProjectStars = (): React.JSX.Element => (
 					target="_blank"
 				>
 					<Badge>
-						<ReactIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>React</span>
+						<ReactIcon />
+						&nbsp;React
 					</Badge>
 				</Link>{' '}
 				et{' '}
@@ -100,8 +100,8 @@ export const ProjectStars = (): React.JSX.Element => (
 					target="_blank"
 				>
 					<Badge>
-						<VueIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>Vue.js</span>
+						<VueIcon />
+						&nbsp;Vue.js
 					</Badge>
 				</Link>
 				, avec{' '}
@@ -111,8 +111,8 @@ export const ProjectStars = (): React.JSX.Element => (
 					target="_blank"
 				>
 					<Badge>
-						<TypeScriptIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>TypeScript</span>
+						<TypeScriptIcon />
+						&nbsp;TypeScript
 					</Badge>
 				</Link>{' '}
 				en parallèle, me permettant de développer des applications plus
@@ -125,8 +125,8 @@ export const ProjectStars = (): React.JSX.Element => (
 					target="_blank"
 				>
 					<Badge>
-						<TailwindCSSIcon className="me-1 size-4 shrink-0 pb-0.5" />
-						<span>Tailwind CSS</span>
+						<TailwindCSSIcon />
+						&nbsp;Tailwind CSS
 					</Badge>
 				</Link>
 				, qui est un framework incroyable de styling, puissant et modulaire.
