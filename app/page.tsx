@@ -20,9 +20,6 @@ const Home = (): React.JSX.Element => {
 			<FadeInStagger className="mt-10" faster>
 				<LandingBlock />
 				<Separator className="my-10" />
-			</FadeInStagger>
-
-			{/*<FadeInStagger className="mt-10" faster>
 				<WorkDescription />
 				<Separator className="my-10" />
 				<TechStack />
@@ -32,7 +29,7 @@ const Home = (): React.JSX.Element => {
 				<SocialSubs />
 				<Separator className="my-10" />
 				<BlogArticles />
-			</FadeInStagger>*/}
+			</FadeInStagger>
 		</>
 	);
 };
