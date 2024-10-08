@@ -15,7 +15,7 @@ import React, {
 
 type IconType = React.ComponentType<any> | undefined;
 
-type StepItem = {
+export type StepItem = {
 	id?: string;
 	label?: string;
 	description?: string;

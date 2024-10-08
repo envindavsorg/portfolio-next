@@ -5,7 +5,8 @@ import { MailStep } from '@/components/form/MailStep';
 import { MessageStep } from '@/components/form/MessageStep';
 import { NameStep } from '@/components/form/NameStep';
 import { SummaryStep } from '@/components/form/SummaryStep';
-import { Step, type StepItem, Stepper } from '@/components/ui/Stepper';
+import type { StepItem } from '@/components/ui/Step';
+import { Step, Stepper } from '@/components/ui/Stepper';
 import { cn } from '@/lib/utils';
 import type React from 'react';
 
