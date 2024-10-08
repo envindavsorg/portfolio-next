@@ -23,12 +23,12 @@ const Home = (): React.JSX.Element => {
 				<WorkDescription />
 				<Separator className="my-10" />
 				<TechStack />
-				<Separator className="my-10" />
+				{/*<Separator className="my-10" />
 				<ProjectStars />
 				<Separator className="my-10" />
 				<SocialSubs />
 				<Separator className="my-10" />
-				<BlogArticles />
+				<BlogArticles />*/}
 			</FadeInStagger>
 		</>
 	);
