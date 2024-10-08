@@ -5,8 +5,6 @@ import { Link } from 'next-view-transitions';
 import type React from 'react';
 import { Fragment } from 'react';
 
-const experience: number = new Date().getFullYear() - 2018;
-
 const WeFixIcon = (props: React.SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
 		viewBox="0 0 1018.5 1018.5"
@@ -28,8 +26,8 @@ export const WorkDescription = (): React.JSX.Element => (
 			<p className="leading-8">
 				Je suis un <span className="font-bold text-theme">développeur</span> et{' '}
 				<span className="font-bold text-theme">designer web</span> depuis{' '}
-				<span className="font-bold">{experience} ans</span>, passionné par la
-				création d’applications <span>belles</span> et{' '}
+				<span className="font-bold">{new Date().getFullYear() - 2018} ans</span>
+				, passionné par la création d’applications <span>belles</span> et{' '}
 				<span>fonctionnelles</span>, le design et le développement web.
 			</p>
 		</FadeIn>

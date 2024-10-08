@@ -17,19 +17,19 @@ const Home = (): React.JSX.Element => {
 				- bienvenue sur mon portfolio !
 			</p>
 
-			<FadeInStagger className="mt-10" faster>
+			{/*<FadeInStagger className="mt-10" faster>
 				<LandingBlock />
 				<Separator className="my-10" />
 				<WorkDescription />
 				<Separator className="my-10" />
 				<TechStack />
-				{/*<Separator className="my-10" />
+				<Separator className="my-10" />
 				<ProjectStars />
 				<Separator className="my-10" />
 				<SocialSubs />
 				<Separator className="my-10" />
-				<BlogArticles />*/}
-			</FadeInStagger>
+				<BlogArticles />
+			</FadeInStagger>*/}
 		</>
 	);
 };

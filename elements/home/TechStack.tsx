@@ -12,14 +12,15 @@ import { Link } from 'next-view-transitions';
 import type React from 'react';
 import { Fragment } from 'react';
 
-const experience: number = new Date().getFullYear() - 2018;
-
 export const TechStack = (): React.JSX.Element => (
 	<Fragment>
 		<FadeIn>
 			<p className="leading-8">
-				En <span className="font-semibold">{experience} ans d'expérience</span>,
-				j'ai eu l'occasion de{' '}
+				En{' '}
+				<span className="font-semibold">
+					{new Date().getFullYear() - 2018} ans d'expérience
+				</span>
+				, j'ai eu l'occasion de{' '}
 				<Link
 					href="/stack"
 					aria-label="Technologies que j'utilise"
