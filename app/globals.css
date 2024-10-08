@@ -4,40 +4,50 @@
 
 @layer base {
 	:root {
-		--theme: #ea580c;
-		--background: #FAFAFA;
-		--foreground: #000000;
-		--border: #E5E5E5;
-		--code: #020617;
-		--primary: #18181b;
-		--primary-foreground: #fafafa;
-		--secondary: #f4f4f5;
-		--secondary-foreground: #18181b;
-		--muted: #f4f4f5;
-		--muted-foreground: #71717a;
-		--accent: #f4f4f5;
-		--accent-foreground: #18181b;
-		--destructive: #dc2626;
-		--destructive-foreground: #fafafa;
+		--theme: hsl(24, 90%, 47%);
+		--background: hsl(0, 0%, 98%);
+		--foreground: hsl(0, 0%, 0%);
+		--border: hsl(0, 0%, 90%);
+		--code: hsl(225, 77%, 5%);
+		--primary: hsl(240, 5%, 11%);
+		--primary-foreground: hsl(0, 0%, 98%);
+		--secondary: hsl(240, 4%, 96%);
+		--secondary-foreground: hsl(240, 5%, 11%);
+		--muted: hsl(240, 4%, 96%);
+		--muted-foreground: hsl(240, 3%, 46%);
+		--accent: hsl(240, 4%, 96%);
+		--accent-foreground: hsl(240, 5%, 11%);
+		--destructive: hsl(0, 76%, 51%);
+		--destructive-foreground: hsl(0, 0%, 98%);
+		/* radius */
 		--radius: 0.5rem;
+		/* shiki */
+		--sh-class: hsl(220, 90%, 71%);
+		--sh-sign: hsl(195, 100%, 78%);
+		--sh-string: hsl(93, 47%, 64%);
+		--sh-keyword: hsl(255, 66%, 76%);
+		--sh-comment: hsl(225, 22%, 45%);
+		--sh-jsxliterals: hsl(220, 90%, 71%);
+		--sh-property: hsl(170, 61%, 64%);
+		--sh-entity: hsl(32, 67%, 66%);
 	}
 
 	.dark {
-		--theme: #fde047;
-		--background: #000000;
-		--foreground: #FAFAFA;
-		--border: #404040;
-		--code: #0f172a;
-		--primary: #fafafa;
-		--primary-foreground: #18181b;
-		--secondary: #27272a;
-		--secondary-foreground: #fafafa;
-		--muted: #27272a;
-		--muted-foreground: #a1a1aa;
-		--accent: #27272a;
-		--accent-foreground: #fafafa;
-		--destructive: #fca5a5;
-		--destructive-foreground: #fafafa;
+		--theme: hsl(51, 97%, 64%);
+		--background: hsl(0, 0%, 0%);
+		--foreground: hsl(0, 0%, 98%);
+		--border: hsl(0, 0%, 25%);
+		--code: hsl(222, 56%, 12%);
+		--primary: hsl(0, 0%, 98%);
+		--primary-foreground: hsl(240, 5%, 11%);
+		--secondary: hsl(240, 3%, 15%);
+		--secondary-foreground: hsl(0, 0%, 98%);
+		--muted: hsl(240, 3%, 15%);
+		--muted-foreground: hsl(240, 4%, 65%);
+		--accent: hsl(240, 3%, 15%);
+		--accent-foreground: hsl(0, 0%, 98%);
+		--destructive: hsl(0, 89%, 80%);
+		--destructive-foreground: hsl(0, 0%, 98%);
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -62,17 +72,6 @@
 	}
 }
 
-:root {
-	--sh-class: #7aa2f7;
-	--sh-sign: #89ddff;
-	--sh-string: #9ece6a;
-	--sh-keyword: #bb9af7;
-	--sh-comment: #565f89;
-	--sh-jsxliterals: #7aa2f7;
-	--sh-property: #73daca;
-	--sh-entity: #e0af68;
-}
-
 html {
 	min-width: 360px;
 }
@@ -81,14 +80,22 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3,
-h4 {
+/* header */
+h1, h2, h3, h4 {
 	text-wrap: balance;
 }
 
-/* Lists */
+/* list */
+@media (hover: hover) {
+	.animated-list:hover li {
+		opacity: 0.5;
+	}
+
+	.animated-list:hover li:hover {
+		opacity: 1;
+	}
+}
+
 ul {
 	@apply mt-4 list-disc space-y-1 pl-5 text-foreground;
 }
@@ -101,6 +108,7 @@ li {
 	@apply pl-1;
 }
 
+/* code */
 pre {
 	overflow-x: auto;
 	padding: 1rem;
@@ -144,11 +152,7 @@ pre code span {
 	font-weight: 500;
 }
 
-hr {
-	@apply text-border;
-}
-
-/* Remove Safari input shadow on mobile */
+/* input */
 input[type="text"],
 input[type="email"] {
 	-webkit-appearance: none;
@@ -156,6 +160,7 @@ input[type="email"] {
 	appearance: none;
 }
 
+/* transition */
 .transition-element {
 	view-transition-name: florin;
 }
@@ -174,22 +179,18 @@ input[type="email"] {
 		opacity: 1;
 		font-weight: 500;
 	}
-
 	20% {
 		transform: translateY(28px) translateX(-0.2px);
 		opacity: 0.5;
 	}
-
 	40% {
 		transform: translateY(28px) translateX(-0.2px);
 		opacity: 0.3;
 	}
-
 	60% {
 		transform: translateY(28px) translateX(-0.2px);
 		opacity: 0.2;
 	}
-
 	100% {
 		transform: translateY(28px) translateX(-0.2px);
 		opacity: 0;
@@ -200,15 +201,12 @@ input[type="email"] {
 	0% {
 		opacity: 0;
 	}
-
 	40% {
 		opacity: 0.6;
 	}
-
 	60% {
 		opacity: 0.8;
 	}
-
 	100% {
 		opacity: 1;
 	}
@@ -219,17 +217,14 @@ input[type="email"] {
 		transform: translateY(28px) translateX(-0.2px);
 		opacity: 0;
 	}
-
 	20% {
 		transform: translateY(28px) translateX(-0.2px);
 		opacity: 0.5;
 	}
-
 	80% {
 		transform: translateY(0) translateX(-0.2px);
 		opacity: 0.7;
 	}
-
 	100% {
 		transform: translateY(0) translateX(-0.2px);
 		opacity: 1;
@@ -240,15 +235,5 @@ input[type="email"] {
 	.fade-in {
 		animation: fade-in 0.8s ease-in-out forwards;
 		opacity: 0;
-	}
-}
-
-@media (hover: hover) {
-	.animated-list:hover li {
-		opacity: 0.5;
-	}
-
-	.animated-list:hover li:hover {
-		opacity: 1;
 	}
 }
