@@ -1,3 +1,5 @@
+'use client';
+
 import { FadeIn } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { SocialLink } from '@/components/links/SocialLink';
