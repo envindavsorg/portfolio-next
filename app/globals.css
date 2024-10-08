@@ -108,6 +108,11 @@ li {
 	@apply pl-1;
 }
 
+/* links */
+a {
+	text-decoration-line: underline;
+}
+
 /* code */
 pre {
 	overflow-x: auto;
