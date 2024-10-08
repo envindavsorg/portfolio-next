@@ -78,7 +78,7 @@ export const ProjectStars = (): React.JSX.Element => (
 				<Link
 					href="/stack"
 					aria-label="Technologies que j'utilise"
-					className="font-bold text-theme underline"
+					className="font-bold text-theme"
 				>
 					appris à utiliser
 				</Link>{' '}

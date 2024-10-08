@@ -110,7 +110,7 @@ li {
 
 /* links */
 a {
-	text-decoration-line: underline;
+	@apply underline-offset-2 underline;
 }
 
 /* code */

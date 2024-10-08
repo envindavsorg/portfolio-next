@@ -24,7 +24,7 @@ export const TechStack = (): React.JSX.Element => (
 				<Link
 					href="/stack"
 					aria-label="Technologies que j'utilise"
-					className="font-bold text-theme underline"
+					className="font-bold text-theme"
 				>
 					travailler avec de nombreux langages et technologies
 				</Link>

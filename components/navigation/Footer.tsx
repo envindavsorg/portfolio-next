@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/Separator';
 import { type ContactMe, contactMe } from '@/content/ContactMe';
+import { Link } from 'next-view-transitions';
 import type React from 'react';
 
 export const Footer = (): React.JSX.Element => (
@@ -8,16 +9,16 @@ export const Footer = (): React.JSX.Element => (
 			{contactMe
 				.slice(0, 4)
 				.map(({ name, url, description }: ContactMe, idx: number) => (
-					<a
+					<Link
 						key={`${idx}-${name}`}
 						href={url}
 						aria-label={description}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-foreground transition-colors duration-200 hover:text-theme"
+						className="text-foreground no-underline transition-colors duration-200 hover:text-theme"
 					>
 						{name}
-					</a>
+					</Link>
 				))}
 		</div>
 

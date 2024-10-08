@@ -79,30 +79,31 @@ export const SocialSubs = (): React.JSX.Element => (
 				Je suis présent sur{' '}
 				<Link
 					href="https://linkedin.com/"
-					className="font-medium underline hover:text-theme"
+					className="font-medium hover:text-theme"
 				>
 					LinkedIn
 				</Link>{' '}
 				et sur{' '}
 				<Link
 					href="https://github.com/"
-					className="font-medium underline hover:text-theme"
+					className="font-medium hover:text-theme"
 				>
 					GitHub
 				</Link>{' '}
+				(retrouvez{' '}
 				<Link
 					href="/github"
 					aria-label="Activité et statistiques de mon profil GitHub"
-					className="font-bold text-theme underline"
+					className="font-bold text-theme"
 				>
-					(retrouvez toute mon activité et mes statistiques)
+					toute mon activité et mes statistiques)
 				</Link>
-				, n'hésitez pas à me rendre une petite visite sur mes profils et
+				), n'hésitez pas à me rendre une petite visite sur mes profils et
 				pourquoi pas{' '}
 				<Link
 					href="/contact"
 					aria-label="Contactez-moi"
-					className="font-bold text-theme underline"
+					className="font-bold text-theme"
 				>
 					me laisser un message
 				</Link>{' '}

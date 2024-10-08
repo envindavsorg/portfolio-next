@@ -212,7 +212,10 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 											>
 												<div className="divide-y divide-border">
 													{navItems.map(
-														({ link, name, description }, idx: number) => {
+														(
+															{ link, name, description }: NavItems,
+															idx: number,
+														) => {
 															const active: boolean =
 																link === '/blog'
 																	? pathname!.startsWith(link)
@@ -248,7 +251,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 																			href={link}
 																			aria-label={description}
 																			className={cn(
-																				'flex w-full items-center justify-between text-base',
+																				'flex w-full items-center justify-between text-base no-underline',
 																				active
 																					? '*:font-bold *:text-theme'
 																					: '*:font-normal *:text-foreground',

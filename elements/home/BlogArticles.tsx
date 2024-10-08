@@ -22,7 +22,7 @@ export const BlogArticles = memo(async () => {
 					<Link
 						href="/blog"
 						aria-label="Voir tous mes articles"
-						className="font-bold text-theme underline"
+						className="font-bold text-theme"
 					>
 						articles
 					</Link>{' '}

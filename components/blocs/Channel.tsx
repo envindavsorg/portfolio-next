@@ -2,6 +2,7 @@ import { Counter } from '@/components/numbers/Counter';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import Image, { type StaticImageData } from 'next/image';
+import Link from 'next/link';
 import type React from 'react';
 
 interface ChannelProps {
@@ -22,11 +23,12 @@ export const Channel = ({
 	icon,
 }: ChannelProps): React.JSX.Element => (
 	<div className="group flex w-full">
-		<a
+		<Link
 			href={link}
+			aria-label={name}
 			target="_blank"
 			rel="noreferrer"
-			className="flex w-full items-center justify-between rounded-md border border-neutral-200 bg-neutral-50 p-3 transition-transform duration-300 dark:border-neutral-700 dark:bg-neutral-800"
+			className="flex w-full items-center justify-between rounded-md border border-neutral-200 bg-neutral-50 p-3 no-underline transition-transform duration-300 dark:border-neutral-700 dark:bg-neutral-800"
 		>
 			<div className="flex items-center space-x-4">
 				<div className="relative">
@@ -61,7 +63,7 @@ export const Channel = ({
 					className="text-lg group-hover:text-theme"
 				/>
 			</div>
-		</a>
+		</Link>
 	</div>
 );
 

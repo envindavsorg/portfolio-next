@@ -22,7 +22,7 @@ export const NavBarItem = ({
 		href={link}
 		aria-label={desc}
 		className={cn(
-			'relative flex h-7 items-center px-1.5',
+			'relative flex h-7 items-center px-1.5 no-underline',
 			disabled && 'pointer-events-none cursor-not-allowed opacity-50',
 		)}
 		passHref

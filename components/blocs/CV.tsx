@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/lib/utils';
 import { Download } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 import type React from 'react';
@@ -14,7 +15,7 @@ export const CV = ({ className }: CVProps) => {
 			target="_blank"
 			rel="noopener noreferrer"
 			locale={false}
-			className={className}
+			className={cn(className, 'no-underline')}
 		>
 			<Button
 				className="flex w-max items-center gap-x-3"

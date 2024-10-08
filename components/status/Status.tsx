@@ -23,7 +23,7 @@ export const Status = async ({
 			target="_blank"
 			rel="noreferrer"
 			passHref
-			className={className}
+			className={cn(className, 'no-underline')}
 		>
 			<CardTemplate
 				className="flex items-center justify-between p-3 sm:px-6"
