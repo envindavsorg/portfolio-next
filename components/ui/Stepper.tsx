@@ -1,9 +1,13 @@
 'use client';
 
-import { Step, StepperProvider, useStepper } from '@/components/ui/Step';
+import {
+	Step,
+	type StepperProps,
+	StepperProvider,
+	useStepper,
+} from '@/components/ui/Step';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
-import type { StepItem, StepProps, StepperProps } from '@/types/stepper';
 import React, { forwardRef, Fragment } from 'react';
 
 interface VariablesSizes {
@@ -191,4 +195,3 @@ const HorizontalContent = ({
 };
 
 export { Stepper, Step, useStepper };
-export type { StepProps, StepperProps, StepItem };
