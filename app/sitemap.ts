@@ -8,8 +8,8 @@ export const getNoteSlugs = async (dir: string): Promise<string[]> => {
 	});
 
 	return entries
-		.filter((entry) => entry.isFile() && entry.name === 'page.mdx')
-		.map((entry) => {
+		.filter((entry: Dirent) => entry.isFile() && entry.name === 'page.mdx')
+		.map((entry: Dirent) => {
 			const relativePath: string = path.relative(
 				dir,
 				path.join(entry.parentPath, entry.name),
@@ -17,19 +17,24 @@ export const getNoteSlugs = async (dir: string): Promise<string[]> => {
 
 			return path.dirname(relativePath);
 		})
-		.map((slug) => slug.replace(/\\/g, '/'));
+		.map((slug: string) => slug.replace(/\\/g, '/'));
 };
+
+interface NotesAndRoutes {
+	url: string;
+	lastModified: string;
+}
 
 const sitemap = async () => {
 	const notesDirectory: string = path.join(process.cwd(), 'app');
 	const slugs: string[] = await getNoteSlugs(notesDirectory);
 
-	const notes = slugs.map((slug) => ({
+	const notes: NotesAndRoutes[] = slugs.map((slug) => ({
 		url: `https://cuzeac-florin.app/${slug}`,
 		lastModified: new Date().toISOString(),
 	}));
 
-	const routes = ['/contact', '/blog'].map((route) => ({
+	const routes: NotesAndRoutes[] = ['/'].map((route) => ({
 		url: `https://cuzeac-florin.app${route}`,
 		lastModified: new Date().toISOString(),
 	}));
