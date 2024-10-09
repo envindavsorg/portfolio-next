@@ -40,7 +40,7 @@ const AccordionTrigger = forwardRef<
 			<AccordionPrimitive.Trigger
 				ref={ref}
 				className={cn(
-					'flex flex-1 items-center gap-x-6 py-3 text-start font-bold text-lg transition-all [&[data-state=open]>svg]:rotate-180',
+					'flex flex-1 items-center gap-x-6 py-3 text-start transition-all [&[data-state=open]>svg]:rotate-180',
 					className,
 				)}
 				{...props}

@@ -19,31 +19,22 @@ type Languages = {
 	items?: number;
 };
 
-interface Props {
+interface UsedLanguagesChartsProps {
 	languages: Languages[];
+	className?: string;
 }
 
-export const MostUsedLanguagesCharts = ({ languages }: Props) => {
+export const UsedLanguagesCharts = ({
+	languages,
+	className,
+}: UsedLanguagesChartsProps) => {
 	const data: Languages[] = languages
 		.slice(0, 5)
 		.map(({ name, percent }: Languages) => ({
 			name: name,
-			percent: Math.round(percent),
+			percent: percent,
 			color: 'bg-orange-600 dark:bg-yellow-300',
 		}));
-
-	const cssLanguage: Languages | undefined = languages.find(
-		({ name }: Languages) => name === 'CSS',
-	);
-
-	if (cssLanguage) {
-		const { name, percent } = cssLanguage;
-		data.push({
-			name: name,
-			percent: Math.round(percent),
-			color: 'bg-orange-600 dark:bg-yellow-300',
-		});
-	}
 
 	const content = data.reduce<Languages[]>((acc, curr) => {
 		if (curr.name === 'Jade' || curr.name === 'Pug') {
@@ -72,6 +63,7 @@ export const MostUsedLanguagesCharts = ({ languages }: Props) => {
 		items:
 			(item.percent * 100) / content.reduce((acc, cv) => acc + cv.percent, 0),
 	}));
+
 	const reducedContent: number = scaledContent.reduce(
 		(acc, cv) => acc + cv.items,
 		0,
@@ -79,12 +71,12 @@ export const MostUsedLanguagesCharts = ({ languages }: Props) => {
 
 	return (
 		<div
-			className="grid min-h-[200px] grid-cols-1 gap-3 md:gap-6"
+			className={cn('grid grid-cols-1 gap-3 md:gap-6', className)}
 			style={{
 				gridTemplateColumns: `repeat(${content.length}, minmax(0, 1fr))`,
 			}}
 		>
-			{content.map(({ name, percent, color }, idx: number) => {
+			{content.map(({ name, percent, color }: Languages, idx: number) => {
 				const height: string | number = percent
 					? ((percent / reducedContent) * 100).toFixed(2)
 					: 0;
@@ -94,24 +86,24 @@ export const MostUsedLanguagesCharts = ({ languages }: Props) => {
 				) => React.JSX.Element = IconMapping[name] || TypeScriptIcon;
 
 				return (
-					<div key={`${name}-${idx}`}>
+					<div className="h-52" key={`${name}-${idx}`}>
 						<div className="relative flex size-full items-end overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700">
 							<motion.span
 								animate={{ height: `${height}%` }}
 								className={cn('relative z-0 w-full', color)}
 								transition={{ type: 'spring' }}
 							/>
-							<div className="absolute inset-0 flex items-center justify-center">
+							<div className="absolute inset-0 flex flex-col items-center justify-center gap-y-3">
 								<Icon className="size-8 shrink-0 sm:size-10" />
+								<div className="flex flex-col items-center justify-center gap-y-0.5 rounded-md bg-neutral-50 p-2 dark:bg-neutral-800">
+									<p className="font-bold font-geist-sans text-sm tracking-tighter">
+										{TextMapping[name] || name}
+									</p>
+									<p className="font-bold text-[10px] tracking-tighter">
+										({percent.toFixed(2)}%)
+									</p>
+								</div>
 							</div>
-						</div>
-						<div className="mt-2 flex flex-col items-center justify-center gap-y-1">
-							<p className="font-bold font-geist-sans text-base tracking-tighter">
-								{TextMapping[name] || name}
-							</p>
-							<p className="font-geist-sans font-medium text-xs tracking-tighter">
-								({percent.toFixed(2)}%)
-							</p>
 						</div>
 					</div>
 				);

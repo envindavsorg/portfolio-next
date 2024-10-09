@@ -6,6 +6,7 @@ const config = {
 		files: [
 			'./app/**/*.{ts,tsx,mdx}',
 			'./components/**/*.{ts,tsx}',
+			'./elements/**/*.{ts,tsx}',
 			'./config/**/*.{ts,tsx}',
 			'./content/**/*.{md,mdx}',
 			'./lib/**/*.{ts,tsx}',
