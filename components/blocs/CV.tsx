@@ -11,10 +11,9 @@ interface CVProps {
 export const CV = ({ className }: CVProps) => {
 	return (
 		<Link
-			href={'/cv/cv.pdf'}
+			href="https://drive.google.com/file/d/1mD3zdZeeg9q4sQooyd8R1bsfZ8Uw_NIt/view?usp=share_link"
 			target="_blank"
 			rel="noopener noreferrer"
-			locale={false}
 			className={cn(className, 'no-underline')}
 		>
 			<Button
