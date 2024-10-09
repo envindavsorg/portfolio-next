@@ -1,15 +1,11 @@
 'use client';
 
 import { HowToScroll } from '@/components/blocs/HowToScroll';
-import {
-	FADE_DOWN_ANIMATION_VARIANTS,
-	FADE_UP_ANIMATION_VARIANTS,
-} from '@/components/motion/variants';
 import { Alert, AlertDescription } from '@/components/ui/Alert';
 import { dayjs } from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
 import { GitDiff, GithubLogo } from '@phosphor-icons/react/dist/ssr';
-import { motion } from 'framer-motion';
+import { type Variants, motion } from 'framer-motion';
 import Image from 'next/image';
 import type React from 'react';
 import { Fragment, memo, useEffect, useRef, useState } from 'react';
@@ -34,6 +30,34 @@ interface ContributionsProps {
 	avatar: string;
 	className?: string;
 }
+
+export const FADE_UP_ANIMATION_VARIANTS: Variants = {
+	hidden: {
+		opacity: 0,
+		y: 10,
+	},
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			type: 'spring',
+		},
+	},
+};
+
+export const FADE_DOWN_ANIMATION_VARIANTS: Variants = {
+	hidden: {
+		opacity: 0,
+		y: -10,
+	},
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			type: 'spring',
+		},
+	},
+};
 
 export const Contributions = memo(
 	({

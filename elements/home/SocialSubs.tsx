@@ -14,6 +14,7 @@ import { Fragment } from 'react';
 interface Data {
 	avatar: string | StaticImageData;
 	login: string;
+	link: string;
 	followers: number;
 	following: number;
 	icon: React.ReactNode;
@@ -35,6 +36,7 @@ const Subscribers = async ({
 		{
 			avatar,
 			login: `@${login}`,
+			link: `https://github.com/${login}`,
 			followers,
 			following,
 			icon: <GithubLogo />,
@@ -43,6 +45,7 @@ const Subscribers = async ({
 			avatar:
 				'https://media.licdn.com/dms/image/v2/D4E03AQGMBLwqpxHRGA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1715716598040?e=1733961600&v=beta&t=miUysAuI_Yu1dAeY8ApQVWPiTNt7pclf0c_PqO51yMo',
 			login: 'Florin Cuzeac',
+			link: 'https://www.linkedin.com/in/cuzeacflorin',
 			followers: 2312,
 			following: 0,
 			icon: <LinkedinLogo />,
@@ -57,12 +60,15 @@ const Subscribers = async ({
 			)}
 		>
 			{data.map(
-				({ avatar, login, followers, following, icon }: Data, idx: number) => (
+				(
+					{ avatar, login, link, followers, following, icon }: Data,
+					idx: number,
+				) => (
 					<Channel
 						key={`${login}-${idx}`}
 						avatar={avatar}
 						name={login}
-						link={`https://github.com/${login}`}
+						link={link}
 						subs={Math.round(followers + following)}
 						icon={icon}
 					/>

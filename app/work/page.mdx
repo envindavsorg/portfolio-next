@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Minus } from '@phosphor-icons/react/dist/ssr';
 import { FadeIn, FadeInStagger } from '../../components/animations/FadeIn';
+import { DownloadCV } from '../../components/blocs/DownloadCV';
 import { HowToScroll } from '../../components/blocs/HowToScroll';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Badge } from '../../components/ui/Badge';
@@ -42,6 +43,10 @@ export const Strong = ({ children }) => (
     <FadeIn className="mt-3">
         Au fil de ma *carrière*, j’ai eu l’occasion de collaborer avec des
         entreprises de tailles variées, des **startups** aux **grandes entreprises**.
+    </FadeIn>
+
+    <FadeIn className="mt-10">
+        <DownloadCV />
     </FadeIn>
 
     <Separator className="my-10" />

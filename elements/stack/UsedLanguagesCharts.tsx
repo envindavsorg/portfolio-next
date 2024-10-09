@@ -95,7 +95,7 @@ export const UsedLanguagesCharts = ({
 							/>
 							<div className="absolute inset-0 flex flex-col items-center justify-center gap-y-3">
 								<Icon className="size-8 shrink-0 sm:size-10" />
-								<div className="flex flex-col items-center justify-center gap-y-0.5 rounded-md bg-neutral-50 p-2 dark:bg-neutral-800">
+								<div className="flex flex-col items-center justify-center gap-y-0.5 rounded-md border border-neutral-200 bg-neutral-50 p-2 dark:border-neutral-700 dark:bg-neutral-800">
 									<p className="font-bold font-geist-sans text-sm tracking-tighter">
 										{TextMapping[name] || name}
 									</p>

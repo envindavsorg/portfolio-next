@@ -106,7 +106,7 @@ const components: MDXComponents = {
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-x-3">
 							{language && languageIcons[language]}
-							<p className="font-bold font-geist-sans text-sm sm:text-base">
+							<p className="font-bold font-geist-sans text-sm text-white sm:text-base">
 								{language ? language : 'Snippet de code'}
 							</p>
 						</div>
