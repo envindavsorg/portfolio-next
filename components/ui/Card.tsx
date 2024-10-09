@@ -57,9 +57,9 @@ export const Card = ({
 
 			{title && (
 				<div className="z-20 flex flex-col">
-					<h3 className="font-extrabold font-geist-sans text-lg tracking-tighter md:text-xl">
+					<div className="font-extrabold font-geist-sans text-lg tracking-tighter md:text-xl">
 						{title}
-					</h3>
+					</div>
 					{comment && (
 						<span className="text-neutral-600 text-xs dark:text-neutral-400">
 							{comment}

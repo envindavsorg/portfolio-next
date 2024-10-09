@@ -1,3 +1,4 @@
+import { githubUser } from '@/actions/github/user.action';
 import {
 	Table,
 	TableBody,
@@ -7,21 +8,26 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/Table';
+import { env } from '@/env/server';
 import { dayjs } from '@/lib/dayjs';
+import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
+import { Fragment, Suspense } from 'react';
 
-interface Props {
-	weeks: {
-		contributionDays: {
-			color: string;
-			contributionCount: number;
-			date: string;
-		}[];
-		firstDay: string;
-	}[];
+interface TablesProps {
+	className?: string;
 }
 
-export const GitHubTable = async ({ weeks }: Props) => {
+export const Tables = async ({ className }: TablesProps) => {
+	noStore();
+	const {
+		commits: {
+			all: {
+				contributionCalendar: { weeks },
+			},
+		},
+	} = await githubUser(env.GITHUB_USERNAME);
+
 	const currentMonthContributions = weeks.flatMap(
 		(week) => week.contributionDays,
 	);
@@ -35,7 +41,7 @@ export const GitHubTable = async ({ weeks }: Props) => {
 	);
 
 	return (
-		<Table>
+		<Table className={className}>
 			<TableHeader>
 				<TableRow>
 					<TableHead>Date</TableHead>
@@ -77,3 +83,17 @@ export const GitHubTable = async ({ weeks }: Props) => {
 		</Table>
 	);
 };
+
+interface GitHubTableProps {
+	className?: string;
+}
+
+export const GitHubTable = ({
+	className,
+}: GitHubTableProps): React.JSX.Element => (
+	<Fragment>
+		<Suspense>
+			<Tables className={className} />
+		</Suspense>
+	</Fragment>
+);

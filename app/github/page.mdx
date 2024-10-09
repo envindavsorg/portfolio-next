@@ -1,88 +1,11 @@
 import React from 'react';
-import { env } from '../../env/server';
-import { unstable_noStore as noStore } from 'next/cache';
-import { githubUser } from '../../actions/github/user.action';
-import { wakatimeStats } from '../../actions/wakatime/stats.action';
-import { Suspense } from 'react';
-import { Graph } from '../../components/github/Graph';
-import { Stats } from '../../components/github/Stats';
-import { GitHubTable } from '../../components/github/Table';
-import { Wakatime } from '../../components/wakatime/Wakatime';
-import { Motion } from '../../components/motion/Motion';
-import {
-    variantsOne,
-    variantsTwo,
-    variantsThree,
-    variantsFour
-} from '../../components/motion/variants';
+import { FadeIn, FadeInStagger } from '../../components/animations/FadeIn';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Separator } from '../../components/ui/Separator';
-import { Spinner } from '../../components/ui/Spinner';
-
-export const GitHubStats = async () => {
-    noStore();
-
-    const { following, followers, commits } = await githubUser(
-        env.GITHUB_USERNAME,
-    );
-
-    return (
-        <Stats
-            followers={followers}
-            following={following}
-            thisYear={commits.thisYear}
-            thisWeek={commits.thisWeek}
-            bestDay={commits.bestDay}
-            perDay={commits.perDay}
-        />
-    );
-};
-
-export const GitHubContributions = async () => {
-    noStore();
-
-    const { login, name, avatar, commits: {
-        all: {
-            contributionCalendar: { weeks, colors }
-        }
-    } } = await githubUser(
-        env.GITHUB_USERNAME,
-    );
-
-    return (
-        <Graph
-            weeks={weeks}
-            colors={colors}
-            login={login}
-            name={name}
-            avatar={avatar}
-        />
-    );
-};
-
-export const GitHubContributionsTable = async () => {
-    noStore();
-
-    const { commits: {
-            all: {
-                contributionCalendar: { weeks }
-            }
-        }
-    } = await githubUser(
-        env.GITHUB_USERNAME,
-    );
-
-    return (
-        <GitHubTable weeks={weeks} />
-    );
-};
-
-export const CodingStats = async () => {
-    noStore();
-
-    const stats = await wakatimeStats(env.WAKATIME_DATA_URL);
-    return <Wakatime stats={stats.data} />;
-};
+import { GitHubGraph } from '../../elements/github/Graph';
+import { GitHubStats } from '../../elements/github/Stats';
+import { GitHubTable } from '../../elements/github/Table';
+import { WakatimeStats } from '../../elements/github/Wakatime';
 
 export const metadata = {
     title: 'Activité et statistiques de mon profil GitHub',
@@ -92,55 +15,40 @@ export const metadata = {
 };
 
 # Activité et statistiques
-
 <AnimatedNameLink />
 
-<Motion className="mt-10" variants={variantsOne} asChild>
-    Toutes mes **statistiques GitHub** (nombre de commits, abonnés, suivis)
-    de l'année **{new Date().getFullYear() - 1}** - **{new Date().getFullYear()}** sont affichées ici.
-</Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="mt-6" variants={variantsOne}>
-        <GitHubStats />
-    </Motion>
-</Suspense>
+<FadeInStagger className="mt-10" faster>
+    <FadeIn>
+        Toutes mes **statistiques GitHub** (nombre de commits, abonnés, suivis)
+        de l'année *{new Date().getFullYear() - 1}* - *{new Date().getFullYear()}* sont affichées ici.
+    </FadeIn>
+    <GitHubStats className="mt-6" />
 
-<Separator className="my-14" />
+    <Separator className="my-10" />
 
-<Motion variants={variantsTwo} asChild>
-    Mon graphique de **contributions GitHub** sur
-    l'année **{new Date().getFullYear() - 1}** - **{new Date().getFullYear()}**.
-    J'essaie tous les jours de **contribuer** et de **créer** de nouveaux projets.
-    Je suis toujours à la **recherche** de nouvelles **idées**
-    que je puisse les matérialiser sur GitHub.
-</Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="mt-6" variants={variantsTwo}>
-        <GitHubContributions />
-    </Motion>
-</Suspense>
+    <FadeIn>
+        Mon graphique de **contributions GitHub** sur
+        l'année *{new Date().getFullYear() - 1}* - *{new Date().getFullYear()}*.
+        J'essaie tous les jours de **contribuer** et de **créer** de nouveaux projets.
+        Je suis toujours à la **recherche** de nouvelles **idées** que
+        je puisse les matérialiser sur GitHub.
+    </FadeIn>
+    <GitHubGraph className="mt-6" />
 
-<Separator className="my-14" />
+    <Separator className="my-10" />
 
-<Motion variants={variantsThree} asChild>
-    Mes statistiques hebdomadaires de **temps de code** sur Wakatime.
-    Vous pouvez retrouver mon temps de code moyen, mon temps de code total sur la
-    semaine passée, mon meilleur jour et les langages que j'utilise le plus.
-</Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="mt-6" variants={variantsFour}>
-        <CodingStats />
-    </Motion>
-</Suspense>
+    <FadeIn>
+        Mes statistiques hebdomadaires de **temps de code** sur Wakatime.
+        Vous pouvez retrouver mon temps de code moyen, mon temps de code total sur la
+        semaine passée, mon meilleur jour et les langages que j'utilise le plus.
+    </FadeIn>
+    <WakatimeStats className="mt-6" />
 
-<Separator className="my-14" />
+    <Separator className="my-10" />
 
-<Motion variants={variantsFour} asChild>
-    Plus de détails sur mon **nombre de commits** effectués
-    de la semaine dernière, **jour** par **jour**.
-</Motion>
-<Suspense fallback={<Spinner className="h-52" />}>
-    <Motion className="mt-6" variants={variantsFour}>
-        <GitHubContributionsTable />
-    </Motion>
-</Suspense>
+    <FadeIn>
+        Plus de détails sur mon **nombre de commits** effectués
+        de la semaine dernière, **jour** par **jour**.
+    </FadeIn>
+    <GitHubTable className="mt-6" />
+</FadeInStagger>

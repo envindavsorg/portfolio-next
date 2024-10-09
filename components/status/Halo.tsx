@@ -2,8 +2,8 @@
 
 import useMousePosition from '@/hooks/useMousePosition';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import React, { type ReactNode } from 'react';
+import { type MotionStyle, motion } from 'framer-motion';
+import React, { type ReactNode, useRef } from 'react';
 
 type HaloProps = {
 	children: ReactNode | ReactNode[];
@@ -18,7 +18,7 @@ export default function Halo({
 	strength = 10,
 	className,
 }: HaloProps) {
-	const ref = React.useRef(null);
+	const ref = useRef(null);
 	const { x, y } = useMousePosition(ref);
 	const offset = size / 2;
 
@@ -42,7 +42,7 @@ export default function Halo({
 						height: size,
 						background:
 							'radial-gradient(#FFFFFF 0%, rgba(188, 255, 219, 0) 60%)',
-					} as React.CSSProperties
+					} as MotionStyle
 				}
 				className={`pointer-events-none absolute inset-0 z-50 translate-x-[var(--x)] translate-y-[var(--y)] opacity-0 transition-opacity`}
 				variants={{

@@ -7,14 +7,19 @@ import {
 } from '@/components/motion/variants';
 import { Alert, AlertDescription } from '@/components/ui/Alert';
 import { dayjs } from '@/lib/dayjs';
+import { cn } from '@/lib/utils';
 import { GitDiff, GithubLogo } from '@phosphor-icons/react/dist/ssr';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type React from 'react';
-import { useEffect, useRef } from 'react';
-import { memo, useState } from 'react';
+import { Fragment, memo, useEffect, useRef, useState } from 'react';
 
-interface ContributionsGraphProps {
+type Contribution = {
+	contributionCount: number | null;
+	date: string | null;
+};
+
+interface ContributionsProps {
 	weeks: {
 		contributionDays: {
 			color: string;
@@ -30,25 +35,19 @@ interface ContributionsGraphProps {
 	className?: string;
 }
 
-type Contributions = {
-	contributionCount: number | null;
-	date: string | null;
-};
-
-export const Graph = memo(
+export const Contributions = memo(
 	({
 		weeks,
 		colors,
 		login,
 		name,
 		avatar,
-	}: ContributionsGraphProps): React.JSX.Element => {
-		const [selectContribution, setSelectContribution] = useState<Contributions>(
-			{
-				contributionCount: null,
-				date: null,
-			},
-		);
+		className,
+	}: ContributionsProps): React.JSX.Element => {
+		const [selectContribution, setSelectContribution] = useState<Contribution>({
+			contributionCount: null,
+			date: null,
+		});
 		const [isVisible, setIsVisible] = useState(false);
 
 		const handleContributionClick = (
@@ -82,8 +81,10 @@ export const Graph = memo(
 		}, [weeks]);
 
 		return (
-			<>
-				<div className="flex w-full items-center justify-between">
+			<Fragment>
+				<div
+					className={cn('flex w-full items-center justify-between', className)}
+				>
 					<div className="flex items-center gap-x-3">
 						<Image
 							src={avatar}
@@ -215,7 +216,7 @@ export const Graph = memo(
 						</motion.div>
 					</motion.div>
 				)}
-			</>
+			</Fragment>
 		);
 	},
 );
