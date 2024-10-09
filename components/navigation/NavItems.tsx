@@ -16,19 +16,13 @@ export const navItems: NavItems[] = [
 		name: 'Travail',
 		description: 'Mon parcours professionnel',
 		link: '/work',
-		position: 5,
+		position: 7,
 	},
 	{
 		name: 'Compétences',
 		description: 'Mes compétences et technologies',
 		link: '/stack',
-		position: 10,
-	},
-	{
-		name: 'Mes projets',
-		description: 'Mes projets réalisés au fil du temps',
-		link: '/projects',
-		position: 15,
+		position: 14,
 	},
 	{
 		name: 'Blog',

@@ -4,7 +4,6 @@ import { CSSIcon } from '@/components/icons/CSS';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { JsonIcon } from '@/components/icons/Json';
 import { MarkdownIcon } from '@/components/icons/Markdown';
-import { NotionIcon } from '@/components/icons/Notion';
 import { PugIcon } from '@/components/icons/Pug';
 import { SassIcon } from '@/components/icons/Sass';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
@@ -123,7 +122,6 @@ const IconMapping: IconMappingType = {
 	SCSS: SassIcon,
 	CSS: CSSIcon,
 	MDX: MarkdownIcon,
-	Text: NotionIcon,
 	JSON: JsonIcon,
 };
 
@@ -134,6 +132,5 @@ const TextMapping: Record<string, string> = {
 	SCSS: 'SCSS',
 	CSS: 'CSS',
 	MDX: 'MDX',
-	Text: 'Notion',
 	JSON: 'JSON',
 };
