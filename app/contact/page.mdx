@@ -1,0 +1,48 @@
+import React from 'react';
+import { FadeIn, FadeInStagger } from '../../components/animations/FadeIn';
+import ContactForm from '../../components/form/ContactForm';
+import { SocialLink } from '../../components/links/SocialLink';
+import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
+import { Separator } from '../../components/ui/Separator';
+import { contactMe } from '../../content/ContactMe';
+
+export const metadata = {
+    title: "Me contacter pour des questions ou des suggestions",
+    alternates: {
+        canonical: '/projects',
+    },
+};
+
+# Contactez-moi
+<AnimatedNameLink />
+
+<FadeInStagger className="mt-10" faster>
+    <FadeIn>
+        N'hésitez pas à *me contacter* si vous avez des *questions* ou des **suggestions**
+        concernant mon **site**, mon **portfolio**, ou mes **projets**.
+        Je suis disponible pour *répondre* à toutes vos demandes.
+    </FadeIn>
+    <FadeIn className="mt-6">
+        <div className="flex gap-6">
+            {contactMe.map(({ description, url, icon }, idx) => (
+                <SocialLink
+                    key={`${idx}-contact`}
+                    href={url}
+                    aria-label={description}
+                    icon={icon}
+                    iconProps={{ weight: 'regular' }}
+                />
+            ))}
+        </div>
+    </FadeIn>
+
+    <Separator className="my-10" />
+
+    <FadeIn>
+        Ou bien, vous pouvez utiliser le **formulaire** de contact ci-dessous
+        pour me laisser un *message* personnalisé.
+    </FadeIn>
+    <FadeIn className="mt-6">
+        <ContactForm />
+    </FadeIn>
+</FadeInStagger>

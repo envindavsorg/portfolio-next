@@ -6,15 +6,15 @@ import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
+const name: string = `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`;
 const inter: NextFont = Inter({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 	subsets: ['latin'],
 });
 
-const name: string = `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`;
-
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 	const { searchParams, host, protocol } = req.nextUrl;
+
 	const backgroundImage: string = `url(${protocol}//${host}/og-bg.png)`;
 	const authorImage: string = `${protocol}//${host}/og-author.png`;
 	const postTitle: string | null = searchParams.get('title');
@@ -65,9 +65,6 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 				</div>
 			</div>
 		</div>,
-		{
-			width: 1500,
-			height: 800,
-		},
+		{ width: 1500, height: 800 },
 	);
 };

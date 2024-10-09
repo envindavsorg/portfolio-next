@@ -6,7 +6,7 @@ import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import type React from 'react';
 
 export const metadata = {
-	title: 'Mes articles de blog',
+	title: 'Tous mes articles de blog',
 	alternates: {
 		canonical: '/blog',
 	},

@@ -5,14 +5,13 @@ import { type CreateEmailResponse, Resend } from 'resend';
 
 const resend: Resend = new Resend(env.RESEND_API_KEY);
 
-export const POST = async (
-	req: NextRequest,
-): Promise<
+type Props =
 	| NextResponse<CreateEmailResponse>
 	| NextResponse<{
 			error: any;
-	  }>
-> => {
+	  }>;
+
+export const POST = async (req: NextRequest): Promise<Props> => {
 	const json: Promise<any> = req.json();
 	const { name, surname, mail, content } = await json;
 
