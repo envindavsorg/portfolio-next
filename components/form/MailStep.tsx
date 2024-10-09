@@ -37,8 +37,8 @@ export const MailStep = () => {
 		updateFormData(data);
 		nextStep();
 
-		toast.success(`Adresse e-mail enregistrée ! Continuons :)`, {
-			className: 'text-sm font-medium',
+		toast.success('Adresse e-mail enregistrée !', {
+			description: 'Nous pouvons maintenant continuer.',
 			duration: 5000,
 			icon: <Smiley className="text-green-600 text-xl dark:text-green-300" />,
 		});
@@ -47,7 +47,7 @@ export const MailStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription>
+				<FormDescription className="pt-2 text-sm">
 					Veuillez entrer votre{' '}
 					<span className="text-theme">adresse e-mail</span> dans le champ
 					ci-dessous.

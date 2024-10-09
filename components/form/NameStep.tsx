@@ -43,8 +43,8 @@ export const NameStep = () => {
 		updateFormData(data);
 		nextStep();
 
-		toast.success(`Bien enregistré, ${data.surname} ! Continuons :)`, {
-			className: 'text-sm font-semibold',
+		toast.success(`Bien enregistré, ${data.surname} !`, {
+			description: 'Nous pouvons maintenant continuer.',
 			duration: 5000,
 			icon: <Smiley className="text-green-600 text-xl dark:text-green-300" />,
 		});
@@ -53,7 +53,7 @@ export const NameStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription>
+				<FormDescription className="pt-2 text-sm">
 					Veuillez entrer votre <span className="text-theme">nom</span> et votre{' '}
 					<span className="text-theme">prénom</span> dans les champs ci-dessous.
 					Afin que je sache qui vous êtes :)

@@ -104,8 +104,8 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 		if (window.confirm('Voulez-vous vraiment fermer cette fenêtre ?')) {
 			window.close();
 		} else {
-			toast.success(`Très bien, je ne la ferme pas :)`, {
-				className: 'text-sm font-medium',
+			toast.success('Très bien, je ne la ferme pas', {
+				description: 'Vous avez toujours le choix !',
 				duration: 5000,
 				icon: <Smiley className="text-green-600 text-xl dark:text-green-300" />,
 			});

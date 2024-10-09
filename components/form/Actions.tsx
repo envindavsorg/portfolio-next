@@ -41,7 +41,9 @@ export const StepperFormActions = (props: StepperFormActionsProps) => {
 				? 'Le message a bien été envoyé !'
 				: 'Une erreur est survenue !',
 			{
-				className: 'text-sm font-medium',
+				description: response.ok
+					? 'Je vous remercie pour votre message.'
+					: 'Le message n’a pas pu être envoyé.',
 				duration: 5000,
 				icon: response.ok ? (
 					<RocketLaunch className="text-green-600 text-xl dark:text-green-300" />

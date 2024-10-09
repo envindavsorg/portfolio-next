@@ -44,8 +44,8 @@ export const MessageStep = () => {
 		updateFormData(data);
 		nextStep();
 
-		toast.success(`Joli message, je suppose ! Continuons :)`, {
-			className: 'text-sm font-medium',
+		toast.success(`Joli message, je suppose !`, {
+			description: 'Nous pouvons maintenant continuer.',
 			duration: 5000,
 			icon: <Smiley className="text-green-600 text-xl dark:text-green-300" />,
 		});
@@ -54,7 +54,7 @@ export const MessageStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription>
+				<FormDescription className="pt-2 text-sm">
 					Veuillez entrer votre <span className="text-theme">message</span> dans
 					le champ ci-dessous.
 				</FormDescription>

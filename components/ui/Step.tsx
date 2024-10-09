@@ -486,13 +486,13 @@ interface StepLabelProps {
 const labelVariants = cva('', {
 	variants: {
 		size: {
-			sm: 'text-base sm:text-lg',
-			md: 'text-lg sm:text-xl',
-			lg: 'text-xl sm:text-2xl',
+			sm: 'text-sm sm:text-base',
+			md: 'text-base sm:text-lg',
+			lg: 'text-lg sm:text-xl',
 		},
 	},
 	defaultVariants: {
-		size: 'lg',
+		size: 'sm',
 	},
 });
 
@@ -527,7 +527,9 @@ export const StepLabel = ({
 						'ms-3 text-foreground tracking-tight',
 						labelVariants({ size }),
 						styles?.['step-label'],
-						isCurrentStep ? 'font-extrabold' : 'font-medium',
+						isCurrentStep
+							? 'font-extrabold text-theme'
+							: 'font-medium text-foreground',
 					)}
 				>
 					{label}
@@ -552,13 +554,13 @@ interface StepIconProps {
 const iconVariants = cva('', {
 	variants: {
 		size: {
-			sm: 'size-4',
+			sm: 'size-3',
 			md: 'size-4',
 			lg: 'size-5',
 		},
 	},
 	defaultVariants: {
-		size: 'md',
+		size: 'sm',
 	},
 });
 

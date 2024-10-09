@@ -74,7 +74,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
 					initialStep,
 					orientation: 'horizontal',
 					state,
-					size: 'md',
+					size: 'sm',
 					responsive: true,
 					checkIcon,
 					errorIcon,
@@ -104,7 +104,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
 						{
 							'--step-icon-size':
 								variables?.['--step-icon-size'] ||
-								`${VARIABLE_SIZES[size || 'md']}`,
+								`${VARIABLE_SIZES[size || 'sm']}`,
 							'--step-gap': variables?.['--step-gap'] || '8px',
 						} as React.CSSProperties
 					}

@@ -86,8 +86,9 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 							</Suspense>
 
 							<Sparkles density={50} />
-							<Toaster position="bottom-right" />
 						</div>
+
+						<Toaster position="bottom-right" />
 					</ThemeProvider>
 
 					{process.env.NODE_ENV === 'production' && (

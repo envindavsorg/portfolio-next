@@ -3,11 +3,14 @@ import { useFormData } from '@/components/form/Context';
 import { Form, FormDescription } from '@/components/ui/Form';
 import { useStepper } from '@/components/ui/Stepper';
 import {
-	ChatCircle,
-	Envelope,
-	Smiley,
-	User,
-} from '@phosphor-icons/react/dist/ssr';
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from '@/components/ui/Table';
+import { Smiley } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -22,7 +25,7 @@ export const SummaryStep = () => {
 		nextStep();
 
 		toast.success(`${formData.surname}, tout est bon pour vous ?`, {
-			className: 'text-sm font-medium',
+			description: 'Nous pouvons maintenant continuer.',
 			duration: 5000,
 			icon: <Smiley className="text-green-600 text-xl dark:text-green-300" />,
 		});
@@ -31,52 +34,50 @@ export const SummaryStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription>
+				<FormDescription className="pt-2 text-sm">
 					Voici un <span className="text-theme">récapitulatif</span> de vos
 					informations. Si tout est correct, vous pouvez{' '}
 					<span className="text-theme">continuer</span>, et sinon, vous pouvez
 					revenir en arrière pour les modifier.
 				</FormDescription>
-				<div className="border-border border-t-[0.5px]">
-					<dl className="divide-y-[0.5px] divide-divide">
-						<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-							<dt className="flex items-center gap-x-2 font-medium">
-								<User className="size-5 text-theme" weight="duotone" />
-								Nom
-							</dt>
-							<dd className="mt-1 font-bold font-mono leading-6 sm:col-span-2 sm:mt-0">
+
+				<Table>
+					<TableHeader>
+						<TableRow>
+							<TableHead>Champ</TableHead>
+							<TableHead className="text-right">Donnée</TableHead>
+						</TableRow>
+					</TableHeader>
+					<TableBody className="border">
+						<TableRow>
+							<TableCell className="font-medium">Votre nom</TableCell>
+							<TableCell className="text-right font-bold text-sm text-theme">
 								{formData.name}
-							</dd>
-						</div>
-						<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-							<dt className="flex items-center gap-x-2 font-medium">
-								<User className="size-5 text-theme" weight="duotone" />
-								Prénom
-							</dt>
-							<dd className="mt-1 font-bold font-mono leading-6 sm:col-span-2 sm:mt-0">
+							</TableCell>
+						</TableRow>
+						<TableRow>
+							<TableCell className="font-medium">Votre prénom</TableCell>
+							<TableCell className="text-right font-bold text-sm text-theme">
 								{formData.surname}
-							</dd>
-						</div>
-						<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-							<dt className="flex items-center gap-x-2 font-medium">
-								<Envelope className="size-5 text-theme" weight="duotone" />
-								E-mail
-							</dt>
-							<dd className="mt-1 font-bold font-mono leading-6 sm:col-span-2 sm:mt-0">
+							</TableCell>
+						</TableRow>
+						<TableRow>
+							<TableCell className="font-medium">
+								Votre adresse e-mail
+							</TableCell>
+							<TableCell className="text-right font-bold text-sm text-theme">
 								{formData.mail}
-							</dd>
-						</div>
-						<div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-							<dt className="flex items-center gap-x-2 font-medium">
-								<ChatCircle className="size-5 text-theme" weight="duotone" />
-								Message
-							</dt>
-							<dd className="mt-1 max-w-[18rem] break-words font-bold font-mono leading-6 sm:col-span-2 sm:mt-0 sm:max-w-full">
+							</TableCell>
+						</TableRow>
+						<TableRow>
+							<TableCell className="font-medium">Votre message</TableCell>
+							<TableCell className="text-right font-bold text-sm text-theme">
 								{formData.content}
-							</dd>
-						</div>
-					</dl>
-				</div>
+							</TableCell>
+						</TableRow>
+					</TableBody>
+				</Table>
+
 				<StepperFormActions formReset={form.reset} />
 			</form>
 		</Form>
