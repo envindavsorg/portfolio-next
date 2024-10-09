@@ -37,13 +37,10 @@ export const DownloadCV = ({
 			<ArrowRight className="size-4 shrink-0" weight="regular" />
 			<Download className="size-8 shrink-0" weight="bold" />
 		</div>
-		<h2 className="font-bold font-geist-sans text-base sm:text-lg">
+		<h2 className="mt-3 font-bold font-geist-sans text-lg sm:mt-0 sm:text-xl">
 			Télécharger mon <span className="font-bold text-theme">CV</span>
 		</h2>
-		<p className="-mt-2 max-w-md text-sm">
-			<span className="font-bold text-theme">Visualisez</span> et{' '}
-			<span className="font-bold text-theme">téléchargez</span> mon CV en PDF.
-		</p>
+		<p className="-mt-2 max-w-md text-sm">au format PDF.</p>
 		<div className="mt-3 flex w-full max-w-md items-center justify-center">
 			<CV />
 		</div>

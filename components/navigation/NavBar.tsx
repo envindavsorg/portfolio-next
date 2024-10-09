@@ -196,7 +196,12 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 											asChild
 										>
 											<motion.nav
-												className="relative bg-neutral-50 dark:bg-neutral-800"
+												className={cn(
+													'relative',
+													scrolled
+														? 'backdrop-blur-xl'
+														: 'bg-neutral-50 dark:bg-neutral-800',
+												)}
 												initial={{
 													opacity: 0,
 												}}
@@ -253,8 +258,8 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 																			className={cn(
 																				'flex w-full items-center justify-between text-base no-underline',
 																				active
-																					? '*:font-bold *:text-theme'
-																					: '*:font-normal *:text-foreground',
+																					? '*:font-extrabold *:text-theme'
+																					: '*:font-medium *:text-foreground',
 																			)}
 																			onClick={toggleNavbar}
 																		>
