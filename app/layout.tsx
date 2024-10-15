@@ -1,17 +1,11 @@
 import './globals.css';
 import { Providers } from '@/app/providers';
-import { Sparkles } from '@/components/background/Sparkles';
-import { Footer } from '@/components/navigation/Footer';
-import { NavBar } from '@/components/navigation/NavBar';
-import { NavBarProvider } from '@/components/navigation/NavBarProvider';
-import { SideNavBar } from '@/components/navigation/SideNavBar';
 import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { env as client } from '@/env/client';
 import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
-import { navigation } from '@/resources/navigation';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -20,7 +14,6 @@ import { ViewTransitions } from 'next-view-transitions';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import type React from 'react';
-import { Suspense } from 'react';
 
 const geistSans = localFont({
 	src: '../fonts/GeistSansVF.woff2',
@@ -72,23 +65,7 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 						disableTransitionOnChange
 					>
 						<ThemeMeta />
-						<div className="flex min-h-screen flex-col justify-between p-8 pt-0 text-foreground md:pt-8">
-							<SideNavBar />
-							<main className="mx-auto w-full max-w-[60ch] pb-5">
-								<NavBarProvider>
-									<NavBar navigation={navigation} />
-								</NavBarProvider>
-
-								{children}
-							</main>
-
-							<Suspense>
-								<Footer />
-							</Suspense>
-
-							<Sparkles density={50} />
-						</div>
-
+						{children}
 						<Toaster position="bottom-right" />
 					</ThemeProvider>
 
