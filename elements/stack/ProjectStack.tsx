@@ -7,7 +7,7 @@ import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { MarkdownIcon } from '@/components/icons/Markdown';
 import { ShellIcon } from '@/components/icons/Shell';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { Card } from '@/components/ui/Card';
+import { PatternCard } from '@/components/ui/PatternCard';
 import { env } from '@/env/server';
 import { cn } from '@/lib/utils';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -45,7 +45,7 @@ export const Languages = async ({ className }: LanguagesProps) => {
 	return (
 		<div className={cn('grid gap-3 sm:grid-cols-2', className)}>
 			{languages.map(({ name, percentage }: Languages, idx: number) => (
-				<Card
+				<PatternCard
 					key={`${name}-${idx}`}
 					tag="static"
 					icon={icons[name]}
