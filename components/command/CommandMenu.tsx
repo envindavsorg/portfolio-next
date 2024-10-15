@@ -8,7 +8,6 @@ import {
 	CardTitle,
 } from '@/components/command/CommandCard';
 import { contactItems, linksItems } from '@/components/command/CommandContact';
-import type { NavItems } from '@/components/navigation/NavItems';
 import { Button } from '@/components/ui/Button';
 import {
 	CommandDialog,
@@ -21,6 +20,7 @@ import {
 import { DialogHeader, DialogTitle } from '@/components/ui/Dialog';
 import { env } from '@/env/client';
 import { cn } from '@/lib/utils';
+import type { Navigation } from '@/resources/navigation';
 import {
 	ArrowsOut,
 	ArrowsOutCardinal,
@@ -38,11 +38,11 @@ import { type ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 interface CommandMenuProps {
-	navItems: NavItems[];
+	navigation: Navigation[];
 	pathname: string;
 }
 
-export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
+export const CommandMenu = ({ navigation, pathname }: CommandMenuProps) => {
 	const [open, setOpen] = useState(false);
 	const [query, setQuery] = useState('');
 
@@ -131,7 +131,7 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 				</DialogTitle>
 
 				<DialogHeader>
-					{navItems.map(({ name, link }: NavItems, idx) => {
+					{navigation.map(({ name, link }: Navigation, idx) => {
 						const isActive: boolean =
 							link === '/blog' ? pathname.startsWith(link) : pathname === link;
 
@@ -169,17 +169,19 @@ export const CommandMenu = ({ navItems, pathname }: CommandMenuProps) => {
 							</CardHeader>
 
 							<CardContent className="px-3 pt-0 pb-3">
-								{navItems.map(({ description, link }, idx: number) => (
-									<CommandItem
-										key={`link-${idx}`}
-										onSelect={() => {
-											setOpen(false);
-											window.open(link, '_self');
-										}}
-									>
-										{description}
-									</CommandItem>
-								))}
+								{navigation.map(
+									({ description, link }: Navigation, idx: number) => (
+										<CommandItem
+											key={`link-${idx}`}
+											onSelect={() => {
+												setOpen(false);
+												window.open(link, '_self');
+											}}
+										>
+											{description}
+										</CommandItem>
+									),
+								)}
 							</CardContent>
 						</Card>
 					</CommandGroup>

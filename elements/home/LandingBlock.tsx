@@ -3,8 +3,9 @@
 import { FadeIn } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { SocialLink } from '@/components/links/SocialLink';
-import { type ContactMe, contactMe } from '@/content/ContactMe';
 import { env } from '@/env/client';
+import { display } from '@/resources/config';
+import { type Contact, contact } from '@/resources/contact';
 import dynamic from 'next/dynamic';
 import type React from 'react';
 import type { ComponentClass, FunctionComponent } from 'react';
@@ -44,10 +45,9 @@ export const LandingBlock = (): React.JSX.Element => {
 
 				<FadeIn>
 					<div className="mt-6 flex gap-6 sm:mt-3">
-						{contactMe
-							.filter((_, idx) => idx !== 3)
+						{contact
 							.slice(0, 4)
-							.map(({ description, url, icon }: ContactMe, idx: number) => (
+							.map(({ description, url, icon }: Contact, idx: number) => (
 								<SocialLink
 									key={`${idx}-contact`}
 									href={url}
@@ -60,9 +60,11 @@ export const LandingBlock = (): React.JSX.Element => {
 				</FadeIn>
 			</div>
 
-			<FadeIn className="mt-3 flex w-full flex-col sm:mt-0">
-				<LocationWidget />
-			</FadeIn>
+			{display.location && (
+				<FadeIn className="mt-3 flex w-full flex-col sm:mt-0">
+					<LocationWidget />
+				</FadeIn>
+			)}
 		</div>
 	);
 };

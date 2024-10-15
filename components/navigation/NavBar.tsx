@@ -1,9 +1,8 @@
 'use client';
 
 import { CommandMenu } from '@/components/command/CommandMenu';
-import type { NavItems } from '@/components/navigation/NavItems';
-import { NavbarMobileButton } from '@/components/navigation/modules/NavBarMobileButton';
-import { useNavBarMobile } from '@/components/navigation/modules/NavBarProvider';
+import { NavbarMobileButton } from '@/components/navigation/NavBarMobileButton';
+import { useNavBarMobile } from '@/components/navigation/NavBarProvider';
 import { ThemeSwitch } from '@/components/theme/ThemeSwitch';
 import { Button } from '@/components/ui/Button';
 import {
@@ -16,6 +15,7 @@ import { env } from '@/env/client';
 import useScroll from '@/hooks/useScroll';
 import avatar from '@/images/avatar.webp';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
+import type { Navigation } from '@/resources/navigation';
 import { ArrowLeft } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'next-view-transitions';
@@ -24,11 +24,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import type React from 'react';
 
 interface NavBarProps {
-	navItems: NavItems[];
+	navigation: Navigation[];
 	className?: string;
 }
 
-export const NavBar = ({ navItems, className }: NavBarProps) => {
+export const NavBar = ({ navigation, className }: NavBarProps) => {
 	const router = useRouter();
 
 	const { isOpen, toggleNavbar } = useNavBarMobile();
@@ -114,7 +114,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 							scrolled && 'backdrop-blur-xl',
 						)}
 					/>
-					<CommandMenu navItems={navItems} pathname={pathname} />
+					<CommandMenu navigation={navigation} pathname={pathname} />
 
 					<div
 						className={cn(
@@ -177,7 +177,7 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 					)}
 
 					<div className="flex items-center gap-x-4">
-						<CommandMenu navItems={navItems} pathname={pathname} />
+						<CommandMenu navigation={navigation} pathname={pathname} />
 						<ThemeSwitch />
 
 						<div className={className}>
@@ -216,9 +216,9 @@ export const NavBar = ({ navItems, className }: NavBarProps) => {
 												}}
 											>
 												<div className="divide-y divide-border">
-													{navItems.map(
+													{navigation.map(
 														(
-															{ link, name, description }: NavItems,
+															{ link, name, description }: Navigation,
 															idx: number,
 														) => {
 															const active: boolean =

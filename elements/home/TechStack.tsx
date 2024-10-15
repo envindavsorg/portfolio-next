@@ -1,13 +1,19 @@
 import { FadeIn } from '@/components/animations/FadeIn';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
 import { CSSIcon } from '@/components/icons/CSS';
+import { ExpressIcon } from '@/components/icons/Express';
+import { FastifyIcon } from '@/components/icons/Fastify';
 import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
+import { MarkdownIcon } from '@/components/icons/Markdown';
+import { MongoDBIcon } from '@/components/icons/MongoDB';
+import { NextJSIcon } from '@/components/icons/Next';
+import { ReactIcon } from '@/components/icons/React';
+import { SassIcon } from '@/components/icons/Sass';
+import { TailwindCSSIcon } from '@/components/icons/Tailwind';
+import { TypeScriptIcon } from '@/components/icons/TypeScript';
+import { VueIcon } from '@/components/icons/Vue';
 import { Badge } from '@/components/ui/Badge';
-import {
-	type LanguagesIcons,
-	myLanguagesIcons,
-} from '@/content/LanguagesIcons';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
 import { Fragment } from 'react';
@@ -50,7 +56,7 @@ export const TechStack = (): React.JSX.Element => (
 
 		<FadeIn className="mt-6" asChild>
 			<div className="scrollbar-hide flex h-14 w-full flex-row space-x-2 overflow-x-auto">
-				{myLanguagesIcons.map(({ icon, name }: LanguagesIcons, idx: number) => (
+				{languages.map(({ icon, name }: Languages, idx: number) => (
 					<div
 						key={`${idx}-languages`}
 						className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
@@ -74,3 +80,63 @@ export const TechStack = (): React.JSX.Element => (
 		</FadeIn>
 	</Fragment>
 );
+
+interface Languages {
+	name: string;
+	icon: React.ReactNode;
+}
+
+const languages: Languages[] = [
+	{
+		name: 'HTML5',
+		icon: <HTML5Icon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'CSS',
+		icon: <CSSIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Sass',
+		icon: <SassIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'JavaScript',
+		icon: <JavaScriptIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'TypeScript',
+		icon: <TypeScriptIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'React',
+		icon: <ReactIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Next.js',
+		icon: <NextJSIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'MongoDB',
+		icon: <MongoDBIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Express',
+		icon: <ExpressIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Fastify',
+		icon: <FastifyIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Markdown',
+		icon: <MarkdownIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Tailwind CSS',
+		icon: <TailwindCSSIcon className="size-7 shrink-0" />,
+	},
+	{
+		name: 'Vue',
+		icon: <VueIcon className="size-7 shrink-0" />,
+	},
+];

@@ -1,5 +1,4 @@
 import { FadeIn } from '@/components/animations/FadeIn';
-import { Status } from '@/components/status/Status';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
 import { Fragment } from 'react';
@@ -41,15 +40,12 @@ export const WorkDescription = (): React.JSX.Element => (
 			</p>
 		</FadeIn>
 
-		<FadeIn className="mt-6">
+		<FadeIn className="mt-3">
 			<p className="leading-8">
 				J'ai décidé de créer ce site pour{' '}
 				<span className="font-bold">partager mes expériences</span> et{' '}
 				<span className="font-bold">mes compétences</span> avec tout le monde.
 			</p>
-			<div className="mt-3">
-				<Status />
-			</div>
 		</FadeIn>
 	</Fragment>
 );

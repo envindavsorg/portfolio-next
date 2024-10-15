@@ -4,7 +4,7 @@ import ContactForm from '../../components/form/ContactForm';
 import { SocialLink } from '../../components/links/SocialLink';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Separator } from '../../components/ui/Separator';
-import { contactMe } from '../../content/ContactMe';
+import { contact } from '../../resources/contact';
 
 export const metadata = {
     title: "Me contacter pour des questions ou des suggestions",
@@ -24,7 +24,7 @@ export const metadata = {
     </FadeIn>
     <FadeIn className="mt-6">
         <div className="flex gap-6">
-            {contactMe.map(({ description, url, icon }, idx) => (
+            {contact.map(({ description, url, icon }, idx) => (
                 <SocialLink
                     key={`${idx}-contact`}
                     href={url}

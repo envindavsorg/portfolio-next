@@ -2,14 +2,28 @@ import React from 'react';
 import Link from 'next/link';
 import { Minus } from '@phosphor-icons/react/dist/ssr';
 import { FadeIn, FadeInStagger } from '../../components/animations/FadeIn';
-import { DownloadCV } from '../../components/blocs/DownloadCV';
 import { HowToScroll } from '../../components/blocs/HowToScroll';
+import { CSSIcon } from '../../components/icons/CSS';
+import { ExpressIcon } from '../../components/icons/Express';
+import { FastifyIcon } from '../../components/icons/Fastify';
+import { FlaskIcon } from '../../components/icons/Flask';
+import { HTML5Icon } from '../../components/icons/HTML';
+import { JavaScriptIcon } from '../../components/icons/JavaScript';
+import { MarkdownIcon } from '../../components/icons/Markdown';
+import { MongoDBIcon } from '../../components/icons/MongoDB';
+import { NextJSIcon } from '../../components/icons/Next';
+import { PostgreIcon } from '../../components/icons/Postgre';
+import { PugIcon } from '../../components/icons/Pug';
+import { ReactIcon } from '../../components/icons/React';
+import { SassIcon } from '../../components/icons/Sass';
+import { StorybookIcon } from '../../components/icons/Storybook';
+import { TailwindCSSIcon } from '../../components/icons/Tailwind';
+import { TypeScriptIcon } from '../../components/icons/TypeScript';
+import { VueIcon } from '../../components/icons/Vue';
+import { VuetifyIcon } from '../../components/icons/Vuetify';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
 import { Badge } from '../../components/ui/Badge';
 import { Separator } from '../../components/ui/Separator';
-import { wefix } from '../../content/work/WeFix';
-import { spinalCom } from '../../content/work/SpinalCom';
-import { economat } from '../../content/work/EdA';
 
 export const metadata = {
     title: "Mes expériences professionnelles en développement et design web chez WeFix, SpinalCom et L'Économat des Armées",
@@ -30,6 +44,43 @@ export const Strong = ({ children }) => (
     </strong>
 );
 
+export const wefix = [
+    { icon: <TypeScriptIcon className="size-7 shrink-0" />, title: 'TypeScript' },
+    { icon: <JavaScriptIcon className="size-7 shrink-0" />, title: 'JavaScript' },
+    { icon: <ReactIcon className="size-7 shrink-0" />, title: 'React' },
+    { icon: <NextJSIcon className="size-7 shrink-0" />, title: 'Next.js' },
+    { icon: <MongoDBIcon className="size-7 shrink-0" />, title: 'MongoDB' },
+    { icon: <CSSIcon className="size-7 shrink-0" />, title: 'CSS' },
+    { icon: <SassIcon className="size-7 shrink-0" />, title: 'Sass' },
+    { icon: <TailwindCSSIcon className="size-7 shrink-0" />, title: 'Tailwind CSS' },
+    { icon: <MarkdownIcon className="size-7 shrink-0" />, title: 'Markdown' },
+    { icon: <HTML5Icon className="size-7 shrink-0" />, title: 'HTML5' },
+    { icon: <FastifyIcon className="size-7 shrink-0" />, title: 'Fastify' },
+    { icon: <ExpressIcon className="size-7 shrink-0" />, title: 'Express' },
+    { icon: <PugIcon className="size-7 shrink-0" />, title: 'Pug' },
+];
+
+export const spinalCom = [
+    { icon: <JavaScriptIcon className="size-7 shrink-0" />, title: 'JavaScript' },
+    { icon: <VueIcon className="size-7 shrink-0" />, title: 'Vue' },
+    { icon: <VuetifyIcon className="size-7 shrink-0" />, title: 'Vuetify' },
+    { icon: <CSSIcon className="size-7 shrink-0" />, title: 'CSS' },
+    { icon: <SassIcon className="size-7 shrink-0" />, title: 'Sass' },
+    { icon: <HTML5Icon className="size-7 shrink-0" />, title: 'HTML5' },
+    { icon: <TypeScriptIcon className="size-7 shrink-0" />, title: 'TypeScript' },
+    { icon: <StorybookIcon className="size-7 shrink-0" />, title: 'Storybook' },
+    { icon: <MongoDBIcon className="size-7 shrink-0" />, title: 'MongoDB' },
+    { icon: <PostgreIcon className="size-7 shrink-0" />, title: 'PostgreSQL' },
+];
+
+export const economat = [
+    { icon: <FlaskIcon className="size-7 shrink-0" />, title: 'Flask' },
+    { icon: <JavaScriptIcon className="size-7 shrink-0" />, title: 'JavaScript' },
+    { icon: <ReactIcon className="size-7 shrink-0" />, title: 'React' },
+    { icon: <HTML5Icon className="size-7 shrink-0" />, title: 'HTML5' },
+    { icon: <CSSIcon className="size-7 shrink-0" />, title: 'CSS' },
+];
+
 # Expériences professionnelles
 <AnimatedNameLink />
 
@@ -43,10 +94,6 @@ export const Strong = ({ children }) => (
     <FadeIn className="mt-3">
         Au fil de ma *carrière*, j’ai eu l’occasion de collaborer avec des
         entreprises de tailles variées, des **startups** aux **grandes entreprises**.
-    </FadeIn>
-
-    <FadeIn className="mt-10">
-        <DownloadCV />
     </FadeIn>
 
     <Separator className="my-10" />

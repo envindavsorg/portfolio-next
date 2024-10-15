@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { unstable_noStore as noStore } from 'next/cache';
-import { DownloadCV } from '../../components/blocs/DownloadCV';
 import { FadeIn, FadeInStagger } from '../../components/animations/FadeIn';
 import { Articles } from '../../components/blog/Articles';
 import { AnimatedNameLink } from '../../components/text/AnimatedName.tsx';
@@ -41,7 +40,4 @@ export const Blog = async () => {
 
 <FadeInStagger className="mt-10" faster>
     <Blog />
-    <FadeIn className="mt-10">
-        <DownloadCV />
-    </FadeIn>
 </FadeInStagger>

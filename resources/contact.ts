@@ -9,24 +9,19 @@ import {
 } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
 
-export interface ContactMe {
+export interface Contact {
 	name: string;
 	description: string;
 	url: string;
 	icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
-export const contactMe: ContactMe[] = [
+
+export const contact: Contact[] = [
 	{
 		name: 'contact',
 		description: "N'hésitez pas à m'envoyer un message",
-		url: `/`,
+		url: '/contact',
 		icon: ChatsCircle,
-	},
-	{
-		name: 'e-mail',
-		description: "N'hésitez pas à m'envoyer un email",
-		url: `mailto:${env.NEXT_PUBLIC_EMAIL}`,
-		icon: EnvelopeSimple,
 	},
 	{
 		name: 'linkedin',
@@ -39,6 +34,12 @@ export const contactMe: ContactMe[] = [
 		description: 'Envoyez-moi un message sur LinkedIn',
 		url: `https://github.com/${env.NEXT_PUBLIC_GITHUB_USERNAME}`,
 		icon: GithubLogo,
+	},
+	{
+		name: 'e-mail',
+		description: "N'hésitez pas à m'envoyer un email",
+		url: `mailto:${env.NEXT_PUBLIC_EMAIL}`,
+		icon: EnvelopeSimple,
 	},
 	{
 		name: 'téléphone',

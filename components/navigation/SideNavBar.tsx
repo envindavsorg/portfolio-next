@@ -1,7 +1,11 @@
 'use client';
 
-import { type NavItems, navItems } from '@/components/navigation/NavItems';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
+import {
+	type Navigation,
+	SIDEBAR_NUM_LINES,
+	navigation,
+} from '@/resources/navigation';
 import {
 	AnimatePresence,
 	type MotionValue,
@@ -15,9 +19,7 @@ import { usePathname } from 'next/navigation';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-const NUM_LINES: number = 30;
-
-export const SideStaggerNavigation = (): React.JSX.Element => {
+export const SideNavBar = (): React.JSX.Element => {
 	const pathname: string | null = usePathname();
 	const [isHovered, setIsHovered] = useState(false);
 	const mouseY: MotionValue<number> = useMotionValue(Number.POSITIVE_INFINITY);
@@ -34,25 +36,25 @@ export const SideStaggerNavigation = (): React.JSX.Element => {
 			}}
 			className="fixed top-0 right-0 hidden h-screen flex-col items-end justify-between py-4 pl-8 lg:flex"
 		>
-			{Array.from(Array(NUM_LINES).keys()).map((i) => {
-				const linkContent: NavItems | undefined = navItems.find(
-					(item) => item.position === i + 1,
+			{Array.from(Array(SIDEBAR_NUM_LINES).keys()).map((idx: number) => {
+				const content: Navigation | undefined = navigation.find(
+					({ position }: Navigation) => position === idx + 1,
 				);
 				const active: boolean =
-					linkContent?.link === '/blog'
-						? pathname!.startsWith(linkContent?.link)
+					content?.link === '/blog'
+						? pathname!.startsWith(content?.link)
 						: getRouterLastPathSegment(pathname!) ===
-								linkContent?.link.split('/').pop() ||
-							getRouterLastPathSegment(pathname!) === linkContent?.link;
+								content?.link.split('/').pop() ||
+							getRouterLastPathSegment(pathname!) === content?.link;
 
 				return (
 					<LinkLine
-						title={linkContent?.name}
-						link={linkContent?.link}
-						description={linkContent?.description}
+						key={`${idx}-${content?.name}`}
+						title={content?.name}
+						link={content?.link}
+						description={content?.description}
 						isHovered={isHovered}
 						mouseY={mouseY}
-						key={i}
 						active={active}
 					/>
 				);

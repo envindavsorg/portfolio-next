@@ -1,6 +1,6 @@
 'use client';
 
-import { useNavBarMobile } from '@/components/navigation/modules/NavBarProvider';
+import { useNavBarMobile } from '@/components/navigation/NavBarProvider';
 import type { Variants } from 'framer-motion';
 import { MotionConfig, motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
