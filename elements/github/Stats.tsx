@@ -1,6 +1,6 @@
 import { githubUser } from '@/actions/github/user.action';
 import { ChannelSkeleton } from '@/components/blocs/Channel';
-import { Card } from '@/components/ui/Card';
+import { PatternCard } from '@/components/ui/PatternCard';
 import { env } from '@/env/server';
 import { cn } from '@/lib/utils';
 import {
@@ -31,7 +31,7 @@ export const Stats = async ({
 	return (
 		<div className={cn('grid grid-cols-4 gap-3', className)}>
 			<div className="col-span-full min-[530px]:col-span-2">
-				<Card
+				<PatternCard
 					tag="static"
 					icon={<GitCommit className="text-theme" weight="duotone" />}
 					title={`${commits.thisYear} commit${commits.thisYear > 1 ? 's' : ''}`}
@@ -40,7 +40,7 @@ export const Stats = async ({
 				/>
 			</div>
 			<div className="col-span-full min-[530px]:col-span-2">
-				<Card
+				<PatternCard
 					tag="static"
 					icon={<CalendarCheck className="text-theme" weight="duotone" />}
 					title={`${commits.thisWeek} commit${commits.thisWeek > 1 ? 's' : ''}`}
@@ -49,7 +49,7 @@ export const Stats = async ({
 				/>
 			</div>
 			<div className="col-span-full min-[530px]:col-span-2">
-				<Card
+				<PatternCard
 					tag="static"
 					icon={<Trophy className="text-theme" weight="duotone" />}
 					title={`${commits.bestDay} commit${commits.bestDay > 1 ? 's' : ''}`}
@@ -58,7 +58,7 @@ export const Stats = async ({
 				/>
 			</div>
 			<div className="col-span-full min-[530px]:col-span-2">
-				<Card
+				<PatternCard
 					tag="static"
 					icon={<ChartPie className="text-theme" weight="duotone" />}
 					title={`${commits.perDay} commit${commits.perDay > 1 ? 's' : ''}`}
@@ -67,7 +67,7 @@ export const Stats = async ({
 				/>
 			</div>
 			<div className="col-span-full min-[530px]:col-span-2">
-				<Card
+				<PatternCard
 					tag="static"
 					icon={<UsersThree className="text-theme" weight="duotone" />}
 					title={`${followers} abonné${followers > 1 ? 's' : ''}`}
@@ -76,7 +76,7 @@ export const Stats = async ({
 				/>
 			</div>
 			<div className="col-span-full min-[530px]:col-span-2">
-				<Card
+				<PatternCard
 					tag="static"
 					icon={<UserPlus className="text-theme" weight="duotone" />}
 					title={`${following} suivi${following > 1 ? 's' : ''}`}
