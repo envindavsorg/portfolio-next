@@ -1,78 +1,86 @@
-'use client';
-
-import { DotPattern } from '@/components/background/DotPattern';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
 import type React from 'react';
+import type { HTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
-interface BaseCardProps {
-	tag: 'link' | 'static';
-	icon: React.ReactNode;
-	title?: string | number;
-	comment?: string;
-	className?: string;
-	patternColor?: string;
-}
-
-interface StaticCardProps extends BaseCardProps {
-	tag: 'static';
-}
-
-interface LinkCardProps extends BaseCardProps {
-	tag: 'link';
-	link: string;
-}
-
-type CardProps = StaticCardProps | LinkCardProps;
-
-export const Card = ({
-	tag,
-	icon,
-	title,
-	comment,
-	className,
-	patternColor = 'fill-theme',
-	...props
-}: CardProps): React.JSX.Element => {
-	const MotionComponent = tag === 'link' ? motion.a : motion.div;
-	const motionProps =
-		tag === 'link'
-			? {
-					href: (props as LinkCardProps).link,
-					whileHover: {
-						scale: 1.025,
-					},
-				}
-			: {};
-
-	return (
-		<MotionComponent
-			{...motionProps}
+const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+	({ className, ...props }: HTMLAttributes<HTMLDivElement>, ref) => (
+		<div
+			ref={ref}
 			className={cn(
+				'rounded-lg border border-neutral-200 bg-background text-card-foreground shadow-sm dark:border-neutral-700',
 				className,
-				'relative overflow-hidden rounded-md border border-neutral-200 bg-background p-4 dark:border-neutral-700',
 			)}
-		>
-			<div className="flex-shrink-0 text-3xl md:text-4xl">{icon}</div>
+			{...props}
+		/>
+	),
+);
+Card.displayName = 'Card';
 
-			{title && (
-				<div className="z-20 flex flex-col">
-					<div className="font-extrabold font-geist-sans text-lg tracking-tighter md:text-xl">
-						{title}
-					</div>
-					{comment && (
-						<span className="text-neutral-600 text-xs dark:text-neutral-400">
-							{comment}
-						</span>
-					)}
-				</div>
-			)}
+const CardHeader = forwardRef<
+	HTMLDivElement,
+	React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }: HTMLAttributes<HTMLDivElement>, ref) => (
+	<div
+		ref={ref}
+		className={cn('flex flex-col space-y-1.5 p-6', className)}
+		{...props}
+	/>
+));
+CardHeader.displayName = 'CardHeader';
 
-			<DotPattern
-				width={10}
-				height={10}
-				className={cn(patternColor, 'z-10 p-2')}
-			/>
-		</MotionComponent>
-	);
+const CardTitle = forwardRef<
+	HTMLParagraphElement,
+	React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }: HTMLAttributes<HTMLHeadingElement>, ref) => (
+	<h3
+		ref={ref}
+		className={cn(
+			'font-semibold text-2xl leading-none tracking-tight',
+			className,
+		)}
+		{...props}
+	/>
+));
+CardTitle.displayName = 'CardTitle';
+
+const CardDescription = forwardRef<
+	HTMLParagraphElement,
+	React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }: HTMLAttributes<HTMLParagraphElement>, ref) => (
+	<p
+		ref={ref}
+		className={cn('text-muted-foreground text-sm', className)}
+		{...props}
+	/>
+));
+CardDescription.displayName = 'CardDescription';
+
+const CardContent = forwardRef<
+	HTMLDivElement,
+	React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }: HTMLAttributes<HTMLDivElement>, ref) => (
+	<div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+));
+CardContent.displayName = 'CardContent';
+
+const CardFooter = forwardRef<
+	HTMLDivElement,
+	React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }: HTMLAttributes<HTMLDivElement>, ref) => (
+	<div
+		ref={ref}
+		className={cn('flex items-center p-6 pt-0', className)}
+		{...props}
+	/>
+));
+CardFooter.displayName = 'CardFooter';
+
+export {
+	Card,
+	CardHeader,
+	CardFooter,
+	CardTitle,
+	CardDescription,
+	CardContent,
 };
