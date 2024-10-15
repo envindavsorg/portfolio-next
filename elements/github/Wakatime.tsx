@@ -1,5 +1,5 @@
 import { wakatimeStats } from '@/actions/wakatime/stats.action';
-import { Card } from '@/components/ui/Card';
+import { PatternCard } from '@/components/ui/PatternCard';
 import { env } from '@/env/server';
 import { dayjs } from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
@@ -25,7 +25,7 @@ export const WakatimeStats = async ({
 			<div className={cn('flex flex-col', className)}>
 				<div className="grid grid-cols-4 gap-3">
 					<div className="col-span-full min-[530px]:col-span-2">
-						<Card
+						<PatternCard
 							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={dayjs(start).format('DD MMM YYYY')}
@@ -34,7 +34,7 @@ export const WakatimeStats = async ({
 						/>
 					</div>
 					<div className="col-span-full min-[530px]:col-span-2">
-						<Card
+						<PatternCard
 							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={dayjs(end).format('DD MMM YYYY')}
@@ -43,7 +43,7 @@ export const WakatimeStats = async ({
 						/>
 					</div>
 					<div className="col-span-full min-[530px]:col-span-2">
-						<Card
+						<PatternCard
 							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={`${(daily_average / 60 / 60).toFixed(2)} heures`}
@@ -52,7 +52,7 @@ export const WakatimeStats = async ({
 						/>
 					</div>
 					<div className="col-span-full min-[530px]:col-span-2">
-						<Card
+						<PatternCard
 							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={`${(total_seconds / 60 / 60).toFixed(2)} heures`}
@@ -61,7 +61,7 @@ export const WakatimeStats = async ({
 						/>
 					</div>
 					<div className="col-span-full">
-						<Card
+						<PatternCard
 							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={`${(best_day.total_seconds / 60 / 60).toFixed(2)} heures (${dayjs(best_day.date).format('DD MMM YYYY')})`}
