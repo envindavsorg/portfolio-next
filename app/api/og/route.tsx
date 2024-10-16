@@ -30,7 +30,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 		const { mode } = values;
 		const paint: string = mode === 'dark' ? '#FFFFFF' : '#000000';
 		const colorful: string = mode === 'dark' ? '#F5E050' : '#D85C1E';
-		const fontSize: string = heading.length > 100 ? '70px' : '100px';
+		const fontSize: string = heading.length > 60 ? '50px' : '80px';
 
 		const { host, protocol } = req.nextUrl;
 		const avatar: string = `${protocol}//${host}/og-author.png`;

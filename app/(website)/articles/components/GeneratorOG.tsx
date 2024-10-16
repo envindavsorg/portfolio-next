@@ -40,7 +40,7 @@ interface GeneratorOGProps {
 
 export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 	const [imageUrl, setImageUrl] = useState(
-		`https://www.cuzeac-florin.app/og?title=${encodeURIComponent(name)}`,
+		`https://www.cuzeac-florin.app/api/og?heading=${encodeURIComponent(name)}&type=image&mode=dark`,
 	);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -56,7 +56,7 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 
 		try {
 			const encodedTitle: string = encodeURIComponent(data.title);
-			const url: string = `https://www.cuzeac-florin.app/og?title=${encodedTitle}`;
+			const url: string = `https://www.cuzeac-florin.app/api/og?heading=${encodedTitle}&type=image&mode=dark`;
 			setImageUrl(url);
 
 			await new Promise((resolve) => setTimeout(resolve, 1000));
