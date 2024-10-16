@@ -15,7 +15,7 @@ export const ArticleTitle = ({
 		href="/blog"
 		aria-label="Retourner à la liste des articles"
 		className={cn(
-			'fade-in mb-8 flex font-bold font-geist-sans text-3xl text-theme md:text-4xl',
+			'fade-in mb-8 flex font-bold font-geist-sans text-3xl text-theme no-underline md:text-4xl',
 			className,
 		)}
 	>

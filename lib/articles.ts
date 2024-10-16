@@ -57,6 +57,7 @@ export const getAllArticles = async (): Promise<ArticleWithSlug[]> => {
 	const articles: Awaited<ArticleWithSlug>[] = await Promise.all(
 		articleFilenames.map(importArticle),
 	);
+	console.log(articles);
 
 	return articles.sort((a, z): number => +new Date(z.date) - +new Date(a.date));
 };

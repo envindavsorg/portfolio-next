@@ -1,4 +1,3 @@
-import { signIn } from '@/app/auth';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { Button } from '@/components/ui/Button';
 import {
@@ -9,6 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/Card';
+import { signIn } from '@/lib/auth';
 import { GithubLogo, SignIn } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import type React from 'react';

@@ -1,4 +1,3 @@
-import { auth } from '@/app/auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -17,6 +16,7 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/Table';
+import { auth } from '@/lib/auth';
 import {
 	Activity,
 	ArrowUpRight,

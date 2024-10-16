@@ -22,6 +22,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		GitHub({
 			clientId: env.AUTH_GITHUB_ID,
 			clientSecret: env.AUTH_GITHUB_SECRET,
+			checks: [`nonce`],
+			authorization: {
+				params: {
+					redirect_uri:
+						process.env.NODE_ENV === 'development'
+							? 'http://localhost:2702/login'
+							: 'https://cuzeac-florin.app/login',
+				},
+			},
 		}),
 	],
 	pages: {

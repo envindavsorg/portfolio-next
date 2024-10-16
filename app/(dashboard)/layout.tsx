@@ -1,4 +1,3 @@
-import { auth, signOut } from '@/app/auth';
 import { FadeInStagger } from '@/components/animations/FadeIn';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
@@ -10,6 +9,7 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { SheetContent, SheetMain, SheetTrigger } from '@/components/ui/Sheet';
 import { env } from '@/env/client';
+import { auth, signOut } from '@/lib/auth';
 import { List, Package } from '@phosphor-icons/react/dist/ssr';
 import type { Session } from 'next-auth';
 import Link from 'next/link';
