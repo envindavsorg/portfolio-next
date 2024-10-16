@@ -180,6 +180,9 @@ importers:
       postcss:
         specifier: ^8.4.47
         version: 8.4.47
+      postcss-100vh-fix:
+        specifier: ^1.0.2
+        version: 1.0.2(postcss@8.4.47)
       tailwind-merge:
         specifier: ^2.5.3
         version: 2.5.3
@@ -4235,6 +4238,12 @@ packages:
   pkg-dir@3.0.0:
     resolution: {integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==}
     engines: {node: '>=6'}
+
+  postcss-100vh-fix@1.0.2:
+    resolution: {integrity: sha512-t7vqk9AfjI4fXmWlQCEiMZFFhi1hro4WlECINI1TV6Qh1XapUJE++gCmNr95F5Hen/+bz1OmO+SiSB9TZmFmSg==}
+    engines: {node: '>=10.0'}
+    peerDependencies:
+      postcss: ^8.1.0
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -9932,6 +9941,10 @@ snapshots:
   pkg-dir@3.0.0:
     dependencies:
       find-up: 3.0.0
+
+  postcss-100vh-fix@1.0.2(postcss@8.4.47):
+    dependencies:
+      postcss: 8.4.47
 
   postcss-import@15.1.0(postcss@8.4.47):
     dependencies:
