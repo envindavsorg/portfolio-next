@@ -1,35 +1,16 @@
-import { auth } from '@/app/auth';
+import { auth, signOut } from '@/app/auth';
 import { FadeInStagger } from '@/components/animations/FadeIn';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
-import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/Card';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { SheetContent, SheetMain, SheetTrigger } from '@/components/ui/Sheet';
 import { env } from '@/env/client';
-import {
-	Bell,
-	ChartPie,
-	House,
-	List,
-	Package,
-	ShoppingCart,
-	UserCircle,
-	Users,
-} from '@phosphor-icons/react/dist/ssr';
+import { List, Package } from '@phosphor-icons/react/dist/ssr';
 import type { Session } from 'next-auth';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -45,198 +26,181 @@ const DashboardLayout = async ({
 
 	return (
 		<FadeInStagger faster>
-			<div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-				<div className="hidden border-neutral-200 border-r bg-muted/40 md:block dark:border-neutral-700">
-					<div className="flex h-full max-h-screen flex-col gap-2">
-						<div className="flex h-14 items-center justify-center border-neutral-200 border-b px-4 lg:h-[60px] lg:px-6 dark:border-neutral-700">
-							<Link
-								href="/dashboard"
-								aria-label="Beinvenue sur l'espace d'administration"
-								className="font-bold text-xl no-underline"
-							>
-								Mon portfolio
-							</Link>
+			<div className="flex min-h-screen w-full flex-col">
+				<header className="sticky top-0 flex h-16 items-center gap-4 border-neutral-200 border-b bg-background px-4 md:px-6 dark:border-neutral-700">
+					<nav className="hidden flex-col gap-6 font-medium text-lg md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+						<div className="flex items-center">
+							<Avatar className="flex size-9">
+								<AvatarImage
+									src="/og-author.png"
+									alt={`${env.NEXT_PUBLIC_NAME}${env.NEXT_PUBLIC_SURNAME}`}
+								/>
+								<AvatarFallback>
+									{`${env.NEXT_PUBLIC_NAME?.[0] || ''}${env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
+								</AvatarFallback>
+							</Avatar>
 						</div>
-						<div className="flex-1">
-							<nav className="grid items-start px-2 font-medium text-sm lg:px-4">
+						<Link
+							href="#"
+							className="text-foreground transition-colors hover:text-foreground"
+						>
+							Dashboard
+						</Link>
+						<Link
+							href="#"
+							className="text-muted-foreground transition-colors hover:text-foreground"
+						>
+							Orders
+						</Link>
+						<Link
+							href="#"
+							className="text-muted-foreground transition-colors hover:text-foreground"
+						>
+							Products
+						</Link>
+						<Link
+							href="#"
+							className="text-muted-foreground transition-colors hover:text-foreground"
+						>
+							Customers
+						</Link>
+						<Link
+							href="#"
+							className="text-muted-foreground transition-colors hover:text-foreground"
+						>
+							Analytics
+						</Link>
+					</nav>
+					<SheetMain>
+						<SheetTrigger asChild>
+							<Button
+								variant="outline"
+								size="icon"
+								className="shrink-0 md:hidden"
+							>
+								<List className="h-5 w-5" />
+								<span className="sr-only">Toggle navigation menu</span>
+							</Button>
+						</SheetTrigger>
+						<SheetContent side="left">
+							<nav className="grid gap-6 font-medium text-lg">
 								<Link
 									href="#"
-									className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+									className="flex items-center gap-2 font-semibold text-lg"
 								>
-									<House className="h-4 w-4" />
+									<Package className="h-6 w-6" />
+									<span className="sr-only">Acme Inc</span>
+								</Link>
+								<Link href="#" className="hover:text-foreground">
 									Dashboard
 								</Link>
 								<Link
 									href="#"
-									className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+									className="text-muted-foreground hover:text-foreground"
 								>
-									<House className="h-4 w-4" />
 									Orders
-									<Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-										6
-									</Badge>
 								</Link>
 								<Link
 									href="#"
-									className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+									className="text-muted-foreground hover:text-foreground"
 								>
-									<Package className="h-4 w-4" />
-									Products{' '}
+									Products
 								</Link>
 								<Link
 									href="#"
-									className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+									className="text-muted-foreground hover:text-foreground"
 								>
-									<Users className="h-4 w-4" />
 									Customers
 								</Link>
 								<Link
 									href="#"
-									className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+									className="text-muted-foreground hover:text-foreground"
 								>
-									<ChartPie className="h-4 w-4" />
 									Analytics
 								</Link>
 							</nav>
-						</div>
-						<div className="mt-auto p-4">
-							<Card x-chunk="dashboard-02-chunk-0">
-								<CardHeader className="p-2 pt-0 md:p-4">
-									<CardTitle>Upgrade to Pro</CardTitle>
-									<CardDescription>
-										Unlock all features and get unlimited access to our support
-										team.
-									</CardDescription>
-								</CardHeader>
-								<CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-									<Button size="sm" className="w-full">
-										Upgrade
-									</Button>
-								</CardContent>
-							</Card>
-						</div>
-					</div>
-				</div>
+						</SheetContent>
+					</SheetMain>
 
-				<div className="flex flex-col">
-					<header className="flex h-14 items-center gap-4 border-neutral-200 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 dark:border-neutral-700">
-						<SheetMain>
-							<SheetTrigger asChild>
-								<Button
-									variant="outline"
-									size="icon"
-									className="shrink-0 md:hidden"
-								>
-									<List className="h-5 w-5" />
-									<span className="sr-only">Toggle navigation menu</span>
-								</Button>
-							</SheetTrigger>
-							<SheetContent side="left" className="flex flex-col">
-								<nav className="grid gap-2 font-medium text-lg">
-									<Link
-										href="#"
-										className="flex items-center gap-2 font-semibold text-lg"
-									>
-										<Package className="h-6 w-6" />
-										<span className="sr-only">Acme Inc</span>
-									</Link>
-									<Link
-										href="#"
-										className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-									>
-										<House className="h-5 w-5" />
-										Dashboard
-									</Link>
-									<Link
-										href="#"
-										className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
-									>
-										<ShoppingCart className="h-5 w-5" />
-										Orders
-										<Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-											6
-										</Badge>
-									</Link>
-									<Link
-										href="#"
-										className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-									>
-										<Package className="h-5 w-5" />
-										Products
-									</Link>
-									<Link
-										href="#"
-										className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-									>
-										<Users className="h-5 w-5" />
-										Customers
-									</Link>
-									<Link
-										href="#"
-										className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-									>
-										<ChartPie className="h-5 w-5" />
-										Analytics
-									</Link>
-								</nav>
-								<div className="mt-auto">
-									<Card>
-										<CardHeader>
-											<CardTitle>Upgrade to Pro</CardTitle>
-											<CardDescription>
-												Unlock all features and get unlimited access to our
-												support team.
-											</CardDescription>
-										</CardHeader>
-										<CardContent>
-											<Button size="sm" className="w-full">
-												Upgrade
-											</Button>
-										</CardContent>
-									</Card>
-								</div>
-							</SheetContent>
-						</SheetMain>
-						<div className="w-full flex-1">
-							<Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-								<Bell className="h-4 w-4" />
-								<span className="sr-only">Toggle notifications</span>
-							</Button>
+					<div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+						<div className="ml-auto flex-1 sm:flex-initial">
+							<div className="ms-auto flex w-fit flex-col items-end justify-end">
+								<h3 className="font-bold font-geist-sans text-sm">
+									{session.user.name}
+								</h3>
+								<p className="text-muted-foreground text-xs">
+									{session.user.email}
+								</p>
+							</div>
 						</div>
 						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button
-									variant="secondary"
-									size="icon"
-									className="rounded-full"
-								>
-									<UserCircle className="h-5 w-5" />
-									<span className="sr-only">Toggle user menu</span>
-
-									<Avatar className="size-8">
-										<AvatarImage
-											src={session.user.image || '/og.png'}
-											alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
-										/>
-										<AvatarFallback>CN</AvatarFallback>
-									</Avatar>
-								</Button>
+							<DropdownMenuTrigger className="cursor-pointer" asChild>
+								<Avatar className="flex size-9">
+									<AvatarImage
+										src={session.user.image || '/og.png'}
+										alt={
+											session.user.name ||
+											`${env.NEXT_PUBLIC_NAME}${env.NEXT_PUBLIC_SURNAME}`
+										}
+									/>
+									<AvatarFallback>
+										{`${env.NEXT_PUBLIC_NAME?.[0] || ''}${env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
+									</AvatarFallback>
+									<span className="sr-only">Cliquer pour ouvrir le menu</span>
+								</Avatar>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent align="end">
-								<DropdownMenuLabel>My Account</DropdownMenuLabel>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem>Settings</DropdownMenuItem>
-								<DropdownMenuItem>Support</DropdownMenuItem>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem>Logout</DropdownMenuItem>
+							<DropdownMenuContent
+								className="mt-2 flex w-44 flex-col gap-y-6 rounded-md bg-background p-3"
+								align="end"
+							>
+								<div className="divide-y divide-border">
+									<DropdownMenuItem
+										asChild
+										className="focus:!bg-transparent space-y-3 px-0 py-3"
+									>
+										<Link
+											href="/"
+											aria-label="Retourner à la page d'accueil"
+											className="flex w-full items-center justify-between font-medium text-base text-foreground no-underline"
+										>
+											<p>accueil</p>
+										</Link>
+									</DropdownMenuItem>
+									<DropdownMenuItem
+										asChild
+										className="focus:!bg-transparent space-y-3 px-0 py-3"
+									>
+										<Link
+											href="/"
+											aria-label="Retourner à la page d'accueil"
+											className="flex w-full items-center justify-between font-medium text-base text-foreground no-underline"
+										>
+											<p>accueil</p>
+										</Link>
+									</DropdownMenuItem>
+								</div>
+
+								<form
+									action={async () => {
+										'use server';
+										await signOut();
+									}}
+								>
+									<Button
+										className="w-full"
+										size="default"
+										variant="destructive"
+									>
+										<p className="font-bold">Déconnexion</p>
+									</Button>
+								</form>
 							</DropdownMenuContent>
 						</DropdownMenu>
-					</header>
-
-					<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-						{children}
-					</main>
-				</div>
+					</div>
+				</header>
+				<main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+					{children}
+				</main>
 			</div>
 		</FadeInStagger>
 	);
