@@ -31,7 +31,7 @@ export const contact: Contact[] = [
 	},
 	{
 		name: 'github',
-		description: 'Envoyez-moi un message sur LinkedIn',
+		description: 'Voir mon profil sur GitHub',
 		url: `https://github.com/${env.NEXT_PUBLIC_GITHUB_USERNAME}`,
 		icon: GithubLogo,
 	},

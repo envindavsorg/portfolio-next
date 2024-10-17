@@ -1,13 +1,5 @@
 'use client';
 
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/command/CommandCard';
-import { contactItems, linksItems } from '@/components/command/CommandContact';
 import { Button } from '@/components/ui/Button';
 import {
 	CommandDialog,
@@ -16,78 +8,71 @@ import {
 	CommandInput,
 	CommandItem,
 	CommandList,
+	CommandShortcut,
 } from '@/components/ui/Command';
-import { DialogHeader, DialogTitle } from '@/components/ui/Dialog';
 import { env } from '@/env/client';
-import { cn } from '@/lib/utils';
-import type { Navigation } from '@/resources/navigation';
+import { type Contact, contact } from '@/resources/contact';
+import { type Links, links } from '@/resources/links';
+import { type Navigation, navigation } from '@/resources/navigation';
 import {
 	ArrowsOut,
 	ArrowsOutCardinal,
 	ChartBar,
-	GoogleLogo,
+	File,
+	Laptop,
 	MagnifyingGlass,
 	MoonStars,
 	SunDim,
+	X,
 	XCircle,
 } from '@phosphor-icons/react';
-import { EnvelopeSimple, Smiley } from '@phosphor-icons/react/dist/ssr';
+import { Smiley } from '@phosphor-icons/react/dist/ssr';
+import type { DialogProps } from '@radix-ui/react-dialog';
 import { useTheme } from 'next-themes';
-import type React from 'react';
-import { type ChangeEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-interface CommandMenuProps {
-	navigation: Navigation[];
-	pathname: string;
-}
-
-export const CommandMenu = ({ navigation, pathname }: CommandMenuProps) => {
+export const CommandMenu = ({ ...props }: DialogProps) => {
+	const router = useRouter();
 	const [open, setOpen] = useState(false);
-	const [query, setQuery] = useState('');
+	const [isFullscreen, setIsFullscreen] = useState(false);
+	const { setTheme } = useTheme();
 
 	useEffect(() => {
-		const down = (event: KeyboardEvent): void => {
-			if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
+		const down = (event: KeyboardEvent) => {
+			if (
+				(event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
+				event.key === '/'
+			) {
+				if (
+					(event.target instanceof HTMLElement &&
+						event.target.isContentEditable) ||
+					event.target instanceof HTMLInputElement ||
+					event.target instanceof HTMLTextAreaElement ||
+					event.target instanceof HTMLSelectElement
+				) {
+					return;
+				}
+
 				event.preventDefault();
 				setOpen((open) => !open);
 			}
 		};
 
 		document.addEventListener('keydown', down);
-
 		return () => document.removeEventListener('keydown', down);
 	}, []);
 
-	const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-		setQuery(event.target.value);
-	};
+	const runCommand = useCallback((command: () => unknown) => {
+		setOpen(false);
+		command();
+	}, []);
 
-	const handleFindGoogle = (): void => {
-		const url: string = `https://www.google.com/search?q=${query}&ref=cuzeac-florin.app`;
-		window.open(url, '_blank');
-	};
+	///////////////////////////////////////////////////////////////////////////////////
 
-	const { systemTheme, theme, setTheme } = useTheme();
-	const [currentTheme, setCurrentTheme] = useState<string | undefined>(
-		undefined,
-	);
-
-	useEffect(() => {
-		setCurrentTheme(theme === 'system' ? systemTheme : theme);
-	}, [theme, systemTheme]);
-
-	const toggleTheme = (): void => {
-		if (currentTheme === 'light') {
-			setTheme('dark');
-		} else {
-			setTheme('light');
-		}
-	};
-
-	const [isFullscreen, setIsFullscreen] = useState(false);
-
-	const handleFullscreen = (): void => {
+	const fullscreen = (): void => {
 		if (document.fullscreenElement) {
 			if (document.exitFullscreen) {
 				document.exitFullscreen();
@@ -100,7 +85,7 @@ export const CommandMenu = ({ navigation, pathname }: CommandMenuProps) => {
 		}
 	};
 
-	const handleClose = (): void => {
+	const close = (): void => {
 		if (window.confirm('Voulez-vous vraiment fermer cette fenêtre ?')) {
 			window.close();
 		} else {
@@ -118,291 +103,127 @@ export const CommandMenu = ({ navigation, pathname }: CommandMenuProps) => {
 				variant="ghost"
 				size="icon"
 				className="z-20 flex shrink-0 rounded-none"
-				onClick={() => setOpen((open: boolean) => !open)}
 				aria-labelledby="Effectuer une recherche sur mon site"
 				aria-label="Effectuer une recherche sur mon site"
+				onClick={() => setOpen(true)}
+				{...props}
 			>
-				<MagnifyingGlass className="text-2xl" />
+				<MagnifyingGlass className="size-5 shrink-0" />
 			</Button>
 
 			<CommandDialog open={open} onOpenChange={setOpen}>
-				<DialogTitle className="sr-only">
-					Menu avec les différents contenus et commandes
-				</DialogTitle>
-
-				<DialogHeader>
-					{navigation.map(({ name, link }: Navigation, idx) => {
-						const isActive: boolean =
-							link === '/blog' ? pathname.startsWith(link) : pathname === link;
-
-						return isActive ? (
-							<div
-								key={`indicator-${idx}`}
-								className={cn(
-									'inline-flex animate-pulse select-none items-center',
-									'h-6 w-fit px-2 py-1',
-									'rounded-md border border-border font-semibold text-xs',
-								)}
-							>
-								{name}
-							</div>
-						) : null;
-					})}
-				</DialogHeader>
-
-				<CommandInput
-					placeholder="De quoi avez-vous besoin ? ..."
-					onChangeCapture={handleInputChange}
-					className="mt-1"
-				/>
+				<div className="relative">
+					<CommandInput placeholder="Tapez une commande ou recherchez ..." />
+					<CommandShortcut
+						className="-translate-y-1/2 absolute top-1/2 right-3 transform"
+						onClick={() => setOpen(false)}
+					>
+						<X className="size-4 shrink-0 opacity-70" />
+						<span className="sr-only">Fermer</span>
+					</CommandShortcut>
+				</div>
 
 				<CommandList>
-					<CommandGroup className="mt-4">
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-sm text-theme">
-									Pages et plan du site :
-								</CardTitle>
-								<CardDescription className="text-xs">
-									- choisissez un élément dans la liste ci-dessous.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
-								{navigation.map(
-									({ description, link }: Navigation, idx: number) => (
-										<CommandItem
-											key={`link-${idx}`}
-											onSelect={() => {
-												setOpen(false);
-												window.open(link, '_self');
-											}}
-										>
-											{description}
-										</CommandItem>
-									),
-								)}
-							</CardContent>
-						</Card>
-					</CommandGroup>
-
-					<div className="my-4" />
-
-					<CommandGroup>
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-green-600 text-sm dark:text-green-300">
-									Entrez en contact avec moi :
-								</CardTitle>
-								<CardDescription className="text-xs">
-									- choisissez un moyen de contact dans la liste ci-dessous.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
-								{contactItems.map(
-									({ title, url, icon, description }, idx: number) => (
-										<CommandItem
-											key={`link-${idx}-${title}`}
-											onSelect={() => {
-												setOpen(false);
-												window.open(url, '_self');
-											}}
-										>
-											<div className="*:size-4 *:text-green-600 dark:*:text-green-300">
-												{icon}
-											</div>
-											<span>{description}</span>
-										</CommandItem>
-									),
-								)}
-							</CardContent>
-						</Card>
-					</CommandGroup>
-
-					<div className="my-4" />
-
-					<CommandGroup>
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-sm text-violet-600 dark:text-violet-300">
-									Liens externes :
-								</CardTitle>
-								<CardDescription className="text-xs">
-									- choisissez un lien dans la liste ci-dessous.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
-								{Object.entries(linksItems).map(
-									([title, { link, icon, text }], idx: number) => (
-										<CommandItem
-											key={`link-${idx}-${title}`}
-											onSelect={() => {
-												setOpen(false);
-												window.open(link, '_blank');
-											}}
-										>
-											<div className="*:size-4 *:text-violet-600 dark:*:text-violet-300">
-												{icon}
-											</div>
-											<span>{text}</span>
-										</CommandItem>
-									),
-								)}
-							</CardContent>
-						</Card>
-					</CommandGroup>
-
-					<div className="my-4" />
-
-					<CommandGroup>
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-red-600 text-sm dark:text-red-300">
-									Apparence & outils :
-								</CardTitle>
-								<CardDescription className="text-xs">
-									- choisissez un élément dans la liste ci-dessous.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
-								<CommandItem onSelect={toggleTheme}>
-									{currentTheme === 'light' ? (
-										<>
-											<MoonStars
-												className="size-4 text-red-600 dark:text-red-300"
-												weight="duotone"
-											/>
-											<span>Activer le thème sombre sur le site</span>
-										</>
-									) : (
-										<>
-											<SunDim
-												className="size-4 text-red-600 dark:text-red-300"
-												weight="duotone"
-											/>
-											<span>Activer le thème clair sur le site</span>
-										</>
-									)}
-								</CommandItem>
-
-								<CommandItem onSelect={handleFullscreen}>
-									{isFullscreen ? (
-										<>
-											<ArrowsOutCardinal
-												className="size-4 text-red-600 dark:text-red-300"
-												weight="duotone"
-											/>
-											<span>Quitter le mode plein écran</span>
-										</>
-									) : (
-										<>
-											<ArrowsOut
-												className="size-4 text-red-600 dark:text-red-300"
-												weight="duotone"
-											/>
-											<span>Activer le mode plein écran</span>
-										</>
-									)}
-								</CommandItem>
-
-								<CommandItem onSelect={handleClose}>
-									<XCircle
-										className="size-4 text-red-600 dark:text-red-300"
-										weight="duotone"
-									/>
-									<span>Fermer cette fenêtre</span>
-								</CommandItem>
-							</CardContent>
-						</Card>
-					</CommandGroup>
-
-					<div className="my-4" />
-
-					<CommandGroup>
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-pink-600 text-sm dark:text-pink-300">
-									Statistiques d'audience de mon site :
-								</CardTitle>
-								<CardDescription className="text-xs">
-									- choisissez un élément dans la liste ci-dessous.
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
+					<CommandEmpty>Aucun résultat ...</CommandEmpty>
+					<CommandGroup heading="Pages et plan du site :">
+						{navigation.map(
+							({ description, link }: Navigation, idx: number) => (
 								<CommandItem
+									key={`link-${idx}`}
+									value={description}
 									onSelect={() => {
-										setOpen(false);
-										window.open(
-											env.NEXT_PUBLIC_UMAMI_PREVIEW_ENDPOINT,
-											'_blank',
-										);
+										runCommand(() => router.push(link));
 									}}
 								>
-									<>
-										<ChartBar
-											className="size-4 text-pink-600 dark:text-pink-300"
-											weight="duotone"
-										/>
-										<span>Voir les statistiques sur Umami</span>
-									</>
+									<File className="mr-2 size-5 shrink-0" />
+									{description}
 								</CommandItem>
-							</CardContent>
-						</Card>
+							),
+						)}
 					</CommandGroup>
+					<CommandGroup heading="Contact :">
+						{contact.map(
+							(
+								{ name, description, url, icon: Icon }: Contact,
+								idx: number,
+							) => (
+								<CommandItem
+									key={`link-${idx}-${name}`}
+									onSelect={() => {
+										setOpen(false);
+										window.open(url, '_self');
+									}}
+								>
+									<Icon className="mr-2 size-5 shrink-0" />
+									<span>{description}</span>
+								</CommandItem>
+							),
+						)}
+					</CommandGroup>
+					<CommandGroup heading="Liens :">
+						{links.map(
+							({ name, description, url, icon: Icon }: Links, idx: number) => (
+								<CommandItem
+									key={`link-${idx}-${name}`}
+									onSelect={() => {
+										setOpen(false);
+										window.open(url, '_self');
+									}}
+								>
+									<Icon className="mr-2 size-5 shrink-0" />
+									<span>{description}</span>
+								</CommandItem>
+							),
+						)}
+					</CommandGroup>
+					<CommandGroup heading="Apparence :">
+						<CommandItem onSelect={() => runCommand(() => setTheme('light'))}>
+							<SunDim className="mr-2 size-5 shrink-0" />
+							Mode clair
+						</CommandItem>
+						<CommandItem onSelect={() => runCommand(() => setTheme('dark'))}>
+							<MoonStars className="mr-2 size-5 shrink-0" />
+							Mode sombre
+						</CommandItem>
+						<CommandItem onSelect={() => runCommand(() => setTheme('system'))}>
+							<Laptop className="mr-2 size-5 shrink-0" />
+							Système
+						</CommandItem>
+					</CommandGroup>
+					<CommandGroup heading="Outils :">
+						<CommandItem onSelect={() => runCommand(() => fullscreen())}>
+							{isFullscreen ? (
+								<ArrowsOutCardinal
+									className="mr-2 size-5 shrink-0"
+									weight="duotone"
+								/>
+							) : (
+								<ArrowsOut className="mr-2 size-5 shrink-0" />
+							)}
+							{isFullscreen ? (
+								<>Quitter le mode plein écran</>
+							) : (
+								<>Activer le mode plein écran</>
+							)}
+						</CommandItem>
 
-					<CommandEmpty>
-						<Card>
-							<CardHeader className="space-y-1 p-3">
-								<CardTitle className="text-base">
-									Aucun résultat trouvé pour{' '}
-									<span className="text-theme italic">`{query}`</span> :
-								</CardTitle>
-								<CardDescription className="text-sm">
-									- contactez-moi ou trouvez sur Google à la place ?
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="px-3 pt-0 pb-3">
-								<div className="flex w-full flex-col justify-start gap-3 sm:flex-row">
-									<Button
-										className="flex items-center gap-x-2 font-semibold"
-										variant="outline"
-										onClick={() => {
-											setOpen(false);
-											window.open('/contact', '_self');
-										}}
-									>
-										<EnvelopeSimple className="size-4 shrink-0" weight="bold" />
-										Me contacter
-									</Button>
-									<Button
-										className="flex items-center gap-x-2 font-semibold"
-										variant="outline"
-										onClick={handleFindGoogle}
-									>
-										<GoogleLogo className="size-4 shrink-0" weight="bold" />
-										Trouver sur Google
-									</Button>
-								</div>
-							</CardContent>
-						</Card>
-
-						<p className="mt-3 hidden w-full text-end text-muted-foreground text-xs lg:inline-block">
-							Appuyez sur{' '}
-							<kbd className="border border-border font-extrabold text-[10px]">
-								ESC
-							</kbd>{' '}
-							pour fermer.
-						</p>
-
-						<p className="mt-3 w-full text-end text-muted-foreground text-xs lg:hidden">
-							Appuyez <span>n'importe où</span> pour fermer.
-						</p>
-					</CommandEmpty>
+						<CommandItem onSelect={() => runCommand(() => close())}>
+							<XCircle className="mr-2 size-5 shrink-0" />
+							Fermer cette fenêtre
+						</CommandItem>
+					</CommandGroup>
+					<CommandGroup heading="Statistiques :">
+						<CommandItem
+							onSelect={() =>
+								runCommand(() =>
+									window.open(env.NEXT_PUBLIC_UMAMI_PREVIEW_ENDPOINT, '_blank'),
+								)
+							}
+						>
+							<ChartBar className="mr-2 size-5 shrink-0" />
+							Voir les statistiques sur Umami
+						</CommandItem>
+					</CommandGroup>
 				</CommandList>
 			</CommandDialog>
 		</>
