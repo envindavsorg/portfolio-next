@@ -2,7 +2,7 @@ import type { RefObject } from 'react';
 import { useEffect } from 'react';
 
 const useOutsideClick = (
-	ref: RefObject<HTMLDivElement>,
+	ref: RefObject<HTMLDivElement | null>,
 	callback: (event: Event) => void,
 ): void =>
 	useEffect((): (() => void) => {
