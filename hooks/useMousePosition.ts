@@ -5,7 +5,7 @@ interface MousePosition {
 	y: number | null;
 }
 
-const useMousePosition = (ref: RefObject<HTMLElement>): MousePosition => {
+const useMousePosition = (ref: RefObject<HTMLElement | null>): MousePosition => {
 	const [mousePosition, setMousePosition] = useState<MousePosition>({
 		x: null,
 		y: null,
