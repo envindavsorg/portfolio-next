@@ -13,9 +13,9 @@ import type { ComponentClass, FunctionComponent } from 'react';
 const LocationWidget: ComponentClass<object> | FunctionComponent<object> =
 	dynamic(
 		() =>
-			import('@/components/blocs/LocationWidget').then(
-				(mod) => mod.LocationWidget,
-			),
+			import('@/components/blocs/LocationWidget').then((mod) => ({
+				default: mod.LocationWidget,
+			})),
 		{ ssr: false },
 	);
 

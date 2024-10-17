@@ -114,7 +114,7 @@ export const NavBar = ({ navigation, className }: NavBarProps) => {
 							scrolled && 'backdrop-blur-xl',
 						)}
 					/>
-					<CommandMenu navigation={navigation} pathname={pathname} />
+					<CommandMenu />
 
 					<div
 						className={cn(
@@ -177,8 +177,8 @@ export const NavBar = ({ navigation, className }: NavBarProps) => {
 					)}
 
 					<div className="flex items-center gap-x-4">
-						<CommandMenu navigation={navigation} pathname={pathname} />
-						<ThemeSwitch />
+						{/*<CommandMenu />
+						<ThemeSwitch />*/}
 
 						<div className={className}>
 							<DropdownMenu open={isOpen} onOpenChange={toggleNavbar}>
