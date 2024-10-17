@@ -2,10 +2,10 @@
 
 import { usePathname } from 'next/navigation';
 import type React from 'react';
-import { type MutableRefObject, createContext, useEffect, useRef } from 'react';
+import { type RefObject, createContext, useEffect, useRef } from 'react';
 
 const usePrevious = <T,>(value: T) => {
-	const ref: MutableRefObject<T | undefined> = useRef<T>();
+	const ref: RefObject<T | undefined> = useRef<T>(undefined);
 
 	useEffect(() => {
 		ref.current = value;
