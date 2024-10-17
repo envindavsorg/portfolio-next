@@ -21,7 +21,7 @@ export const AnimatedName = ({
 		)}
 	>
 		<span className="sr-only">{name}</span>
-		<span aria-hidden="true" className="group relative block overflow-hidden">
+		<span className="group relative block overflow-hidden">
 			<span className="group-hover:-translate-y-full inline-block transition-all duration-300 ease-in-out">
 				{name.split('').map((letter: string, idx: number) => (
 					<span
