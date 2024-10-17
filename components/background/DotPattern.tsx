@@ -26,7 +26,6 @@ export const DotPattern = ({
 
 	return (
 		<svg
-			aria-hidden="true"
 			className={cn(
 				'pointer-events-none absolute inset-0 size-full',
 				'[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]',

@@ -20,6 +20,7 @@ const viewport = {
 export const FadeIn = (
 	props: React.ComponentPropsWithoutRef<typeof motion.div> & {
 		asChild?: boolean;
+		className?: string;
 	},
 ): React.JSX.Element => {
 	const shouldReduceMotion = useReducedMotion();

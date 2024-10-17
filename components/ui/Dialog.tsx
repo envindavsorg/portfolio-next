@@ -13,7 +13,7 @@ const DialogPortal = DialogPrimitive.Portal;
 const DialogClose = DialogPrimitive.Close;
 
 const DialogOverlay = forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Overlay>,
+	React.ComponentRef<typeof DialogPrimitive.Overlay>,
 	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(
 	(
@@ -38,7 +38,7 @@ const DialogOverlay = forwardRef<
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 const DialogContent = forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Content>,
+	React.ComponentRef<typeof DialogPrimitive.Content>,
 	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(
 	(
@@ -51,7 +51,7 @@ const DialogContent = forwardRef<
 				ref={ref}
 				className={cn(
 					'fixed top-[50%] left-[50%] z-50 grid translate-x-[-50%] translate-y-[-50%] gap-4 duration-200',
-					'w-11/12 max-w-xl rounded-md border border-border border-dashed bg-background p-6',
+					'w-11/12 max-w-xl rounded-md border border-neutral-200 bg-background p-6 dark:border-neutral-700',
 					'data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=closed]:animate-out',
 					'data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:animate-in',
 					className,
@@ -106,7 +106,7 @@ const DialogFooter = ({
 DialogFooter.displayName = 'DialogFooter';
 
 const DialogTitle = forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Title>,
+	React.ComponentRef<typeof DialogPrimitive.Title>,
 	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(
 	(
@@ -126,7 +126,7 @@ const DialogTitle = forwardRef<
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
 const DialogDescription = forwardRef<
-	React.ElementRef<typeof DialogPrimitive.Description>,
+	React.ComponentRef<typeof DialogPrimitive.Description>,
 	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(
 	(
