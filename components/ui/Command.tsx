@@ -1,21 +1,16 @@
 'use client';
 
-import { Dialog, DialogContent } from '@/components/ui/Dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/Dialog';
 import { cn } from '@/lib/utils';
-import { Pen } from '@phosphor-icons/react';
+import { MagnifyingGlass } from '@phosphor-icons/react';
 import type { DialogProps } from '@radix-ui/react-dialog';
 import { Command as CommandPrimitive } from 'cmdk';
 import type React from 'react';
-import {
-	type ComponentPropsWithoutRef,
-	type ElementRef,
-	type MutableRefObject,
-	forwardRef,
-	useRef,
-} from 'react';
+import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
+import { forwardRef, useRef } from 'react';
 
 const Command = forwardRef<
-	ElementRef<typeof CommandPrimitive>,
+	ComponentRef<typeof CommandPrimitive>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive>
 >(
 	(
@@ -40,8 +35,9 @@ const CommandDialog = ({
 	children,
 	...props
 }: CommandDialogProps): React.JSX.Element => {
-	const ref: MutableRefObject<HTMLDivElement | null> =
-		useRef<HTMLDivElement | null>(null);
+	const ref: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(
+		null,
+	);
 
 	const bounce = (): void => {
 		const { current } = ref;
@@ -59,26 +55,19 @@ const CommandDialog = ({
 
 	return (
 		<Dialog {...props}>
+			<DialogTitle className="sr-only">
+				Menu avec les différents contenus et commandes
+			</DialogTitle>
 			<DialogContent
-				className="overflow-hidden p-3"
+				className="max-w-lg overflow-hidden p-0"
 				ref={ref}
 				onKeyDown={(event: React.KeyboardEvent): void => {
-					const { key } = event;
-
-					if (key === 'Enter' || key === 'Backspace') {
+					if (event.key === 'Enter' || event.key === 'Backspace') {
 						bounce();
 					}
 				}}
 			>
-				<Command
-					className={cn(
-						'[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium',
-						'[&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0',
-						'[&_[cmdk-group]]:px-0 [&_[cmdk-input-wrapper]_svg]:h-5',
-						'[&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12',
-						'[&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5',
-					)}
-				>
+				<Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
 					{children}
 				</Command>
 			</DialogContent>
@@ -87,7 +76,7 @@ const CommandDialog = ({
 };
 
 const CommandInput = forwardRef<
-	ElementRef<typeof CommandPrimitive.Input>,
+	ComponentRef<typeof CommandPrimitive.Input>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(
 	(
@@ -99,15 +88,18 @@ const CommandInput = forwardRef<
 	): React.JSX.Element => (
 		<div
 			className={cn(
-				'flex items-center gap-x-2 border-border border-b',
+				'flex items-center border-neutral-200 border-b px-3 dark:border-neutral-700',
 				className,
 			)}
 			cmdk-input-wrapper=""
 		>
-			<Pen className="size-5" />
+			<MagnifyingGlass
+				className="mr-2 size-5 shrink-0 opacity-50"
+				weight="duotone"
+			/>
 			<CommandPrimitive.Input
 				ref={ref}
-				className="h-11 w-full rounded-none bg-transparent py-3 font-geist-sans text-base outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+				className="w-full rounded-none bg-transparent py-3 font-geist-sans text-base outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
 				{...props}
 			/>
 		</div>
@@ -117,7 +109,7 @@ const CommandInput = forwardRef<
 CommandInput.displayName = CommandPrimitive.Input.displayName;
 
 const CommandList = forwardRef<
-	ElementRef<typeof CommandPrimitive.List>,
+	ComponentRef<typeof CommandPrimitive.List>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.List>
 >(
 	(
@@ -138,18 +130,22 @@ const CommandList = forwardRef<
 CommandList.displayName = CommandPrimitive.List.displayName;
 
 const CommandEmpty = forwardRef<
-	ElementRef<typeof CommandPrimitive.Empty>,
+	ComponentRef<typeof CommandPrimitive.Empty>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
 >(
 	(props, ref): React.JSX.Element => (
-		<CommandPrimitive.Empty ref={ref} className="py-3" {...props} />
+		<CommandPrimitive.Empty
+			ref={ref}
+			className="py-6 text-center text-sm"
+			{...props}
+		/>
 	),
 );
 
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
 const CommandGroup = forwardRef<
-	ElementRef<typeof CommandPrimitive.Group>,
+	ComponentRef<typeof CommandPrimitive.Group>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
 >(
 	(
@@ -162,15 +158,7 @@ const CommandGroup = forwardRef<
 		<CommandPrimitive.Group
 			ref={ref}
 			className={cn(
-				'overflow-hidden text-foreground',
-				'[&_[cmdk-group-heading]]:flex [&_[cmdk-group-heading]]:items-center',
-				'[&_[cmdk-group-heading]]:px-2',
-				'[&_[cmdk-group-heading]]:py-0',
-				'[&_[cmdk-group-heading]]:mb-2',
-				'[&_[cmdk-group-heading]]:font-medium',
-				'[&_[cmdk-group-heading]]:text-muted-foreground',
-				'[&_[cmdk-group-heading]]:text-xs',
-				'[&_[cmdk-group-heading]]:select-none',
+				'overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-theme [&_[cmdk-group-heading]]:text-xs sm:[&_[cmdk-group-heading]]:font-geist-sans',
 				className,
 			)}
 			{...props}
@@ -181,7 +169,7 @@ const CommandGroup = forwardRef<
 CommandGroup.displayName = CommandPrimitive.Group.displayName;
 
 const CommandSeparator = forwardRef<
-	ElementRef<typeof CommandPrimitive.Separator>,
+	ComponentRef<typeof CommandPrimitive.Separator>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
 >(
 	(
@@ -201,7 +189,7 @@ const CommandSeparator = forwardRef<
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
 const CommandItem = forwardRef<
-	ElementRef<typeof CommandPrimitive.Item>,
+	ComponentRef<typeof CommandPrimitive.Item>,
 	ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
 >(
 	(
@@ -214,11 +202,7 @@ const CommandItem = forwardRef<
 		<CommandPrimitive.Item
 			ref={ref}
 			className={cn(
-				'relative h-12 cursor-pointer select-none rounded-lg px-4 py-0 text-sm outline-none',
-				'flex items-center gap-2',
-				'duration transition-all transition-none ease-in will-change-[background,color]',
-				'aria-selected:bg-accent aria-selected:text-accent-foreground',
-				'data-[disabled="true"]:pointer-events-none data-[disabled="true"]:opacity-50',
+				'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50',
 				className,
 			)}
 			style={{ contentVisibility: 'auto' }}
@@ -236,7 +220,7 @@ const CommandShortcut = ({
 	return (
 		<span
 			className={cn(
-				'ml-auto text-muted-foreground text-sm tracking-widest',
+				'ml-auto cursor-pointer text-muted-foreground text-sm tracking-widest',
 				className,
 			)}
 			{...props}
