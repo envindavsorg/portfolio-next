@@ -33,7 +33,7 @@ export const increment = async (slug: string) => {
 		return;
 	}
 
-	const headersList = headers();
+	const headersList = await headers();
 	const forwardedFor = headersList.get('x-forwarded-for');
 	const realIp = headersList.get('x-real-ip');
 	const ipSource = forwardedFor || realIp || 'localhost';
