@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
-import { MoonStars, SunDim } from '@phosphor-icons/react';
+import { CloudMoon, Sun } from '@phosphor-icons/react';
 import { type Variants, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -10,7 +10,7 @@ interface ThemeSwitchProps {
 	size?: number;
 }
 
-export const ThemeSwitch = ({ size = 26 }: ThemeSwitchProps) => {
+export const ThemeSwitch = ({ size = 24 }: ThemeSwitchProps) => {
 	const { systemTheme, theme, setTheme } = useTheme();
 	const [currentTheme, setCurrentTheme] = useState<string | undefined>(
 		undefined,
@@ -58,17 +58,14 @@ export const ThemeSwitch = ({ size = 26 }: ThemeSwitchProps) => {
 						variants={variants}
 						className="flex *:shrink-0"
 					>
-						<SunDim size={size} />
-						<MoonStars size={size} />
+						<Sun size={size} weight="duotone" />
+						<CloudMoon size={size} weight="duotone" />
 					</motion.div>
 				)}
 			</div>
 
 			<span className="sr-only">
 				Activer ou désactiver le thème clair ou sombre sur le site ...
-			</span>
-			<span className="sr-only">
-				Enable or disable light or dark theme on website ...
 			</span>
 		</Button>
 	);
