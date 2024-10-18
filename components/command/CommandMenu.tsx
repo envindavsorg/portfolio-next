@@ -18,15 +18,15 @@ import {
 	ArrowsOut,
 	ArrowsOutCardinal,
 	ChartBar,
+	Command,
 	File,
 	Laptop,
-	MagnifyingGlass,
 	MoonStars,
+	Smiley,
 	SunDim,
 	X,
 	XCircle,
 } from '@phosphor-icons/react';
-import { Smiley } from '@phosphor-icons/react/dist/ssr';
 import type { DialogProps } from '@radix-ui/react-dialog';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
@@ -70,8 +70,6 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
 		command();
 	}, []);
 
-	///////////////////////////////////////////////////////////////////////////////////
-
 	const fullscreen = (): void => {
 		if (document.fullscreenElement) {
 			if (document.exitFullscreen) {
@@ -108,7 +106,7 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
 				onClick={() => setOpen(true)}
 				{...props}
 			>
-				<MagnifyingGlass className="size-5 shrink-0" />
+				<Command style={{ width: 26, height: 26 }} weight="duotone" />
 			</Button>
 
 			<CommandDialog open={open} onOpenChange={setOpen}>
