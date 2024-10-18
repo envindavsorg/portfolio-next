@@ -15,7 +15,7 @@ import { env } from '@/env/client';
 import useScroll from '@/hooks/useScroll';
 import avatar from '@/images/avatar.webp';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
-import type { Navigation } from '@/resources/navigation';
+import { type Navigation, navigation } from '@/resources/navigation';
 import { ArrowLeft } from '@phosphor-icons/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'next-view-transitions';
@@ -23,23 +23,44 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import type React from 'react';
 
-interface NavBarProps {
-	navigation: Navigation[];
-	className?: string;
-}
-
-export const NavBar = ({ navigation, className }: NavBarProps) => {
+export const NavBar = () => {
 	const router = useRouter();
-
 	const { isOpen, toggleNavbar } = useNavBarMobile();
+
 	const scrolled: boolean = useScroll(50);
 	const pathname: string | null = usePathname();
 	const isHome: boolean = pathname === '/';
 
 	return (
 		<>
-			<div className="sticky top-8 z-50 hidden items-center justify-between lg:flex">
-				{!isHome && (
+			<div
+				className={cn(
+					'h-16 fixed top-5 left-0 right-0 z-10 max-w-full sm:max-w-[62.5ch] md:max-w-[65ch] mx-auto md:rounded-md',
+					scrolled
+						? 'backdrop-blur-xl md:border border-neutral-200 dark:border-neutral-800'
+						: 'bg-background',
+				)}
+			/>
+			<div className="sticky top-8 z-50 items-center justify-between flex">
+				{isHome ? (
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.5, delay: 0.4, ease: 'backOut' }}
+					>
+						<Image
+							src={avatar}
+							alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
+							className={cn(
+								'size-10 rounded-full object-cover object-center transition-colors duration-200',
+								scrolled
+									? 'border border-theme'
+									: 'border border-neutral-200 dark:border-neutral-700',
+							)}
+							priority
+						/>
+					</motion.div>
+				) : (
 					<>
 						<div
 							className={cn(
@@ -48,20 +69,10 @@ export const NavBar = ({ navigation, className }: NavBarProps) => {
 							)}
 						/>
 						<motion.div
-							className="z-20"
-							initial={{
-								opacity: 0,
-								y: -20,
-							}}
-							animate={{
-								y: 0,
-								opacity: 1,
-							}}
-							transition={{
-								duration: 0.5,
-								delay: 0.4,
-								ease: 'backOut',
-							}}
+							initial={{ opacity: 0, y: -20 }}
+							animate={{ y: 0, opacity: 1 }}
+							transition={{ duration: 0.5, delay: 0.4, ease: 'backOut' }}
+							style={{ zIndex: 20 }}
 						>
 							<Button
 								variant="ghost"
@@ -71,212 +82,95 @@ export const NavBar = ({ navigation, className }: NavBarProps) => {
 								aria-labelledby="Retourner à la page précédente"
 								aria-label="Retourner à la page précédente"
 							>
-								<ArrowLeft className="text-2xl" />
+								<ArrowLeft style={{ width: 25, height: 25 }} weight="duotone" />
 							</Button>
 						</motion.div>
 					</>
 				)}
 
-				{isHome && (
-					<motion.div
-						initial={{
-							opacity: 0,
-							y: 20,
-						}}
-						animate={{
-							y: 0,
-							opacity: 1,
-						}}
-						transition={{
-							duration: 0.5,
-							delay: 0.4,
-							ease: 'backOut',
-						}}
-					>
-						<Image
-							src={avatar}
-							alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
-							className={cn(
-								'size-8 rounded-full object-cover object-center transition-colors duration-200',
-								scrolled
-									? 'border border-theme'
-									: 'border border-neutral-200 dark:border-neutral-700',
-							)}
-							priority
-						/>
-					</motion.div>
-				)}
-
 				<div className="relative flex items-center justify-between gap-x-6">
-					<div
-						className={cn(
-							'-left-1.5 absolute z-10 size-10 rounded-full',
-							scrolled && 'backdrop-blur-xl',
-						)}
-					/>
 					<CommandMenu />
-
-					<div
-						className={cn(
-							'-right-1.5 absolute z-10 size-10 rounded-full',
-							scrolled && 'backdrop-blur-xl',
-						)}
-					/>
 					<ThemeSwitch />
-				</div>
-			</div>
-
-			<div className="sticky top-4 z-50 w-full max-w-[60ch]">
-				<div
-					className={cn(
-						'mx-auto flex items-center justify-between lg:hidden',
-						'rounded-md border border-neutral-200 px-3.5 py-3 dark:border-neutral-700',
-						scrolled ? 'backdrop-blur-xl' : 'bg-neutral-50 dark:bg-neutral-800',
-						className,
-					)}
-				>
-					{isHome ? (
-						<Image
-							src={avatar}
-							alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
-							className={cn(
-								'size-8 rounded-full object-cover object-center transition-colors duration-200',
-								scrolled
-									? 'border border-theme'
-									: 'border border-neutral-200 dark:border-neutral-700',
-							)}
-							priority
-						/>
-					) : (
-						<motion.div
-							initial={{
-								opacity: 0,
-								y: -20,
-							}}
-							animate={{
-								y: 0,
-								opacity: 1,
-							}}
-							transition={{
-								duration: 0.5,
-								delay: 0.4,
-								ease: 'backOut',
-							}}
-						>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="flex shrink-0 rounded-none"
-								onClick={() => router.back()}
-								aria-labelledby="Retourner à la page précédente"
-								aria-label="Retourner à la page précédente"
+					<div className="z-20 inline-block lg:hidden">
+						<DropdownMenu open={isOpen} onOpenChange={toggleNavbar}>
+							<DropdownMenuTrigger
+								asChild
+								aria-label="Ouvrir le menu en mode mobile"
 							>
-								<ArrowLeft className="text-2xl" />
-							</Button>
-						</motion.div>
-					)}
-
-					<div className="flex items-center gap-x-4">
-						{/*<CommandMenu />
-						<ThemeSwitch />*/}
-
-						<div className={className}>
-							<DropdownMenu open={isOpen} onOpenChange={toggleNavbar}>
-								<DropdownMenuTrigger
-									asChild
-									aria-label="Ouvrir le menu en mode mobile"
-								>
-									<NavbarMobileButton />
-								</DropdownMenuTrigger>
-								<AnimatePresence>
-									{isOpen && (
-										<DropdownMenuContent
-											align="end"
-											className="-mr-4 mt-4 flex w-44 flex-col gap-y-6 rounded-md px-3 py-1 lg:hidden"
-											asChild
+								<NavbarMobileButton />
+							</DropdownMenuTrigger>
+							<AnimatePresence>
+								{isOpen && (
+									<DropdownMenuContent
+										align="end"
+										className={cn(
+											'relative -mr-4 mt-4 flex w-44 flex-col gap-y-6 rounded-md px-3 py-1 lg:hidden',
+											scrolled
+												? 'backdrop-blur-xl'
+												: 'bg-neutral-50 dark:bg-neutral-800',
+										)}
+										asChild
+									>
+										<motion.nav
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											exit={{ opacity: 0 }}
+											transition={{ duration: 0.3 }}
 										>
-											<motion.nav
-												className={cn(
-													'relative',
-													scrolled
-														? 'backdrop-blur-xl'
-														: 'bg-neutral-50 dark:bg-neutral-800',
-												)}
-												initial={{
-													opacity: 0,
-												}}
-												animate={{
-													opacity: 1,
-												}}
-												exit={{
-													opacity: 0,
-												}}
-												transition={{
-													duration: 0.3,
-												}}
-											>
-												<div className="divide-y divide-border">
-													{navigation.map(
-														(
-															{ link, name, description }: Navigation,
-															idx: number,
-														) => {
-															const active: boolean =
-																link === '/blog'
-																	? pathname!.startsWith(link)
-																	: getRouterLastPathSegment(pathname!) ===
-																			link.split('/').pop() ||
-																		getRouterLastPathSegment(pathname!) ===
-																			link;
+											<div className="divide-y divide-border">
+												{navigation.map(
+													(
+														{ link, name, description }: Navigation,
+														idx: number,
+													) => {
+														const active: boolean =
+															link === '/blog'
+																? pathname!.startsWith(link)
+																: getRouterLastPathSegment(pathname!) ===
+																		link.split('/').pop() ||
+																	getRouterLastPathSegment(pathname!) === link;
 
-															return (
-																<DropdownMenuItem
-																	key={`mobile-link=${idx}`}
-																	asChild
-																	className="focus:!bg-transparent space-y-3 px-0 py-3"
+														return (
+															<DropdownMenuItem
+																key={`mobile-link=${idx}`}
+																asChild
+																className="focus:!bg-transparent space-y-3 px-0 py-3"
+															>
+																<motion.div
+																	key={`${name}-${idx}`}
+																	initial={{ scale: 0, opacity: 0 }}
+																	animate={{ scale: 1, opacity: 1 }}
+																	transition={{
+																		type: 'spring',
+																		stiffness: 260,
+																		damping: 20,
+																		delay: 0.1 + idx / 10,
+																	}}
 																>
-																	<motion.div
-																		key={`${name}-${idx}`}
-																		initial={{
-																			scale: 0,
-																			opacity: 0,
-																		}}
-																		animate={{
-																			scale: 1,
-																			opacity: 1,
-																		}}
-																		transition={{
-																			type: 'spring',
-																			stiffness: 260,
-																			damping: 20,
-																			delay: 0.1 + idx / 10,
-																		}}
+																	<Link
+																		href={link}
+																		aria-label={description}
+																		className={cn(
+																			'flex w-full items-center justify-between text-base no-underline',
+																			active
+																				? '*:font-extrabold *:text-theme'
+																				: '*:font-medium *:text-foreground',
+																		)}
+																		onClick={toggleNavbar}
 																	>
-																		<Link
-																			href={link}
-																			aria-label={description}
-																			className={cn(
-																				'flex w-full items-center justify-between text-base no-underline',
-																				active
-																					? '*:font-extrabold *:text-theme'
-																					: '*:font-medium *:text-foreground',
-																			)}
-																			onClick={toggleNavbar}
-																		>
-																			<p>/{name.toLowerCase()}</p>
-																		</Link>
-																	</motion.div>
-																</DropdownMenuItem>
-															);
-														},
-													)}
-												</div>
-											</motion.nav>
-										</DropdownMenuContent>
-									)}
-								</AnimatePresence>
-							</DropdownMenu>
-						</div>
+																		<p>/{name.toLowerCase()}</p>
+																	</Link>
+																</motion.div>
+															</DropdownMenuItem>
+														);
+													},
+												)}
+											</div>
+										</motion.nav>
+									</DropdownMenuContent>
+								)}
+							</AnimatePresence>
+						</DropdownMenu>
 					</div>
 				</div>
 			</div>
