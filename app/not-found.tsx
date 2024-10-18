@@ -10,12 +10,6 @@ import { useRouter } from 'next/navigation';
 import type React from 'react';
 import { Suspense } from 'react';
 
-export const metadata = {
-	title: 'Page introuvable',
-	description:
-		'Oups ! Cette page n’existe pas, peut-être avez-vous cliqué sur un ancien lien ou avez-vous fait une faute de frappe.',
-};
-
 const NotFound = (): React.JSX.Element => {
 	const router = useRouter();
 
@@ -32,11 +26,16 @@ const NotFound = (): React.JSX.Element => {
 							</FadeIn>
 							<FadeIn>
 								<h2 className="mb-6 flex font-bold font-geist-sans text-3xl text-theme no-underline md:text-4xl">
-									{metadata.title}
+									Page introuvable
 								</h2>
 							</FadeIn>
 							<FadeIn>
-								<p className="leading-8">{metadata.description}</p>
+								<p className="leading-8">
+									<span className="font-bold">Oups !</span> Cette page n’existe
+									pas, peut-être avez-vous cliqué sur un{' '}
+									<span className="font-bold">ancien lien</span> ou avez-vous
+									fait une <span className="font-bold">faute de frappe</span>.
+								</p>
 							</FadeIn>
 							<FadeIn>
 								<Button

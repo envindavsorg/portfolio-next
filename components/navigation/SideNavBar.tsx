@@ -134,6 +134,7 @@ const LinkLine = ({
 								exit={{
 									opacity: 0,
 								}}
+								// @ts-ignore
 								className={cn(
 									'absolute top-0 left-0 z-10 w-full pt-2',
 									'font-geist-sans font-medium text-foreground',
