@@ -1,179 +1,164 @@
 'use client';
 
-import { CommandMenu } from '@/components/command/CommandMenu';
-import { NavbarMobileButton } from '@/components/navigation/NavBarMobileButton';
-import { useNavBarMobile } from '@/components/navigation/NavBarProvider';
-import { ThemeSwitch } from '@/components/theme/ThemeSwitch';
-import { Button } from '@/components/ui/Button';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu';
-import { env } from '@/env/client';
-import useScroll from '@/hooks/useScroll';
-import avatar from '@/images/avatar.webp';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
-import { type Navigation, navigation } from '@/resources/navigation';
-import { ArrowLeft } from '@phosphor-icons/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import {
+	type Navigation,
+	SIDEBAR_NUM_LINES,
+	navigation,
+} from '@/resources/navigation';
+import {
+	AnimatePresence,
+	type MotionValue,
+	motion,
+	useMotionValue,
+	useSpring,
+	useTransform,
+} from 'framer-motion';
 import { Link } from 'next-view-transitions';
-import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import type React from 'react';
+import { useEffect, useRef } from 'react';
+import { useState } from 'react';
 
-export const NavBar = () => {
-	const router = useRouter();
-	const { isOpen, toggleNavbar } = useNavBarMobile();
-
-	const scrolled: boolean = useScroll(50);
+export const NavBar = (): React.JSX.Element => {
 	const pathname: string | null = usePathname();
-	const isHome: boolean = pathname === '/';
+	const [isHovered, setIsHovered] = useState(false);
+	const mouseY: MotionValue<number> = useMotionValue(Number.POSITIVE_INFINITY);
 
 	return (
-		<>
-			<div
-				className={cn(
-					'h-16 fixed top-5 left-0 right-0 z-10 max-w-full sm:max-w-[62.5ch] md:max-w-[65ch] mx-auto md:rounded-md',
-					scrolled
-						? 'backdrop-blur-xl md:border border-neutral-200 dark:border-neutral-800'
-						: 'bg-background',
-				)}
-			/>
-			<div className="sticky top-8 z-50 items-center justify-between flex">
-				{isHome ? (
-					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ y: 0, opacity: 1 }}
-						transition={{ duration: 0.5, delay: 0.4, ease: 'backOut' }}
-					>
-						<Image
-							src={avatar}
-							alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
-							className={cn(
-								'size-10 rounded-full object-cover object-center transition-colors duration-200',
-								scrolled
-									? 'border border-theme'
-									: 'border border-neutral-200 dark:border-neutral-700',
-							)}
-							priority
-						/>
-					</motion.div>
-				) : (
-					<>
-						<div
-							className={cn(
-								'-left-1.5 absolute z-10 size-10 rounded-full',
-								scrolled && 'backdrop-blur-xl',
-							)}
-						/>
-						<motion.div
-							initial={{ opacity: 0, y: -20 }}
-							animate={{ y: 0, opacity: 1 }}
-							transition={{ duration: 0.5, delay: 0.4, ease: 'backOut' }}
-							style={{ zIndex: 20 }}
-						>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="flex shrink-0 rounded-none"
-								onClick={() => router.back()}
-								aria-labelledby="Retourner à la page précédente"
-								aria-label="Retourner à la page précédente"
-							>
-								<ArrowLeft style={{ width: 25, height: 25 }} weight="duotone" />
-							</Button>
-						</motion.div>
-					</>
-				)}
+		<motion.nav
+			onMouseMove={(e) => {
+				mouseY.set(e.clientY);
+				setIsHovered(true);
+			}}
+			onMouseLeave={() => {
+				mouseY.set(Number.POSITIVE_INFINITY);
+				setIsHovered(false);
+			}}
+			className="fixed top-0 right-0 hidden h-screen flex-col items-end justify-between py-4 pl-8 lg:flex"
+		>
+			{Array.from(Array(SIDEBAR_NUM_LINES).keys()).map((idx: number) => {
+				const content: Navigation | undefined = navigation.find(
+					({ position }: Navigation) => position === idx + 1,
+				);
+				const active: boolean =
+					content?.link === '/blog'
+						? pathname!.startsWith(content?.link)
+						: getRouterLastPathSegment(pathname!) ===
+								content?.link.split('/').pop() ||
+							getRouterLastPathSegment(pathname!) === content?.link;
 
-				<div className="relative flex items-center justify-between gap-x-6">
-					<CommandMenu />
-					<ThemeSwitch />
-					<div className="z-20 inline-block lg:hidden">
-						<DropdownMenu open={isOpen} onOpenChange={toggleNavbar}>
-							<DropdownMenuTrigger
-								asChild
-								aria-label="Ouvrir le menu en mode mobile"
-							>
-								<NavbarMobileButton />
-							</DropdownMenuTrigger>
-							<AnimatePresence>
-								{isOpen && (
-									<DropdownMenuContent
-										align="end"
-										className={cn(
-											'relative -mr-4 mt-4 flex w-44 flex-col gap-y-6 rounded-md px-3 py-1 lg:hidden',
-											scrolled
-												? 'backdrop-blur-xl'
-												: 'bg-neutral-50 dark:bg-neutral-800',
-										)}
-										asChild
-									>
-										<motion.nav
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											exit={{ opacity: 0 }}
-											transition={{ duration: 0.3 }}
-										>
-											<div className="divide-y divide-border">
-												{navigation.map(
-													(
-														{ link, name, description }: Navigation,
-														idx: number,
-													) => {
-														const active: boolean =
-															link === '/blog'
-																? pathname!.startsWith(link)
-																: getRouterLastPathSegment(pathname!) ===
-																		link.split('/').pop() ||
-																	getRouterLastPathSegment(pathname!) === link;
+				return (
+					<LinkLine
+						key={`${idx}-${content?.name}`}
+						title={content?.name}
+						link={content?.link}
+						description={content?.description}
+						isHovered={isHovered}
+						mouseY={mouseY}
+						active={active}
+					/>
+				);
+			})}
+		</motion.nav>
+	);
+};
 
-														return (
-															<DropdownMenuItem
-																key={`mobile-link=${idx}`}
-																asChild
-																className="focus:!bg-transparent space-y-3 px-0 py-3"
-															>
-																<motion.div
-																	key={`${name}-${idx}`}
-																	initial={{ scale: 0, opacity: 0 }}
-																	animate={{ scale: 1, opacity: 1 }}
-																	transition={{
-																		type: 'spring',
-																		stiffness: 260,
-																		damping: 20,
-																		delay: 0.1 + idx / 10,
-																	}}
-																>
-																	<Link
-																		href={link}
-																		aria-label={description}
-																		className={cn(
-																			'flex w-full items-center justify-between text-base no-underline',
-																			active
-																				? '*:font-extrabold *:text-theme'
-																				: '*:font-medium *:text-foreground',
-																		)}
-																		onClick={toggleNavbar}
-																	>
-																		<p>/{name.toLowerCase()}</p>
-																	</Link>
-																</motion.div>
-															</DropdownMenuItem>
-														);
-													},
-												)}
-											</div>
-										</motion.nav>
-									</DropdownMenuContent>
+const SPRING_OPTIONS = {
+	mass: 1,
+	stiffness: 200,
+	damping: 15,
+};
+
+interface LinkLineProps {
+	mouseY: MotionValue;
+	title: string | undefined;
+	link: string | undefined;
+	description: string | undefined;
+	isHovered: boolean;
+	active: boolean;
+}
+
+const LinkLine = ({
+	mouseY,
+	isHovered,
+	title,
+	link,
+	description,
+	active,
+}: LinkLineProps): React.JSX.Element => {
+	const ref = useRef<HTMLDivElement>(null);
+	const distance = useTransform(mouseY, (val) => {
+		const bounds = ref.current?.getBoundingClientRect();
+
+		return val - (bounds?.y || 0) - (bounds?.height || 0) / 2;
+	});
+
+	// Styles for non-link lines
+	const lineWidthRaw = useTransform(distance, [-80, 0, 80], [15, 100, 15]);
+	const lineWidth = useSpring(lineWidthRaw, SPRING_OPTIONS);
+
+	// Styles for link lines
+	const linkWidth = useSpring(25, SPRING_OPTIONS);
+
+	useEffect(() => {
+		if (isHovered) {
+			linkWidth.set(150);
+		} else {
+			linkWidth.set(25);
+		}
+	}, [isHovered]);
+
+	if (title) {
+		return (
+			<Link href={link || '#'} aria-label={description}>
+				<motion.div
+					ref={ref}
+					className={cn(
+						'group relative bg-foreground transition-colors hover:bg-theme',
+						active && 'bg-theme',
+					)}
+					style={{
+						width: linkWidth,
+						height: 2,
+					}}
+				>
+					<AnimatePresence>
+						{isHovered && (
+							<motion.span
+								initial={{
+									opacity: 0,
+								}}
+								animate={{
+									opacity: 1,
+								}}
+								exit={{
+									opacity: 0,
+								}}
+								className={cn(
+									'absolute top-0 left-0 z-10 w-full pt-2',
+									'font-geist-sans font-medium text-foreground',
+									'transition-colors group-hover:text-theme',
+									active && 'font-extrabold text-theme',
 								)}
-							</AnimatePresence>
-						</DropdownMenu>
-					</div>
-				</div>
-			</div>
-		</>
+							>
+								{title}
+							</motion.span>
+						)}
+					</AnimatePresence>
+				</motion.div>
+			</Link>
+		);
+	}
+
+	return (
+		<motion.div
+			ref={ref}
+			className="relative bg-foreground"
+			style={{
+				width: lineWidth,
+				height: 1.5,
+			}}
+		/>
 	);
 };

@@ -106,7 +106,7 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
 				onClick={() => setOpen(true)}
 				{...props}
 			>
-				<Command style={{ width: 26, height: 26 }} weight="duotone" />
+				<Command style={{ width: 20, height: 20 }} weight="duotone" />
 			</Button>
 
 			<CommandDialog open={open} onOpenChange={setOpen}>

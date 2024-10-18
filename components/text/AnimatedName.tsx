@@ -15,8 +15,7 @@ export const AnimatedName = ({
 }: AnimatedNameProps): React.JSX.Element => (
 	<h1
 		className={cn(
-			'transition-element pt-12',
-			'font-bold font-geist-sans text-3xl md:text-4xl',
+			'pt-6 font-bold font-geist-sans text-3xl transition-element sm:pt-12 md:text-4xl',
 			className,
 		)}
 	>

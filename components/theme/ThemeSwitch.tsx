@@ -10,7 +10,7 @@ interface ThemeSwitchProps {
 	size?: number;
 }
 
-export const ThemeSwitch = ({ size = 24 }: ThemeSwitchProps) => {
+export const ThemeSwitch = ({ size = 18 }: ThemeSwitchProps) => {
 	const { systemTheme, theme, setTheme } = useTheme();
 	const [currentTheme, setCurrentTheme] = useState<string | undefined>(
 		undefined,
