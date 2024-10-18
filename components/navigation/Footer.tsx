@@ -43,7 +43,7 @@ export const Footer = async (): Promise<React.JSX.Element> => {
 			<Separator className="my-4" />
 
 			<div className="flex w-full items-center justify-between">
-				<div className="flex gap-x-3">
+				<div className="ml-[5px] flex gap-x-3">
 					{contact
 						.slice(0, 3)
 						.map(({ name, url, description }: Contact, idx: number) => (

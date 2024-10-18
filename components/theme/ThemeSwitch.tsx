@@ -56,10 +56,10 @@ export const ThemeSwitch = ({ size = 18 }: ThemeSwitchProps) => {
 					<motion.div
 						animate={currentTheme}
 						variants={variants}
-						className="flex *:shrink-0"
+						style={{ display: 'flex' }}
 					>
-						<Sun size={size} weight="duotone" />
-						<CloudMoon size={size} weight="duotone" />
+						<Sun size={size} weight="duotone" className="shrink-0" />
+						<CloudMoon size={size} weight="duotone" className="shrink-0" />
 					</motion.div>
 				)}
 			</div>

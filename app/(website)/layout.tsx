@@ -8,7 +8,7 @@ interface RootLayoutProps {
 }
 
 const WebsiteLayout = ({ children }: Readonly<RootLayoutProps>) => (
-	<div className="flex min-h-screen flex-col justify-between p-8 text-foreground">
+	<div className="flex min-h-screen flex-col justify-between p-6 text-foreground sm:p-8">
 		<NavBar />
 		<main className="mx-auto w-full max-w-[60ch]">
 			{children}
