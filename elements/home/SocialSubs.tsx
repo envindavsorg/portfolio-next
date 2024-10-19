@@ -46,7 +46,7 @@ const Subscribers = async ({
 				'https://media.licdn.com/dms/image/v2/D4E03AQGMBLwqpxHRGA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1715716598040?e=1733961600&v=beta&t=miUysAuI_Yu1dAeY8ApQVWPiTNt7pclf0c_PqO51yMo',
 			login: 'Florin Cuzeac',
 			link: 'https://www.linkedin.com/in/cuzeacflorin',
-			followers: 2312,
+			followers: 2327,
 			following: 0,
 			icon: <LinkedinLogo />,
 		},
