@@ -1,11 +1,15 @@
 'use client';
 
+import { Button } from '@/components/ui/Button';
+import { env } from '@/env/client';
+import avatar from '@/images/avatar.webp';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
 import {
 	type Navigation,
 	SIDEBAR_NUM_LINES,
 	navigation,
 } from '@/resources/navigation';
+import { ArrowLeft } from '@phosphor-icons/react';
 import {
 	AnimatePresence,
 	type MotionValue,
@@ -15,7 +19,8 @@ import {
 	useTransform,
 } from 'framer-motion';
 import { Link } from 'next-view-transitions';
-import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import type React from 'react';
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
@@ -154,11 +159,57 @@ const LinkLine = ({
 	return (
 		<motion.div
 			ref={ref}
-			className="relative bg-foreground"
 			style={{
 				width: lineWidth,
 				height: 1.5,
+				position: 'relative',
+				backgroundColor: 'var(--foreground)',
 			}}
 		/>
+	);
+};
+
+export const NavBarSlim = () => {
+	const router = useRouter();
+	const pathname: string | null = usePathname();
+	const isHome: boolean = pathname === '/';
+
+	return (
+		<div
+			className={cn(
+				'flex items-center',
+				isHome && 'justify-start',
+				!isHome && 'justify-between',
+			)}
+		>
+			<motion.div
+				initial={{ opacity: 0, y: -20 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ duration: 0.5, delay: 0.4, ease: 'backOut' }}
+			>
+				<Button
+					variant="ghost"
+					size="icon"
+					className={cn('flex shrink-0 rounded-none', isHome && 'hidden')}
+					onClick={() => router.back()}
+					aria-labelledby="Retourner à la page précédente"
+					aria-label="Retourner à la page précédente"
+				>
+					<ArrowLeft className="size-10" weight="duotone" />
+				</Button>
+			</motion.div>
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ duration: 0.5, delay: 0.4, ease: 'backOut' }}
+			>
+				<Image
+					src={avatar}
+					alt={`${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`}
+					className="size-10 rounded-full border border-neutral-200 object-cover object-center dark:border-neutral-700"
+					priority
+				/>
+			</motion.div>
+		</div>
 	);
 };
