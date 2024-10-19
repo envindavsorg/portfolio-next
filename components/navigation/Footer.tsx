@@ -16,7 +16,7 @@ export const Footer = async (): Promise<React.JSX.Element> => {
 	);
 
 	return (
-		<footer className="mt-12 w-full">
+		<footer className="mx-auto mt-16 w-full max-w-[60ch]">
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-x-2">
 					<span className="relative flex size-3">
