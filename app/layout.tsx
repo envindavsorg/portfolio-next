@@ -31,7 +31,9 @@ export const metadata: Metadata = constructMetadata({
 	title: `${client.NEXT_PUBLIC_NAME} ${client.NEXT_PUBLIC_SURNAME}`,
 	description:
 		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et de nouvelles technologies.",
-	image: absoluteUrl('/api/og'),
+	image: absoluteUrl(
+		`/api/og?heading=${client.NEXT_PUBLIC_NAME} ${client.NEXT_PUBLIC_SURNAME}&type=image&mode=dark`,
+	),
 });
 
 export const viewport: Viewport = {

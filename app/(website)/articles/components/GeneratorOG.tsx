@@ -101,7 +101,7 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 						)}
 					/>
 					<button
-						className="ms-auto h-11 w-fit rounded-md border border-neutral-200 dark:border-neutral-700 bg-background px-3 py-2"
+						className="ms-auto h-11 w-fit rounded-md border border-neutral-200 bg-background px-3 py-2 dark:border-neutral-700"
 						type="submit"
 					>
 						{isLoading ? (
