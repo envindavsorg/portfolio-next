@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 import { Minus } from '@phosphor-icons/react/dist/ssr';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { HowToScroll } from '@/components/blocs/HowToScroll';
@@ -24,12 +25,18 @@ import { VuetifyIcon } from '@/components/icons/Vuetify';
 import { AnimatedNameLink } from '@/components/text/AnimatedName.tsx';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
+import { absoluteUrl } from '@/site/metadata';
 
-export const metadata = {
-    title: "Mes expériences professionnelles en développement et design web chez WeFix, SpinalCom et L'Économat des Armées",
-    alternates: {
-      canonical: '/work',
-    },
+export const generateMetadata = async () => {
+    const cookie = await cookies();
+    const theme = cookie.get('theme').value;
+
+    return {
+        title: "Mes expériences professionnelles en développement et design web chez WeFix, SpinalCom et L'Économat des Armées",
+        image: absoluteUrl(
+            `/api/og?heading=Toutes mes expériences professionnelles&type=image&mode=${theme}`,
+        ),
+    }
 };
 
 export const Small = ({ children }) => (
