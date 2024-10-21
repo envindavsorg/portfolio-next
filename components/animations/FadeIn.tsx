@@ -8,6 +8,7 @@ import {
 	useReducedMotion,
 } from 'framer-motion';
 import type React from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { createContext, useContext } from 'react';
 
 const FadeInStaggerContext = createContext(false);
@@ -64,8 +65,9 @@ export const FadeIn = (
 export const FadeInStagger = ({
 	faster = false,
 	...props
-}: React.ComponentPropsWithoutRef<typeof motion.div> & {
+}: ComponentPropsWithoutRef<typeof motion.div> & {
 	faster?: boolean;
+	className?: string;
 }) => (
 	<FadeInStaggerContext.Provider value={true}>
 		<motion.div
