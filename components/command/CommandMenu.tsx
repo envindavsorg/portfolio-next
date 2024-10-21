@@ -68,7 +68,7 @@ export const CommandMenu = () => {
 			</p>
 
 			<button
-				className="fixed top-4 right-4 flex items-center justify-center rounded-full border border-neutral-200 bg-background p-2 lg:hidden dark:border-neutral-700 print:hidden"
+				className="fixed top-4 right-4 z-[100] flex items-center justify-center rounded-full border border-neutral-200 bg-background p-2 lg:hidden dark:border-neutral-700 print:hidden"
 				aria-label="Effectuer une recherche sur mon site"
 				onClick={() => setOpen(true)}
 				type="button"
