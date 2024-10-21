@@ -52,7 +52,7 @@ const Work = (): React.JSX.Element => (
 					<span className="font-bold text-theme">grandes entreprises</span>.
 				</p>
 			</FadeIn>
-			<FadeIn className="mt-6">
+			<FadeIn className="mt-6 print:hidden">
 				<CV />
 			</FadeIn>
 
@@ -98,7 +98,7 @@ const Work = (): React.JSX.Element => (
 					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
 					{`${wefix.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
 				</p>
-				<div className="mt-3 flex w-full flex-row flex-wrap gap-3">
+				<div className="mt-3 flex w-full flex-row flex-wrap gap-3 print:hidden">
 					{wefix.map(({ icon: Icon, title }: WorkItem, idx: number) => (
 						<div
 							key={`${title}-${idx}`}
@@ -152,7 +152,7 @@ const Work = (): React.JSX.Element => (
 					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
 					{`${spinalCom.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
 				</p>
-				<div className="mt-3 flex w-full flex-row flex-wrap gap-3">
+				<div className="mt-3 flex w-full flex-row flex-wrap gap-3 print:hidden">
 					{spinalCom.map(({ icon: Icon, title }: WorkItem, idx: number) => (
 						<div
 							key={`${title}-${idx}`}
@@ -204,7 +204,7 @@ const Work = (): React.JSX.Element => (
 					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
 					{`${economat.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
 				</p>
-				<div className="mt-3 flex w-full flex-row flex-wrap gap-3">
+				<div className="mt-3 flex w-full flex-row flex-wrap gap-3 print:hidden">
 					{economat.map(({ icon: Icon, title }: WorkItem, idx: number) => (
 						<div
 							key={`${title}-${idx}`}
