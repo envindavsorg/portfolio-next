@@ -7,13 +7,13 @@ import {
 	LinkedinLogo,
 	Phone,
 } from '@phosphor-icons/react/dist/ssr';
-import type React from 'react';
+import type { ComponentType, SVGProps } from 'react';
 
 export interface Contact {
 	name: string;
 	description: string;
 	url: string;
-	icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+	icon: ComponentType<SVGProps<SVGSVGElement>>;
 }
 
 export const contact: Contact[] = [

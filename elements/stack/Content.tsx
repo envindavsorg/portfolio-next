@@ -4,7 +4,7 @@ import { MongoDBIcon } from '@/components/icons/MongoDB';
 import { NextJSIcon } from '@/components/icons/Next';
 import { PostgreIcon } from '@/components/icons/Postgre';
 import { ReactIcon } from '@/components/icons/React';
-import { TailwindCSSIcon } from '@/components/icons/Tailwind';
+import { TailwindIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import React from 'react';
 
@@ -23,7 +23,7 @@ export const PreferredStack = [
 	},
 	{
 		name: 'Tailwind CSS',
-		icon: <TailwindCSSIcon className="size-7 shrink-0" />,
+		icon: <TailwindIcon className="size-7 shrink-0" />,
 	},
 	{
 		name: 'MongoDB',
