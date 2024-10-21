@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const TailwindCSSIcon = (props: SVGProps<SVGSVGElement>) => (
+export const TailwindIcon = (props: SVGProps<SVGSVGElement>) => (
 	<svg
 		viewBox="0 0 256 154"
 		width="1em"
