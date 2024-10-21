@@ -33,21 +33,24 @@ const Work = (): React.JSX.Element => (
 
 		<FadeInStagger className="mt-10" faster>
 			<FadeIn>
-				Je travaille actuellement chez{' '}
-				<span className="font-bold text-theme">WeFix</span>, une entreprise
-				leader dans la <span className="font-bold">réparation</span> des
-				appareils électroniques, que j’ai rejoint en{' '}
-				<span className="font-bold">2020</span> en tant que{' '}
-				<span className="font-bold">développeur web</span>. Depuis mon arrivée,
-				j’ai participé à de nombreux projets visant à améliorer les{' '}
-				<span className="font-bold">plateformes en ligne</span> et les{' '}
-				<span className="font-bold">services numériques</span> de l’entreprise.
-			</FadeIn>
-			<FadeIn className="mt-3">
-				Au fil de ma <span className="font-bold">carrière</span>, j’ai eu
-				l’occasion de collaborer avec des entreprises de tailles variées, des{' '}
-				<span className="font-bold text-theme">startups</span> aux{' '}
-				<span className="font-bold text-theme">grandes entreprises</span>.
+				<p className="leading-8">
+					Je travaille actuellement chez{' '}
+					<span className="font-bold text-theme">WeFix</span>, une entreprise
+					leader dans la <span className="font-bold">réparation</span> des
+					appareils électroniques, que j’ai rejoint en{' '}
+					<span className="font-bold">2020</span> en tant que{' '}
+					<span className="font-bold">développeur web</span>. Depuis mon
+					arrivée, j’ai participé à de nombreux projets visant à améliorer les{' '}
+					<span className="font-bold">plateformes en ligne</span> et les{' '}
+					<span className="font-bold">services numériques</span> de
+					l’entreprise.
+				</p>
+				<p className="mt-3 leading-8">
+					Au fil de ma <span className="font-bold">carrière</span>, j’ai eu
+					l’occasion de collaborer avec des entreprises de tailles variées, des{' '}
+					<span className="font-bold text-theme">startups</span> aux{' '}
+					<span className="font-bold text-theme">grandes entreprises</span>.
+				</p>
 			</FadeIn>
 			<FadeIn className="mt-6">
 				<CV />
@@ -77,25 +80,25 @@ const Work = (): React.JSX.Element => (
 				<Badge>CDI</Badge>
 			</FadeIn>
 			<FadeIn className="mt-6">
-				J'ai rejoint{' '}
-				<span className="font-bold text-theme">
-					WeFix (groupe Fnac & Darty)
-				</span>{' '}
-				en <span className="font-bold">2020</span>, en tant que développeur web.
-				J'ai eu la chance de travailler sur des projets variés, de la refonte du
-				site web à la mise en place de nouvelles fonctionnalités, en interne
-				comme chez de nouveaux partenaires comme{' '}
-				<span className="font-bold">Bouygues Telecom</span>,{' '}
-				<span className="font-bold">Garantie Privée</span>,{' '}
-				<span className="font-bold">Assurant</span>,{' '}
-				<span className="font-bold">Fnac</span>, etc.
-			</FadeIn>
-			<FadeIn className="mt-6 text-sm">
-				<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
-				{`${wefix.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
-			</FadeIn>
-			<FadeIn className="mt-3" asChild>
-				<div className="flex w-full flex-row flex-wrap gap-3">
+				<p className="leading-8">
+					J'ai rejoint{' '}
+					<span className="font-bold text-theme">
+						WeFix (groupe Fnac & Darty)
+					</span>{' '}
+					en <span className="font-bold">2020</span>, en tant que développeur
+					web. J'ai eu la chance de travailler sur des projets variés, de la
+					refonte du site web à la mise en place de nouvelles fonctionnalités,
+					en interne comme chez de nouveaux partenaires comme{' '}
+					<span className="font-bold">Bouygues Telecom</span>,{' '}
+					<span className="font-bold">Garantie Privée</span>,{' '}
+					<span className="font-bold">Assurant</span>,{' '}
+					<span className="font-bold">Fnac</span>, etc.
+				</p>
+				<p className="mt-6 text-sm">
+					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
+					{`${wefix.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
+				</p>
+				<div className="mt-3 flex w-full flex-row flex-wrap gap-3">
 					{wefix.map(({ icon: Icon, title }: WorkItem, idx: number) => (
 						<div
 							key={`${title}-${idx}`}
@@ -132,22 +135,24 @@ const Work = (): React.JSX.Element => (
 				<Badge>Alternance</Badge>
 			</FadeIn>
 			<FadeIn className="mt-6">
-				Durant ma <span className="font-bold">dernière année d'alternance</span>
-				, j'ai rejoint <span className="font-bold">SpinalCom</span>, une startup
-				spécialisée dans le <span className="font-bold">développement</span> de
-				solutions pour le <span className="font-bold">bâtiment connecté</span>.
-				J'ai eu l'opportunité de travailler sur un dashboard de gestion des
-				équipements connectés, la{' '}
-				<span className="font-bold">refonte du site web</span> et la{' '}
-				<span className="font-bold">création de maquettes</span> pour de
-				nouveaux projets.
-			</FadeIn>
-			<FadeIn className="mt-6 text-sm">
-				<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
-				{`${spinalCom.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
-			</FadeIn>
-			<FadeIn className="mt-3" asChild>
-				<div className="flex w-full flex-row flex-wrap gap-3">
+				<p className="leading-8">
+					Durant ma{' '}
+					<span className="font-bold">dernière année d'alternance</span>, j'ai
+					rejoint <span className="font-bold">SpinalCom</span>, une startup
+					spécialisée dans le <span className="font-bold">développement</span>{' '}
+					de solutions pour le{' '}
+					<span className="font-bold">bâtiment connecté</span>. J'ai eu
+					l'opportunité de travailler sur un dashboard de gestion des
+					équipements connectés, la{' '}
+					<span className="font-bold">refonte du site web</span> et la{' '}
+					<span className="font-bold">création de maquettes</span> pour de
+					nouveaux projets.
+				</p>
+				<p className="mt-6 text-sm">
+					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
+					{`${spinalCom.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
+				</p>
+				<div className="mt-3 flex w-full flex-row flex-wrap gap-3">
 					{spinalCom.map(({ icon: Icon, title }: WorkItem, idx: number) => (
 						<div
 							key={`${title}-${idx}`}
@@ -184,20 +189,22 @@ const Work = (): React.JSX.Element => (
 				<Badge>Alternance</Badge>
 			</FadeIn>
 			<FadeIn className="mt-6">
-				Durant ma <span className="font-bold">première année d'alternance</span>
-				, j'ai rejoint <span className="font-bold">l'Économat des Armées</span>,
-				une entreprise partenaire du soutien des{' '}
-				<span className="font-bold">forces armées</span>. J'ai travaillé sur la
-				<span className="font-bold">création d'un site</span> sur l'intranet du{' '}
-				<span className="font-bold">Ministère des Armées</span>, et d'un
-				<span className="font-bold">annuaire interne</span> à l'entreprise.
-			</FadeIn>
-			<FadeIn className="mt-6 text-sm">
-				<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
-				{`${economat.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
-			</FadeIn>
-			<FadeIn className="mt-3" asChild>
-				<div className="flex w-full flex-row flex-wrap gap-3">
+				<p className="leading-8">
+					Durant ma{' '}
+					<span className="font-bold">première année d'alternance</span>, j'ai
+					rejoint <span className="font-bold">l'Économat des Armées</span>, une
+					entreprise partenaire du soutien des{' '}
+					<span className="font-bold">forces armées</span>. J'ai travaillé sur
+					la <span className="font-bold">création d'un site</span> sur
+					l'intranet du <span className="font-bold">Ministère des Armées</span>,
+					et d'un
+					<span className="font-bold">annuaire interne</span> à l'entreprise.
+				</p>
+				<p className="mt-6 text-sm">
+					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}
+					{`${economat.map(({ title }: WorkItem) => title).join(', ')}, etc...`}
+				</p>
+				<div className="mt-3 flex w-full flex-row flex-wrap gap-3">
 					{economat.map(({ icon: Icon, title }: WorkItem, idx: number) => (
 						<div
 							key={`${title}-${idx}`}
