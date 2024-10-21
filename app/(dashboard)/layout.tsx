@@ -33,7 +33,7 @@ const DashboardLayout = async ({
 							<Avatar className="flex size-9">
 								<AvatarImage
 									src="/og-author.png"
-									alt={`${env.NEXT_PUBLIC_NAME}${env.NEXT_PUBLIC_SURNAME}`}
+									alt={env.NEXT_PUBLIC_FULLNAME}
 								/>
 								<AvatarFallback>
 									{`${env.NEXT_PUBLIC_NAME?.[0] || ''}${env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}

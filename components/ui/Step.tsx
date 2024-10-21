@@ -702,7 +702,7 @@ export const StepButtonContainer = ({
 				'stepper__step-button-container',
 				'pointer-events-none rounded-full p-0',
 				'h-[var(--step-icon-size)] w-[var(--step-icon-size)]',
-				'flex items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-700 bg-background',
+				'flex items-center justify-center rounded-full border border-neutral-200 bg-background dark:border-neutral-700',
 				'data-[clickable=true]:pointer-events-auto',
 				'data-[active=true]:border-theme data-[active=true]:bg-background data-[active=true]:text-theme',
 				'data-[current=true]:border-theme data-[current=true]:bg-background data-[current=true]:text-theme',

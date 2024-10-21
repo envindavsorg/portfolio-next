@@ -8,6 +8,7 @@ import {
 	useSpring,
 } from 'framer-motion';
 import type React from 'react';
+import type { RefObject } from 'react';
 import { useEffect, useRef } from 'react';
 
 interface CounterProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -33,7 +34,7 @@ export const Counter = ({
 		stiffness: 100,
 	});
 
-	const isInView: boolean = useInView(ref, {
+	const isInView: boolean = useInView(ref as RefObject<HTMLSpanElement>, {
 		once: true,
 		margin: '0px',
 	});

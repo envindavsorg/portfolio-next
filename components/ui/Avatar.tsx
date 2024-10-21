@@ -6,7 +6,7 @@ import type React from 'react';
 import { forwardRef } from 'react';
 
 const Avatar = forwardRef<
-	React.ElementRef<typeof AvatarPrimitive.Root>,
+	React.ComponentRef<typeof AvatarPrimitive.Root>,
 	React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
 >(
 	(
@@ -29,7 +29,7 @@ const Avatar = forwardRef<
 Avatar.displayName = AvatarPrimitive.Root.displayName;
 
 const AvatarImage = forwardRef<
-	React.ElementRef<typeof AvatarPrimitive.Image>,
+	React.ComponentRef<typeof AvatarPrimitive.Image>,
 	React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
 >(
 	(
@@ -49,7 +49,7 @@ const AvatarImage = forwardRef<
 AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
 const AvatarFallback = forwardRef<
-	React.ElementRef<typeof AvatarPrimitive.Fallback>,
+	React.ComponentRef<typeof AvatarPrimitive.Fallback>,
 	React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >(
 	(

@@ -1,12 +1,11 @@
 'use client';
 
 import { DotPattern } from '@/components/background/DotPattern';
+import { MotionDiv } from '@/components/motion/MotionDiv';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
 import type React from 'react';
 
-interface BaseCardProps {
-	tag: 'link' | 'static';
+interface PatternCardProps {
 	icon: React.ReactNode;
 	title?: string | number;
 	comment?: string;
@@ -14,65 +13,38 @@ interface BaseCardProps {
 	patternColor?: string;
 }
 
-interface StaticCardProps extends BaseCardProps {
-	tag: 'static';
-}
-
-interface LinkCardProps extends BaseCardProps {
-	tag: 'link';
-	link: string;
-}
-
-type CardProps = StaticCardProps | LinkCardProps;
-
 export const PatternCard = ({
-	tag,
 	icon,
 	title,
 	comment,
 	className,
 	patternColor = 'fill-theme',
-	...props
-}: CardProps): React.JSX.Element => {
-	const MotionComponent = tag === 'link' ? motion.a : motion.div;
-	const motionProps =
-		tag === 'link'
-			? {
-					href: (props as LinkCardProps).link,
-					whileHover: {
-						scale: 1.025,
-					},
-				}
-			: {};
+}: PatternCardProps): React.JSX.Element => (
+	<MotionDiv
+		className={cn(
+			className,
+			'relative overflow-hidden rounded-md border border-neutral-200 bg-background p-4 dark:border-neutral-700',
+		)}
+	>
+		<div className="flex-shrink-0 text-3xl md:text-4xl">{icon}</div>
 
-	return (
-		<MotionComponent
-			{...motionProps}
-			className={cn(
-				className,
-				'relative overflow-hidden rounded-md border border-neutral-200 bg-background p-4 dark:border-neutral-700',
-			)}
-		>
-			<div className="flex-shrink-0 text-3xl md:text-4xl">{icon}</div>
-
-			{title && (
-				<div className="z-20 flex flex-col">
-					<div className="font-extrabold font-geist-sans text-lg tracking-tighter md:text-xl">
-						{title}
-					</div>
-					{comment && (
-						<span className="text-neutral-600 text-xs dark:text-neutral-400">
-							{comment}
-						</span>
-					)}
+		{title && (
+			<div className="z-20 flex flex-col">
+				<div className="font-extrabold font-geist-sans text-lg tracking-tighter md:text-xl">
+					{title}
 				</div>
-			)}
+				{comment && (
+					<span className="text-neutral-600 text-xs dark:text-neutral-400">
+						{comment}
+					</span>
+				)}
+			</div>
+		)}
 
-			<DotPattern
-				width={10}
-				height={10}
-				className={cn(patternColor, 'z-10 p-2')}
-			/>
-		</MotionComponent>
-	);
-};
+		<DotPattern
+			width={10}
+			height={10}
+			className={cn(patternColor, 'z-10 p-2')}
+		/>
+	</MotionDiv>
+);

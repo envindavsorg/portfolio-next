@@ -177,19 +177,17 @@ const HorizontalContent = ({
 
 	return (
 		<>
-			{React.Children.map(
-				childArr[activeStep],
-				(node): React.JSX.Element | any => {
-					if (!React.isValidElement(node)) {
-						return null;
-					}
+			{React.Children.map(childArr[activeStep], (node) => {
+				if (!React.isValidElement(node)) {
+					return null;
+				}
 
-					return React.Children.map(
-						node.props.children,
-						(childNode): React.JSX.Element | any => childNode,
-					);
-				},
-			)}
+				return React.Children.map(
+					// @ts-ignore
+					node.props.children,
+					(childNode): React.JSX.Element | any => childNode,
+				);
+			})}
 		</>
 	);
 };

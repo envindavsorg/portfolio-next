@@ -26,7 +26,6 @@ export const WakatimeStats = async ({
 				<div className="grid grid-cols-4 gap-3">
 					<div className="col-span-full min-[530px]:col-span-2">
 						<PatternCard
-							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={dayjs(start).format('DD MMM YYYY')}
 							comment="Date de début"
@@ -35,7 +34,6 @@ export const WakatimeStats = async ({
 					</div>
 					<div className="col-span-full min-[530px]:col-span-2">
 						<PatternCard
-							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={dayjs(end).format('DD MMM YYYY')}
 							comment="Date de fin"
@@ -44,7 +42,6 @@ export const WakatimeStats = async ({
 					</div>
 					<div className="col-span-full min-[530px]:col-span-2">
 						<PatternCard
-							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={`${(daily_average / 60 / 60).toFixed(2)} heures`}
 							comment="Temps moyen de code"
@@ -53,7 +50,6 @@ export const WakatimeStats = async ({
 					</div>
 					<div className="col-span-full min-[530px]:col-span-2">
 						<PatternCard
-							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={`${(total_seconds / 60 / 60).toFixed(2)} heures`}
 							comment="Temps de code total"
@@ -62,7 +58,6 @@ export const WakatimeStats = async ({
 					</div>
 					<div className="col-span-full">
 						<PatternCard
-							tag="static"
 							icon={<GitCommit className="text-theme" weight="duotone" />}
 							title={`${(best_day.total_seconds / 60 / 60).toFixed(2)} heures (${dayjs(best_day.date).format('DD MMM YYYY')})`}
 							comment="Meilleur jour de code"

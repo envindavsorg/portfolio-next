@@ -23,7 +23,7 @@ export const ViewsCounter = async ({ article, slug }: ViewsCounterProps) => {
 	const views: any[] | string[] = await getViewsCount();
 	const viewsForSlug = views?.find((view) => view.slug === slug);
 	const number: number = Number(viewsForSlug?.count || 0);
-	const name: string = `${env.NEXT_PUBLIC_NAME} ${env.NEXT_PUBLIC_SURNAME}`;
+	const name: string = `${env.NEXT_PUBLIC_FULLNAME}`;
 
 	await incrementViews(slug);
 

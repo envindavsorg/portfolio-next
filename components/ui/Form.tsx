@@ -89,7 +89,7 @@ const FormItem = forwardRef<
 FormItem.displayName = 'FormItem';
 
 const FormLabel = forwardRef<
-	React.ElementRef<typeof LabelPrimitive.Root>,
+	React.ComponentRef<typeof LabelPrimitive.Root>,
 	React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(
 	(
@@ -106,7 +106,7 @@ const FormLabel = forwardRef<
 FormLabel.displayName = 'FormLabel';
 
 const FormControl = forwardRef<
-	React.ElementRef<typeof Slot>,
+	React.ComponentRef<typeof Slot>,
 	React.ComponentPropsWithoutRef<typeof Slot>
 >(
 	(

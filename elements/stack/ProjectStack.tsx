@@ -47,7 +47,6 @@ export const Languages = async ({ className }: LanguagesProps) => {
 			{languages.map(({ name, percentage }: Languages, idx: number) => (
 				<PatternCard
 					key={`${name}-${idx}`}
-					tag="static"
 					icon={icons[name]}
 					title={
 						name.toLowerCase() === 'contributions'

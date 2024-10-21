@@ -9,7 +9,7 @@ import { forwardRef } from 'react';
 const Accordion = AccordionPrimitive.Root;
 
 const AccordionItem = forwardRef<
-	React.ElementRef<typeof AccordionPrimitive.Item>,
+	React.ComponentRef<typeof AccordionPrimitive.Item>,
 	React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(
 	(
@@ -25,7 +25,7 @@ const AccordionItem = forwardRef<
 AccordionItem.displayName = 'AccordionItem';
 
 const AccordionTrigger = forwardRef<
-	React.ElementRef<typeof AccordionPrimitive.Trigger>,
+	React.ComponentRef<typeof AccordionPrimitive.Trigger>,
 	React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
 >(
 	(
@@ -57,7 +57,7 @@ const AccordionTrigger = forwardRef<
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = forwardRef<
-	React.ElementRef<typeof AccordionPrimitive.Content>,
+	React.ComponentRef<typeof AccordionPrimitive.Content>,
 	React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(
 	(

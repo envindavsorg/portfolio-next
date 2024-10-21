@@ -1,6 +1,8 @@
 'use client';
 
 import { HowToScroll } from '@/components/blocs/HowToScroll';
+import { MotionDiv } from '@/components/motion/MotionDiv';
+import { MotionSpan } from '@/components/motion/MotionSpan';
 import { Alert, AlertDescription } from '@/components/ui/Alert';
 import { dayjs } from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
@@ -149,7 +151,7 @@ export const Contributions = memo(
 											contributionCount > 0 ? color : '#4B5563';
 
 										return (
-											<motion.span
+											<MotionSpan
 												key={`${date}-${idx}`}
 												className="size-4 cursor-pointer rounded-xs"
 												style={background ? { background } : undefined}
@@ -210,7 +212,7 @@ export const Contributions = memo(
 							},
 						}}
 					>
-						<motion.div
+						<MotionDiv
 							className="mt-6"
 							variants={
 								isVisible
@@ -237,7 +239,7 @@ export const Contributions = memo(
 									</span>
 								</AlertDescription>
 							</Alert>
-						</motion.div>
+						</MotionDiv>
 					</motion.div>
 				)}
 			</Fragment>

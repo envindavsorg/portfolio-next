@@ -6,7 +6,7 @@ import type React from 'react';
 import { forwardRef } from 'react';
 
 const Separator = forwardRef<
-	React.ElementRef<typeof SeparatorPrimitive.Root>,
+	React.ComponentRef<typeof SeparatorPrimitive.Root>,
 	React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
 >(
 	(

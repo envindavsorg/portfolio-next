@@ -5,6 +5,7 @@ import type { ArticleWithSlug } from '@/lib/articles';
 import { getRelativeCoordinates } from '@/lib/utils';
 import { ArticleNyTimes } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
+import type { RefObject } from 'react';
 import { useRef, useState } from 'react';
 import { Article } from './Article';
 
@@ -24,7 +25,7 @@ export const Articles = ({
 		y: 0,
 	});
 
-	const listRef: React.MutableRefObject<null> = useRef(null);
+	const listRef: RefObject<null> = useRef(null);
 
 	const handleMouseMove = (event: React.MouseEvent<HTMLUListElement>): void => {
 		setMousePosition(getRelativeCoordinates(event, listRef.current));
