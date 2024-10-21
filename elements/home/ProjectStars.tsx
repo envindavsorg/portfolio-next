@@ -2,7 +2,7 @@ import { projectStars } from '@/actions/github/stars.action';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { Channel, ChannelSkeleton } from '@/components/blocs/Channel';
 import { ReactIcon } from '@/components/icons/React';
-import { TailwindCSSIcon } from '@/components/icons/Tailwind';
+import { TailwindIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
 import { Badge } from '@/components/ui/Badge';
@@ -125,7 +125,7 @@ export const ProjectStars = (): React.JSX.Element => (
 					target="_blank"
 				>
 					<Badge>
-						<TailwindCSSIcon />
+						<TailwindIcon />
 						&nbsp;Tailwind CSS
 					</Badge>
 				</Link>
