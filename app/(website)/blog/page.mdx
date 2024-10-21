@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { unstable_noStore as noStore } from 'next/cache';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { Articles } from '@/components/blog/Articles';
-import { AnimatedNameLink } from '@/components/text/AnimatedName.tsx';
 import { getAllArticles } from '@/lib/articles';
 
 export const metadata = {
@@ -36,7 +35,6 @@ export const Blog = async () => {
 };
 
 # {metadata.title}
-<AnimatedNameLink />
 
 <FadeInStagger className="mt-10" faster>
     <Blog />

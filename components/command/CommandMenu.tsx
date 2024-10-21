@@ -28,14 +28,13 @@ import {
 	X,
 	XCircle,
 } from '@phosphor-icons/react';
-import type { DialogProps } from '@radix-ui/react-dialog';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-export const CommandMenu = ({ ...props }: DialogProps) => {
+export const CommandMenu = () => {
 	const router = useRouter();
 
 	const { systemTheme, theme, setTheme } = useTheme();
@@ -125,16 +124,15 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
 				pour ouvrir le menu de commandes.
 			</p>
 
-			<Button
-				variant="ghost"
-				className="fixed right-4 bottom-4 flex h-14 rounded-full border border-neutral-200 bg-background lg:hidden dark:border-neutral-700 print:hidden"
+			<button
+				className="fixed top-4 right-4 flex items-center justify-center rounded-full border border-neutral-200 bg-background p-2 lg:hidden dark:border-neutral-700 print:hidden"
 				aria-labelledby="Effectuer une recherche sur mon site"
 				aria-label="Effectuer une recherche sur mon site"
 				onClick={() => setOpen(true)}
-				{...props}
+				type="button"
 			>
-				<Command className="size-7 shrink-0" weight="duotone" />
-			</Button>
+				<Command className="size-7 shrink-0 text-foreground" weight="duotone" />
+			</button>
 
 			<CommandDialog open={open} onOpenChange={setOpen}>
 				<div className="relative">
@@ -143,7 +141,10 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
 						className="-translate-y-1/2 absolute top-1/2 right-3 transform"
 						onClick={() => setOpen(false)}
 					>
-						<X className="size-4 shrink-0 opacity-70" />
+						<X
+							className="size-4 shrink-0 text-destructive opacity-90"
+							weight="bold"
+						/>
 						<span className="sr-only">Fermer</span>
 					</CommandShortcut>
 				</div>

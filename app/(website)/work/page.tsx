@@ -1,6 +1,6 @@
+import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
-import { AnimatedNameLink } from '@/components/text/AnimatedName';
 import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
 import { type WorkItem, economat, spinalCom, wefix } from '@/resources/work';
@@ -29,7 +29,7 @@ const Work = (): React.JSX.Element => (
 		<h1 className="fade-in mb-0 pt-6 font-geist-sans font-medium text-lg sm:pt-12">
 			Mes expériences professionnelles
 		</h1>
-		<AnimatedNameLink />
+		<AnimatedName />
 
 		<FadeInStagger className="mt-10" faster>
 			<FadeIn>
