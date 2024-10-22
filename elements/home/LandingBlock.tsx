@@ -3,7 +3,6 @@
 import { FadeIn } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { SocialLink } from '@/components/links/SocialLink';
-import { env } from '@/env/client';
 import { display } from '@/resources/config';
 import { type Contact, contact } from '@/resources/contact';
 import dynamic from 'next/dynamic';
@@ -27,7 +26,7 @@ export const LandingBlock = (): React.JSX.Element => {
 					<p className="leading-8">
 						Bonjour, je m'appelle{' '}
 						<span className="font-bold text-theme">
-							{env.NEXT_PUBLIC_SURNAME}
+							{process.env.NEXT_PUBLIC_SURNAME}
 						</span>
 						, j'ai{' '}
 						<span className="font-bold">

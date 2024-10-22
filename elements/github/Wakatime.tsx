@@ -1,6 +1,5 @@
 import { wakatimeStats } from '@/actions/wakatime/stats.action';
 import { PatternCard } from '@/components/ui/PatternCard';
-import { env } from '@/env/server';
 import { dayjs } from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
 import { GitCommit } from '@phosphor-icons/react/dist/ssr';
@@ -16,7 +15,7 @@ export const WakatimeStats = async ({
 	className,
 }: WakatimeProps): Promise<React.JSX.Element> => {
 	noStore();
-	const stats = await wakatimeStats(env.WAKATIME_DATA_URL);
+	const stats = await wakatimeStats(process.env.WAKATIME_DATA_URL!);
 	const { data } = stats;
 	const { start, end, daily_average, best_day, total_seconds } = data;
 

@@ -3,8 +3,6 @@ import { Providers } from '@/app/providers';
 import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
-import { env as client } from '@/env/client';
-import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
 import { Analytics } from '@vercel/analytics/react';
@@ -28,11 +26,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = constructMetadata({
-	title: `${client.NEXT_PUBLIC_NAME} ${client.NEXT_PUBLIC_SURNAME}`,
+	title: `${process.env.NEXT_PUBLIC_FULLNAME}`,
 	description:
 		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et de nouvelles technologies.",
 	image: absoluteUrl(
-		`/api/og?heading=${client.NEXT_PUBLIC_NAME} ${client.NEXT_PUBLIC_SURNAME}&type=image&mode=dark`,
+		`/api/og?heading=${process.env.NEXT_PUBLIC_FULLNAME}&type=image&mode=dark`,
 	),
 });
 
@@ -79,8 +77,8 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 							{process.env.NODE_ENV === 'production' && (
 								<Script
 									defer
-									src={server.UMAMI_SCRIPT}
-									data-website-id={server.UMAMI_WEBSITE_ID}
+									src={process.env.UMAMI_SCRIPT}
+									data-website-id={process.env.UMAMI_WEBSITE_ID}
 								/>
 							)}
 						</>

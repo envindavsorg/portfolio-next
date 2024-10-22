@@ -1,21 +1,10 @@
-import { Lightbulb } from '@phosphor-icons/react/dist/ssr';
+import { Do } from '@/components/blocs/DoAndDont';
 import type React from 'react';
 
 export const Tailwind = (): React.JSX.Element => (
 	<>
-		<div className="my-6 flex items-start space-x-4">
-			<div className="relative mt-1 ml-1 flex h-4 w-4 items-center justify-center rounded-full bg-theme text-white ring-2 ring-theme">
-				<Lightbulb
-					className="size-3 overflow-visible text-background"
-					weight="bold"
-				/>
-				<div className="absolute top-full left-[0.46875rem] mt-1 h-[1.375rem] w-px rounded-full bg-theme" />
-			</div>
-			<p className="m-0 flex-1 font-bold text-base text-theme">
-				Pourquoi utiliser <span className="font-extrabold">Tailwind CSS</span> ?
-			</p>
-		</div>
-		<div className="rounded-md border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-800">
+		<Do text="Pourquoi utiliser Tailwind CSS ?" />
+		<div className="rounded-md border border-neutral-200 bg-neutral-50 p-3 *:text-sm dark:border-neutral-700 dark:bg-neutral-800">
 			<p className="leading-8">
 				<span className="font-bold text-theme">Tailwind CSS</span> est un
 				excellent outil pour accélérer la création de sites web grâce à ses

@@ -1,6 +1,5 @@
 import { getViewsCount, increment } from '@/actions/blog/views.actions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
-import { env } from '@/env/client';
 import { formatDate } from '@/lib/formatDate';
 import { Circle } from '@phosphor-icons/react/dist/ssr';
 import React, { cache } from 'react';
@@ -23,7 +22,7 @@ export const ViewsCounter = async ({ article, slug }: ViewsCounterProps) => {
 	const views: any[] | string[] = await getViewsCount();
 	const viewsForSlug = views?.find((view) => view.slug === slug);
 	const number: number = Number(viewsForSlug?.count || 0);
-	const name: string = `${env.NEXT_PUBLIC_FULLNAME}`;
+	const name: string = `${process.env.NEXT_PUBLIC_FULLNAME}`;
 
 	await incrementViews(slug);
 

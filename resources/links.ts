@@ -1,4 +1,3 @@
-import { env } from '@/env/client';
 import {
 	GithubLogo,
 	LinkedinLogo,
@@ -18,13 +17,13 @@ export const links: Links[] = [
 	{
 		name: 'linkedin',
 		description: 'Voir mon profil LinkedIn',
-		url: `https://fr.linkedin.com/in/${env.NEXT_PUBLIC_WEBSITE_PREFIX}`,
+		url: `https://fr.linkedin.com/in/${process.env.NEXT_PUBLIC_WEBSITE_PREFIX}`,
 		icon: LinkedinLogo,
 	},
 	{
 		name: 'github',
 		description: 'Voir mon compte et projets sur GitHub',
-		url: `https://github.com/${env.NEXT_PUBLIC_GITHUB_USERNAME}`,
+		url: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`,
 		icon: GithubLogo,
 	},
 	{

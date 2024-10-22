@@ -1,11 +1,10 @@
 'use server';
 
-import { env } from '@/env/server';
 import { logger } from '@/lib/logger';
 
 const headers = {
 	'Content-Type': 'application/json',
-	Authorization: `Basic ${env.WAKATIME_API_KEY}`,
+	Authorization: `Basic ${process.env.WAKATIME_API_KEY}`,
 };
 
 export const wakatimeStats = async (url: string) => {

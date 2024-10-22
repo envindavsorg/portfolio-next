@@ -1,6 +1,5 @@
 import { useCommandContext } from '@/components/command/CommandContext';
 import { Button } from '@/components/ui/Button';
-import { env } from '@/env/client';
 import { ChartBar, Printer, ReadCvLogo, XCircle } from '@phosphor-icons/react';
 import Link from 'next/link';
 import type React from 'react';
@@ -57,7 +56,7 @@ export const CommandToolbar = (): React.JSX.Element => {
 			</Button>
 
 			<Link
-				href={env.NEXT_PUBLIC_UMAMI_PREVIEW_ENDPOINT}
+				href={process.env.NEXT_PUBLIC_UMAMI_PREVIEW_ENDPOINT!}
 				aria-label="Voir les statistiques sur Umami"
 				target="_blank"
 				rel="noopener noreferrer"

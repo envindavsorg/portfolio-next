@@ -1,8 +1,7 @@
-import { env } from '@/env/client';
 import type { Metadata } from 'next';
 
 export const absoluteUrl = (path: string): string =>
-	`${env.NEXT_PUBLIC_WEBSITE_URL}${path}`;
+	`${process.env.NEXT_PUBLIC_WEBSITE_URL}${path}`;
 
 interface ConstructMetadataProps {
 	title: string;

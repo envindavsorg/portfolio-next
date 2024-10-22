@@ -8,7 +8,6 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { SheetContent, SheetMain, SheetTrigger } from '@/components/ui/Sheet';
-import { env } from '@/env/client';
 import { auth, signOut } from '@/lib/auth';
 import { List, Package } from '@phosphor-icons/react/dist/ssr';
 import type { Session } from 'next-auth';
@@ -33,10 +32,10 @@ const DashboardLayout = async ({
 							<Avatar className="flex size-9">
 								<AvatarImage
 									src="/og-author.png"
-									alt={env.NEXT_PUBLIC_FULLNAME}
+									alt={process.env.NEXT_PUBLIC_FULLNAME}
 								/>
 								<AvatarFallback>
-									{`${env.NEXT_PUBLIC_NAME?.[0] || ''}${env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
+									{`${process.env.NEXT_PUBLIC_NAME?.[0] || ''}${process.env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
 								</AvatarFallback>
 							</Avatar>
 						</div>
@@ -140,11 +139,11 @@ const DashboardLayout = async ({
 										src={session.user.image || '/og.png'}
 										alt={
 											session.user.name ||
-											`${env.NEXT_PUBLIC_NAME}${env.NEXT_PUBLIC_SURNAME}`
+											`${process.env.NEXT_PUBLIC_NAME}${process.env.NEXT_PUBLIC_SURNAME}`
 										}
 									/>
 									<AvatarFallback>
-										{`${env.NEXT_PUBLIC_NAME?.[0] || ''}${env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
+										{`${process.env.NEXT_PUBLIC_NAME?.[0] || ''}${process.env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
 									</AvatarFallback>
 									<span className="sr-only">Cliquer pour ouvrir le menu</span>
 								</Avatar>

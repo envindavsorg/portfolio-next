@@ -1,16 +1,7 @@
-import { fileURLToPath } from 'node:url';
 import createMDX from '@next/mdx';
 import { Redis } from '@upstash/redis';
-import createJiti, { type JITI } from 'jiti';
 import type { NextConfig } from 'next';
 
-// Import env here to validate during build.
-// Using jiti we can import .ts files :)
-const jiti: JITI = createJiti(fileURLToPath(import.meta.url));
-jiti('./env/server');
-jiti('./env/client');
-
-// Next.js configuration
 const nextConfig: NextConfig = {
 	pageExtensions: ['mdx', 'ts', 'tsx'],
 	typescript: {
@@ -18,7 +9,7 @@ const nextConfig: NextConfig = {
 		// Dangerously allow production builds to successfully complete even if
 		// your project has type errors.
 		// !! WARN !!
-		ignoreBuildErrors: true,
+		ignoreBuildErrors: false,
 	},
 	devIndicators: {
 		buildActivity: false,

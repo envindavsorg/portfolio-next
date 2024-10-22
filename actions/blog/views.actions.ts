@@ -2,12 +2,14 @@
 
 import crypto from 'node:crypto';
 import { redis } from '@/db/redis';
-import { env } from '@/env/server';
 import { unstable_noStore as noStore } from 'next/cache';
 import { headers } from 'next/headers';
 
 export const getBlogViews = async (): Promise<number> => {
-	if (!env.UPSTASH_REDIS_REST_URL || !env.UPSTASH_REDIS_REST_TOKEN) {
+	if (
+		!process.env.UPSTASH_REDIS_REST_URL ||
+		!process.env.UPSTASH_REDIS_REST_TOKEN
+	) {
 		return 0;
 	}
 
@@ -18,7 +20,10 @@ export const getBlogViews = async (): Promise<number> => {
 };
 
 export const getViewsCount = async () => {
-	if (!env.UPSTASH_REDIS_REST_URL || !env.UPSTASH_REDIS_REST_TOKEN) {
+	if (
+		!process.env.UPSTASH_REDIS_REST_URL ||
+		!process.env.UPSTASH_REDIS_REST_TOKEN
+	) {
 		return [];
 	}
 

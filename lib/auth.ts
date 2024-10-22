@@ -1,4 +1,3 @@
-import { env } from '@/env/server';
 import { logger } from '@/lib/logger';
 import NextAuth from 'next-auth';
 import type { Session } from 'next-auth';
@@ -20,8 +19,8 @@ interface ExtendedSession extends Session {
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
 		GitHub({
-			clientId: env.AUTH_GITHUB_ID,
-			clientSecret: env.AUTH_GITHUB_SECRET,
+			clientId: process.env.AUTH_GITHUB_ID,
+			clientSecret: process.env.AUTH_GITHUB_SECRET,
 			checks: [`nonce`],
 			authorization: {
 				params: {
@@ -60,7 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return session;
 		},
 		signIn({ user }) {
-			return user.id !== env.GITHUB_USERNAME;
+			return user.id !== process.env.GITHUB_USERNAME;
 		},
 	},
 });

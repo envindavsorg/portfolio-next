@@ -8,16 +8,16 @@ import {
 	TechStack,
 	WorkDescription,
 } from '@/elements/home';
-import { env } from '@/env/client';
 import type React from 'react';
 
 const AnimatedName = (): React.JSX.Element => (
 	<h1 className="pt-6 font-bold font-geist-sans text-3xl transition-element sm:pt-12 md:text-4xl">
-		<span className="sr-only">{env.NEXT_PUBLIC_FULLNAME}</span>
+		<span className="sr-only">{process.env.NEXT_PUBLIC_FULLNAME}</span>
 		<span className="group relative block overflow-hidden">
 			<span className="group-hover:-translate-y-full inline-block transition-all duration-300 ease-in-out">
-				{env.NEXT_PUBLIC_FULLNAME.split('').map(
-					(letter: string, idx: number) => (
+				{process.env
+					.NEXT_PUBLIC_FULLNAME!.split('')
+					.map((letter: string, idx: number) => (
 						<span
 							key={`${letter}-${idx}`}
 							className="inline-block"
@@ -27,8 +27,7 @@ const AnimatedName = (): React.JSX.Element => (
 						>
 							{letter === ' ' ? '\u00A0' : letter}
 						</span>
-					),
-				)}
+					))}
 			</span>
 			<span className="absolute top-0 left-0 inline-block translate-y-full transition-all duration-300 ease-in-out group-hover:translate-y-0">
 				{'Développeur web'.split('').map((letter, index) => (

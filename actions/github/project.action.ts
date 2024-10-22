@@ -1,7 +1,6 @@
 'use server';
 
 import { octokit } from '@/db/octokit';
-import { env } from '@/env/server';
 import { query } from '@/graphql/project';
 import { logger } from '@/lib/logger';
 
@@ -53,7 +52,7 @@ export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
 				languages: { totalSize, edges },
 			},
 		} = await graphql<ProjectInfoResponse>(query, {
-			owner: env.GITHUB_USERNAME,
+			owner: process.env.GITHUB_USERNAME,
 			repo: repository,
 		});
 

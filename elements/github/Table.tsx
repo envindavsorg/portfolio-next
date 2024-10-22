@@ -8,7 +8,6 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/Table';
-import { env } from '@/env/server';
 import { dayjs } from '@/lib/dayjs';
 import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
@@ -26,7 +25,7 @@ export const Tables = async ({ className }: TablesProps) => {
 				contributionCalendar: { weeks },
 			},
 		},
-	} = await githubUser(env.GITHUB_USERNAME);
+	} = await githubUser(process.env.GITHUB_USERNAME!);
 
 	const currentMonthContributions = weeks.flatMap(
 		(week) => week.contributionDays,

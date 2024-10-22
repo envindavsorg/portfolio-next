@@ -1,7 +1,6 @@
 import { githubUser } from '@/actions/github/user.action';
 import { ChannelSkeleton } from '@/components/blocs/Channel';
 import { PatternCard } from '@/components/ui/PatternCard';
-import { env } from '@/env/server';
 import { cn } from '@/lib/utils';
 import {
 	CalendarCheck,
@@ -25,7 +24,7 @@ export const Stats = async ({
 }: StatsProps): Promise<React.JSX.Element> => {
 	noStore();
 	const { following, followers, commits } = await githubUser(
-		env.GITHUB_USERNAME,
+		process.env.GITHUB_USERNAME!,
 	);
 
 	return (

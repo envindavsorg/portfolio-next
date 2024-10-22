@@ -1,9 +1,8 @@
 import ContactEmailTemplate from '@/emails/Contact';
-import { env } from '@/env/server';
 import { type NextRequest, NextResponse } from 'next/server';
 import { type CreateEmailResponse, Resend } from 'resend';
 
-const resend: Resend = new Resend(env.RESEND_API_KEY);
+const resend: Resend = new Resend(process.env.RESEND_API_KEY);
 
 type Props =
 	| NextResponse<CreateEmailResponse>
