@@ -1,11 +1,10 @@
 'use client';
 
-import { MotionDiv } from '@/components/motion/MotionDiv';
 import { cn } from '@/lib/utils';
 import type { Container, SingleOrMultiple } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import { type AnimationControls, useAnimation } from 'framer-motion';
+import { type AnimationControls, motion, useAnimation } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import type React from 'react';
 import { memo, useEffect, useState } from 'react';
@@ -96,7 +95,7 @@ const SparklesEffect = (props: SparklesEffectProps) => {
 	};
 
 	return (
-		<MotionDiv animate={controls} className={cn('opacity-0', className)}>
+		<motion.div animate={controls} className={cn('opacity-0', className)}>
 			{init && (
 				<Particles
 					id={id || 'tsparticles'}
@@ -473,6 +472,6 @@ const SparklesEffect = (props: SparklesEffectProps) => {
 					}}
 				/>
 			)}
-		</MotionDiv>
+		</motion.div>
 	);
 };

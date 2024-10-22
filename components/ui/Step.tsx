@@ -161,7 +161,7 @@ export const Step = forwardRef<HTMLLIElement, StepProps>(
 );
 
 const usePrevious = <T,>(value: T): T | undefined => {
-	const ref = useRef<T>(undefined);
+	const ref = useRef<T>(value);
 
 	useEffect((): void => {
 		ref.current = value;

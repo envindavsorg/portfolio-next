@@ -1,8 +1,8 @@
-import { MotionDiv } from '@/components/motion/MotionDiv';
 import type { ArticleWithSlug } from '@/lib/articles';
 import { formatDate } from '@/lib/formatDate';
 import { cn } from '@/lib/utils';
 import { LineVertical } from '@phosphor-icons/react';
+import { motion } from 'framer-motion';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
 import type React from 'react';
@@ -39,7 +39,7 @@ export const Article = ({
 			>
 				<div className="transition-opacity">
 					{isLanding && (
-						<MotionDiv
+						<motion.div
 							animate={{
 								top: y - imageHeight - imageOffset,
 								left: x - imageWidth / 2,
@@ -61,7 +61,7 @@ export const Article = ({
 								height={imageHeight}
 								className="size-56 object-contain object-center"
 							/>
-						</MotionDiv>
+						</motion.div>
 					)}
 
 					<div className="flex items-center justify-between gap-6">

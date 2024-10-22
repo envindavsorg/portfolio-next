@@ -1,8 +1,8 @@
 'use client';
 
 import { DotPattern } from '@/components/background/DotPattern';
-import { MotionDiv } from '@/components/motion/MotionDiv';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import type React from 'react';
 
 interface PatternCardProps {
@@ -20,7 +20,7 @@ export const PatternCard = ({
 	className,
 	patternColor = 'fill-theme',
 }: PatternCardProps): React.JSX.Element => (
-	<MotionDiv
+	<motion.div
 		className={cn(
 			className,
 			'relative overflow-hidden rounded-md border border-neutral-200 bg-background p-4 dark:border-neutral-700',
@@ -46,5 +46,5 @@ export const PatternCard = ({
 			height={10}
 			className={cn(patternColor, 'z-10 p-2')}
 		/>
-	</MotionDiv>
+	</motion.div>
 );

@@ -60,7 +60,7 @@ const CommandDialog = ({
 			</DialogTitle>
 			<DialogContent
 				className="max-w-lg overflow-hidden p-0"
-				ref={ref}
+				ref={ref as RefObject<HTMLDivElement>}
 				onKeyDown={(event: React.KeyboardEvent): void => {
 					if (event.key === 'Enter' || event.key === 'Backspace') {
 						bounce();

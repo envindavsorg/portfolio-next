@@ -1,8 +1,5 @@
 'use client';
 
-import { MotionDiv } from '@/components/motion/MotionDiv';
-import { MotionNav } from '@/components/motion/MotionNav';
-import { MotionSpan } from '@/components/motion/MotionSpan';
 import { cn, getRouterLastPathSegment } from '@/lib/utils';
 import {
 	type Navigation,
@@ -29,8 +26,8 @@ export const NavBar = (): React.JSX.Element => {
 	const mouseY: MotionValue<number> = useMotionValue(Number.POSITIVE_INFINITY);
 
 	return (
-		<MotionNav
-			onMouseMove={(event) => {
+		<motion.nav
+			onMouseMove={(event: React.MouseEvent<HTMLElement>) => {
 				mouseY.set(event.clientY);
 				setIsHovered(true);
 			}}
@@ -63,7 +60,7 @@ export const NavBar = (): React.JSX.Element => {
 					/>
 				);
 			})}
-		</MotionNav>
+		</motion.nav>
 	);
 };
 
@@ -115,7 +112,7 @@ const LinkLine = ({
 	if (title) {
 		return (
 			<Link href={link || '#'} aria-label={description}>
-				<MotionDiv
+				<motion.div
 					ref={ref}
 					className={cn(
 						'group relative bg-foreground transition-colors hover:bg-theme',
@@ -128,7 +125,7 @@ const LinkLine = ({
 				>
 					<AnimatePresence>
 						{isHovered && (
-							<MotionSpan
+							<motion.span
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
@@ -140,10 +137,10 @@ const LinkLine = ({
 								)}
 							>
 								{title}
-							</MotionSpan>
+							</motion.span>
 						)}
 					</AnimatePresence>
-				</MotionDiv>
+				</motion.div>
 			</Link>
 		);
 	}

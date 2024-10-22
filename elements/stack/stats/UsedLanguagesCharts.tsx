@@ -7,8 +7,8 @@ import { MarkdownIcon } from '@/components/icons/Markdown';
 import { PugIcon } from '@/components/icons/Pug';
 import { SassIcon } from '@/components/icons/Sass';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { MotionSpan } from '@/components/motion/MotionSpan';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import type React from 'react';
 
 type Languages = {
@@ -85,7 +85,7 @@ export const UsedLanguagesCharts = ({
 				return (
 					<div className="h-52" key={`${name}-${idx}`}>
 						<div className="relative flex size-full items-end overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700">
-							<MotionSpan
+							<motion.span
 								animate={{ height: `${height}%` }}
 								className={cn('relative z-0 w-full', color)}
 								transition={{ type: 'spring' }}
