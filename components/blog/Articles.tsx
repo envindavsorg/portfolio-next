@@ -25,7 +25,7 @@ export const Articles = ({
 		y: 0,
 	});
 
-	const listRef: RefObject<null> = useRef(null);
+	const listRef: RefObject<HTMLUListElement> = useRef(null);
 
 	const handleMouseMove = (event: React.MouseEvent<HTMLUListElement>): void => {
 		setMousePosition(getRelativeCoordinates(event, listRef.current));
