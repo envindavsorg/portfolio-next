@@ -1,5 +1,5 @@
 import { ogImageSchema } from '@/lib/validations/og';
-import { baseURL } from '@/resources/config';
+import { baseURL, name } from '@/resources/config';
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
 import type React from 'react';
@@ -49,7 +49,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 					<div tw="flex items-center" style={{ gap: '12px' }}>
 						<img
 							src={avatar}
-							alt={`${process.env.NEXT_PUBLIC_FULLNAME}`}
+							alt={name}
 							tw="rounded-full object-cover object-center"
 							style={{ width: '56px', height: '56px' }}
 						/>
@@ -58,7 +58,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 								tw="text-2xl m-0"
 								style={{ fontFamily: 'Cal Sans', fontWeight: 'bold' }}
 							>
-								{`${process.env.NEXT_PUBLIC_FULLNAME}`}
+								{name}
 							</h2>
 							<p
 								tw="m-0 text-sm mt-0.5"

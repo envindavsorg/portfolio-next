@@ -1,7 +1,8 @@
+import { baseURL } from '@/resources/config';
 import type { Metadata } from 'next';
 
 export const absoluteUrl = (path: string): string =>
-	`${process.env.NEXT_PUBLIC_WEBSITE_URL}${path}`;
+	`https://${baseURL}${path}`;
 
 interface ConstructMetadataProps {
 	title: string;

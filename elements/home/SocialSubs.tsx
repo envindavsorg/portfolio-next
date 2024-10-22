@@ -1,7 +1,6 @@
 import { githubUser } from '@/actions/github/user.action';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { Channel, ChannelSkeleton } from '@/components/blocs/Channel';
-import { env as server } from '@/env/server';
 import { cn } from '@/lib/utils';
 import { GithubLogo, LinkedinLogo } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
@@ -29,7 +28,7 @@ const Subscribers = async ({
 }: SubscribersProps): Promise<React.JSX.Element> => {
 	noStore();
 	const { avatar, login, followers, following } = await githubUser(
-		server.GITHUB_USERNAME,
+		process.env.GITHUB_USERNAME!,
 	);
 
 	const data: Data[] = [

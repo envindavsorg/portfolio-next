@@ -4,6 +4,7 @@ import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { cn } from '@/lib/utils';
+import { name } from '@/resources/config';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -26,12 +27,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = constructMetadata({
-	title: `${process.env.NEXT_PUBLIC_FULLNAME}`,
+	title: name,
 	description:
 		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et de nouvelles technologies.",
-	image: absoluteUrl(
-		`/api/og?heading=${process.env.NEXT_PUBLIC_FULLNAME}&type=image&mode=dark`,
-	),
+	image: absoluteUrl(`/api/og?heading=${name}&type=image&mode=dark`),
 });
 
 export const viewport: Viewport = {

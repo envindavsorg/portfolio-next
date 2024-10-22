@@ -1,6 +1,7 @@
 import { getViewsCount, increment } from '@/actions/blog/views.actions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { formatDate } from '@/lib/formatDate';
+import { initials, name } from '@/resources/config';
 import { Circle } from '@phosphor-icons/react/dist/ssr';
 import React, { cache } from 'react';
 
@@ -22,7 +23,6 @@ export const ViewsCounter = async ({ article, slug }: ViewsCounterProps) => {
 	const views: any[] | string[] = await getViewsCount();
 	const viewsForSlug = views?.find((view) => view.slug === slug);
 	const number: number = Number(viewsForSlug?.count || 0);
-	const name: string = `${process.env.NEXT_PUBLIC_FULLNAME}`;
 
 	await incrementViews(slug);
 
@@ -30,12 +30,7 @@ export const ViewsCounter = async ({ article, slug }: ViewsCounterProps) => {
 		<div className="flex max-w-none items-center gap-4">
 			<Avatar className="size-12 shrink-0">
 				<AvatarImage src="https://cuzeac-florin.app/og-author.png" alt={name} />
-				<AvatarFallback>
-					{name
-						.split(' ')
-						.map((part: string) => part[0].toUpperCase())
-						.join('')}
-				</AvatarFallback>
+				<AvatarFallback>{initials}</AvatarFallback>
 			</Avatar>
 			<div className="inline-flex select-none flex-col gap-0.5 overflow-hidden leading-tight">
 				<p className="text-primary">{article.author}</p>

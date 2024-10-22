@@ -56,7 +56,7 @@ export const CommandToolbar = (): React.JSX.Element => {
 			</Button>
 
 			<Link
-				href={process.env.NEXT_PUBLIC_UMAMI_PREVIEW_ENDPOINT!}
+				href="https://cloud.umami.is/share/rVOMj3DXuoMnokjd/cuzeac-florin.app"
 				aria-label="Voir les statistiques sur Umami"
 				target="_blank"
 				rel="noopener noreferrer"

@@ -4,6 +4,7 @@ import { FadeIn } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { SocialLink } from '@/components/links/SocialLink';
 import { display } from '@/resources/config';
+import { name } from '@/resources/config';
 import { type Contact, contact } from '@/resources/contact';
 import dynamic from 'next/dynamic';
 import type React from 'react';
@@ -26,7 +27,7 @@ export const LandingBlock = (): React.JSX.Element => {
 					<p className="leading-8">
 						Bonjour, je m'appelle{' '}
 						<span className="font-bold text-theme">
-							{process.env.NEXT_PUBLIC_SURNAME}
+							{name.trim().split(' ').pop()}
 						</span>
 						, j'ai{' '}
 						<span className="font-bold">

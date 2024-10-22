@@ -1,3 +1,4 @@
+import { githubUsername, name } from '@/resources/config';
 import {
 	GithubLogo,
 	LinkedinLogo,
@@ -17,13 +18,13 @@ export const links: Links[] = [
 	{
 		name: 'linkedin',
 		description: 'Voir mon profil LinkedIn',
-		url: `https://fr.linkedin.com/in/${process.env.NEXT_PUBLIC_WEBSITE_PREFIX}`,
+		url: `https://fr.linkedin.com/in/${name.replace(/ /g, '').toLowerCase()}`,
 		icon: LinkedinLogo,
 	},
 	{
 		name: 'github',
 		description: 'Voir mon compte et projets sur GitHub',
-		url: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`,
+		url: `https://github.com/${githubUsername}`,
 		icon: GithubLogo,
 	},
 	{

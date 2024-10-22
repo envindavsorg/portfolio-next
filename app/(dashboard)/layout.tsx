@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { SheetContent, SheetMain, SheetTrigger } from '@/components/ui/Sheet';
 import { auth, signOut } from '@/lib/auth';
+import { initials, name } from '@/resources/config';
 import { List, Package } from '@phosphor-icons/react/dist/ssr';
 import type { Session } from 'next-auth';
 import Link from 'next/link';
@@ -30,13 +31,8 @@ const DashboardLayout = async ({
 					<nav className="hidden flex-col gap-6 font-medium text-lg md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
 						<div className="flex items-center">
 							<Avatar className="flex size-9">
-								<AvatarImage
-									src="/og-author.png"
-									alt={process.env.NEXT_PUBLIC_FULLNAME}
-								/>
-								<AvatarFallback>
-									{`${process.env.NEXT_PUBLIC_NAME?.[0] || ''}${process.env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
-								</AvatarFallback>
+								<AvatarImage src="/og-author.png" alt={name} />
+								<AvatarFallback>{initials}</AvatarFallback>
 							</Avatar>
 						</div>
 						<Link
@@ -137,14 +133,9 @@ const DashboardLayout = async ({
 								<Avatar className="flex size-9">
 									<AvatarImage
 										src={session.user.image || '/og.png'}
-										alt={
-											session.user.name ||
-											`${process.env.NEXT_PUBLIC_NAME}${process.env.NEXT_PUBLIC_SURNAME}`
-										}
+										alt={session.user.name || name}
 									/>
-									<AvatarFallback>
-										{`${process.env.NEXT_PUBLIC_NAME?.[0] || ''}${process.env.NEXT_PUBLIC_SURNAME?.[0] || ''}`}
-									</AvatarFallback>
+									<AvatarFallback>{initials}</AvatarFallback>
 									<span className="sr-only">Cliquer pour ouvrir le menu</span>
 								</Avatar>
 							</DropdownMenuTrigger>

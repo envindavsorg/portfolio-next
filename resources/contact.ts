@@ -1,3 +1,4 @@
+import { githubUsername, mail, name, phone } from '@/resources/config';
 import {
 	ChatCircle,
 	ChatsCircle,
@@ -25,31 +26,31 @@ export const contact: Contact[] = [
 	{
 		name: 'linkedin',
 		description: 'Envoyez-moi un message sur LinkedIn',
-		url: `https://www.linkedin.com/in/${process.env.NEXT_PUBLIC_WEBSITE_PREFIX}`,
+		url: `https://www.linkedin.com/in/${name.replace(/ /g, '').toLowerCase()}`,
 		icon: LinkedinLogo,
 	},
 	{
 		name: 'github',
 		description: 'Voir mon profil sur GitHub',
-		url: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`,
+		url: `https://github.com/${githubUsername}`,
 		icon: GithubLogo,
 	},
 	{
 		name: 'e-mail',
 		description: "N'hésitez pas à m'envoyer un email",
-		url: `mailto:${process.env.NEXT_PUBLIC_EMAIL}`,
+		url: `mailto:${mail}`,
 		icon: EnvelopeSimple,
 	},
 	{
 		name: 'téléphone',
 		description: "N'hésitez pas à m'appeler",
-		url: `tel:${process.env.NEXT_PUBLIC_PHONE}`,
+		url: `tel:${phone}`,
 		icon: Phone,
 	},
 	{
 		name: 'SMS',
 		description: "N'hésitez pas à m'envoyer un SMS",
-		url: `sms:${process.env.NEXT_PUBLIC_PHONE}`,
+		url: `sms:${phone}`,
 		icon: ChatCircle,
 	},
 ];
