@@ -1,5 +1,4 @@
 import './globals.css';
-import { Providers } from '@/app/providers';
 import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
@@ -57,32 +56,30 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 					geistMono.variable,
 				)}
 			>
-				<Providers>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="dark"
-						disableTransitionOnChange
-					>
-						<ThemeMeta />
-						{children}
-						<Toaster position="bottom-right" />
-					</ThemeProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					disableTransitionOnChange
+				>
+					<ThemeMeta />
+					{children}
+					<Toaster position="bottom-right" />
+				</ThemeProvider>
 
-					{process.env.NODE_ENV === 'production' && (
-						<>
-							<Analytics mode={'production'} debug={true} />
-							<SpeedInsights debug={false} />
+				{process.env.NODE_ENV === 'production' && (
+					<>
+						<Analytics mode={'production'} debug={true} />
+						<SpeedInsights debug={false} />
 
-							{process.env.NODE_ENV === 'production' && (
-								<Script
-									defer
-									src={process.env.UMAMI_SCRIPT}
-									data-website-id={process.env.UMAMI_WEBSITE_ID}
-								/>
-							)}
-						</>
-					)}
-				</Providers>
+						{process.env.NODE_ENV === 'production' && (
+							<Script
+								defer
+								src={process.env.UMAMI_SCRIPT}
+								data-website-id={process.env.UMAMI_WEBSITE_ID}
+							/>
+						)}
+					</>
+				)}
 			</body>
 		</html>
 	</ViewTransitions>
