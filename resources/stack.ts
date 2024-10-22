@@ -13,6 +13,7 @@ import { NPMIcon } from '@/components/icons/NPM';
 import { NextJSIcon } from '@/components/icons/Next';
 import { NodejsIcon } from '@/components/icons/Node';
 import { PNPMIcon } from '@/components/icons/PNPM';
+import { PostgreIcon } from '@/components/icons/Postgre';
 import { PugIcon } from '@/components/icons/Pug';
 import { ReactIcon } from '@/components/icons/React';
 import { SassIcon } from '@/components/icons/Sass';
@@ -48,4 +49,15 @@ export const stack: Stack[] = [
 	{ icon: PNPMIcon, title: 'pnpm' },
 	{ icon: FigmaIcon, title: 'Figma' },
 	{ icon: FramerMotionIcon, title: 'Framer Motion' },
+];
+
+export const preferred: Stack[] = [
+	{ icon: ReactIcon, title: 'React' },
+	{ icon: NextJSIcon, title: 'Next.js' },
+	{ icon: TypeScriptIcon, title: 'TypeScript' },
+	{ icon: TailwindIcon, title: 'Tailwind CSS' },
+	{ icon: MongoDBIcon, title: 'MongoDB' },
+	{ icon: PostgreIcon, title: 'PostgreSQL' },
+	{ icon: ExpressIcon, title: 'Express' },
+	{ icon: FastifyIcon, title: 'Fastify' },
 ];

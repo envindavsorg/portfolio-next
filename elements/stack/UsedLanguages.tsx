@@ -5,10 +5,7 @@ import { env } from '@/env/server';
 import { unstable_noStore as noStore } from 'next/cache';
 import React, { Fragment } from 'react';
 
-interface UsedLanguagesProps {
-	className?: string;
-}
-export const UsedLanguages = async ({ className }: UsedLanguagesProps) => {
+export const UsedLanguages = async () => {
 	noStore();
 	const { data } = await wakatimeStats(env.WAKATIME_DATA_URL);
 
@@ -21,7 +18,7 @@ export const UsedLanguages = async ({ className }: UsedLanguagesProps) => {
 				</p>
 			</FadeIn>
 
-			<UsedLanguagesCharts languages={data.languages} className={className} />
+			<UsedLanguagesCharts languages={data.languages} />
 		</Fragment>
 	);
 };

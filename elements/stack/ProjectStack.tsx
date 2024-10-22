@@ -9,7 +9,6 @@ import { ShellIcon } from '@/components/icons/Shell';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { PatternCard } from '@/components/ui/PatternCard';
 import { env } from '@/env/server';
-import { cn } from '@/lib/utils';
 import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
 import { Fragment } from 'react';
@@ -33,17 +32,13 @@ const icons: Icons = {
 	Shell: <ShellIcon className="flex-shrink-0 text-3xl md:text-4xl" />,
 };
 
-interface LanguagesProps {
-	className?: string;
-}
-
-export const Languages = async ({ className }: LanguagesProps) => {
+export const Languages = async () => {
 	noStore();
 	const { languages, commits } = await projectInfo(env.GITHUB_REPO);
 	languages.unshift({ name: 'Contributions', percentage: commits });
 
 	return (
-		<div className={cn('grid gap-3 sm:grid-cols-2', className)}>
+		<div className="mt-6 grid gap-3 sm:grid-cols-2">
 			{languages.map(({ name, percentage }: Languages, idx: number) => (
 				<PatternCard
 					key={`${name}-${idx}`}
@@ -65,13 +60,7 @@ export const Languages = async ({ className }: LanguagesProps) => {
 	);
 };
 
-interface ProjectStackProps {
-	className?: string;
-}
-
-export const ProjectStack = ({
-	className,
-}: ProjectStackProps): React.JSX.Element => (
+export const ProjectStack = (): React.JSX.Element => (
 	<Fragment>
 		<FadeIn>
 			<p className="leading-8">
@@ -81,14 +70,14 @@ export const ProjectStack = ({
 		</FadeIn>
 		<Suspense
 			fallback={
-				<div className={cn('mt-6 grid w-full gap-3 sm:grid-cols-2', className)}>
+				<div className="mt-6 grid w-full gap-3 sm:grid-cols-2">
 					{Array.from({ length: 6 }).map((_, idx: number) => (
 						<ChannelSkeleton key={`${idx}-channel-skeleton`} />
 					))}
 				</div>
 			}
 		>
-			<Languages className={className} />
+			<Languages />
 		</Suspense>
 	</Fragment>
 );

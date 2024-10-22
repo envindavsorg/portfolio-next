@@ -21,10 +21,13 @@ export const generateMetadata = async () => {
 		image: absoluteUrl(
 			`/api/og?heading=Toutes mes expériences professionnelles&type=${type}&mode=${mode}`,
 		),
+		alternates: {
+			canonical: '/work',
+		},
 	};
 };
 
-const Work = (): React.JSX.Element => (
+const WorkPage = (): React.JSX.Element => (
 	<>
 		<h1 className="fade-in mb-0 pt-6 font-geist-sans font-medium text-lg sm:pt-12">
 			Mes expériences professionnelles
@@ -220,4 +223,4 @@ const Work = (): React.JSX.Element => (
 	</>
 );
 
-export default Work;
+export default WorkPage;

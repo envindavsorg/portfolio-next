@@ -20,12 +20,10 @@ type Languages = {
 
 interface UsedLanguagesChartsProps {
 	languages: Languages[];
-	className?: string;
 }
 
 export const UsedLanguagesCharts = ({
 	languages,
-	className,
 }: UsedLanguagesChartsProps) => {
 	const data: Languages[] = languages
 		.slice(0, 5)
@@ -70,7 +68,7 @@ export const UsedLanguagesCharts = ({
 
 	return (
 		<div
-			className={cn('grid grid-cols-1 gap-3 md:gap-6', className)}
+			className="mt-6 grid grid-cols-1 gap-3 md:gap-6"
 			style={{
 				gridTemplateColumns: `repeat(${content.length}, minmax(0, 1fr))`,
 			}}

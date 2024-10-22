@@ -1,0 +1,10 @@
+```tsx
+// app/page.tsx
+const Home = async () => {
+	const res = await fetch('https://url.example.com/examples');
+	const data = await res.json();
+	return <div>{data.example}</div>;
+}
+
+export default Home;
+```
