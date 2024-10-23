@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { unstable_noStore as noStore } from 'next/cache';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { Articles } from '@/components/blog/Articles';
 import { getAllArticles } from '@/lib/articles';
@@ -12,7 +11,6 @@ export const metadata = {
 };
 
 export const Blog = async () => {
-    noStore();
     const articles = await getAllArticles();
 
     return (
