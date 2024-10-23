@@ -10,7 +10,6 @@ import {
 	UserPlus,
 	UsersThree,
 } from '@phosphor-icons/react/dist/ssr';
-import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
 import { Suspense } from 'react';
 import { Fragment } from 'react';
@@ -22,7 +21,6 @@ interface StatsProps {
 export const Stats = async ({
 	className,
 }: StatsProps): Promise<React.JSX.Element> => {
-	noStore();
 	const { following, followers, commits } = await githubUser(
 		process.env.GITHUB_USERNAME!,
 	);
