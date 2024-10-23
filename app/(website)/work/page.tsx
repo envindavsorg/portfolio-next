@@ -5,22 +5,26 @@ import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
 import { type WorkItem, economat, spinalCom, wefix } from '@/resources/work';
 import { absoluteUrl } from '@/site/metadata';
+import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import type React from 'react';
 
-export const generateMetadata = async () => {
+export const generateMetadata = async (): Promise<Metadata> => {
 	const cookie = await cookies();
 	const type: string = 'image';
 	const mode: string | undefined = cookie.get('theme')?.value;
+	const title: string = 'Mes expériences professionnelles';
 
 	return {
-		title: 'Mes expériences professionnelles',
+		title,
 		description:
 			"Mes expériences professionnelles en développement et design web chez WeFix, SpinalCom et L'Économat des Armées",
-		image: absoluteUrl(
-			`/api/og?heading=Toutes mes expériences professionnelles&type=${type}&mode=${mode}`,
-		),
+		openGraph: {
+			images: [
+				absoluteUrl(`/api/og?heading=${title}&type=${type}&mode=${mode}`),
+			],
+		},
 		alternates: {
 			canonical: '/work',
 		},

@@ -8,21 +8,25 @@ import { ProjectStack } from '@/elements/stack/stats/ProjectStack';
 import { TechStart } from '@/elements/stack/stats/TechStart';
 import { UsedLanguages } from '@/elements/stack/stats/UsedLanguages';
 import { absoluteUrl } from '@/site/metadata';
+import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import type React from 'react';
 
-export const generateMetadata = async () => {
+export const generateMetadata = async (): Promise<Metadata> => {
 	const cookie = await cookies();
 	const type: string = 'image';
 	const mode: string | undefined = cookie.get('theme')?.value;
+	const title: string = "Toutes les technologies que j'utilise";
 
 	return {
-		title: "Toutes les technologies que j'utilise quotidiennement",
+		title,
 		description:
 			'Voici les technologies avec lesquelles je suis le plus productif, et avec lesquelles je démarre chaque projet',
-		image: absoluteUrl(
-			`/api/og?heading=Toutes mes expériences professionnelles&type=${type}&mode=${mode}`,
-		),
+		openGraph: {
+			images: [
+				absoluteUrl(`/api/og?heading=${title}&type=${type}&mode=${mode}`),
+			],
+		},
 		alternates: {
 			canonical: '/stack',
 		},
