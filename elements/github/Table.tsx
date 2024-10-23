@@ -9,7 +9,6 @@ import {
 	TableRow,
 } from '@/components/ui/Table';
 import { dayjs } from '@/lib/dayjs';
-import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
 import { Fragment, Suspense } from 'react';
 
@@ -18,7 +17,6 @@ interface TablesProps {
 }
 
 export const Tables = async ({ className }: TablesProps) => {
-	noStore();
 	const {
 		commits: {
 			all: {
