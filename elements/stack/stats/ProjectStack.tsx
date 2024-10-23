@@ -8,7 +8,6 @@ import { MarkdownIcon } from '@/components/icons/Markdown';
 import { ShellIcon } from '@/components/icons/Shell';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { PatternCard } from '@/components/ui/PatternCard';
-import { unstable_noStore as noStore } from 'next/cache';
 import type React from 'react';
 import { Fragment } from 'react';
 import { Suspense } from 'react';
@@ -32,7 +31,6 @@ const icons: Icons = {
 };
 
 export const Languages = async () => {
-	noStore();
 	const { languages, commits } = await projectInfo(process.env.GITHUB_REPO!);
 	languages.unshift({ name: 'Contributions', percentage: commits });
 
