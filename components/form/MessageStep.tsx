@@ -54,9 +54,10 @@ export const MessageStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription className="pt-2 text-sm">
-					Veuillez entrer votre <span className="text-theme">message</span> dans
-					le champ ci-dessous.
+				<FormDescription className="leading-8">
+					Veuillez entrer votre{' '}
+					<span className="font-bold text-theme">message</span> dans le champ
+					ci-dessous. 😃
 				</FormDescription>
 				<div className="grid grid-cols-2 gap-3">
 					<div className="col-span-2">

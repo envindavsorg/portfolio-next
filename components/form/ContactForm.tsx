@@ -7,23 +7,18 @@ import { NameStep } from '@/components/form/NameStep';
 import { SummaryStep } from '@/components/form/SummaryStep';
 import type { StepItem } from '@/components/ui/Step';
 import { Step, Stepper } from '@/components/ui/Stepper';
-import { cn } from '@/lib/utils';
 import type React from 'react';
 
 const steps = [
-	{ label: 'Nom et prénom' },
-	{ label: 'Adresse e-mail' },
-	{ label: 'Message' },
-	{ label: 'Récapitulatif' },
+	{ label: 'Votre nom et prénom' },
+	{ label: 'Votre adresse e-mail' },
+	{ label: 'Votre message' },
+	{ label: 'Voici le récapitulatif' },
 ] satisfies StepItem[];
 
-interface ContactFormProps {
-	className?: string;
-}
-
-const ContactForm = ({ className }: ContactFormProps) => (
+export const ContactForm = () => (
 	<FormDataProvider>
-		<div className={cn(className, 'flex w-full flex-col gap-4')}>
+		<div className="flex w-full flex-col gap-4">
 			<Stepper
 				variant="circle-alt"
 				initialStep={0}
@@ -66,5 +61,3 @@ const ContactForm = ({ className }: ContactFormProps) => (
 		</div>
 	</FormDataProvider>
 );
-
-export default ContactForm;

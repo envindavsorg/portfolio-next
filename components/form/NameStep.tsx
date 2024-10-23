@@ -53,10 +53,11 @@ export const NameStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription className="pt-2 text-sm">
-					Veuillez entrer votre <span className="text-theme">nom</span> et votre{' '}
-					<span className="text-theme">prénom</span> dans les champs ci-dessous.
-					Afin que je sache qui vous êtes :)
+				<FormDescription className="leading-8">
+					Veuillez entrer votre{' '}
+					<span className="font-bold text-theme">nom</span> et votre{' '}
+					<span className="font-bold text-theme">prénom</span> en utilisant les
+					champs de saisie ci-dessous. 😃
 				</FormDescription>
 				<div className="grid grid-cols-2 gap-3">
 					<FormField

@@ -26,7 +26,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 			],
 		},
 		alternates: {
-			canonical: '/stack',
+			canonical: '/github',
 		},
 	};
 };

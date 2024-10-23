@@ -23,6 +23,7 @@ export const StepperFormActions = (props: StepperFormActionsProps) => {
 	} = useStepper();
 
 	const { formData, resetFormData } = useFormData();
+
 	const handleSubmit = async (): Promise<void> => {
 		setIsLoading(true);
 
@@ -63,7 +64,7 @@ export const StepperFormActions = (props: StepperFormActionsProps) => {
 	};
 
 	return (
-		<div className="flex w-full justify-end gap-2">
+		<div className="flex w-full justify-end gap-3">
 			{hasCompletedAllSteps ? (
 				<Button size="sm" type="button" onClick={resetSteps}>
 					Envoyer

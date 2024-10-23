@@ -34,11 +34,11 @@ export const SummaryStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription className="pt-2 text-sm">
-					Voici un <span className="text-theme">récapitulatif</span> de vos
-					informations. Si tout est correct, vous pouvez{' '}
-					<span className="text-theme">continuer</span>, et sinon, vous pouvez
-					revenir en arrière pour les modifier.
+				<FormDescription className="leading-8">
+					Voici un <span className="font-bold text-theme">récapitulatif</span>{' '}
+					de vos informations. Si tout est correct, vous pouvez{' '}
+					<span className="font-bold text-theme">continuer</span>, et sinon,
+					vous pouvez revenir en arrière pour les modifier. 😃
 				</FormDescription>
 
 				<Table>

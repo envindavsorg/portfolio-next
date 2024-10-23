@@ -1,9 +1,11 @@
 import { wakatimeStats } from '@/actions/wakatime/stats.action';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { UsedLanguagesCharts } from '@/elements/stack/stats/UsedLanguagesCharts';
+import { unstable_noStore as noStore } from 'next/cache';
 import React, { Fragment } from 'react';
 
 export const UsedLanguages = async () => {
+	noStore();
 	const { data } = await wakatimeStats(process.env.WAKATIME_DATA_URL!);
 
 	return (

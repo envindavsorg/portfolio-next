@@ -47,10 +47,10 @@ export const MailStep = () => {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-3">
-				<FormDescription className="pt-2 text-sm">
+				<FormDescription className="leading-8">
 					Veuillez entrer votre{' '}
-					<span className="text-theme">adresse e-mail</span> dans le champ
-					ci-dessous.
+					<span className="font-bold text-theme">adresse e-mail</span> en
+					utilisant le champ de saisie ci-dessous. 😃
 				</FormDescription>
 				<div className="grid grid-cols-2 gap-3">
 					<div className="col-span-2">
