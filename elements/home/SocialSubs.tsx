@@ -4,7 +4,6 @@ import { Channel, ChannelSkeleton } from '@/components/blocs/Channel';
 import { cn } from '@/lib/utils';
 import { GithubLogo, LinkedinLogo } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
-import { unstable_noStore as noStore } from 'next/dist/server/web/spec-extension/unstable-no-store';
 import type { StaticImageData } from 'next/image';
 import type React from 'react';
 import { Suspense } from 'react';
@@ -26,7 +25,6 @@ interface SubscribersProps {
 const Subscribers = async ({
 	className,
 }: SubscribersProps): Promise<React.JSX.Element> => {
-	noStore();
 	const { avatar, login, followers, following } = await githubUser(
 		process.env.GITHUB_USERNAME!,
 	);
