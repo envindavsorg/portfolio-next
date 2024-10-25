@@ -1,4 +1,5 @@
 import { FadeInStagger } from '@/components/animations/FadeIn';
+import { Paragraph } from '@/components/blocs/Typography';
 import { Separator } from '@/components/ui/Separator';
 import {
 	BlogArticles,
@@ -48,9 +49,7 @@ const AnimatedName = (): React.JSX.Element => (
 const Home = (): React.JSX.Element => (
 	<>
 		<AnimatedName />
-		<p className="mt-1 font-bold text-sm text-theme sm:text-base">
-			- bienvenue sur mon portfolio !
-		</p>
+		<Paragraph>- bienvenue sur mon portfolio !</Paragraph>
 
 		<FadeInStagger className="mt-10" faster>
 			<LandingBlock />
