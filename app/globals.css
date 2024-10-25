@@ -177,6 +177,10 @@ input[type="email"] {
 }
 
 /* transition */
+:root {
+	--translate-y: 32px;
+}
+
 .transition-element {
 	view-transition-name: florin;
 }
@@ -196,19 +200,19 @@ input[type="email"] {
 		font-weight: 500;
 	}
 	20% {
-		transform: translateY(28px) translateX(-0.2px);
+		transform: translateY(var(--translate-y)) translateX(-0.2px);
 		opacity: 0.5;
 	}
 	40% {
-		transform: translateY(28px) translateX(-0.2px);
+		transform: translateY(var(--translate-y)) translateX(-0.2px);
 		opacity: 0.3;
 	}
 	60% {
-		transform: translateY(28px) translateX(-0.2px);
+		transform: translateY(var(--translate-y)) translateX(-0.2px);
 		opacity: 0.2;
 	}
 	100% {
-		transform: translateY(28px) translateX(-0.2px);
+		transform: translateY(var(--translate-y)) translateX(-0.2px);
 		opacity: 0;
 	}
 }
@@ -230,11 +234,11 @@ input[type="email"] {
 
 @keyframes fade-in-up {
 	0% {
-		transform: translateY(28px) translateX(-0.2px);
+		transform: translateY(var(--translate-y)) translateX(-0.2px);
 		opacity: 0;
 	}
 	20% {
-		transform: translateY(28px) translateX(-0.2px);
+		transform: translateY(var(--translate-y)) translateX(-0.2px);
 		opacity: 0.5;
 	}
 	80% {
