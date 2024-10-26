@@ -1,6 +1,7 @@
 'use server';
 
 import { logger } from '@/lib/logger';
+import { unstable_noStore as noStore } from 'next/cache';
 
 const headers = {
 	'Content-Type': 'application/json',
@@ -8,6 +9,8 @@ const headers = {
 };
 
 export const wakatimeStats = async (url: string) => {
+	noStore();
+
 	if (!url) {
 		logger.error('→ url parameter is required !');
 		throw new Error('→ WAKATIME_DATA_URL env variable is not set ...');
