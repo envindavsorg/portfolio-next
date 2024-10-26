@@ -124,17 +124,18 @@ const WorkPage = (): React.JSX.Element => (
 					l’entreprise.
 				</p>
 				<StatsFromGogs />
-				<p className="leading-8">
-					Au fil de ma <span className="font-bold">carrière</span>, j’ai eu
-					l’occasion de collaborer avec des entreprises de tailles variées, des{' '}
-					<span className="font-bold text-theme">startups</span> aux{' '}
-					<span className="font-bold text-theme">grandes entreprises</span>.
-				</p>
 			</FadeIn>
 
 			<Separator className="my-12" />
 
-			<FadeIn>
+			<p className="leading-8">
+				Au fil de ma <span className="font-bold">carrière</span>, j’ai eu
+				l’occasion de collaborer avec des entreprises de tailles variées, des{' '}
+				<span className="font-bold text-theme">startups</span> aux{' '}
+				<span className="font-bold text-theme">grandes entreprises</span>.
+			</p>
+
+			<FadeIn className="mt-12">
 				<Link
 					href="https://wefix.net/"
 					aria-label="Site web de WeFix"
