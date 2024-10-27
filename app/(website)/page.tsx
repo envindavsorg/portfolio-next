@@ -53,15 +53,15 @@ const Home = (): React.JSX.Element => (
 
 		<FadeInStagger className="mt-10" faster>
 			<LandingBlock />
-			<Separator className="my-10" />
+			<Separator className="my-12" />
 			<WorkDescription />
-			<Separator className="my-10" />
+			<Separator className="my-12" />
 			<TechStack />
-			<Separator className="my-10" />
+			<Separator className="my-12" />
 			<ProjectStars />
-			<Separator className="my-10" />
+			<Separator className="my-12" />
 			<SocialSubs />
-			<Separator className="my-10" />
+			<Separator className="my-12" />
 			<BlogArticles />
 		</FadeInStagger>
 	</>
