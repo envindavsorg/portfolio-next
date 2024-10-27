@@ -1,5 +1,6 @@
 import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
+import { Title } from '@/components/blocs/Typography';
 import { ContactForm } from '@/components/form/ContactForm';
 import { SocialLink } from '@/components/links/SocialLink';
 import { Separator } from '@/components/ui/Separator';
@@ -32,9 +33,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const ContactPage = (): React.JSX.Element => (
 	<>
-		<h1 className="fade-in mb-0 pt-6 font-geist-sans font-medium text-lg sm:pt-12">
-			Activité et statistiques
-		</h1>
+		<Title>- n'hésitez pas à me contacter</Title>
 		<AnimatedName />
 
 		<FadeInStagger className="mt-10" faster>
