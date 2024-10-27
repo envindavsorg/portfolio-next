@@ -22,12 +22,12 @@ const importArticle = async (
 	articleFilename: string,
 ): Promise<ArticleWithSlug> => {
 	const articleModule = await import(
-		`../app/(website)/articles/${articleFilename}`
+		`../app/(website)/blog/articles/${articleFilename}`
 	);
 	const { article } = articleModule;
 
 	const contentPath: string = path.resolve(
-		'./app/(website)/articles',
+		'./app/(website)/blog/articles',
 		articleFilename,
 	);
 	const content: string = await fs.readFile(contentPath, 'utf-8');
@@ -51,7 +51,7 @@ const importArticle = async (
 
 export const getAllArticles = async (): Promise<ArticleWithSlug[]> => {
 	const articleFilenames: string[] = await glob('*/page.mdx', {
-		cwd: './app/(website)/articles',
+		cwd: './app/(website)/blog/articles',
 	});
 
 	const articles: Awaited<ArticleWithSlug>[] = await Promise.all(
