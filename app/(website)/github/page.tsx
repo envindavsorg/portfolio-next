@@ -1,5 +1,6 @@
 import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
+import { Title } from '@/components/blocs/Typography';
 import { Separator } from '@/components/ui/Separator';
 import { GitHubGraph } from '@/elements/github/Graph';
 import { GitHubStats } from '@/elements/github/Stats';
@@ -33,9 +34,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const GitHubPage = (): React.JSX.Element => (
 	<>
-		<h1 className="fade-in mb-0 pt-6 font-geist-sans font-medium text-lg sm:pt-12">
-			Activité et statistiques
-		</h1>
+		<Title>- activité et statistiques sur GitHub</Title>
 		<AnimatedName />
 
 		<FadeInStagger className="mt-10" faster>
