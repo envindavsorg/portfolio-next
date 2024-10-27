@@ -5,12 +5,21 @@ import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { ReactIcon } from '@/components/icons/React';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { CopyButton } from '@/components/ui/CopyButton';
+import { cn } from '@/lib/utils';
 import type { MDXComponents } from 'mdx/types';
 import { Link } from 'next-view-transitions';
+import { Caveat } from 'next/font/google';
 import Image, { type ImageProps } from 'next/image';
 import type React from 'react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { highlight } from 'sugar-high';
+
+const caveat = Caveat({
+	weight: '600',
+	style: 'normal',
+	subsets: ['latin'],
+	display: 'swap',
+});
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>;
 type ParagraphProps = ComponentPropsWithoutRef<'p'>;
@@ -22,7 +31,10 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 const components: MDXComponents = {
 	h1: (props: HeadingProps) => (
 		<h1
-			className="fade-in mb-0 pt-6 font-geist-sans font-medium text-lg sm:pt-12"
+			className={cn(
+				'fade-in mb-0 pt-6 text-2xl text-theme sm:pt-12',
+				caveat.className,
+			)}
 			{...props}
 		/>
 	),
