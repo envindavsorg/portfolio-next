@@ -2,61 +2,61 @@
 
 import { logger } from '@/lib/logger';
 
+export interface GogsStats {
+	id: number;
+	owner: {
+		id: number;
+		username: string;
+		login: string;
+		full_name: string;
+		email: string;
+		avatar_url: string;
+	};
+	name: string;
+	full_name: string;
+	description: string;
+	private: boolean;
+	fork: boolean;
+	parent: string;
+	empty: boolean;
+	mirror: boolean;
+	size: number;
+	html_url: string;
+	ssh_url: string;
+	clone_url: string;
+	website: string;
+	stars_count: number;
+	forks_count: number;
+	watchers_count: number;
+	open_issues_count: number;
+	default_branch: string;
+	created_at: string;
+	updated_at: string;
+	permissions: {
+		admin: boolean;
+		push: boolean;
+		pull: boolean;
+	};
+}
+
 const headers = {
 	'Content-Type': 'application/json',
 	Authorization: `token ${process.env.GOGS_TOKEN}`,
-	cache: 'no-cache',
 };
 
-enum GogsUrls {
-	ALL = 'http://152.228.152.104:4000/api/v1/user/repos',
-	CLIENT = 'http://152.228.152.104:4000/api/v1/repos/WeFix/site-wefix-client/contents/commit_count.txt',
-	WEFIX = 'http://152.228.152.104:4000/api/v1/repos/WeFix/site-wefix/contents/commit_count.txt',
-	B2B = 'http://152.228.152.104:4000/api/v1/repos/WeFix/site-b2b/contents/commit_count.txt',
-	PARTENAIRES = 'http://152.228.152.104:4000/api/v1/repos/WeFix/partenaires-cli/contents/commit_count.txt',
-	ASSURANCES = 'http://152.228.152.104:4000/api/v1/repos/WeFix/site-assurances-pug/contents/commit_count.txt',
-	BOUYGUES = 'http://152.228.152.104:4000/api/v1/repos/WeFix/site-bouygues-pug/contents/commit_count.txt',
-}
-
-const decodeBase64 = (base64: string): number =>
-	Number(Buffer.from(base64, 'base64').toString('utf-8'));
-
-export const gogsStats = async () => {
-	if (!process.env.GOGS_TOKEN) {
-		logger.error('→ GOGS_TOKEN env variable is not set ...');
-		throw new Error('→ GOGS_TOKEN env variable is not set ...');
+export const gogsStats = async (url: string): Promise<GogsStats[]> => {
+	if (!url) {
+		logger.error('→ url parameter is required !');
+		throw new Error('→ GOGS_URL env variable is not set ...');
 	}
 
-	const { ALL, CLIENT, WEFIX, B2B, PARTENAIRES, ASSURANCES, BOUYGUES } =
-		GogsUrls;
-
 	try {
-		const repos: Response = await fetch(ALL, { headers });
-		const wefix: Response = await fetch(WEFIX, { headers });
-		const client: Response = await fetch(CLIENT, { headers });
-		const b2b: Response = await fetch(B2B, { headers });
-		const partenaires: Response = await fetch(PARTENAIRES, { headers });
-		const assurances: Response = await fetch(ASSURANCES, { headers });
-		const bouygues: Response = await fetch(BOUYGUES, { headers });
+		const response: Response = await fetch(url, {
+			headers,
+			cache: 'no-cache',
+		});
 
-		const reposData = await repos.json();
-		const wefixData = await wefix.json();
-		const clientData = await client.json();
-		const b2bData = await b2b.json();
-		const partenairesData = await partenaires.json();
-		const assurancesData = await assurances.json();
-		const bouyguesData = await bouygues.json();
-
-		return {
-			repositoriesCreated: reposData.length,
-			totalCommits:
-				decodeBase64(wefixData.content) +
-				decodeBase64(clientData.content) +
-				decodeBase64(b2bData.content) +
-				decodeBase64(partenairesData.content) +
-				decodeBase64(assurancesData.content) +
-				decodeBase64(bouyguesData.content),
-		};
+		return response.json();
 	} catch (error) {
 		logger.error('→ there is an error fetching GOGS stats: ', error);
 		throw new Error('→ failed to fetch GOGS stats ...');
