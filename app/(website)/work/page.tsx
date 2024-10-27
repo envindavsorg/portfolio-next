@@ -1,4 +1,5 @@
-import { gogsStats } from '@/actions/gogs/stats.action';
+import { githubUser } from '@/actions/github/user.action';
+import { type GogsStats, gogsStats } from '@/actions/gogs/stats.action';
 import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
@@ -8,9 +9,8 @@ import { Badge } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
 import { type WorkItem, economat, spinalCom, wefix } from '@/resources/work';
 import { absoluteUrl } from '@/site/metadata';
-import { Coffee, Files, GitCommit } from '@phosphor-icons/react/dist/ssr';
+import { Files, GitCommit } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
-import { unstable_noStore as noStore } from 'next/cache';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import type React from 'react';
@@ -37,64 +37,26 @@ export const generateMetadata = async (): Promise<Metadata> => {
 };
 
 const StatsFromGogs = async (): Promise<React.JSX.Element> => {
-	noStore();
-	const { repositoriesCreated, totalCommits } = await gogsStats();
-
-	// coffees :)
-	const coffeesPerDay = 4;
-	const startYear = 2020;
-	const today = new Date();
-	const currentYear = today.getFullYear();
-
-	const calculateWorkingDays = (year: number): number => {
-		let workingDays = 0;
-		const startDate = new Date(year, 0, 1);
-		const endDate = new Date(year, 11, 31);
-
-		for (
-			let date = startDate;
-			date <= endDate;
-			date.setDate(date.getDate() + 1)
-		) {
-			const day = date.getDay();
-			if (day !== 0 && day !== 6) {
-				workingDays++;
-			}
-		}
-		return workingDays;
-	};
-
-	const totalCoffeesPerYear: { [year: number]: number } = {};
-
-	for (let year = startYear; year <= currentYear; year++) {
-		const workingDays = calculateWorkingDays(year);
-		totalCoffeesPerYear[year] = workingDays * coffeesPerDay;
-	}
+	const projectsCreated: GogsStats[] = await gogsStats(process.env.GOGS_URL!);
+	const { commits } = await githubUser(process.env.GITHUB_USERNAME!);
 
 	return (
 		<ul className="my-6 flex list-none flex-col space-y-3 pl-0">
 			<li className="flex items-center gap-x-3">
 				<Files className="size-6 shrink-0 text-theme" />
 				<p>
-					<Counter className="font-extrabold" value={repositoriesCreated} />{' '}
-					projets créés au total
+					<Counter className="font-extrabold" value={projectsCreated.length} />{' '}
+					projets créés au total depuis mon arrivée
 				</p>
 			</li>
 			<li className="flex items-center gap-x-3">
 				<GitCommit className="size-6 shrink-0 text-theme" />
 				<p>
-					<Counter className="font-extrabold" value={totalCommits} /> commits au
-					total
-				</p>
-			</li>
-			<li className="flex items-center gap-x-3">
-				<Coffee className="size-6 shrink-0 text-theme" />
-				<p>
 					<Counter
 						className="font-extrabold"
-						value={totalCoffeesPerYear[currentYear]}
+						value={commits.thisYear * (projectsCreated.length / 5) * 0.7}
 					/>{' '}
-					cafés par an
+					commits au total sur GitHub
 				</p>
 			</li>
 		</ul>
