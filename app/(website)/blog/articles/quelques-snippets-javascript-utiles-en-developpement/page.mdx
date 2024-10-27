@@ -19,7 +19,7 @@ export const metadata = {
   description: article.description,
 }
 
-# Mes articles de blog
+# Tous mes articles de blog
 
 <ArticleTitle>
     {article.title}
@@ -58,7 +58,7 @@ const date = new Date();
 console.log(date); // 2024-07-21T12:00:00.000Z
 ```
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 2. Vérifiez si une variable est un tableau
 
@@ -85,7 +85,7 @@ const str = 'Hello';
 console.log(Array.isArray(str)); // false
 ```
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 3. Fusionnez deux tableaux
 
@@ -114,7 +114,7 @@ const arrMerged = arr1.concat(arr2);
 console.log(arrMerged); // [1, 2, 3, 4, 5, 6]
 ```
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 4. Supprimez les doublons d'un tableau
 
@@ -139,7 +139,7 @@ Voici une explication étape par étape :
 <br/><br/>En résumé, ce code utilise un **Set** pour éliminer les doublons du tableau **arr** et la syntaxe
 de décomposition pour convertir le **Set** de retour en un tableau de valeurs uniques.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 5. Triez un tableau par ordre croissant
 
@@ -163,7 +163,7 @@ Ce code utilise la méthode sort sur un tableau en
 pour devenir *[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]* après l'application de sort.
 Le *console.log(arr);* affiche le tableau trié dans la console.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 6. Inversez un tableau
 
@@ -182,7 +182,7 @@ La méthode *reverse* en **JavaScript** inverse l'ordre des éléments d'un tabl
 + Dans l'exemple donné, le tableau *[1, 2, 3, 4, 5]* est inversé pour devenir *[5, 4, 3, 2, 1]*.
 + Le *console.log(arr);* affiche le tableau inversé *[5, 4, 3, 2, 1]* dans la console.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 7. Convertissez la chaîne en nombre
 
@@ -202,7 +202,7 @@ une chaîne de caractères en un entier.
 + Dans l'exemple donné, str est **'42'**. La fonction *parseInt* convertit cette chaîne en l'entier **42**.
 + Le *console.log(num);* affiche la valeur entière **42** dans la console.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 8. Générez un nombre aléatoire entre deux valeurs
 
@@ -226,7 +226,7 @@ Ce code génère un nombre entier aléatoire compris entre les valeurs **min** e
 <br/><br/>Dans l'exemple donné, la variable *randomNum* contient un nombre entier aléatoire
 variant entre **1** et **10**. Le *console.log(randomNum);* affiche ce nombre aléatoire dans la console.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 9. Vérifiez si une chaîne contient une sous-chaîne
 
@@ -248,7 +248,7 @@ en utilisant la méthode includes de **JavaScript*.
 + La méthode includes trouve *'world'* dans *'Hello, world!'*, donc **isSubstring** est **true**.
 + Le *console.log(isSubstring);* affiche **true** dans la console, indiquant que la sous-chaîne **'world'** est présente dans la chaîne *'Hello, world!'*.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 10. Obtenez la longueur d'un objet
 
@@ -268,7 +268,7 @@ Ce code détermine le nombre de propriétés dans un objet en utilisant **Object
 + Dans l'exemple fourni, obj possède trois propriétés : **'a'**, **'b'**, et **'c'**, donc **objLength** est **3**.
 + Le *console.log(objLength);* affiche **3** dans la console, indiquant que l'objet a trois propriétés.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 11. Convertir un objet en tableau
 
@@ -287,7 +287,7 @@ Ce code convertit un objet en un tableau de paires clé-valeur en utilisant *Obj
 + *Object.entries(obj)* retourne *[['a', 1], ['b', 2], ['c', 3]]*, où chaque élément est une paire clé-valeur de l'objet.
 + Le *console.log(arr);* affiche *[['a', 1], ['b', 2], ['c', 3]]* dans la console.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 12. Vérifiez si un objet est vide
 
@@ -309,7 +309,7 @@ Ce code vérifie si un objet est vide, c'est-à-dire qu'il ne possède aucune pr
 + Donc, *isEmpty* est évalué à true car le tableau des entrées est vide et **obj** est un objet régulier.
 + Le *console.log(isEmpty);* affiche true dans la console, indiquant que l'objet est vide.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 13. Obtenez l'URL actuelle
 
@@ -330,7 +330,7 @@ Ce code récupère l'**URL** actuelle de la page web en utilisant l'objet *windo
 <br/><br/>Notez que ce code fonctionne uniquement dans des environnements
 permettant l'accès à l'objet window, comme les navigateurs web.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 14. Redirection vers une nouvelle URL
 
@@ -349,7 +349,7 @@ Ce code redirige le navigateur vers une nouvelle **URL**.
 <br/><br/>Notez que l'utilisation de ce code entraînera une redirection qui interrompra
 tout script en cours sur la page actuelle.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 15. Définissez un cookie
 
@@ -368,7 +368,7 @@ Ce code crée ou met à jour un cookie dans le navigateur.
 + *path=/* indique que le cookie est accessible sur l'ensemble du site (toutes les pages et sous-répertoires).
 + Lorsque ce code est exécuté, le navigateur stocke ce cookie jusqu'à la date d'expiration spécifiée ou jusqu'à ce qu'il soit supprimé explicitement par le script.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 16. Obtenez un cookie
 
@@ -393,7 +393,7 @@ Ce code extrait la valeur d'un cookie spécifique nommé name à partir du docum
 le cookie name est présent et a cette valeur. Le *console.log(cookieValue);*
 affichera **John Doe** dans la console.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 17. Vérifiez si un cookie existe
 
@@ -410,7 +410,7 @@ Ce code vérifie si un cookie spécifique, nommé name, existe dans le navigateu
 
 <br/><br/>Si un cookie nommé **name** existe, *cookieExists* sera **true** sinon, ce sera **false**.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 18. Supprimer un cookie
 
@@ -425,7 +425,7 @@ Ce code supprime le cookie nommé **name** dans le navigateur.
 + *path=/* s'assure que l'action s'applique au cookie **name** sur l'ensemble du site Web.
 + En exécutant cette ligne, vous indiquez au navigateur de supprimer le cookie **name**.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 19. Obtenez les dimensions actuelles de la fenêtre
 
@@ -445,7 +445,7 @@ Ce code récupère et affiche la largeur et la hauteur de la fenêtre d'affichag
 <br/><br/>Le *console.log(windowWidth, windowHeight);* affiche ces dimensions **(largeur et hauteur)**
 dans la console, permettant de voir la **taille actuelle** de la fenêtre du navigateur.
 
-<Separator className="my-10" />
+<Separator className="my-12" />
 
 ## 20. Copiez le texte dans le presse-papiers
 
