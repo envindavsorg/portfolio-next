@@ -1,5 +1,6 @@
 import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
+import { Title } from '@/components/blocs/Typography';
 import { Separator } from '@/components/ui/Separator';
 import { Tailwind } from '@/elements/stack/Tailwind';
 import { BackAccordion } from '@/elements/stack/back/Accordion';
@@ -35,9 +36,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const StackPage = (): React.JSX.Element => (
 	<>
-		<h1 className="fade-in mb-0 pt-6 font-geist-sans font-medium text-lg sm:pt-12">
-			Les technologies que j'utilise
-		</h1>
+		<Title>- les technologies que j'utilise</Title>
 		<AnimatedName />
 
 		<FadeInStagger className="mt-10" faster>
