@@ -33,7 +33,7 @@ export const Article = ({
 	return (
 		<li className="group py-3 transition-opacity first:pt-0 last:pb-0">
 			<Link
-				href={`/articles/${slug}`}
+				href={`/blog/articles/${slug}`}
 				aria-label={title}
 				className="no-underline"
 			>
