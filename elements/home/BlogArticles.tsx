@@ -3,13 +3,13 @@ import { Articles } from '@/components/blog/Articles';
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
 
 export const BlogArticles = memo(async () => {
 	const articles: Awaited<ArticleWithSlug>[] = await getAllArticles();
 
 	return (
-		<Fragment>
+		<div className="relative flex flex-col">
 			<FadeIn>
 				<h2 className="font-bold font-geist-sans text-xl md:text-2xl">
 					Mes derniers articles <span className="tracking-widest">...</span>
@@ -36,6 +36,6 @@ export const BlogArticles = memo(async () => {
 			<FadeIn className="mt-6">
 				<Articles articles={articles.slice(0, 3)} isLanding />
 			</FadeIn>
-		</Fragment>
+		</div>
 	);
 });
