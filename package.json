@@ -18,7 +18,7 @@
     "url": "https://github.com/envindavsorg/portfolio-site"
   },
   "scripts": {
-    "dev": "next dev -p 2702 --turbo",
+    "dev": "next dev -p 2702 --turbopack",
     "build": "next build",
     "start": "next start -p 2702",
     "email": "email dev",
@@ -31,7 +31,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@next/mdx": "15.0.0",
+    "@next/mdx": "15.0.1",
     "@phosphor-icons/react": "^2.1.7",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -58,13 +58,13 @@
     "dayjs": "^1.11.13",
     "fast-glob": "^3.3.2",
     "framer-motion": "^11.11.10",
-    "next": "15.0.0",
+    "next": "15.0.2-canary.9",
     "next-auth": "5.0.0-beta.22",
     "next-themes": "^0.3.0",
     "next-view-transitions": "^0.3.2",
     "octokit": "^4.0.2",
-    "react": "19.0.0-rc-65a56d0e-20241020",
-    "react-dom": "19.0.0-rc-65a56d0e-20241020",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-hook-form": "^7.53.1",
     "react-spring": "^9.7.4",
     "reading-duration": "^1.1.2",
@@ -79,8 +79,8 @@
     "@biomejs/biome": "1.9.4",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^20.17.1",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -91,5 +91,11 @@
     "turbo": "^2.2.3",
     "typescript": "^5.6.3"
   },
-  "packageManager": "pnpm@9.12.2"
+  "packageManager": "pnpm@9.12.2",
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-rc.1",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    }
+  }
 }

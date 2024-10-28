@@ -65,9 +65,9 @@ export const LandingBlock = (): React.JSX.Element => (
 										>
 											<FloatingPanelButton
 												onClick={action}
-												className="flex w-full items-center space-x-2 rounded-md px-2 py-1.5 transition-colors hover:bg-theme"
+												className="flex w-full items-center space-x-2 rounded-md px-2 py-1.5 transition-colors"
 											>
-												<Icon className="size-4" />
+												<Icon className="size-5 shrink-0" />
 												<span>{label}</span>
 											</FloatingPanelButton>
 										</motion.div>

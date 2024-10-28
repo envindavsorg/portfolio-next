@@ -14,8 +14,7 @@ export const getBlogViews = async (): Promise<number> => {
 	}
 
 	noStore();
-	const views: any = await redis.lrange('views', 0, -1);
-
+	const views = await redis.lrange('views', 0, -1);
 	return views.reduce((total: any, item: any) => total + item.count, 0);
 };
 
@@ -48,7 +47,7 @@ export const increment = async (slug: string) => {
 	const hasViewed = await redis.get(ipViewKey);
 
 	if (!hasViewed) {
-		const views: any = await redis.lrange('views', 0, -1);
+		const views = await redis.lrange('views', 0, -1);
 		const viewIndex: number = views.findIndex(
 			(view: any) => view.slug === slug,
 		);

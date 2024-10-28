@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/Badge';
 import { cn } from '@/lib/utils';
 import { GithubLogo } from '@phosphor-icons/react/dist/ssr';
 import { Link } from 'next-view-transitions';
+import { unstable_cacheLife as cacheLife } from 'next/cache';
 import type React from 'react';
 import { Suspense } from 'react';
 import { Fragment } from 'react';
@@ -27,6 +28,9 @@ interface StarsProps {
 export const Stars = async ({
 	className,
 }: StarsProps): Promise<React.JSX.Element> => {
+	'use cache';
+	cacheLife('days');
+
 	const [next, react] = await Promise.all([
 		projectStars('vercel', 'next.js'),
 		projectStars('facebook', 'react'),

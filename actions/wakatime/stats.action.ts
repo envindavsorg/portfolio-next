@@ -1,7 +1,7 @@
 'use server';
 
 import { logger } from '@/lib/logger';
-import { unstable_noStore as noStore } from 'next/cache';
+import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 const headers = {
 	'Content-Type': 'application/json',
@@ -9,7 +9,8 @@ const headers = {
 };
 
 export const wakatimeStats = async (url: string) => {
-	noStore();
+	'use cache';
+	cacheLife('hours');
 
 	if (!url) {
 		logger.error('→ url parameter is required !');

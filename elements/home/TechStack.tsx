@@ -11,6 +11,7 @@ import { Fragment } from 'react';
 
 const firstMarqueeRow: Stack[] = stack.slice(0, stack.length / 2);
 const secondMarqueeRow: Stack[] = stack.slice(stack.length / 2);
+const experienceYears: number = new Date().getFullYear() - 2018;
 
 export const TechStack = (): React.JSX.Element => (
 	<Fragment>
@@ -44,7 +45,7 @@ export const TechStack = (): React.JSX.Element => (
 				<p className="leading-8">
 					En{' '}
 					<span className="font-semibold">
-						{new Date().getFullYear() - 2018} ans d'expérience
+						{experienceYears} ans d'expérience
 					</span>
 					, j'ai eu l'occasion de{' '}
 					<Link

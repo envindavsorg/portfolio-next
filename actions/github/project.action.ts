@@ -3,6 +3,7 @@
 import { octokit } from '@/db/octokit';
 import { query } from '@/graphql/project';
 import { logger } from '@/lib/logger';
+import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 interface ProjectInfo {
 	commits: number;
@@ -34,7 +35,8 @@ interface ProjectInfoResponse {
 }
 
 export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
-	const { graphql } = octokit;
+	'use cache';
+	cacheLife('hours');
 
 	if (!repository) {
 		logger.error('→ GitHub repository parameter is required !');
@@ -51,7 +53,7 @@ export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
 				},
 				languages: { totalSize, edges },
 			},
-		} = await graphql<ProjectInfoResponse>(query, {
+		} = await octokit.graphql<ProjectInfoResponse>(query, {
 			owner: process.env.GITHUB_USERNAME,
 			repo: repository,
 		});

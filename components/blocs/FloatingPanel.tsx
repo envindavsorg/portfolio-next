@@ -123,7 +123,7 @@ export const FloatingPanelTrigger = ({
 		<motion.button
 			ref={triggerRef}
 			layoutId={`floating-panel-trigger-${uniqueId}`}
-			className="h-11 rounded-md border border-neutral-200 bg-background px-8 hover:bg-accent hover:text-accent-foreground dark:border-neutral-700"
+			className="h-11 rounded-md border border-neutral-200 bg-background px-8 dark:border-neutral-700"
 			style={{ borderRadius: 8 }}
 			onClick={handleClick}
 			whileHover={{ scale: 1.05 }}
@@ -231,7 +231,7 @@ export const FloatingPanelContent = ({
 						>
 							<FloatingPanelTitle>{title}</FloatingPanelTitle>
 							{children}
-							<CursorClick className="-bottom-8 -right-8 absolute z-10 size-28 shrink-0 text-theme opacity-10" />
+							<CursorClick className="-bottom-8 -right-8 absolute size-28 shrink-0 text-theme opacity-10" />
 						</motion.div>
 					</div>
 				</>
@@ -251,7 +251,7 @@ const FloatingPanelTitle = ({ children }: FloatingPanelTitleProps) => {
 		<motion.div layoutId={`floating-panel-label-container-${uniqueId}`}>
 			<motion.div
 				layoutId={`floating-panel-label-${uniqueId}`}
-				className="font-bold text-sm"
+				className="font-extrabold text-sm"
 				id={`floating-panel-title-${uniqueId}`}
 			>
 				{children}
@@ -312,7 +312,7 @@ export const FloatingPanelCloseButton = ({
 			type="button"
 			className={cn('flex items-center', className)}
 			onClick={closeFloatingPanel}
-			aria-label="Close floating panel"
+			aria-label="Fermer le panneau flottant"
 			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.9 }}
 		>
@@ -334,11 +334,11 @@ export const FloatingPanelButton = ({
 }: FloatingPanelButtonProps) => (
 	<motion.button
 		className={cn(
-			'flex w-full items-center gap-2 rounded-md px-4 py-2 text-left text-sm hover:bg-zinc-100 dark:hover:bg-zinc-700',
+			'z-20 flex w-full items-center gap-2 rounded-md px-4 py-2 text-left text-sm hover:bg-background sm:text-base',
 			className,
 		)}
 		onClick={onClick}
-		whileHover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
+		whileHover={{ scale: 1.02 }}
 		whileTap={{ scale: 0.98 }}
 	>
 		{children}

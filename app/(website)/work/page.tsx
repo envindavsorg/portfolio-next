@@ -1,5 +1,5 @@
 import { githubUser } from '@/actions/github/user.action';
-import { type GogsStats, gogsStats } from '@/actions/gogs/stats.action';
+import { gogsStats } from '@/actions/gogs/stats.action';
 import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
@@ -37,7 +37,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 };
 
 const StatsFromGogs = async (): Promise<React.JSX.Element> => {
-	const projectsCreated: GogsStats[] = await gogsStats(process.env.GOGS_URL!);
+	const projectsCreated: Response[] = await gogsStats(process.env.GOGS_URL!);
 	const { commits } = await githubUser(process.env.GITHUB_USERNAME!);
 
 	return (

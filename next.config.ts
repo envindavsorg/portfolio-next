@@ -57,6 +57,7 @@ const nextConfig: NextConfig = {
 	},
 	experimental: {
 		mdxRs: true,
+		dynamicIO: true,
 	},
 };
 
