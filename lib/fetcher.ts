@@ -3,7 +3,7 @@ interface ApplicationError extends Error {
 	status: number;
 }
 
-export const fetcher = async (url: string): Promise<Response> => {
+export const fetcher = async (url: string) => {
 	const response: Response = await fetch(url);
 
 	if (!response.ok) {
