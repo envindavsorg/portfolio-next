@@ -16,178 +16,188 @@ const config = {
 		],
 	},
 	theme: {
-    	extend: {
-    		colors: {
-    			theme: 'var(--theme)',
-    			background: 'var(--background)',
-    			foreground: 'var(--foreground)',
-    			border: 'var(--border)',
-    			primary: {
-    				DEFAULT: 'var(--primary)',
-    				foreground: 'var(--primary-foreground)'
-    			},
-    			secondary: {
-    				DEFAULT: 'var(--secondary)',
-    				foreground: 'var(--secondary-foreground)'
-    			},
-    			destructive: {
-    				DEFAULT: 'var(--destructive)',
-    				foreground: 'var(--destructive-foreground)'
-    			},
-    			muted: {
-    				DEFAULT: 'var(--muted)',
-    				foreground: 'var(--muted-foreground)'
-    			},
-    			accent: {
-    				DEFAULT: 'var(--accent)',
-    				foreground: 'var(--accent-foreground)'
-    			},
-    			ts: '#3178C6',
-    			js: '#F0DB4F',
-    			react: '#00D8FF',
-    			next: '#737373',
-    			html: '#EF652A',
-    			css: '#30A9DC',
-    			tailwind: '#0ED7B5',
-    			flowbite: '#1C64F2',
-    			framer: '#F648A7',
-    			express: '#A3A3A3',
-    			shell: '#3AB14A',
-    			fastify: '#A4A4A4',
-    			nestjs: '#E0234E',
-    			mdx: '#F9AC00',
-    			scss: '#CF649A',
-    			pug: '#EFCCA3',
-    			bun: '#FBF0DF',
-    			node: '#6CC04A',
-    			vue: '#41B883',
-    			vuetify: '#B0DEFF',
-    			mongo: '#07EB65',
-    			linkedin: '#0077B5'
-    		},
-    		maxWidth: {
-    			'43': '43rem',
-    			'20.5': '20.5rem'
-    		},
-    		maxHeight: {
-    			'18': '18rem',
-    			'20.5': '20.5rem'
-    		},
-    		boxShadow: {
-    			light: '3px 3px 0px 0px #000000',
-    			dark: '3px 3px 0px 0px #FFFFFF'
-    		},
-    		translate: {
-    			boxShadowX: '3px',
-    			boxShadowY: '3px',
-    			reverseBoxShadowX: '-3px',
-    			reverseBoxShadowY: '-3px'
-    		},
-    		borderRadius: {
-    			lg: 'var(--radius)',
-    			md: 'calc(var(--radius) - 2px)',
-    			sm: 'calc(var(--radius) - 4px)'
-    		},
-    		scale: {
-    			flip: '-1'
-    		},
-    		keyframes: {
-    			'fade-in': {
-    				'0%': {
-    					opacity: '0'
-    				},
-    				'100%': {
-    					opacity: '1'
-    				}
-    			},
-    			'fade-in-up': {
-    				'0%': {
-    					opacity: '0',
-    					transform: 'translateY(var(--fade-in-up-ty, 1rem))'
-    				},
-    				'100%': {
-    					opacity: '1',
-    					transform: 'translateY(0)'
-    				}
-    			},
-    			'fade-in-down': {
-    				'0%': {
-    					opacity: '0',
-    					transform: 'translateY(var(--fade-in-down-ty, -1rem))'
-    				},
-    				'100%': {
-    					opacity: '1',
-    					transform: 'translateY(0)'
-    				}
-    			},
-    			'accordion-down': {
-    				from: {
-    					height: '0'
-    				},
-    				to: {
-    					height: 'var(--radix-accordion-content-height)'
-    				}
-    			},
-    			'accordion-up': {
-    				from: {
-    					height: 'var(--radix-accordion-content-height)'
-    				},
-    				to: {
-    					height: '0'
-    				}
-    			},
-    			'collapsible-down': {
-    				from: {
-    					height: '0'
-    				},
-    				to: {
-    					height: 'var(--radix-collapsible-content-height)'
-    				}
-    			},
-    			'collapsible-up': {
-    				from: {
-    					height: 'var(--radix-collapsible-content-height)'
-    				},
-    				to: {
-    					height: '0'
-    				}
-    			},
-    			meteors: {
-    				'0%': {
-    					transform: 'rotate(215deg) translateX(0)',
-    					opacity: '1'
-    				},
-    				'70%': {
-    					opacity: '1'
-    				},
-    				'100%': {
-    					transform: 'rotate(215deg) translateX(-500px)',
-    					opacity: '0'
-    				}
-    			}
-    		},
-    		animation: {
-    			'fade-in': 'fade-in 1s ease-out forwards',
-    			'fade-in-up': 'fade-in-up 1s ease-out forwards',
-    			'fade-in-down': 'fade-in-down 1s ease-out forwards',
-    			'accordion-down': 'accordion-down 0.2s ease-out',
-    			'accordion-up': 'accordion-up 0.2s ease-out',
-    			'collapsible-down': 'collapsible-down 0.2s ease-out',
-    			'collapsible-up': 'collapsible-up 0.2s ease-out',
-    			meteors: 'meteors 5s linear infinite'
-    		},
-    		transitionTimingFunction: {
-    			slow: 'cubic-bezier(.405, 0, .025, 1)'
-    		},
-    		transitionDuration: {
-    			mid: '4s'
-    		}
-    	},
-    	fontFamily: {
-    		'geist-sans': ['var(--font-geist-sans)'],
-    		'geist-mono': ['var(--font-geist-mono)']
-    	}
-    },
+		extend: {
+			colors: {
+				theme: 'var(--theme)',
+				background: 'var(--background)',
+				foreground: 'var(--foreground)',
+				border: 'var(--border)',
+				primary: {
+					DEFAULT: 'var(--primary)',
+					foreground: 'var(--primary-foreground)',
+				},
+				secondary: {
+					DEFAULT: 'var(--secondary)',
+					foreground: 'var(--secondary-foreground)',
+				},
+				destructive: {
+					DEFAULT: 'var(--destructive)',
+					foreground: 'var(--destructive-foreground)',
+				},
+				muted: {
+					DEFAULT: 'var(--muted)',
+					foreground: 'var(--muted-foreground)',
+				},
+				accent: {
+					DEFAULT: 'var(--accent)',
+					foreground: 'var(--accent-foreground)',
+				},
+				ts: '#3178C6',
+				js: '#F0DB4F',
+				react: '#00D8FF',
+				next: '#737373',
+				html: '#EF652A',
+				css: '#30A9DC',
+				tailwind: '#0ED7B5',
+				flowbite: '#1C64F2',
+				framer: '#F648A7',
+				express: '#A3A3A3',
+				shell: '#3AB14A',
+				fastify: '#A4A4A4',
+				nestjs: '#E0234E',
+				mdx: '#F9AC00',
+				scss: '#CF649A',
+				pug: '#EFCCA3',
+				bun: '#FBF0DF',
+				node: '#6CC04A',
+				vue: '#41B883',
+				vuetify: '#B0DEFF',
+				mongo: '#07EB65',
+				linkedin: '#0077B5',
+			},
+			maxWidth: {
+				'43': '43rem',
+				'20.5': '20.5rem',
+			},
+			maxHeight: {
+				'18': '18rem',
+				'20.5': '20.5rem',
+			},
+			boxShadow: {
+				light: '3px 3px 0px 0px #000000',
+				dark: '3px 3px 0px 0px #FFFFFF',
+			},
+			translate: {
+				boxShadowX: '3px',
+				boxShadowY: '3px',
+				reverseBoxShadowX: '-3px',
+				reverseBoxShadowY: '-3px',
+			},
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)',
+			},
+			scale: {
+				flip: '-1',
+			},
+			keyframes: {
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+					},
+					'100%': {
+						opacity: '1',
+					},
+				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(var(--fade-in-up-ty, 1rem))',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)',
+					},
+				},
+				'fade-in-down': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(var(--fade-in-down-ty, -1rem))',
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)',
+					},
+				},
+				'accordion-down': {
+					from: {
+						height: '0',
+					},
+					to: {
+						height: 'var(--radix-accordion-content-height)',
+					},
+				},
+				'accordion-up': {
+					from: {
+						height: 'var(--radix-accordion-content-height)',
+					},
+					to: {
+						height: '0',
+					},
+				},
+				'collapsible-down': {
+					from: {
+						height: '0',
+					},
+					to: {
+						height: 'var(--radix-collapsible-content-height)',
+					},
+				},
+				'collapsible-up': {
+					from: {
+						height: 'var(--radix-collapsible-content-height)',
+					},
+					to: {
+						height: '0',
+					},
+				},
+				marquee: {
+					from: { transform: 'translateX(0)' },
+					to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+				},
+				'marquee-vertical': {
+					from: { transform: 'translateY(0)' },
+					to: { transform: 'translateY(calc(-100% - var(--gap)))' },
+				},
+				meteors: {
+					'0%': {
+						transform: 'rotate(215deg) translateX(0)',
+						opacity: '1',
+					},
+					'70%': {
+						opacity: '1',
+					},
+					'100%': {
+						transform: 'rotate(215deg) translateX(-500px)',
+						opacity: '0',
+					},
+				},
+			},
+			animation: {
+				'fade-in': 'fade-in 1s ease-out forwards',
+				'fade-in-up': 'fade-in-up 1s ease-out forwards',
+				'fade-in-down': 'fade-in-down 1s ease-out forwards',
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'collapsible-down': 'collapsible-down 0.2s ease-out',
+				'collapsible-up': 'collapsible-up 0.2s ease-out',
+				marquee: 'marquee var(--duration) linear infinite',
+				'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+				meteors: 'meteors 5s linear infinite',
+			},
+			transitionTimingFunction: {
+				slow: 'cubic-bezier(.405, 0, .025, 1)',
+			},
+			transitionDuration: {
+				mid: '4s',
+			},
+		},
+		fontFamily: {
+			'geist-sans': ['var(--font-geist-sans)'],
+			'geist-mono': ['var(--font-geist-mono)'],
+		},
+	},
 	plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
 } satisfies Config;
 
