@@ -45,13 +45,13 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 		<html
 			lang="fr"
 			dir="ltr"
-			className="scrollbar-hide h-full scroll-smooth antialiased [scrollbar-gutter:stable]"
+			className="scrollbar-hide h-full scroll-smooth antialiased"
 			suppressHydrationWarning
 		>
 			<body
 				className={cn(
 					'font-geist-mono tracking-tight antialiased',
-					'bg-white dark:bg-black',
+					'select-none bg-white dark:bg-black',
 					geistSans.variable,
 					geistMono.variable,
 				)}
