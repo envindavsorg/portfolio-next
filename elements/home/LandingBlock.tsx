@@ -1,11 +1,20 @@
 'use client';
 
 import { FadeIn } from '@/components/animations/FadeIn';
-import { CV } from '@/components/blocs/CV';
-import { SocialLink } from '@/components/links/SocialLink';
+import { AnimatedTitle } from '@/components/blocs/AnimatedTitle';
+import {
+	FloatingPanelBody,
+	FloatingPanelButton,
+	FloatingPanelCloseButton,
+	FloatingPanelContent,
+	FloatingPanelFooter,
+	FloatingPanelRoot,
+	FloatingPanelTrigger,
+} from '@/components/blocs/FloatingPanel';
 import { display } from '@/resources/config';
 import { name } from '@/resources/config';
-import { type Contact, contact } from '@/resources/contact';
+import { actions } from '@/resources/cv';
+import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import type React from 'react';
 import type { ComponentClass, FunctionComponent } from 'react';
@@ -13,23 +22,22 @@ import type { ComponentClass, FunctionComponent } from 'react';
 const LocationWidget: ComponentClass<object> | FunctionComponent<object> =
 	dynamic(
 		() =>
-			import('@/components/blocs/LocationWidget').then((mod) => ({
+			import('@/components/widgets').then((mod) => ({
 				default: mod.LocationWidget,
 			})),
 		{ ssr: false },
 	);
 
-export const LandingBlock = (): React.JSX.Element => {
-	return (
+export const LandingBlock = (): React.JSX.Element => (
+	<>
 		<div className="flex flex-col items-center gap-6 min-[530px]:flex-row">
 			<div className="flex flex-col gap-y-3">
 				<FadeIn>
+					<AnimatedTitle words="Bonjour !!!" />
 					<p className="leading-8">
-						Bonjour, je m'appelle{' '}
-						<span className="font-bold text-theme">
-							{name.trim().split(' ').pop()}
-						</span>
-						, j'ai{' '}
+						Je m'appelle{' '}
+						<span className="font-bold">{name.trim().split(' ').pop()}</span>,
+						j'ai{' '}
 						<span className="font-bold">
 							{new Date().getFullYear() - 1994} ans
 						</span>{' '}
@@ -40,23 +48,37 @@ export const LandingBlock = (): React.JSX.Element => {
 				</FadeIn>
 
 				<FadeIn>
-					<CV className="mt-6 sm:mt-3" />
-				</FadeIn>
-
-				<FadeIn>
-					<div className="mt-6 flex gap-6 sm:mt-3">
-						{contact
-							.slice(0, 4)
-							.map(({ description, url, icon }: Contact, idx: number) => (
-								<SocialLink
-									key={`${idx}-contact`}
-									href={url}
-									aria-label={description}
-									icon={icon}
-									iconProps={{ weight: 'regular' }}
-								/>
-							))}
-					</div>
+					<FloatingPanelRoot className="mt-3">
+						<FloatingPanelTrigger title="Télécharger mon CV">
+							Télécharger mon CV
+						</FloatingPanelTrigger>
+						<FloatingPanelContent className="flex w-52 flex-col justify-between">
+							<FloatingPanelBody>
+								<AnimatePresence>
+									{actions.map(({ icon: Icon, label, action }, idx: number) => (
+										<motion.div
+											key={idx}
+											initial={{ opacity: 0, y: -10 }}
+											animate={{ opacity: 1, y: 0 }}
+											exit={{ opacity: 0, y: 10 }}
+											transition={{ delay: idx * 0.1 }}
+										>
+											<FloatingPanelButton
+												onClick={action}
+												className="flex w-full items-center space-x-2 rounded-md px-2 py-1.5 transition-colors hover:bg-theme"
+											>
+												<Icon className="size-4" />
+												<span>{label}</span>
+											</FloatingPanelButton>
+										</motion.div>
+									))}
+								</AnimatePresence>
+							</FloatingPanelBody>
+							<FloatingPanelFooter>
+								<FloatingPanelCloseButton />
+							</FloatingPanelFooter>
+						</FloatingPanelContent>
+					</FloatingPanelRoot>
 				</FadeIn>
 			</div>
 
@@ -66,5 +88,23 @@ export const LandingBlock = (): React.JSX.Element => {
 				</FadeIn>
 			)}
 		</div>
-	);
-};
+
+		<FadeIn className="mt-12">
+			<p className="leading-8">
+				Je suis un <span className="font-bold text-theme">développeur</span> et{' '}
+				<span className="font-bold text-theme">designer web</span> depuis{' '}
+				<span className="font-bold">{new Date().getFullYear() - 2018} ans</span>
+				, passionné par la création d’applications <span>belles</span> et{' '}
+				<span>fonctionnelles</span>, le design et le développement web.
+			</p>
+		</FadeIn>
+
+		<FadeIn className="mt-3">
+			<p className="leading-8">
+				J'ai décidé de créer ce site pour{' '}
+				<span className="font-bold">partager mes expériences</span> et{' '}
+				<span className="font-bold">mes compétences</span> avec tout le monde.
+			</p>
+		</FadeIn>
+	</>
+);
