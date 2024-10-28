@@ -121,7 +121,7 @@ li {
 
 /* links */
 a {
-	@apply underline-offset-2 underline;
+	@apply underline-offset-2 underline decoration-wavy;
 }
 
 /* code */
