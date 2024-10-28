@@ -7,7 +7,6 @@ import {
 	ProjectStars,
 	SocialSubs,
 	TechStack,
-	WorkDescription,
 } from '@/elements/home';
 import { name } from '@/resources/config';
 import type React from 'react';
@@ -21,9 +20,7 @@ const AnimatedName = (): React.JSX.Element => (
 					<span
 						key={`${letter}-${idx}`}
 						className="inline-block"
-						style={{
-							transitionDelay: `${idx * 25}ms`,
-						}}
+						style={{ transitionDelay: `${idx * 25}ms` }}
 					>
 						{letter === ' ' ? '\u00A0' : letter}
 					</span>
@@ -34,9 +31,7 @@ const AnimatedName = (): React.JSX.Element => (
 					<span
 						key={index}
 						className="inline-block"
-						style={{
-							transitionDelay: `${index * 25}ms`,
-						}}
+						style={{ transitionDelay: `${index * 25}ms` }}
 					>
 						{letter === ' ' ? '\u00A0' : letter}
 					</span>
@@ -53,8 +48,6 @@ const Home = (): React.JSX.Element => (
 
 		<FadeInStagger className="mt-10" faster>
 			<LandingBlock />
-			<Separator className="my-12" />
-			<WorkDescription />
 			<Separator className="my-12" />
 			<TechStack />
 			<Separator className="my-12" />
