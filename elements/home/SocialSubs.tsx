@@ -80,26 +80,28 @@ export const SocialSubs = (): React.JSX.Element => (
 		<FadeIn>
 			<p className="leading-8">
 				Je suis présent sur{' '}
-				<Link
-					href="https://linkedin.com/"
-					className="font-medium hover:text-theme"
-				>
+				<Link href="https://linkedin.com/" className="font-bold text-theme">
 					LinkedIn
 				</Link>{' '}
 				et sur{' '}
-				<Link
-					href="https://github.com/"
-					className="font-medium hover:text-theme"
-				>
+				<Link href="https://github.com/" className="font-bold text-theme">
 					GitHub
 				</Link>{' '}
-				(retrouvez{' '}
+				(retrouvez toute{' '}
 				<Link
 					href="/github"
 					aria-label="Activité et statistiques de mon profil GitHub"
-					className="font-bold text-theme"
+					className="!decoration-solid font-bold"
 				>
-					toute mon activité et mes statistiques)
+					mon activité
+				</Link>{' '}
+				et{' '}
+				<Link
+					href="/github"
+					aria-label="Activité et statistiques de mon profil GitHub"
+					className="!decoration-solid font-bold"
+				>
+					mes statistiques
 				</Link>
 				), n'hésitez pas à me rendre une petite visite sur mes profils et
 				pourquoi pas{' '}
@@ -108,9 +110,9 @@ export const SocialSubs = (): React.JSX.Element => (
 					aria-label="Contactez-moi"
 					className="font-bold text-theme"
 				>
-					me laisser un message
+					me laisser
 				</Link>{' '}
-				😃
+				un message 😃
 			</p>
 		</FadeIn>
 

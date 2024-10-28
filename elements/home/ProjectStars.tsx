@@ -114,8 +114,10 @@ export const ProjectStars = (): React.JSX.Element => (
 					</Badge>
 				</Link>{' '}
 				en parallèle, me permettant de développer des applications plus
-				robustes, belles et fonctionnelles. Pour le{' '}
-				<span className="font-bold">design</span> et l'
+				robustes, belles et fonctionnelles.
+			</p>
+			<p className="mt-3 leading-8">
+				Pour le <span className="font-bold">design</span> et l'
 				<span className="font-bold">UI</span> des mes applications, j'utilise{' '}
 				<Link
 					href="https://tailwindcss.com/"
