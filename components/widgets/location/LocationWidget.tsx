@@ -25,7 +25,7 @@ import { useSpring } from 'react-spring';
 export const LocationWidget = memo((): React.JSX.Element => {
 	const { resolvedTheme } = useTheme();
 
-	const canvas = useRef<HTMLCanvasElement>(null);
+	const canvas = useRef<HTMLCanvasElement | null>(null);
 	const pointerInteracting = useRef<number | null>(null);
 	const pointerInteractionMovement = useRef(0);
 

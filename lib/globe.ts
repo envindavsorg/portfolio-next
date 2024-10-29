@@ -22,9 +22,9 @@ export const myLatitude: number = 48.858093;
 export const myLongitude: number = 2.294694;
 
 export const onPointerDown = (
-	canvas: React.RefObject<HTMLCanvasElement>,
-	pointerInteracting: React.MutableRefObject<number | null>,
-	pointerInteractionMovement: React.MutableRefObject<number>,
+	canvas: React.RefObject<HTMLCanvasElement | null>,
+	pointerInteracting: React.RefObject<number | null>,
+	pointerInteractionMovement: React.RefObject<number>,
 	event: React.PointerEvent<HTMLCanvasElement>,
 ): void => {
 	pointerInteracting.current =
@@ -33,25 +33,25 @@ export const onPointerDown = (
 };
 
 export const onPointerUp = (
-	canvas: React.RefObject<HTMLCanvasElement>,
-	pointerInteracting: React.MutableRefObject<number | null>,
+	canvas: React.RefObject<HTMLCanvasElement | null>,
+	pointerInteracting: React.RefObject<number | null>,
 ): void => {
 	pointerInteracting.current = null;
 	canvas.current && (canvas.current.style.cursor = 'grab');
 };
 
 export const onPointerOut = (
-	canvas: React.RefObject<HTMLCanvasElement>,
-	pointerInteracting: React.MutableRefObject<number | null>,
+	canvas: React.RefObject<HTMLCanvasElement | null>,
+	pointerInteracting: React.RefObject<number | null>,
 ): void => {
 	pointerInteracting.current = null;
 	canvas.current && (canvas.current.style.cursor = 'grab');
 };
 
 export const onMouseMove = (
-	event: React.MouseEvent<HTMLCanvasElement>,
-	pointerInteracting: React.MutableRefObject<number | null>,
-	pointerInteractionMovement: React.MutableRefObject<number>,
+	event: React.MouseEvent<HTMLCanvasElement | null>,
+	pointerInteracting: React.RefObject<number | null>,
+	pointerInteractionMovement: React.RefObject<number>,
 	api: SpringRef<{ r: number }>,
 ): void => {
 	if (pointerInteracting.current !== null) {
@@ -65,9 +65,9 @@ export const onMouseMove = (
 };
 
 export const onTouchMove = (
-	event: React.TouchEvent<HTMLCanvasElement>,
-	pointerInteracting: React.MutableRefObject<number | null>,
-	pointerInteractionMovement: React.MutableRefObject<number>,
+	event: React.TouchEvent<HTMLCanvasElement | null>,
+	pointerInteracting: React.RefObject<number | null>,
+	pointerInteractionMovement: React.RefObject<number>,
 	api: SpringRef<{ r: number }>,
 ): void => {
 	if (pointerInteracting.current !== null && event.touches[0]) {

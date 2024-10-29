@@ -25,21 +25,18 @@ const nextConfig: NextConfig = {
 		],
 	},
 	async redirects() {
-		if (
-			!process.env.UPSTASH_REDIS_REST_URL ||
-			!process.env.UPSTASH_REDIS_REST_TOKEN
-		) {
+		const { UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN } = process.env;
+		if (!UPSTASH_REDIS_REST_URL || !UPSTASH_REDIS_REST_TOKEN) {
 			return [];
 		}
 
-		const redis = new Redis({
-			url: process.env.UPSTASH_REDIS_REST_URL,
-			token: process.env.UPSTASH_REDIS_REST_TOKEN,
+		const redis: Redis = new Redis({
+			url: UPSTASH_REDIS_REST_URL,
+			token: UPSTASH_REDIS_REST_TOKEN,
 		});
 
-		const redirects = await redis.lrange('redirects', 0, -1);
-
-		return redirects.map((redirect) => {
+		const redirects: string[] = await redis.lrange('redirects', 0, -1);
+		return redirects.map((redirect: string) => {
 			const { source, destination, permanent } = JSON.parse(redirect);
 			return {
 				source,
@@ -53,13 +50,8 @@ const nextConfig: NextConfig = {
 	},
 };
 
-// Add MDX support to Next.js
-const withMDX: (config: NextConfig) => NextConfig = createMDX({
+const withMDX = createMDX({
 	extension: /\.mdx?$/,
-	options: {
-		remarkPlugins: [],
-		rehypePlugins: [],
-	},
 });
 
 export default withMDX(nextConfig);

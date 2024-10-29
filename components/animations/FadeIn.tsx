@@ -1,12 +1,6 @@
 'use client';
 
-import { Slot } from '@radix-ui/react-slot';
-import {
-	type ForwardRefComponent,
-	type HTMLMotionProps,
-	motion,
-	useReducedMotion,
-} from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type React from 'react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { createContext, useContext } from 'react';
@@ -18,25 +12,19 @@ const viewport = {
 	margin: '0px 0px -200px',
 };
 
-export const FadeIn = (
-	props: React.ComponentPropsWithoutRef<typeof motion.div> & {
-		asChild?: boolean;
-		className?: string;
-	},
-): React.JSX.Element => {
+interface FadeInProps
+	extends React.ComponentPropsWithoutRef<typeof motion.div> {
+	asChild?: boolean;
+	className?: string;
+}
+
+export const FadeIn = (props: FadeInProps): React.JSX.Element => {
 	const shouldReduceMotion = useReducedMotion();
 	const isInStaggerGroup = useContext(FadeInStaggerContext);
 	const { asChild, ...restProps } = props;
 
-	const Comp = asChild
-		? (motion.create(Slot) as ForwardRefComponent<
-				HTMLDivElement,
-				HTMLMotionProps<'div'>
-			>)
-		: motion.div;
-
 	return (
-		<Comp
+		<motion.div
 			variants={{
 				hidden: {
 					opacity: 0,
@@ -62,13 +50,16 @@ export const FadeIn = (
 	);
 };
 
+interface FadeInStaggerProps
+	extends ComponentPropsWithoutRef<typeof motion.div> {
+	faster?: boolean;
+	className?: string;
+}
+
 export const FadeInStagger = ({
 	faster = false,
 	...props
-}: ComponentPropsWithoutRef<typeof motion.div> & {
-	faster?: boolean;
-	className?: string;
-}) => (
+}: FadeInStaggerProps) => (
 	<FadeInStaggerContext.Provider value={true}>
 		<motion.div
 			initial="hidden"
