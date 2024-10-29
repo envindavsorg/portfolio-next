@@ -1,6 +1,7 @@
 'use server';
 
 import { logger } from '@/lib/logger';
+import { unstable_noStore as noStore } from 'next/cache';
 
 const headers = {
 	'Content-Type': 'application/json',
@@ -8,6 +9,8 @@ const headers = {
 };
 
 export const gogsStats = async (url: string): Promise<Response[]> => {
+	noStore();
+
 	if (!url) {
 		logger.error('→ url parameter is required !');
 		throw new Error('→ GOGS_URL env variable is not set ...');
