@@ -3,22 +3,14 @@ import type React from 'react';
 import { useId } from 'react';
 
 interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
-	width?: any;
-	height?: any;
-	x?: any;
-	y?: any;
-	cx?: any;
-	cy?: any;
+	width?: number;
+	height?: number;
 	className?: string;
 }
 
 export const DotPattern = ({
 	width = 16,
 	height = 16,
-	x = 0,
-	y = 0,
-	cx = 1,
-	cy = 1,
 	className,
 	...props
 }: DotPatternProps) => {
@@ -40,10 +32,10 @@ export const DotPattern = ({
 					height={height}
 					patternUnits="userSpaceOnUse"
 					patternContentUnits="userSpaceOnUse"
-					x={x}
-					y={y}
+					x={0}
+					y={0}
 				>
-					<circle id="pattern-circle" cx={cx} cy={cy} r={1} />
+					<circle id="pattern-circle" cx={1} cy={1} r={1} />
 				</pattern>
 			</defs>
 			<rect width="100%" height="100%" strokeWidth={0} fill={`url(#${id})`} />

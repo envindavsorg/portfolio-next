@@ -15,16 +15,13 @@ interface SparklesProps {
 }
 
 export const Sparkles = memo(({ density = 50, className }: SparklesProps) => {
-	const { systemTheme, theme } = useTheme();
-	const currentTheme: string | undefined =
-		theme === 'system' ? systemTheme : theme;
-
+	const { resolvedTheme } = useTheme();
 	const particlesMinSize: number = 0.7;
 	const particlesMaxSize: number = 0.9;
 	const particlesSpeed: number = 2;
 	const particlesDensity: number = density;
 	const particlesColor: string =
-		currentTheme === 'dark' ? '#FFFFFF' : '#000000';
+		resolvedTheme === 'dark' ? '#FFFFFF' : '#000000';
 
 	return (
 		<div

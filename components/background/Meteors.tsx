@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils';
 import type React from 'react';
-import { Fragment } from 'react';
 import { useEffect, useState } from 'react';
 
 interface NewMeteors {
@@ -28,7 +27,7 @@ export const Meteors = ({ number, className }: MeteorsProps) => {
 	}, [number]);
 
 	return (
-		<Fragment>
+		<>
 			{meteors.map((meteor, idx) => (
 				<span
 					key={`meteor${idx}`}
@@ -49,6 +48,6 @@ export const Meteors = ({ number, className }: MeteorsProps) => {
 					}}
 				/>
 			))}
-		</Fragment>
+		</>
 	);
 };
