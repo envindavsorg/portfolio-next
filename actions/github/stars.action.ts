@@ -3,7 +3,6 @@
 import { octokit } from '@/db/octokit';
 import { query } from '@/graphql/stars';
 import { logger } from '@/lib/logger';
-import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 interface ProjectStars {
 	stars: number;
@@ -29,9 +28,6 @@ export const projectStars = async (
 	owner: string,
 	project: string,
 ): Promise<ProjectStars> => {
-	'use cache';
-	cacheLife('hours');
-
 	if (!owner || !project) {
 		logger.error('→ GitHub owner and project parameters are required !');
 		throw new Error('→ GitHub owner and project parameters are required ! ...');

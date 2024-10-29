@@ -334,7 +334,7 @@ export const FloatingPanelButton = ({
 }: FloatingPanelButtonProps) => (
 	<motion.button
 		className={cn(
-			'z-20 flex w-full items-center gap-2 rounded-md px-4 py-2 text-left text-sm hover:bg-background sm:text-base',
+			'z-20 flex w-full items-center gap-2 rounded-md px-4 py-2 text-left text-sm hover:bg-background',
 			className,
 		)}
 		onClick={onClick}

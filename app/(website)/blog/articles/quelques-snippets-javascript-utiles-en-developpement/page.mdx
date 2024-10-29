@@ -3,11 +3,12 @@ import { slugify } from '@/lib/slug';
 import { ArticleTitle } from '@/components/blog/ArticleTitle';
 import { ViewsCounter } from '@/components/blog/ViewsCounter';
 import { Separator } from '@/components/ui/Separator';
+import { name } from '@/resources/config';
 import image from './js.webp';
 import cover from './cover.png';
 
 export const article = {
-    author: 'Cuzeac Florin',
+    author: name,
     date: '2024-10-07',
     title: 'Quelques snippets JavaScript utiles en développement',
     description: "Quelques snippets JavaScript utiles et à connaître absolument.",

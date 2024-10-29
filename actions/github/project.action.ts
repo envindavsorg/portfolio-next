@@ -3,7 +3,6 @@
 import { octokit } from '@/db/octokit';
 import { query } from '@/graphql/project';
 import { logger } from '@/lib/logger';
-import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 interface ProjectInfo {
 	commits: number;
@@ -35,9 +34,6 @@ interface ProjectInfoResponse {
 }
 
 export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
-	'use cache';
-	cacheLife('hours');
-
 	if (!repository) {
 		logger.error('→ GitHub repository parameter is required !');
 		throw new Error('→ GitHub repository parameter is required ! ...');

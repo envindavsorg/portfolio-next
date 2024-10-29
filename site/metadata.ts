@@ -1,4 +1,4 @@
-import { baseURL } from '@/resources/config';
+import { baseURL, id, keywords, name } from '@/resources/config';
 import type { Metadata } from 'next';
 
 export const absoluteUrl = (path: string): string =>
@@ -18,23 +18,12 @@ export const constructMetadata = ({
 }: ConstructMetadataProps): Metadata => ({
 	title: {
 		default: title,
-		template: '%s | Cuzeac Florin',
+		template: `%s | ${name}`,
 	},
 	description,
-	metadataBase: new URL('https://cuzeac-florin.app'),
-	applicationName: 'Cuzeac Florin',
-	keywords: [
-		'next.js',
-		'framer motion',
-		'react',
-		'javascript',
-		'typescript',
-		'tailwind css',
-		'front-end development',
-		'web development',
-		'responsive ui',
-		'portfolio',
-	],
+	metadataBase: new URL(`https://${baseURL}`),
+	applicationName: name,
+	keywords,
 	openGraph: {
 		title,
 		description,
@@ -48,8 +37,8 @@ export const constructMetadata = ({
 			},
 		],
 		locale: 'fr_FR',
-		url: 'https://cuzeac-florin.app',
-		siteName: 'Cuzeac Florin',
+		url: `https://${baseURL}`,
+		siteName: name,
 	},
 	alternates: {
 		canonical: '/',
@@ -65,14 +54,14 @@ export const constructMetadata = ({
 	},
 	authors: [
 		{
-			name: 'Cuzeac Florin',
-			url: 'https://cuzeac-florin.app',
+			name,
+			url: `https://${baseURL}`,
 		},
 	],
-	creator: 'Cuzeac Florin',
+	creator: name,
 	generator: 'Next.js',
 	referrer: 'origin-when-cross-origin',
-	publisher: 'Cuzeac Florin',
+	publisher: name,
 	icons: {
 		icon: '/favicon.ico',
 		shortcut: '/favicon-16x16.png',
@@ -94,7 +83,7 @@ export const constructMetadata = ({
 		title,
 		description,
 		images: [image],
-		creator: '@cuzeacflorin',
+		creator: id,
 	},
 	...props,
 });

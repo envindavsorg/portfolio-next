@@ -4,16 +4,9 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	pageExtensions: ['mdx', 'ts', 'tsx'],
-	typescript: {
-		// !! WARN !!
-		// Dangerously allow production builds to successfully complete even if
-		// your project has type errors.
-		// !! WARN !!
-		ignoreBuildErrors: true,
-	},
 	devIndicators: {
-		buildActivity: false,
-		appIsrStatus: false,
+		buildActivity: true,
+		appIsrStatus: true,
 	},
 	images: {
 		remotePatterns: [
@@ -57,7 +50,6 @@ const nextConfig: NextConfig = {
 	},
 	experimental: {
 		mdxRs: true,
-		dynamicIO: true,
 	},
 };
 

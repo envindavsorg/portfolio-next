@@ -8,11 +8,12 @@ import { File, Folder, Tree } from '@/components/ui/FileTree';
 import { Separator } from '@/components/ui/Separator';
 import { GeneratorOG } from '../components/GeneratorOG';
 import { NextAppStructure, NextAppStructureOG } from '../constants/NextAppStructure';
+import { name } from '@/resources/config';
 import appRouter from './app-router.png';
 import cover from './cover.png';
 
 export const article = {
-    author: 'Cuzeac Florin',
+    author: name,
     date: '2024-08-07',
     title: 'Générer des balises Open Graph dynamiques avec Next.js 14',
     description: "Une façon puissante d’améliorer le partage des liens de votre site web sur les réseaux sociaux est d'ajouter des balises Open Graph dynamiques. Dans ce tutoriel, nous allons explorer comment vous pouvez y parvenir facilement avec Next.js 14.",
@@ -200,7 +201,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 				<div tw="w-full flex flex-row items-center justify-end">
 					<img
 						src={authorImage}
-						alt="Cuzeac Florin"
+						alt="Image de l'auteur"
 						tw="w-16 h-16 rounded-full object-cover object-top rounded-full mr-3"
 					/>
 					<div tw="flex flex-col items-start justify-center">

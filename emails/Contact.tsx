@@ -1,3 +1,4 @@
+import { id } from '@/resources/config';
 import {
 	Body,
 	Container,
@@ -66,13 +67,12 @@ const ContactEmailTemplate = ({
 						src="https://cuzeac-florin.app/og.png"
 						width="36"
 						height="36"
-						alt="Cuzeac Florin - Mon portfolio personnel"
 						style={{ borderRadius: '10px' }}
 						className="mt-10 object-cover object-center"
 					/>
 					<Text className="mt-1 block text-gray-700 text-sm">
-						<span className="font-bold text-yellow-300">Cuzeac Florin</span> -
-						Mon portfolio personnel -{' '}
+						<span className="font-bold text-yellow-300">{id}</span> - Mon
+						portfolio personnel -{' '}
 						<span className="font-bold text-yellow-300">
 							{new Date().getFullYear()}
 						</span>

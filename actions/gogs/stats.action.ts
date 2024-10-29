@@ -1,7 +1,6 @@
 'use server';
 
 import { logger } from '@/lib/logger';
-import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 const headers = {
 	'Content-Type': 'application/json',
@@ -9,9 +8,6 @@ const headers = {
 };
 
 export const gogsStats = async (url: string): Promise<Response[]> => {
-	'use cache';
-	cacheLife('days');
-
 	if (!url) {
 		logger.error('→ url parameter is required !');
 		throw new Error('→ GOGS_URL env variable is not set ...');

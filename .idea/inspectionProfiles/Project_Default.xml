@@ -64,7 +64,7 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="93">
+          <list size="94">
             <item index="0" class="java.lang.String" itemvalue="class" />
             <item index="1" class="java.lang.String" itemvalue="slot" />
             <item index="2" class="java.lang.String" itemvalue="aria-label" />
@@ -158,6 +158,7 @@
             <item index="90" class="java.lang.String" itemvalue="@mouseout" />
             <item index="91" class="java.lang.String" itemvalue="data-quotation-id" />
             <item index="92" class="java.lang.String" itemvalue="data-dashboard" />
+            <item index="93" class="java.lang.String" itemvalue="tw" />
           </list>
         </value>
       </option>

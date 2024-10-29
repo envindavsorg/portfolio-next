@@ -11,12 +11,8 @@ import {
 	totalCommitsThisYear,
 } from '@/lib/github';
 import { logger } from '@/lib/logger';
-import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 export const githubUser = async (username: string): Promise<GitHubData> => {
-	'use cache';
-	cacheLife('hours');
-
 	if (!username) {
 		logger.error('→ username parameter is required !');
 		throw new Error('→ GITHUB_USERNAME env variable is not set ...');

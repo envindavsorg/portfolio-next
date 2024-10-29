@@ -1,9 +1,23 @@
 export const baseURL: string = 'cuzeac-florin.app';
 export const name: string = 'Cuzeac Florin';
+export const id: string = '@cuzeacflorin';
 export const initials: string = 'CF';
 export const githubUsername: string = 'envindavsorg';
 export const mail: string = 'florin@cuzeac.com';
 export const phone: string = '+33658058665';
+
+export const keywords: string[] = [
+	'next.js',
+	'framer motion',
+	'react',
+	'javascript',
+	'typescript',
+	'tailwind css',
+	'front-end development',
+	'web development',
+	'responsive ui',
+	'portfolio',
+];
 
 // Enable localization
 export const i18n: boolean = false;

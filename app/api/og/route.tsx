@@ -50,8 +50,13 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 						<img
 							src={avatar}
 							alt={name}
-							tw="rounded-full object-cover object-center"
-							style={{ width: '56px', height: '56px' }}
+							tw="rounded-full"
+							style={{
+								width: '56px',
+								height: '56px',
+								objectFit: 'cover',
+								objectPosition: 'center',
+							}}
 						/>
 						<div tw="flex flex-col">
 							<h2
