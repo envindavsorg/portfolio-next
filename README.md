@@ -33,7 +33,7 @@ CREATE TABLE redirects (
 );
 ```
 
-## License
+## Licence
 
 1. You are free to use this code as inspiration.
 2. Please do not copy it directly.

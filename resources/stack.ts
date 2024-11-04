@@ -51,6 +51,9 @@ export const stack: Stack[] = [
 	{ icon: FramerMotionIcon, title: 'Framer Motion' },
 ];
 
+export const stackMarqueeRow: Stack[] = stack.slice(0, stack.length / 2);
+export const inverseStackMarqueeRow: Stack[] = stack.slice(stack.length / 2);
+
 export const preferred: Stack[] = [
 	{ icon: ReactIcon, title: 'React' },
 	{ icon: NextJSIcon, title: 'Next.js' },
