@@ -25,6 +25,12 @@ const geistMono = localFont({
 	weight: '100 900',
 });
 
+const hubot = localFont({
+	src: '../fonts/HubotSans.woff2',
+	variable: '--font-hubot',
+	weight: '400 900',
+});
+
 export const metadata: Metadata = constructMetadata({
 	title: name,
 	description:
@@ -54,6 +60,7 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 					'select-none bg-white dark:bg-black',
 					geistSans.variable,
 					geistMono.variable,
+					hubot.variable,
 				)}
 			>
 				<ThemeProvider
