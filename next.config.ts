@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
 	pageExtensions: ['mdx', 'ts', 'tsx'],
 	devIndicators: {
 		buildActivity: true,
-		appIsrStatus: true,
+		appIsrStatus: false,
 	},
 	images: {
 		remotePatterns: [
