@@ -1,6 +1,5 @@
 import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
-import { ExpandableCards } from '@/components/blocs/ExpendableCard';
 import { Title } from '@/components/blocs/Typography';
 import { Separator } from '@/components/ui/Separator';
 import { Tailwind } from '@/elements/stack/Tailwind';
@@ -9,7 +8,6 @@ import { FrontAccordion } from '@/elements/stack/front/Accordion';
 import { ProjectStack } from '@/elements/stack/stats/ProjectStack';
 import { TechStart } from '@/elements/stack/stats/TechStart';
 import { UsedLanguages } from '@/elements/stack/stats/UsedLanguages';
-import { hardware } from '@/resources/hardware';
 import { absoluteUrl } from '@/site/metadata';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -182,16 +180,6 @@ const StackPage = (): React.JSX.Element => (
 						je sois.
 					</li>
 				</ul>
-
-				<p className="mt-12 leading-8">
-					Voici quelques appareils Apple que j'utilise quotidiennement, autant
-					dans ma vie professionnelle que dans mon quotidien:
-				</p>
-				<ExpandableCards
-					className="mt-6"
-					items={hardware}
-					grid="grid grid-cols-3 sm:grid-cols-4 gap-6"
-				/>
 			</FadeIn>
 		</FadeInStagger>
 	</>
