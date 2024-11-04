@@ -1,6 +1,8 @@
 'use client';
 
+import { CommandToast } from '@/components/command/CommandToast';
 import { CommandToolbar } from '@/components/command/CommandToolbar';
+import { Kbd } from '@/components/layout/Kbd';
 import {
 	CommandDialog,
 	CommandEmpty,
@@ -56,25 +58,20 @@ export const CommandMenu = () => {
 
 	return (
 		<>
-			<p
-				className="!cursor-pointer fixed right-0 bottom-0 left-0 mx-auto hidden w-full max-w-[70ch] border-t border-t-neutral-200 bg-background px-1 py-2 text-center font-medium text-muted-foreground text-sm lg:inline-block dark:border-neutral-700 print:hidden"
-				onClick={() => setOpen(true)}
-			>
-				Appuyez sur{' '}
-				<kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-neutral-200 bg-muted px-1.5 font-bold font-mono text-[10px] text-foreground opacity-100 dark:border-neutral-700">
-					<span className="text-xs">⌘</span>K
-				</kbd>{' '}
-				pour ouvrir le menu de commandes.
-			</p>
-
-			<button
-				className="fixed top-4 right-4 z-[100] flex items-center justify-center rounded-full border border-neutral-200 bg-background p-2 lg:hidden dark:border-neutral-700 print:hidden"
-				aria-label="Effectuer une recherche sur mon site"
-				onClick={() => setOpen(true)}
-				type="button"
-			>
-				<Command className="size-7 shrink-0 text-foreground" weight="duotone" />
-			</button>
+			<CommandToast onClick={() => setOpen(true)}>
+				<div className="flex size-[30px] items-center justify-center">
+					<Command
+						className="size-5 shrink-0 text-foreground"
+						weight="duotone"
+					/>
+				</div>
+				<div className="absolute top-0 left-[30px] flex items-center justify-center gap-x-1.5 whitespace-nowrap font-semibold text-sm leading-[30px] opacity-100 transition-opacity duration-[0.3s] ease-[ease-in-out]">
+					Menu de commandes{' '}
+					<Kbd>
+						<span className="text-xs">⌘</span>K
+					</Kbd>
+				</div>
+			</CommandToast>
 
 			<CommandDialog open={open} onOpenChange={setOpen}>
 				<div className="relative">
