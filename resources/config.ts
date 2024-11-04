@@ -1,10 +1,15 @@
 export const baseURL: string = 'cuzeac-florin.app';
 export const name: string = 'Cuzeac Florin';
+export const title: string = 'Développeur web';
 export const id: string = '@cuzeacflorin';
 export const initials: string = 'CF';
 export const githubUsername: string = 'envindavsorg';
 export const mail: string = 'florin@cuzeac.com';
 export const phone: string = '+33658058665';
+
+const birthYear: number = 1994;
+export const age: number = new Date().getFullYear() - birthYear;
+export const developerSince: number = new Date().getFullYear() - 2018;
 
 export const keywords: string[] = [
 	'next.js',
