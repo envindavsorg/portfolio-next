@@ -196,6 +196,7 @@ const config = {
 		fontFamily: {
 			'geist-sans': ['var(--font-geist-sans)'],
 			'geist-mono': ['var(--font-geist-mono)'],
+			hubot: ['var(--font-hubot)'],
 		},
 	},
 	plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
