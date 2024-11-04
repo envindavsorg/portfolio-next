@@ -158,12 +158,12 @@ const Subscribers = async ({
 	);
 };
 
-const Home = async (): Promise<React.JSX.Element> => {
+const Page = async (): Promise<React.JSX.Element> => {
 	const articles: Awaited<ArticleWithSlug>[] = await getAllArticles();
 
 	return (
 		<>
-			<Title name={name} title={title}>
+			<Title name={name} title={title} isHome>
 				bienvenue sur mon portfolio !
 			</Title>
 
@@ -236,7 +236,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 				</Paragraph>
 				<FadeIn className="mt-6" asChild>
 					<div className="flex flex-col">
-						<Marquee pauseOnHover className="mt-3 [--duration:20s]">
+						<Marquee pauseOnHover className="[--duration:20s]">
 							{stackMarqueeRow.map(
 								({ icon: Icon, title }: Stack, idx: number) => (
 									<div
@@ -406,4 +406,4 @@ const Home = async (): Promise<React.JSX.Element> => {
 	);
 };
 
-export default Home;
+export default Page;

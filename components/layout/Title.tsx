@@ -13,15 +13,24 @@ export type TitleProps = React.HTMLProps<HTMLHeadingElement> & {
 	children: React.ReactNode;
 	name: string;
 	title: string;
+	isHome?: boolean;
 	className?: string;
 };
 
 export const Title: React.FC<TitleProps> = memo(
-	({ children, name, title, className }) => (
+	({ children, name, title, isHome, className }) => (
 		<>
+			{!isHome && (
+				<p className="fade-in mb-0.5 flex items-center gap-x-2 pt-6 font-hubot font-medium text-sm text-theme sm:pt-12 sm:text-base">
+					<Minus />
+					{children}
+				</p>
+			)}
 			<h1
 				className={cn(
-					'pt-6 font-extrabold font-hubot text-3xl transition-element sm:pt-12 md:text-4xl',
+					'font-extrabold font-hubot text-3xl md:text-4xl',
+					isHome && 'pt-6 transition-element sm:pt-12',
+					!isHome && 'fade-in mb-8',
 					className,
 				)}
 			>
@@ -51,10 +60,12 @@ export const Title: React.FC<TitleProps> = memo(
 					</span>
 				</span>
 			</h1>
-			<p className="mt-0.5 flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base">
-				<Minus />
-				{children}
-			</p>
+			{isHome && (
+				<p className="mt-0.5 flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base">
+					<Minus />
+					{children}
+				</p>
+			)}
 		</>
 	),
 );

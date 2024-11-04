@@ -65,7 +65,7 @@ export const CommandMenu = () => {
 						weight="duotone"
 					/>
 				</div>
-				<div className="absolute top-0 left-[30px] flex items-center justify-center gap-x-1.5 whitespace-nowrap font-semibold text-sm leading-[30px] opacity-100 transition-opacity duration-[0.3s] ease-[ease-in-out]">
+				<div className="absolute top-0 left-[30px] flex items-center justify-center gap-x-1.5 whitespace-nowrap font-semibold text-foreground text-sm leading-[30px] opacity-100 transition-opacity duration-[0.5s] ease-[ease-in-out]">
 					Menu de commandes{' '}
 					<Kbd>
 						<span className="text-xs">⌘</span>K

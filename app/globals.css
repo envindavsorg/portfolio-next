@@ -178,7 +178,7 @@ input[type="email"] {
 
 /* transition */
 :root {
-	--translate-y: 32px;
+	--translate-y: 24px;
 }
 
 .transition-element {
