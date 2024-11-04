@@ -42,12 +42,13 @@ export const DistanceFromUser = (): React.JSX.Element => {
 
 	return (
 		<>
-			<h2 className="absolute top-10 left-4 z-30 font-bold font-geist-sans text-5xl min-[530px]:top-4 min-[530px]:left-4">
+			<h2 className="absolute top-10 left-4 z-30 font-extrabold font-hubot text-3xl md:text-4xl min-[530px]:top-4 min-[530px]:left-4">
 				Paris
 			</h2>
+			<FranceFlag className="absolute top-[2.85rem] right-[15.75rem] z-30 aspect-square size-6 min-[530px]:top-6 min-[530px]:right-20" />
 			<p
 				className={cn(
-					'absolute top-24 left-4 z-30 text-lg min-[530px]:top-16',
+					'absolute top-20 left-4 z-30 text-lg min-[530px]:top-14',
 					caveat.className,
 				)}
 			>
@@ -69,3 +70,11 @@ export const DistanceFromUser = (): React.JSX.Element => {
 		</>
 	);
 };
+
+const FranceFlag = ({ ...props }): React.JSX.Element => (
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 513 342" {...props}>
+		<rect y="0" fill="#FFFFFF" width="513" height="342" />
+		<rect y="0" fill="#0052B4" width="171" height="342" />
+		<rect x="342" y="0" fill="#D80027" width="171" height="342" />
+	</svg>
+);
