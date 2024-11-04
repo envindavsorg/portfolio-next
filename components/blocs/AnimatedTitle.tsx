@@ -1,6 +1,11 @@
+// Copyright Cuzeac Florin 2024. All Rights Reserved.
+// Project: portfolio-site
+// Author contact: https://www.linkedin.com/in/cuzeacflorin/
+// This file is licensed under the MIT Licence.
+// Licence text available at https://opensource.org/licenses/MIT
+
 'use client';
 
-import { cn } from '@/lib/utils';
 import { HandWaving } from '@phosphor-icons/react';
 import { type Variants, motion } from 'framer-motion';
 import type React from 'react';
@@ -15,11 +20,7 @@ interface AnimatedTitleProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const AnimatedTitle = memo(
-	({
-		words,
-		delay = 0.15,
-		className,
-	}: AnimatedTitleProps): React.JSX.Element => {
+	({ words, delay = 0.15 }: AnimatedTitleProps): React.JSX.Element => {
 		const [animationDone, setAnimationDone] = useState(false);
 
 		const variants: Variants = {
@@ -40,7 +41,7 @@ export const AnimatedTitle = memo(
 		const letters: string[] = useMemo(() => words.split(''), [words]);
 
 		return (
-			<div className={cn('flex justify-start', className)}>
+			<div className="flex justify-start">
 				{letters.map((letter: string, idx: number) => (
 					<motion.p
 						key={idx}
@@ -53,7 +54,7 @@ export const AnimatedTitle = memo(
 								? () => setAnimationDone(true)
 								: undefined
 						}
-						className="whitespace-nowrap bg-white bg-clip-text font-bold leading-8"
+						className="whitespace-nowrap bg-white bg-clip-text leading-8"
 					>
 						{letter === ' ' ? <span>&nbsp;</span> : letter}
 					</motion.p>
@@ -79,15 +80,14 @@ export const AnimatedTitle = memo(
 const WavingHand = (): React.JSX.Element => (
 	<motion.div
 		animate={{
-			rotate: 30,
+			rotate: [0, 30, 0],
 		}}
 		transition={{
+			duration: 0.5,
 			repeat: 7,
-			repeatType: 'mirror',
-			duration: 0.25,
+			repeatType: 'reverse',
 			delay: 0.5,
 			ease: 'easeInOut',
-			type: 'tween',
 		}}
 	>
 		<HandWaving className="text-theme text-xl" weight="duotone" />
