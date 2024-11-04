@@ -100,15 +100,11 @@ export const FloatingPanelRoot = ({
 };
 
 interface FloatingPanelTriggerProps {
-	children: React.ReactNode;
-	className?: string;
 	title: string;
+	className?: string;
 }
 
-export const FloatingPanelTrigger = ({
-	children,
-	title,
-}: FloatingPanelTriggerProps) => {
+export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 	const { openFloatingPanel, uniqueId, setTitle } = useFloatingPanel();
 	const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -139,7 +135,7 @@ export const FloatingPanelTrigger = ({
 					layoutId={`floating-panel-label-${uniqueId}`}
 					className="font-bold text-sm"
 				>
-					{children}
+					{title}
 				</motion.span>
 			</motion.div>
 		</motion.button>
