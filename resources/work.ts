@@ -56,9 +56,6 @@ export const wefix: WorkItem[] = [
 	{ icon: FramerMotionIcon, title: 'Framer Motion' },
 ];
 
-export const wefixMarqueeRow: WorkItem[] = wefix.slice(0, wefix.length / 2);
-export const inverseWefixMarqueeRow: WorkItem[] = wefix.slice(wefix.length / 2);
-
 export const spinalCom: WorkItem[] = [
 	{ icon: JavaScriptIcon, title: 'JavaScript' },
 	{ icon: VueIcon, title: 'Vue' },
@@ -75,14 +72,6 @@ export const spinalCom: WorkItem[] = [
 	{ icon: NPMIcon, title: 'npm' },
 ];
 
-export const spinalComMarqueeRow: WorkItem[] = spinalCom.slice(
-	0,
-	spinalCom.length / 2,
-);
-export const inverseSpinalComMarqueeRow: WorkItem[] = spinalCom.slice(
-	spinalCom.length / 2,
-);
-
 export const economat: WorkItem[] = [
 	{ icon: PythonIcon, title: 'Python' },
 	{ icon: FlaskIcon, title: 'Flask' },
@@ -98,11 +87,3 @@ export const economat: WorkItem[] = [
 	{ icon: BootstrapIcon, title: 'Bootstrap' },
 	{ icon: MySQLIcon, title: 'MySQL' },
 ];
-
-export const economatMarqueeRow: WorkItem[] = economat.slice(
-	0,
-	economat.length / 2,
-);
-export const inverseEconomatMarqueeRow: WorkItem[] = economat.slice(
-	economat.length / 2,
-);
