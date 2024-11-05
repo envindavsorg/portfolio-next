@@ -13,7 +13,7 @@ import type React from 'react';
 
 const LocationWidget = dynamic(
 	() =>
-		import('@/components/widgets').then((mod) => ({
+		import('@/components/widgets/index').then((mod) => ({
 			default: mod.LocationWidget,
 		})),
 	{
