@@ -6,8 +6,11 @@
 
 import { gogsStats } from '@/actions/gogs/stats.action';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
+import { CV } from '@/components/blocs/CV';
 import { Marquee } from '@/components/blocs/Marquee';
+import { ArticlesContent } from '@/components/blog/ArticlesContent';
 import { Paragraph } from '@/components/layout/Paragraph';
+import { ScrollTypeWriter } from '@/components/layout/ScrollTypeWriter';
 import { Title } from '@/components/layout/Title';
 import { Counter } from '@/components/numbers/Counter';
 import { Badge } from '@/components/ui/Badge';
@@ -17,7 +20,6 @@ import { type WorkItem, economat, spinalCom, wefix } from '@/resources/work';
 import { absoluteUrl } from '@/site/metadata';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import type React from 'react';
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -91,7 +93,7 @@ const Page = async (): Promise<React.JSX.Element> => {
 					<span className="font-bold">2020</span> en tant que{' '}
 					<span className="font-bold">développeur web</span>.
 				</Paragraph>
-				<Paragraph className="mt-3">
+				<Paragraph className="mt-6">
 					Depuis mon arrivée, j’ai participé à de nombreux projets visant à
 					améliorer les <span className="font-bold">plateformes en ligne</span>{' '}
 					et les <span className="font-bold">services numériques</span> de
@@ -105,8 +107,11 @@ const Page = async (): Promise<React.JSX.Element> => {
 					</span>{' '}
 					sur les plateformes Git de WeFix.
 				</Paragraph>
+				<CV className="mt-6" />
 
-				<Paragraph className="mt-12">
+				<Separator className="my-12" />
+
+				<Paragraph>
 					Au fil de ma <span className="font-bold">carrière</span>, j’ai eu
 					l’occasion de collaborer avec des entreprises de tailles variées, des{' '}
 					<span className="font-bold text-theme">startups</span> aux{' '}
@@ -114,17 +119,7 @@ const Page = async (): Promise<React.JSX.Element> => {
 				</Paragraph>
 
 				<FadeIn className="mt-12">
-					<Link
-						href="https://wefix.net/"
-						aria-label="Site web de WeFix"
-						target="_blank"
-						rel="noreferrer noopener"
-						className="no-underline"
-					>
-						<h2 className="font-bold font-hubot text-2xl text-foreground sm:text-3xl">
-							1. WeFix (Fnac & Darty)
-						</h2>
-					</Link>
+					<ScrollTypeWriter text="1. WeFix (Fnac & Darty)" />
 					<div className="mt-3 font-bold">
 						Développeur web (jan. 2020 - aujourd'hui)
 					</div>
@@ -161,17 +156,7 @@ const Page = async (): Promise<React.JSX.Element> => {
 				<Separator className="my-12" />
 
 				<FadeIn className="mt-12">
-					<Link
-						href="https://www.spinalcom.com/en/"
-						aria-label="Site web de SpinalCom"
-						target="_blank"
-						rel="noreferrer noopener"
-						className="no-underline"
-					>
-						<h2 className="font-bold font-hubot text-2xl text-foreground sm:text-3xl">
-							2. SpinalCom
-						</h2>
-					</Link>
+					<ScrollTypeWriter text="2. SpinalCom" />
 					<div className="mt-3 font-bold">
 						Designer Web (juil. 2019 - jan. 2020)
 					</div>
@@ -207,17 +192,7 @@ const Page = async (): Promise<React.JSX.Element> => {
 				<Separator className="my-12" />
 
 				<FadeIn className="mt-12">
-					<Link
-						href="https://www.economat-armees.com/"
-						aria-label="Site web de l'Économat"
-						target="_blank"
-						rel="noreferrer noopener"
-						className="no-underline"
-					>
-						<h2 className="font-bold font-hubot text-2xl text-foreground sm:text-3xl">
-							3. Économat des Armées
-						</h2>
-					</Link>
+					<ScrollTypeWriter text="3. Économat des Armées" />
 					<div className="mt-3 font-bold">
 						Développeur web (jan. 2018 - juil. 2019)
 					</div>
@@ -247,6 +222,10 @@ const Page = async (): Promise<React.JSX.Element> => {
 					duration={'[--duration:30s]'}
 					className="mt-3"
 				/>
+
+				<Separator className="my-12" />
+
+				<ArticlesContent />
 			</FadeInStagger>
 		</>
 	);

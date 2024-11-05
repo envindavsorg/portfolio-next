@@ -6,7 +6,7 @@ import {
 	StepperProvider,
 	useStepper,
 } from '@/components/ui/Step';
-import useMediaQuery from '@/hooks/useMediaQuery';
+import useMediaQuery from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 import React, { forwardRef, Fragment } from 'react';
 
