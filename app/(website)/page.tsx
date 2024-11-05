@@ -9,7 +9,6 @@ import { githubUser } from '@/actions/github/user.action';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { Channel, ChannelSkeleton } from '@/components/blocs/Channel';
-import { Location } from '@/components/blocs/Location';
 import { Marquee } from '@/components/blocs/Marquee';
 import { Articles } from '@/components/blog/Articles';
 import {
@@ -25,6 +24,7 @@ import { Paragraph } from '@/components/layout/Paragraph';
 import { Title } from '@/components/layout/Title';
 import { Counter } from '@/components/numbers/Counter';
 import { Separator } from '@/components/ui/Separator';
+import { Location } from '@/components/widgets/Location';
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import { cn } from '@/lib/utils';
 import { age, developerSince, name, title } from '@/resources/config';
