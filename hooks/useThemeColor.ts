@@ -1,8 +1,12 @@
+// Copyright Cuzeac Florin 2024. All Rights Reserved.
+// Project: portfolio-site
+// Author contact: https://www.linkedin.com/in/cuzeacflorin/
+// This file is licensed under the MIT Licence.
+// Licence text available at https://opensource.org/licenses/MIT
+
+import { dark, light } from '@/resources/theme';
 import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
-
-const lightThemeColor = '#FAFAFA';
-const darkThemeColor = '#000000';
 
 const useThemeColor = (): void => {
 	const { systemTheme, theme } = useTheme();
@@ -22,8 +26,7 @@ const useThemeColor = (): void => {
 				document.head.appendChild(themeColorMetaTag);
 			}
 
-			themeColorMetaTag.content =
-				theme === 'dark' ? darkThemeColor : lightThemeColor;
+			themeColorMetaTag.content = theme === 'dark' ? dark : light;
 		};
 
 		updateThemeColor(currentTheme);
