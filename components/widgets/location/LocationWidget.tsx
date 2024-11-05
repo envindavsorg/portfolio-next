@@ -1,3 +1,9 @@
+// Copyright Cuzeac Florin 2024. All Rights Reserved.
+// Project: portfolio-site
+// Author contact: https://www.linkedin.com/in/cuzeacflorin/
+// This file is licensed under the MIT Licence.
+// Licence text available at https://opensource.org/licenses/MIT
+
 'use client';
 
 import { Meteors } from '@/components/background/Meteors';
@@ -82,7 +88,7 @@ export const LocationWidget = memo((): React.JSX.Element => {
 	}, [r, resolvedTheme]);
 
 	return (
-		<div className="relative flex h-52 w-full shrink-0 flex-col items-center justify-between overflow-hidden rounded-md border border-neutral-200 bg-background p-2 min-[530px]:aspect-square min-[530px]:h-56 min-[530px]:w-56 dark:border-neutral-700">
+		<div className="relative flex h-52 w-full shrink-0 flex-col items-center justify-between overflow-hidden rounded-md border border-border bg-background p-2 min-[530px]:aspect-square min-[530px]:h-56 min-[530px]:w-56">
 			<DistanceFromUser />
 
 			<div className="min-[530px]:-translate-x-5 absolute inset-x-0 z-20 aspect-square h-96 translate-x-32 min-[530px]:top-[35%]">
