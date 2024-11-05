@@ -20,7 +20,7 @@ export const ProgressBar = (): React.JSX.Element => {
 	const { scrollYProgress } = useScroll();
 	const shouldReduceMotion: boolean | null = useReducedMotion();
 
-	const scaleX: MotionValue = useSpring(scrollYProgress, {
+	const scaleY: MotionValue = useSpring(scrollYProgress, {
 		stiffness: 100,
 		damping: 30,
 		restDelta: 0.001,
@@ -38,8 +38,8 @@ export const ProgressBar = (): React.JSX.Element => {
 	return (
 		<motion.div
 			variants={variants}
-			style={{ scaleX }}
-			className="fixed top-0 right-0 left-0 mx-auto h-1 w-full max-w-[60ch] origin-left bg-theme"
+			style={{ scaleY }}
+			className="fixed top-0 left-0 h-full w-px origin-top bg-theme"
 		/>
 	);
 };
