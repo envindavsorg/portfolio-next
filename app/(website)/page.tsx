@@ -6,6 +6,7 @@
 
 import { projectStars } from '@/actions/github/stars.action';
 import { githubUser } from '@/actions/github/user.action';
+import { PreLoader } from '@/components/PreLoader';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { Channel, ChannelSkeleton } from '@/components/blocs/Channel';
@@ -159,6 +160,8 @@ const Subscribers = async ({
 
 const Page = (): React.JSX.Element => (
 	<>
+		<PreLoader />
+
 		<Title name={name} title={title} isHome>
 			bienvenue sur mon portfolio !
 		</Title>

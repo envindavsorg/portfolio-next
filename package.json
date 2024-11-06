@@ -58,6 +58,7 @@
     "dayjs": "^1.11.13",
     "fast-glob": "^3.3.2",
     "framer-motion": "12.0.0-alpha.0",
+    "gsap": "^3.12.5",
     "next": "15.0.1",
     "next-auth": "5.0.0-beta.22",
     "next-themes": "^0.3.0",
