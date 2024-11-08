@@ -1,9 +1,3 @@
-// Copyright Cuzeac Florin 2024. All Rights Reserved.
-// Project: portfolio-site
-// Author contact: https://www.linkedin.com/in/cuzeacflorin/
-// This file is licensed under the MIT Licence.
-// Licence text available at https://opensource.org/licenses/MIT
-
 import { gogsStats } from '@/actions/gogs/stats.action';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
@@ -210,8 +204,8 @@ const Page = async (): Promise<React.JSX.Element> => {
 					<span className="font-bold">forces armées</span>. J'ai travaillé sur
 					la <span className="font-bold">création d'un site</span> sur
 					l'intranet du <span className="font-bold">Ministère des Armées</span>,
-					et d'un
-					<span className="font-bold">annuaire interne</span> à l'entreprise.
+					et d'un <span className="font-bold">annuaire interne</span> à
+					l'entreprise.
 				</Paragraph>
 				<Paragraph className="mt-6 text-sm">
 					<span className="font-bold text-theme">Technologies utilisées:</span>{' '}

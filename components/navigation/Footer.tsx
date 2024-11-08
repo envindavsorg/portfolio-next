@@ -1,9 +1,3 @@
-// Copyright Cuzeac Florin 2024. All Rights Reserved.
-// Project: portfolio-site
-// Author contact: https://www.linkedin.com/in/cuzeacflorin/
-// This file is licensed under the MIT Licence.
-// Licence text available at https://opensource.org/licenses/MIT
-
 import { TimeDisplay } from '@/components/blocs/TimeDisplay';
 import { display } from '@/resources/config';
 import { type Contact, contact } from '@/resources/contact';

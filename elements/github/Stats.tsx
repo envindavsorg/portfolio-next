@@ -1,5 +1,5 @@
 import { githubUser } from '@/actions/github/user.action';
-import { ChannelSkeleton } from '@/components/blocs/Channel';
+import { ChannelSkeleton } from '@/components/channels/Skeleton';
 import { PatternCard } from '@/components/ui/PatternCard';
 import { cn } from '@/lib/utils';
 import {

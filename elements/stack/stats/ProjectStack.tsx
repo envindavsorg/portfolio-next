@@ -1,6 +1,6 @@
 import { projectInfo } from '@/actions/github/project.action';
 import { FadeIn } from '@/components/animations/FadeIn';
-import { ChannelSkeleton } from '@/components/blocs/Channel';
+import { ChannelSkeleton } from '@/components/channels/Skeleton';
 import { CSSIcon } from '@/components/icons/CSS';
 import { GitIcon } from '@/components/icons/Git';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';

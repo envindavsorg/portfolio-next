@@ -25,7 +25,7 @@ export const keywords: string[] = [
 ];
 
 // Enable or disable the reading progress bar
-export const progressBar: boolean = true;
+export const progressBar: boolean = false;
 
 // Enable localization
 export const i18n: boolean = false;
