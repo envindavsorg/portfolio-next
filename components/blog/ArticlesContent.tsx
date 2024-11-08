@@ -31,7 +31,7 @@ export const ArticlesContent = async (): Promise<React.JSX.Element> => {
 			</Paragraph>
 
 			<FadeIn className="mt-6" asChild>
-				<Articles articles={articles.slice(0, 3)} isLanding />
+				<Articles articles={articles.slice(0, 3)} />
 			</FadeIn>
 		</>
 	);

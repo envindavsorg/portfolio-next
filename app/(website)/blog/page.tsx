@@ -47,7 +47,7 @@ const BlogPage = async (): Promise<React.JSX.Element> => {
 				</FadeIn>
 
 				<FadeIn className="mt-12">
-					<Articles articles={articles} isBlog />
+					<Articles articles={articles} />
 				</FadeIn>
 			</FadeInStagger>
 		</>

@@ -1,5 +1,4 @@
 import { type ClassValue, clsx } from 'clsx';
-import type React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export const cn = (...inputs: ClassValue[]): string => {
@@ -18,39 +17,4 @@ export const getRouterLastPathSegment = (pathname: string): string => {
 	}
 
 	return '/';
-};
-
-interface GetRelativeCoordinates {
-	x: number;
-	y: number;
-}
-
-export const getRelativeCoordinates = (
-	event: React.MouseEvent<HTMLUListElement>,
-	referenceElement: any,
-): GetRelativeCoordinates => {
-	const position = {
-		x: event.pageX,
-		y: event.pageY,
-	};
-
-	const offset = {
-		left: referenceElement.offsetLeft,
-		top: referenceElement.clientTop,
-		width: referenceElement.clientWidth,
-		height: referenceElement.clientHeight,
-	};
-
-	let reference = referenceElement.offsetParent;
-
-	while (reference) {
-		offset.left += reference.offsetLeft;
-		offset.top += reference.offsetTop;
-		reference = reference.offsetParent;
-	}
-
-	return {
-		x: position.x - offset.left,
-		y: position.y - offset.top,
-	};
 };
