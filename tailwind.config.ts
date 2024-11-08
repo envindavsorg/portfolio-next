@@ -73,10 +73,17 @@ const config = {
 				'18': '18rem',
 				'20.5': '20.5rem',
 			},
-			boxShadow: {
-				light: '3px 3px 0px 0px #000000',
-				dark: '3px 3px 0px 0px #FFFFFF',
-			},
+			boxShadow: ({ theme }) => ({
+				'surface-glass': `
+			          inset 0.25px 1px 0 0 ${theme('colors.yellow.200 / 3%')},
+			          0px 0.3px 0.3px rgba(3, 2, 2, 0.02),
+			          0px 2.2px 2.5px -0.4px rgba(3, 2, 2, 0.02),
+			          0px 4.3px 4.8px -0.8px rgba(3, 2, 2, 0.02),
+			          0px 7.5px 8.4px -1.2px rgba(3, 2, 2, 0.02),
+			          0px 12.8px 14.4px -1.7px rgba(3, 2, 2, 0.02),
+			          0px 21px 23.6px -2.1px rgba(3, 2, 2, 0.02),
+			          0px 33.2px 37.4px -2.5px rgba(3, 2, 2, 0.02)`,
+			}),
 			translate: {
 				boxShadowX: '3px',
 				boxShadowY: '3px',

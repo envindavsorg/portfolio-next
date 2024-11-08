@@ -9,44 +9,39 @@ import { Badge } from '@/components/ui/Badge';
 import type React from 'react';
 
 type BadgeWithIconProps = {
-	icon: React.ReactNode;
-	label: string;
+	type: 'html' | 'css' | 'js' | 'react' | 'vue' | 'ts' | 'tailwind';
 };
 
-const BadgeWithIcon = ({
-	icon,
-	label,
-}: BadgeWithIconProps): React.JSX.Element => (
-	<Badge>
-		{icon}
-		&nbsp;{label}
-	</Badge>
-);
+export const BadgeWithIcon = ({
+	type,
+}: BadgeWithIconProps): React.JSX.Element => {
+	const getIconAndLabel = () => {
+		switch (type) {
+			case 'html':
+				return { icon: <HTML5Icon />, label: 'HTML' };
+			case 'css':
+				return { icon: <CSSIcon />, label: 'CSS' };
+			case 'js':
+				return { icon: <JavaScriptIcon />, label: 'JavaScript' };
+			case 'react':
+				return { icon: <ReactIcon />, label: 'React' };
+			case 'vue':
+				return { icon: <VueIcon />, label: 'Vue' };
+			case 'ts':
+				return { icon: <TypeScriptIcon />, label: 'TypeScript' };
+			case 'tailwind':
+				return { icon: <TailwindIcon />, label: 'Tailwind' };
+			default:
+				return { icon: null, label: '' };
+		}
+	};
 
-export const HTMLBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<HTML5Icon />} label="HTML" />
-);
+	const { icon, label } = getIconAndLabel();
 
-export const CSSBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<CSSIcon />} label="CSS" />
-);
-
-export const JavaScriptBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<JavaScriptIcon />} label="JavaScript" />
-);
-
-export const ReactBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<ReactIcon />} label="React" />
-);
-
-export const VueBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<VueIcon />} label="Vue" />
-);
-
-export const TypeScriptBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<TypeScriptIcon />} label="TypeScript" />
-);
-
-export const TailwindBadge = (): React.JSX.Element => (
-	<BadgeWithIcon icon={<TailwindIcon />} label="Tailwind" />
-);
+	return (
+		<Badge>
+			{icon}
+			&nbsp;{label}
+		</Badge>
+	);
+};

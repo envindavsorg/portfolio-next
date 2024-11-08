@@ -1,5 +1,6 @@
 'use client';
 
+import { useCommandContext } from '@/components/command/CommandContext';
 import { CommandToast } from '@/components/command/CommandToast';
 import { CommandToolbar } from '@/components/command/CommandToolbar';
 import { Kbd } from '@/components/layout/Kbd';
@@ -18,36 +19,11 @@ import { type Navigation, navigation } from '@/resources/navigation';
 import { Command, File, X } from '@phosphor-icons/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 export const CommandMenu = () => {
 	const router = useRouter();
-	const [open, setOpen] = useState(false);
-
-	useEffect(() => {
-		const down = (event: KeyboardEvent) => {
-			if (
-				(event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
-				event.key === '/'
-			) {
-				if (
-					(event.target instanceof HTMLElement &&
-						event.target.isContentEditable) ||
-					event.target instanceof HTMLInputElement ||
-					event.target instanceof HTMLTextAreaElement ||
-					event.target instanceof HTMLSelectElement
-				) {
-					return;
-				}
-
-				event.preventDefault();
-				setOpen((open) => !open);
-			}
-		};
-
-		document.addEventListener('keydown', down);
-		return () => document.removeEventListener('keydown', down);
-	}, []);
+	const { open, setOpen } = useCommandContext();
 
 	const runCommand = useCallback((command: () => unknown) => {
 		setOpen(false);

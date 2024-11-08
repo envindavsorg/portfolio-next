@@ -25,6 +25,8 @@ type CommandContextProps = {
 	getScreenIcon: () => React.ReactElement;
 	closeWindow: () => void;
 	runCommand: (command: () => unknown) => void;
+	open: boolean;
+	setOpen: (open: boolean) => void;
 };
 
 const CommandContext = createContext<CommandContextProps | undefined>(
@@ -42,6 +44,32 @@ export const CommandProvider = ({
 	const [currentTheme, setCurrentTheme] = useState<string | undefined>(
 		undefined,
 	);
+	const [open, setOpen] = useState(false);
+
+	useEffect(() => {
+		const down = (event: KeyboardEvent) => {
+			if (
+				(event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
+				event.key === '/'
+			) {
+				if (
+					(event.target instanceof HTMLElement &&
+						event.target.isContentEditable) ||
+					event.target instanceof HTMLInputElement ||
+					event.target instanceof HTMLTextAreaElement ||
+					event.target instanceof HTMLSelectElement
+				) {
+					return;
+				}
+
+				event.preventDefault();
+				setOpen((open) => !open);
+			}
+		};
+
+		document.addEventListener('keydown', down);
+		return () => document.removeEventListener('keydown', down);
+	}, []);
 
 	useEffect(() => {
 		setCurrentTheme(theme === 'system' ? systemTheme : theme);
@@ -59,12 +87,12 @@ export const CommandProvider = ({
 		currentTheme === 'dark' ? (
 			<Sun
 				weight="duotone"
-				className="size-5 shrink-0 text-foreground sm:size-6"
+				className="size-7 shrink-0 text-foreground sm:size-6"
 			/>
 		) : (
 			<CloudMoon
 				weight="duotone"
-				className="size-5 shrink-0 text-foreground sm:size-6"
+				className="size-7 shrink-0 text-foreground sm:size-6"
 			/>
 		);
 
@@ -118,6 +146,8 @@ export const CommandProvider = ({
 		getScreenIcon,
 		closeWindow,
 		runCommand,
+		open,
+		setOpen,
 	};
 
 	return (

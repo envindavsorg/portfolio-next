@@ -4,15 +4,7 @@ import { Marquee } from '@/components/blocs/Marquee';
 import { ArticlesContent } from '@/components/blog/ArticlesContent';
 import { StarsChannel } from '@/components/channels/Stars';
 import { SubscribersChannel } from '@/components/channels/Subscribers';
-import {
-	CSSBadge,
-	HTMLBadge,
-	JavaScriptBadge,
-	ReactBadge,
-	TailwindBadge,
-	TypeScriptBadge,
-	VueBadge,
-} from '@/components/layout/Badges';
+import { BadgeWithIcon } from '@/components/layout/Badges';
 import { Paragraph } from '@/components/layout/Paragraph';
 import { Title } from '@/components/layout/Title';
 import { Counter } from '@/components/numbers/Counter';
@@ -94,8 +86,9 @@ const Page = (): React.JSX.Element => (
 					travailler
 				</Link>{' '}
 				avec de nombreux langages et technologies, sur beaucoup de projets
-				différents. J'ai commencé par le développement web avec <HTMLBadge />,{' '}
-				<CSSBadge /> et <JavaScriptBadge />, bien évidemment.
+				différents. J'ai commencé par le développement web avec{' '}
+				<BadgeWithIcon type="html" />, <BadgeWithIcon type="css" /> et{' '}
+				<BadgeWithIcon type="js" />, bien évidemment.
 			</Paragraph>
 			<FadeIn className="mt-6" asChild>
 				<div className="flex flex-col">
@@ -145,7 +138,7 @@ const Page = (): React.JSX.Element => (
 					aria-label="Voir le site de React !"
 					target="_blank"
 				>
-					<ReactBadge />
+					<BadgeWithIcon type="react" />
 				</Link>{' '}
 				et{' '}
 				<Link
@@ -153,7 +146,7 @@ const Page = (): React.JSX.Element => (
 					aria-label="Voir le site de Vue !"
 					target="_blank"
 				>
-					<VueBadge />
+					<BadgeWithIcon type="vue" />
 				</Link>
 				, avec{' '}
 				<Link
@@ -161,7 +154,7 @@ const Page = (): React.JSX.Element => (
 					aria-label="Voir le site de TypeScript !"
 					target="_blank"
 				>
-					<TypeScriptBadge />
+					<BadgeWithIcon type="ts" />
 				</Link>{' '}
 				en parallèle, me permettant de développer des applications plus
 				robustes, belles et fonctionnelles.
@@ -174,7 +167,7 @@ const Page = (): React.JSX.Element => (
 					aria-label="Voir le site de Tailwind !"
 					target="_blank"
 				>
-					<TailwindBadge />
+					<BadgeWithIcon type="tailwind" />
 				</Link>
 				, qui est un framework incroyable de styling, puissant et modulaire.
 			</Paragraph>
