@@ -1,4 +1,4 @@
-import { ProfileImageLarge } from '@/components/ProfileImage';
+import { ProfileImage } from '@/components/ProfileImage';
 import { IntersectionSwap } from '@/components/navigation/IntersectionSwap';
 import { NavBarSwap } from '@/components/navigation/NavBarSwap';
 import { cn } from '@/lib/utils';
@@ -18,7 +18,7 @@ export const Title: React.FC<TitleProps> = memo(
 	({ children, name, title, isHome, className }) => (
 		<IntersectionSwap nav={<NavBarSwap />}>
 			<div className="flex items-center space-x-6 sm:space-x-8">
-				<ProfileImageLarge />
+				<ProfileImage className="size-14" />
 
 				<div className="flex-1">
 					{!isHome && (

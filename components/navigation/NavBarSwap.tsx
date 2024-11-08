@@ -11,14 +11,14 @@ export const NavBarSwap = (): React.JSX.Element => {
 	const { toggleTheme, getThemeIcon, setOpen } = useCommandContext();
 
 	return (
-		<div className="rounded-md border border-border bg-gray-800/95 px-3 py-2 shadow-surface-glass backdrop-blur [@supports(backdrop-filter:blur(0px))]:bg-white/[3%]">
+		<div className="rounded-md border border-border bg-background px-3 py-2 shadow-surface-glass backdrop-blur [@supports(backdrop-filter:blur(0px))]:bg-white/[3%]">
 			<div className="flex items-center justify-between">
 				<Link
 					href="/"
 					title="Retourner sur la page principale"
 					className="rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/70"
 				>
-					<ProfileImage />
+					<ProfileImage className="size-9" />
 				</Link>
 
 				<div className="flex items-center space-x-6">
