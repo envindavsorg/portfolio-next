@@ -24,7 +24,7 @@ export const ProfileImage = (): React.JSX.Element => (
 
 export const ProfileImageLarge = (): React.JSX.Element => (
 	<div className="rounded-full bg-theme p-px shadow-lg ring-[5px] ring-orange-300/30 dark:ring-yellow-300/30">
-		<div className="flex size-16 items-center justify-center rounded-full p-0.5">
+		<div className="flex size-14 items-center justify-center rounded-full p-0.5">
 			<Florin />
 		</div>
 	</div>

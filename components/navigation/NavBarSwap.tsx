@@ -30,7 +30,7 @@ export const NavBarSwap = (): React.JSX.Element => {
 					>
 						<MagnifyingGlass
 							weight="duotone"
-							className="size-7 shrink-0 text-foreground sm:size-6"
+							className="size-5 shrink-0 text-foreground sm:size-6"
 						/>
 					</Button>
 

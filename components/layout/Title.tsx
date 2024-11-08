@@ -17,10 +17,10 @@ export type TitleProps = React.HTMLProps<HTMLHeadingElement> & {
 export const Title: React.FC<TitleProps> = memo(
 	({ children, name, title, isHome, className }) => (
 		<IntersectionSwap nav={<NavBarSwap />}>
-			<div className="flex items-center space-x-8">
+			<div className="flex items-center space-x-6 sm:space-x-8">
 				<ProfileImageLarge />
 
-				<div className="mt-2">
+				<div>
 					{!isHome && (
 						<p className="fade-in mb-0.5 flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base">
 							<Minus />
