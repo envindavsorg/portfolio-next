@@ -1,5 +1,4 @@
 import { projectInfo } from '@/actions/github/project.action';
-import { FadeIn } from '@/components/animations/FadeIn';
 import { ChannelSkeleton } from '@/components/channels/Skeleton';
 import { CSSIcon } from '@/components/icons/CSS';
 import { GitIcon } from '@/components/icons/Git';
@@ -7,6 +6,7 @@ import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { MarkdownIcon } from '@/components/icons/Markdown';
 import { ShellIcon } from '@/components/icons/Shell';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
+import { Paragraph } from '@/components/layout/Paragraph';
 import { PatternCard } from '@/components/ui/PatternCard';
 import type React from 'react';
 import { Fragment } from 'react';
@@ -59,12 +59,10 @@ export const Languages = async () => {
 
 export const ProjectStack = (): React.JSX.Element => (
 	<Fragment>
-		<FadeIn>
-			<p className="leading-8">
-				Les principales technologies que j'ai utilisées sur ce projet sont les
-				suivantes :
-			</p>
-		</FadeIn>
+		<Paragraph>
+			Les principales technologies que j'ai utilisées sur ce projet sont les
+			suivantes :
+		</Paragraph>
 		<Suspense
 			fallback={
 				<div className="mt-6 grid w-full gap-3 sm:grid-cols-2">

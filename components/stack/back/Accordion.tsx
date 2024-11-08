@@ -1,12 +1,12 @@
 import { FadeIn } from '@/components/animations/FadeIn';
+import Express from '@/components/stack/back/frameworks/express.mdx';
+import Fastify from '@/components/stack/back/frameworks/fastify.mdx';
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/Accordion';
-import Express from '@/elements/stack/back/frameworks/express.mdx';
-import Fastify from '@/elements/stack/back/frameworks/fastify.mdx';
 import type React from 'react';
 
 export const BackAccordion = (): React.JSX.Element => (

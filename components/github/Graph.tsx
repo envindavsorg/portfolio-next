@@ -1,5 +1,5 @@
 import { githubUser } from '@/actions/github/user.action';
-import { Contributions } from '@/elements/github/Contributions';
+import { Contributions } from '@/components/github/Contributions';
 import type React from 'react';
 import { Fragment, Suspense } from 'react';
 

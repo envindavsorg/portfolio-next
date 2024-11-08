@@ -34,9 +34,7 @@ const sitemap = async () => {
 	const pages: Pages[] = slugs
 		.filter((slug) => {
 			const routeKey = `/${slug}` as RouteKey;
-			// @ts-ignore
-			// noinspection PointlessBooleanExpressionJS
-			return routes[routeKey] !== false;
+			return routes[routeKey];
 		})
 		.map((slug) => ({
 			url: `https://cuzeac-florin.app/${slug}`,

@@ -1,8 +1,8 @@
-import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
-import { Title } from '@/components/blocs/Typography';
 import { Articles } from '@/components/blog/Articles';
+import { Title } from '@/components/layout/Title';
 import { getAllArticles } from '@/lib/articles';
+import { name, title } from '@/resources/config';
 import { absoluteUrl } from '@/site/metadata';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -34,8 +34,9 @@ const BlogPage = async (): Promise<React.JSX.Element> => {
 
 	return (
 		<>
-			<Title>- tous mes articles de blog</Title>
-			<AnimatedName />
+			<Title name={name} title={title}>
+				tous mes articles de blog
+			</Title>
 
 			<FadeInStagger className="mt-10" faster>
 				<FadeIn>

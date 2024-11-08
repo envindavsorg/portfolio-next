@@ -1,11 +1,11 @@
-import { AnimatedName } from '@/app/(website)/animated-name';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
-import { Title } from '@/components/blocs/Typography';
+import { GitHubGraph } from '@/components/github/Graph';
+import { GitHubStats } from '@/components/github/Stats';
+import { GitHubTable } from '@/components/github/Table';
+import { WakatimeStats } from '@/components/github/Wakatime';
+import { Title } from '@/components/layout/Title';
 import { Separator } from '@/components/ui/Separator';
-import { GitHubGraph } from '@/elements/github/Graph';
-import { GitHubStats } from '@/elements/github/Stats';
-import { GitHubTable } from '@/elements/github/Table';
-import { WakatimeStats } from '@/elements/github/Wakatime';
+import { name, title } from '@/resources/config';
 import { absoluteUrl } from '@/site/metadata';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
@@ -34,8 +34,9 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const GitHubPage = (): React.JSX.Element => (
 	<>
-		<Title>- activité et statistiques sur GitHub</Title>
-		<AnimatedName />
+		<Title name={name} title={title}>
+			activité et statistiques sur GitHub
+		</Title>
 
 		<FadeInStagger className="mt-10" faster>
 			<FadeIn>
