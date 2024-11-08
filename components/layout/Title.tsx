@@ -20,7 +20,7 @@ export const Title: React.FC<TitleProps> = memo(
 			<div className="flex items-center space-x-6 sm:space-x-8">
 				<ProfileImageLarge />
 
-				<div>
+				<div className="flex-1">
 					{!isHome && (
 						<p className="fade-in mb-0.5 flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base">
 							<Minus />
