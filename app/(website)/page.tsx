@@ -159,6 +159,12 @@ const Page = (): React.JSX.Element => (
 				en parallèle, me permettant de développer des applications plus
 				robustes, belles et fonctionnelles.
 			</Paragraph>
+
+			<Separator className="my-12" />
+
+			<ArticlesContent />
+
+			{/*
 			<Paragraph className="mt-3">
 				Pour le <span className="font-bold">design</span> et l'
 				<span className="font-bold">UI</span> des mes applications, j'utilise{' '}
@@ -213,9 +219,7 @@ const Page = (): React.JSX.Element => (
 			</Paragraph>
 			<SubscribersChannel />
 
-			<Separator className="my-12" />
-
-			<ArticlesContent />
+			*/}
 		</FadeInStagger>
 	</>
 );
