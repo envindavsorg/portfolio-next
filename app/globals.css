@@ -1,38 +1,65 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
+:root {
+	--theme: hsl(24, 90%, 47%);
+	--background: hsl(0, 0%, 98%);
+	--foreground: hsl(0, 0%, 0%);
+	--border: hsl(0, 0%, 90%);
+	--code: hsl(225, 77%, 5%);
+	--primary: hsl(240, 5%, 11%);
+	--primary-foreground: hsl(0, 0%, 98%);
+	--secondary: hsl(240, 4%, 96%);
+	--secondary-foreground: hsl(240, 5%, 11%);
+	--muted: hsl(240, 4%, 96%);
+	--muted-foreground: hsl(240, 3%, 46%);
+	--accent: hsl(240, 4%, 96%);
+	--accent-foreground: hsl(240, 5%, 11%);
+	--destructive: hsl(0, 76%, 51%);
+	--destructive-foreground: hsl(0, 0%, 98%);
+	/* radius */
+	--radius: 0.5rem;
+	/* shiki */
+	--sh-class: hsl(220, 90%, 71%);
+	--sh-sign: hsl(195, 100%, 78%);
+	--sh-string: hsl(93, 47%, 64%);
+	--sh-keyword: hsl(255, 66%, 76%);
+	--sh-comment: hsl(225, 22%, 45%);
+	--sh-jsxliterals: hsl(220, 90%, 71%);
+	--sh-property: hsl(170, 61%, 64%);
+	--sh-entity: hsl(32, 67%, 66%);
+}
+
+@theme inline {
+	--color-theme: var(--theme);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-border: var(--border);
+	--color-code: var(--code);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	/* Rayon de bordure */
+	--radius: var(--radius);
+	/* Styles Shiki */
+	--sh-class: var(--sh-class);
+	--sh-sign: var(--sh-sign);
+	--sh-string: var(--sh-string);
+	--sh-keyword: var(--sh-keyword);
+	--sh-comment: var(--sh-comment);
+	--sh-jsxliterals: var(--sh-jsxliterals);
+	--sh-property: var(--sh-property);
+	--sh-entity: var(--sh-entity);
+}
+
+@media (prefers-color-scheme: dark) {
 	:root {
-		--theme: hsl(24, 90%, 47%);
-		--background: hsl(0, 0%, 98%);
-		--foreground: hsl(0, 0%, 0%);
-		--border: hsl(0, 0%, 90%);
-		--code: hsl(225, 77%, 5%);
-		--primary: hsl(240, 5%, 11%);
-		--primary-foreground: hsl(0, 0%, 98%);
-		--secondary: hsl(240, 4%, 96%);
-		--secondary-foreground: hsl(240, 5%, 11%);
-		--muted: hsl(240, 4%, 96%);
-		--muted-foreground: hsl(240, 3%, 46%);
-		--accent: hsl(240, 4%, 96%);
-		--accent-foreground: hsl(240, 5%, 11%);
-		--destructive: hsl(0, 76%, 51%);
-		--destructive-foreground: hsl(0, 0%, 98%);
-		/* radius */
-		--radius: 0.5rem;
-		/* shiki */
-		--sh-class: hsl(220, 90%, 71%);
-		--sh-sign: hsl(195, 100%, 78%);
-		--sh-string: hsl(93, 47%, 64%);
-		--sh-keyword: hsl(255, 66%, 76%);
-		--sh-comment: hsl(225, 22%, 45%);
-		--sh-jsxliterals: hsl(220, 90%, 71%);
-		--sh-property: hsl(170, 61%, 64%);
-		--sh-entity: hsl(32, 67%, 66%);
-	}
-
-	.dark {
 		--theme: hsl(51, 97%, 64%);
 		--background: hsl(0, 0%, 0%);
 		--foreground: hsl(0, 0%, 98%);
@@ -49,11 +76,14 @@
 		--destructive: hsl(0, 89%, 80%);
 		--destructive-foreground: hsl(0, 0%, 98%);
 	}
+}
 
-	@media (prefers-color-scheme: dark) {
-		html {
-			color-scheme: dark;
-		}
+@utility scrollbar-hide {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
 	}
 }
 
@@ -144,7 +174,7 @@ pre {
 }
 
 code {
-	@apply bg-border rounded-md p-1 text-base font-geist-mono;
+	@apply bg-border rounded-md p-1 text-base;
 }
 
 pre code {
@@ -172,7 +202,6 @@ pre code span {
 input[type="text"],
 input[type="email"] {
 	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 }
 

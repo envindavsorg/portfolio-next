@@ -1,52 +1,37 @@
 'use client';
 
+import { useIntersectionObserver } from '@uidotdev/usehooks';
+import type { FC, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import type React from 'react';
-import { useRef } from 'react';
-import { useIntersection } from 'react-use';
 
 interface IntersectionSwapProps {
-	children: React.ReactNode;
-	nav: React.ReactNode;
+	children: ReactNode;
+	element: ReactNode;
 }
 
-export const IntersectionSwap = ({
-	children,
-	nav,
-}: IntersectionSwapProps): React.JSX.Element => {
-	const intersectionRef: React.RefObject<HTMLDivElement | null> =
-		useRef<HTMLDivElement | null>(null);
-
-	const intersection: IntersectionObserverEntry | null = useIntersection(
-		intersectionRef as React.RefObject<HTMLDivElement>,
-		{
-			root: null,
-			rootMargin: '-100px',
-		},
-	);
-
-	let showPrimary = false;
-	if (intersection && !intersection.isIntersecting) {
-		showPrimary = true;
-	}
+export const IntersectionSwap: FC<IntersectionSwapProps> = ({ children, element }) => {
+	const [ref, entry] = useIntersectionObserver({
+		threshold: 0,
+		root: null,
+		rootMargin: '-100px',
+	});
+	const show: boolean = entry?.isIntersecting === false;
 
 	return (
 		<>
 			<div
 				className={cn(
 					'-mx-px sticky top-6 z-[9999] transition duration-75 will-change-transform',
-					!showPrimary && '-translate-y-2 scale-95 opacity-0',
-					showPrimary && 'opacity-100',
+					show ? 'opacity-100' : '-translate-y-2 scale-95 opacity-0',
 				)}
 			>
-				{nav}
+				{element}
 			</div>
-			<div ref={intersectionRef}>
+			<div ref={ref}>
 				<div
 					className={cn(
 						'transition duration-150 will-change-transform',
-						showPrimary && '-translate-y-2 scale-[0.98] opacity-0',
-						!showPrimary && 'opacity-100 delay-100',
+						show ? '-translate-y-2 scale-[0.98] opacity-0' : 'opacity-100 delay-100',
 					)}
 				>
 					{children}

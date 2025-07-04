@@ -1,10 +1,10 @@
-import { ProfileImage } from '@/components/ProfileImage';
-import { IntersectionSwap } from '@/components/navigation/IntersectionSwap';
-import { NavBarSwap } from '@/components/navigation/NavBarSwap';
-import { cn } from '@/lib/utils';
-import { Minus } from '@phosphor-icons/react/dist/ssr';
+import { MinusIcon } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
 import { memo } from 'react';
+import { IntersectionSwap } from '@/components/navigation/IntersectionSwap';
+import { NavBarSwap } from '@/components/navigation/NavBarSwap';
+import { ProfileImage } from '@/components/ProfileImage';
+import { cn } from '@/lib/utils';
 
 export type TitleProps = React.HTMLProps<HTMLHeadingElement> & {
 	children: React.ReactNode;
@@ -16,14 +16,14 @@ export type TitleProps = React.HTMLProps<HTMLHeadingElement> & {
 
 export const Title: React.FC<TitleProps> = memo(
 	({ children, name, title, isHome, className }) => (
-		<IntersectionSwap nav={<NavBarSwap />}>
+		<IntersectionSwap element={<NavBarSwap />}>
 			<div className="flex items-center space-x-6 sm:space-x-8">
 				<ProfileImage className="size-14" />
 
 				<div className="flex-1">
 					{!isHome && (
 						<p className="fade-in mb-0.5 flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base">
-							<Minus />
+							<MinusIcon />
 							{children}
 						</p>
 					)}
@@ -63,7 +63,7 @@ export const Title: React.FC<TitleProps> = memo(
 					</h1>
 					{isHome && (
 						<p className="mt-0.5 flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base">
-							<Minus />
+							<MinusIcon />
 							{children}
 						</p>
 					)}

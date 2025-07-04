@@ -4,10 +4,6 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	pageExtensions: ['mdx', 'ts', 'tsx'],
-	devIndicators: {
-		buildActivity: true,
-		appIsrStatus: false,
-	},
 	images: {
 		remotePatterns: [
 			{
