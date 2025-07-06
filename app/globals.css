@@ -56,6 +56,8 @@
 	--sh-jsxliterals: var(--sh-jsxliterals);
 	--sh-property: var(--sh-property);
 	--sh-entity: var(--sh-entity);
+
+	--breakpoint-2xl: 1400px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -76,6 +78,11 @@
 		--destructive: hsl(0, 89%, 80%);
 		--destructive-foreground: hsl(0, 0%, 98%);
 	}
+}
+
+@utility container {
+	margin-inline: auto;
+	padding-inline: 1rem;
 }
 
 @utility scrollbar-hide {
@@ -147,11 +154,6 @@ ol {
 
 li {
 	@apply pl-1;
-}
-
-/* links */
-a {
-	@apply underline-offset-2 underline decoration-wavy;
 }
 
 /* code */

@@ -11,7 +11,14 @@ interface PageParagraphProps {
 const PageParagraph = memo(
 	({ children, className }: PageParagraphProps): React.JSX.Element => (
 		<FadeIn>
-			<p className={cn('text-base leading-8 md:text-lg', className)}>{children}</p>
+			<p
+				className={cn(
+					'text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300',
+					className,
+				)}
+			>
+				{children}
+			</p>
 		</FadeIn>
 	),
 );

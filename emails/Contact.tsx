@@ -1,4 +1,3 @@
-import { id } from '@/resources/config';
 import {
 	Body,
 	Container,
@@ -11,7 +10,7 @@ import {
 } from '@react-email/components';
 import { Tailwind } from '@react-email/tailwind';
 import type React from 'react';
-import config from '../tailwind.config';
+import { id } from '@/resources/config';
 
 interface ContactEmailTemplateProps {
 	name: string;
@@ -26,7 +25,7 @@ const ContactEmailTemplate = ({
 	mail,
 	content,
 }: Readonly<ContactEmailTemplateProps>): React.JSX.Element => (
-	<Tailwind config={config}>
+	<Tailwind>
 		<Html>
 			<Head />
 			<Preview>
@@ -35,24 +34,19 @@ const ContactEmailTemplate = ({
 			<Body className="bg-black">
 				<Container className="mx-auto px-3">
 					<Heading className="font-extrabold text-2xl text-white">
-						<span className="font-bold text-yellow-300">Driiiing</span>, un
-						nouveau message t'attend, depuis ton site !
+						<span className="font-bold text-yellow-300">Driiiing</span>, un nouveau
+						message t'attend, depuis ton site !
 					</Heading>
 					<Text className="mt-20 block text-base text-white">
-						<span className="font-bold text-yellow-300">Florin</span>, tu as
-						reçu un nouveau message, depuis ton site, de la part de{' '}
+						<span className="font-bold text-yellow-300">Florin</span>, tu as reçu un
+						nouveau message, depuis ton site, de la part de{' '}
 						<span className="font-bold">
 							{name} {surname}
 						</span>{' '}
 						qui a pour adresse e-mail{' '}
-						<span className="font-extrabold text-yellow-300 underline">
-							{mail}
-						</span>
-						.
+						<span className="font-extrabold text-yellow-300 underline">{mail}</span>.
 					</Text>
-					<Text className="mt-10 block text-base text-white">
-						Voici le contenu :
-					</Text>
+					<Text className="mt-10 block text-base text-white">Voici le contenu :</Text>
 					<Text
 						className="mt-1 bg-transparent p-4 font-bold text-white text-xl"
 						style={{ border: '1px solid #FFFFFF', borderRadius: '10px' }}
@@ -71,11 +65,9 @@ const ContactEmailTemplate = ({
 						className="mt-10 object-cover object-center"
 					/>
 					<Text className="mt-1 block text-gray-700 text-sm">
-						<span className="font-bold text-yellow-300">{id}</span> - Mon
-						portfolio personnel -{' '}
-						<span className="font-bold text-yellow-300">
-							{new Date().getFullYear()}
-						</span>
+						<span className="font-bold text-yellow-300">{id}</span> - Mon portfolio
+						personnel -{' '}
+						<span className="font-bold text-yellow-300">{new Date().getFullYear()}</span>
 					</Text>
 				</Container>
 			</Body>

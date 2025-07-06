@@ -1,17 +1,19 @@
 import './globals.css';
+
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
+import type { Metadata, Viewport } from 'next';
+import localFont from 'next/font/local';
+import Script from 'next/script';
+import { ViewTransitions } from 'next-view-transitions';
+import type React from 'react';
+import { Sparkles } from '@/components/background/Sparkles';
 import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Toaster } from '@/components/ui/Sonner';
 import { cn } from '@/lib/utils';
 import { name } from '@/resources/config';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
-import type { Metadata, Viewport } from 'next';
-import { ViewTransitions } from 'next-view-transitions';
-import localFont from 'next/font/local';
-import Script from 'next/script';
-import type React from 'react';
 
 const geistSans = localFont({
 	src: '../fonts/GeistSansVF.woff2',
@@ -63,14 +65,15 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 					hubot.variable,
 				)}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="dark"
-					disableTransitionOnChange
-				>
+				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
-					{children}
+
+					<div className="container flex min-h-screen max-w-2xl flex-col">
+						<main className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">{children}</main>
+					</div>
+
 					<Toaster position="bottom-right" />
+					<Sparkles density={50} />
 				</ThemeProvider>
 
 				{process.env.NODE_ENV === 'production' && (

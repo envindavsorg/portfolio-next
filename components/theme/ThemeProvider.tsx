@@ -1,10 +1,12 @@
 'use client';
 
-import { ThemeProvider as Provider, useTheme } from 'next-themes';
-import type { ThemeProviderProps } from 'next-themes/dist/types';
-import React, { useEffect } from 'react';
+import {
+	ThemeProvider as Provider,
+	type ThemeProviderProps,
+	useTheme,
+} from 'next-themes';
+import { useEffect } from 'react';
 
-// helper component to set theme in cookie
 const AppThemeProviderHelper = () => {
 	const { theme } = useTheme();
 

@@ -1,9 +1,5 @@
-import { MinusIcon } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
 import { memo } from 'react';
-import { IntersectionSwap } from '@/components/navigation/IntersectionSwap';
-import { NavBarSwap } from '@/components/navigation/NavBarSwap';
-import { ProfileImage } from '@/components/ProfileImage';
 import { AnimatedLetters } from '@/components/text/AnimatedLetters';
 import { cn } from '@/lib/utils';
 
@@ -25,51 +21,35 @@ const PageTitle = memo(
 	}: TitleProps): React.JSX.Element => {
 		const pSpacing: string = isHome ? 'mt-0.5' : 'fade-in mb-0.5';
 		const pClasses: string = cn(
-			'flex items-center gap-x-2 font-hubot font-medium text-sm text-theme sm:text-base',
+			'flex items-center gap-x-2 ps-5 font-hubot font-medium text-sm text-theme sm:text-base',
 			pSpacing,
 		);
 
 		return (
-			<IntersectionSwap element={<NavBarSwap />}>
-				<div className="flex items-center space-x-6 sm:space-x-8">
-					<ProfileImage className="size-14" />
+			<div className="flex-1">
+				{!isHome && <p className={pClasses}>{children}</p>}
 
-					<div className="flex-1">
-						{!isHome && (
-							<p className={pClasses}>
-								<MinusIcon />
-								{children}
-							</p>
-						)}
+				<h1
+					className={cn(
+						'font-extrabold font-hubot text-3xl md:text-4xl',
+						isHome ? 'transition-element' : 'fade-in',
+						className,
+					)}
+				>
+					<span className="group relative block overflow-hidden">
+						<span className="group-hover:-translate-y-full inline-block transition-all duration-300 ease-in-out">
+							<AnimatedLetters text={name} />
+						</span>
+						<span className="absolute top-0 left-0 inline-block translate-y-full transition-all duration-300 ease-in-out group-hover:translate-y-0">
+							<AnimatedLetters text={title} />
+						</span>
+					</span>
 
-						<h1
-							className={cn(
-								'font-extrabold font-hubot text-3xl md:text-4xl',
-								isHome ? 'transition-element' : 'fade-in',
-								className,
-							)}
-						>
-							<span className="group relative block overflow-hidden">
-								<span className="group-hover:-translate-y-full inline-block transition-all duration-300 ease-in-out">
-									<AnimatedLetters text={name} />
-								</span>
-								<span className="absolute top-0 left-0 inline-block translate-y-full transition-all duration-300 ease-in-out group-hover:translate-y-0">
-									<AnimatedLetters text={title} />
-								</span>
-							</span>
+					<span className="sr-only">{name}</span>
+				</h1>
 
-							<span className="sr-only">{name}</span>
-						</h1>
-
-						{isHome && (
-							<p className={pClasses}>
-								<MinusIcon />
-								{children}
-							</p>
-						)}
-					</div>
-				</div>
-			</IntersectionSwap>
+				{isHome && <p className={pClasses}>{children}</p>}
+			</div>
 		);
 	},
 );
