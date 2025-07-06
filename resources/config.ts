@@ -1,6 +1,6 @@
 export const baseURL: string = 'cuzeac-florin.app';
 export const name: string = 'Cuzeac Florin';
-export const title: string = 'Développeur web';
+export const title: string = 'Crée, innove, impacte.';
 export const id: string = '@cuzeacflorin';
 export const initials: string = 'CF';
 export const githubUsername: string = 'envindavsorg';

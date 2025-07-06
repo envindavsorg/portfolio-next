@@ -1,15 +1,15 @@
+import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import type React from 'react';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { GitHubGraph } from '@/components/github/Graph';
 import { GitHubStats } from '@/components/github/Stats';
 import { GitHubTable } from '@/components/github/Table';
 import { WakatimeStats } from '@/components/github/Wakatime';
-import { Title } from '@/components/layout/Title';
+import PageTitle from '@/components/text/PageTitle';
 import { Separator } from '@/components/ui/Separator';
 import { name, title } from '@/resources/config';
 import { absoluteUrl } from '@/site/metadata';
-import type { Metadata } from 'next';
-import { cookies } from 'next/headers';
-import type React from 'react';
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	const cookie = await cookies();
@@ -19,12 +19,9 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 	return {
 		title,
-		description:
-			"Activité et statistiques de mon profil GitHub sur l'année passée",
+		description: "Activité et statistiques de mon profil GitHub sur l'année passée",
 		openGraph: {
-			images: [
-				absoluteUrl(`/api/og?heading=${title}&type=${type}&mode=${mode}`),
-			],
+			images: [absoluteUrl(`/api/og?heading=${title}&type=${type}&mode=${mode}`)],
 		},
 		alternates: {
 			canonical: '/github',
@@ -34,23 +31,18 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const GitHubPage = (): React.JSX.Element => (
 	<>
-		<Title name={name} title={title}>
+		<PageTitle name={name} title={title}>
 			activité et statistiques sur GitHub
-		</Title>
+		</PageTitle>
 
 		<FadeInStagger className="mt-10" faster>
 			<FadeIn>
 				<p className="leading-8">
-					Toutes mes <span className="font-bold">statistiques GitHub</span>{' '}
-					(nombre de commits, abonnés, suivis) de l'année{' '}
-					<span className="font-bold text-theme">
-						{new Date().getFullYear() - 1}
-					</span>{' '}
-					-{' '}
-					<span className="font-bold text-theme">
-						{new Date().getFullYear()}
-					</span>{' '}
-					sont affichées ici.
+					Toutes mes <span className="font-bold">statistiques GitHub</span> (nombre de
+					commits, abonnés, suivis) de l'année{' '}
+					<span className="font-bold text-theme">{new Date().getFullYear() - 1}</span> -{' '}
+					<span className="font-bold text-theme">{new Date().getFullYear()}</span> sont
+					affichées ici.
 				</p>
 			</FadeIn>
 			<GitHubStats className="mt-6" />
@@ -59,21 +51,15 @@ const GitHubPage = (): React.JSX.Element => (
 
 			<FadeIn>
 				<p className="leading-8">
-					Mon graphique de{' '}
-					<span className="font-bold">contributions GitHub</span> sur l'année{' '}
-					<span className="font-bold text-theme">
-						{new Date().getFullYear() - 1}
-					</span>{' '}
-					-{' '}
-					<span className="font-bold text-theme">
-						{new Date().getFullYear()}
-					</span>
-					. J'essaie tous les jours de{' '}
-					<span className="font-bold">contribuer</span> et de{' '}
-					<span className="font-bold">créer</span> de nouveaux projets. Je suis
-					toujours à la <span className="font-bold">recherche</span> de
-					nouvelles <span className="font-bold">idées</span> que je puisse les
-					matérialiser sur GitHub.
+					Mon graphique de <span className="font-bold">contributions GitHub</span> sur
+					l'année{' '}
+					<span className="font-bold text-theme">{new Date().getFullYear() - 1}</span> -{' '}
+					<span className="font-bold text-theme">{new Date().getFullYear()}</span>.
+					J'essaie tous les jours de <span className="font-bold">contribuer</span> et de{' '}
+					<span className="font-bold">créer</span> de nouveaux projets. Je suis toujours à
+					la <span className="font-bold">recherche</span> de nouvelles{' '}
+					<span className="font-bold">idées</span> que je puisse les matérialiser sur
+					GitHub.
 				</p>
 				.
 			</FadeIn>
@@ -84,10 +70,9 @@ const GitHubPage = (): React.JSX.Element => (
 			<FadeIn>
 				<p className="leading-8">
 					Mes statistiques hebdomadaires de{' '}
-					<span className="font-bold">temps de code</span>. Vous pouvez
-					retrouver mon temps de code moyen, mon temps de code total sur la
-					semaine passée, mon meilleur jour et les langages que j'utilise le
-					plus.
+					<span className="font-bold">temps de code</span>. Vous pouvez retrouver mon
+					temps de code moyen, mon temps de code total sur la semaine passée, mon meilleur
+					jour et les langages que j'utilise le plus.
 				</p>
 			</FadeIn>
 			<WakatimeStats className="mt-6" />
@@ -96,9 +81,8 @@ const GitHubPage = (): React.JSX.Element => (
 
 			<FadeIn>
 				<p className="leading-8">
-					Plus de détails sur mon{' '}
-					<span className="font-bold">nombre de commits</span> effectués de la
-					semaine dernière, <span className="font-bold">jour</span> par{' '}
+					Plus de détails sur mon <span className="font-bold">nombre de commits</span>{' '}
+					effectués de la semaine dernière, <span className="font-bold">jour</span> par{' '}
 					<span className="font-bold">jour</span>.
 				</p>
 			</FadeIn>

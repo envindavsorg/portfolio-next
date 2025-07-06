@@ -1,9 +1,9 @@
-import { FadeIn } from '@/components/animations/FadeIn';
-import { Articles } from '@/components/blog/Articles';
-import { Paragraph } from '@/components/layout/Paragraph';
-import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
+import { FadeIn } from '@/components/animations/FadeIn';
+import { Articles } from '@/components/blog/Articles';
+import PageParagraph from '@/components/text/PageParagraph';
+import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 
 export const ArticlesContent = async (): Promise<React.JSX.Element> => {
 	const articles: Awaited<ArticleWithSlug>[] = await getAllArticles();
@@ -15,7 +15,7 @@ export const ArticlesContent = async (): Promise<React.JSX.Element> => {
 					Mes derniers articles <span className="tracking-widest">...</span>
 				</h2>
 			</FadeIn>
-			<Paragraph className="mt-3">
+			<PageParagraph className="mt-3">
 				J'écris occasionnellement des{' '}
 				<Link
 					href="/blog"
@@ -28,7 +28,7 @@ export const ArticlesContent = async (): Promise<React.JSX.Element> => {
 				<span className="font-bold">développement web</span>, le{' '}
 				<span className="font-bold">design</span>, le{' '}
 				<span className="font-bold">marketing</span>, etc.
-			</Paragraph>
+			</PageParagraph>
 
 			<FadeIn className="mt-6" asChild>
 				<Articles articles={articles.slice(0, 3)} />

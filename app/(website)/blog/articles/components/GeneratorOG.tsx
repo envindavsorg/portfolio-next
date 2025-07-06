@@ -1,14 +1,5 @@
 'use client';
 
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormMessage,
-} from '@/components/ui/Form';
-import { Input } from '@/components/ui/Input';
-import { Spinner } from '@/components/ui/Spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	ArrowRight,
@@ -27,6 +18,15 @@ import {
 	useForm,
 } from 'react-hook-form';
 import { z } from 'zod';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormMessage,
+} from '@/components/ui/Form';
+import { Input } from '@/components/ui/Input';
+import { Spinner } from '@/components/ui/Spinner';
 
 const FormSchema = z.object({
 	title: z.string().min(2, {
@@ -75,8 +75,7 @@ export const GeneratorOG = ({ name }: GeneratorOGProps) => {
 			</div>
 			<Form {...form}>
 				<p className="text-sm">
-					Essayez avec un autre{' '}
-					<span className="font-bold text-theme">titre</span> :
+					Essayez avec un autre <span className="font-bold text-theme">titre</span> :
 				</p>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}

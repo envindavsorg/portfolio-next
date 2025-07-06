@@ -1,9 +1,9 @@
+import type React from 'react';
 import { Sparkles } from '@/components/background/Sparkles';
 import { CommandProvider } from '@/components/command/CommandContext';
 import { CommandMenu } from '@/components/command/CommandMenu';
 import { Footer } from '@/components/navigation/Footer';
 import { NavBar } from '@/components/navigation/NavBar';
-import type React from 'react';
 
 interface RootLayoutProps {
 	children: React.ReactNode;

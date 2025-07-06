@@ -1,6 +1,6 @@
+import type { MetadataRoute } from 'next';
 import { name } from '@/resources/config';
 import { dark } from '@/resources/theme';
-import type { MetadataRoute } from 'next';
 
 const manifest = (): MetadataRoute.Manifest => ({
 	name: 'Mon portfolio personnel',

@@ -1,12 +1,12 @@
-import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
-import { Articles } from '@/components/blog/Articles';
-import { Title } from '@/components/layout/Title';
-import { getAllArticles } from '@/lib/articles';
-import { name, title } from '@/resources/config';
-import { absoluteUrl } from '@/site/metadata';
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import type React from 'react';
+import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
+import { Articles } from '@/components/blog/Articles';
+import PageTitle from '@/components/text/PageTitle';
+import { getAllArticles } from '@/lib/articles';
+import { name, title } from '@/resources/config';
+import { absoluteUrl } from '@/site/metadata';
 
 export const generateMetadata = async (): Promise<Metadata> => {
 	const cookie = await cookies();
@@ -19,9 +19,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 		description:
 			'Découvrez tous mes articles de blog sur mon portfolio, avec des illustrations et des descriptions.',
 		openGraph: {
-			images: [
-				absoluteUrl(`/api/og?heading=${title}&type=${type}&mode=${mode}`),
-			],
+			images: [absoluteUrl(`/api/og?heading=${title}&type=${type}&mode=${mode}`)],
 		},
 		alternates: {
 			canonical: '/blog',
@@ -34,17 +32,14 @@ const BlogPage = async (): Promise<React.JSX.Element> => {
 
 	return (
 		<>
-			<Title name={name} title={title}>
+			<PageTitle name={name} title={title}>
 				tous mes articles de blog
-			</Title>
+			</PageTitle>
 
 			<FadeInStagger className="mt-10" faster>
 				<FadeIn>
-					<span className="font-bold text-theme">
-						{articles.length} articles
-					</span>{' '}
-					pour l'instant.{' '}
-					<span className="font-bold">Restez branchés pour la suite !</span>
+					<span className="font-bold text-theme">{articles.length} articles</span> pour
+					l'instant. <span className="font-bold">Restez branchés pour la suite !</span>
 				</FadeIn>
 
 				<FadeIn className="mt-12">
