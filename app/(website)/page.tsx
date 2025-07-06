@@ -5,12 +5,11 @@ import { CV } from '@/components/blocs/CV';
 import { Marquee } from '@/components/blocs/Marquee';
 import { ArticlesContent } from '@/components/blog/ArticlesContent';
 import { BadgeWithIcon } from '@/components/layout/Badges';
-import { Counter } from '@/components/numbers/Counter';
 import PageParagraph from '@/components/text/PageParagraph';
 import PageTitle from '@/components/text/PageTitle';
 import { Separator } from '@/components/ui/Separator';
 import { Location } from '@/components/widgets/Location';
-import { age, developerSince, name, title } from '@/resources/config';
+import { developerSince, name, title } from '@/resources/config';
 import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
 
 const Page = (): React.JSX.Element => (

@@ -1,3 +1,5 @@
+import type React from 'react';
+import { Fragment, Suspense } from 'react';
 import { projectInfo } from '@/actions/github/project.action';
 import { ChannelSkeleton } from '@/components/channels/Skeleton';
 import { CSSIcon } from '@/components/icons/CSS';
@@ -6,11 +8,8 @@ import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { MarkdownIcon } from '@/components/icons/Markdown';
 import { ShellIcon } from '@/components/icons/Shell';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { Paragraph } from '@/components/layout/Paragraph';
+import PageParagraph from '@/components/text/PageParagraph';
 import { PatternCard } from '@/components/ui/PatternCard';
-import type React from 'react';
-import { Fragment } from 'react';
-import { Suspense } from 'react';
 
 type Icons = {
 	[key: string]: React.ReactNode;
@@ -46,9 +45,7 @@ export const Languages = async () => {
 							: `Environ ${percentage.toFixed(2)}%`
 					}
 					comment={
-						name.toLowerCase() === 'contributions'
-							? '(nombre de commits)'
-							: `en ${name}`
+						name.toLowerCase() === 'contributions' ? '(nombre de commits)' : `en ${name}`
 					}
 					className="flex flex-row-reverse items-center justify-between gap-3"
 				/>
@@ -59,10 +56,9 @@ export const Languages = async () => {
 
 export const ProjectStack = (): React.JSX.Element => (
 	<Fragment>
-		<Paragraph>
-			Les principales technologies que j'ai utilisées sur ce projet sont les
-			suivantes :
-		</Paragraph>
+		<PageParagraph>
+			Les principales technologies que j'ai utilisées sur ce projet sont les suivantes :
+		</PageParagraph>
 		<Suspense
 			fallback={
 				<div className="mt-6 grid w-full gap-3 sm:grid-cols-2">
