@@ -31,6 +31,10 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 			avatar: user.avatarUrl,
 			followers: user.followers.totalCount,
 			following: user.following.totalCount,
+			stars: user.repositories.nodes.reduce(
+				(totalStars, repo) => totalStars + repo.stargazers.totalCount,
+				0,
+			),
 			commits: {
 				thisYear: totalCommitsThisYear(user),
 				thisWeek: totalCommitsThisWeek(user),

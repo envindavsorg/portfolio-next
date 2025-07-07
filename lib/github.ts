@@ -33,6 +33,7 @@ export interface GitHubData {
 	followers: number;
 	following: number;
 	commits: GitHubCommits;
+	stars: number;
 }
 
 export interface GitHubResponse {
@@ -46,6 +47,16 @@ export interface GitHubResponse {
 		totalCount: number;
 	};
 	contributionsCollection: GitHubCollection;
+	repositories: {
+		totalCount: number;
+		nodes: {
+			stargazers: { totalCount: number };
+		}[];
+		pageInfo: {
+			hasNextPage: boolean;
+			endCursor: string | null;
+		};
+	};
 }
 
 export const totalCommitsThisYear = (data: GitHubResponse): number =>

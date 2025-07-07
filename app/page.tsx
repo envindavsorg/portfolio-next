@@ -16,8 +16,10 @@ const Home = (): React.JSX.Element => (
 		<FadeInStagger className="mt-6 flex flex-col gap-y-2" faster>
 			<PageParagraph>
 				Bonjour, je suis {name.trim().split(' ').pop()} ✌️, développeur web avec{' '}
-				<Counter value={10} /> ans d’expérience, passionné par la création d’applications
-				fiables, belles et fonctionnelles.
+				<span className="text-foreground">
+					<Counter value={10} /> ans d’expérience
+				</span>
+				, passionné par la création d’applications fiables, belles et fonctionnelles.
 			</PageParagraph>
 			<PageParagraph>
 				Je travaille actuellement chez{' '}

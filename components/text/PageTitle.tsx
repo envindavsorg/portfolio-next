@@ -21,7 +21,7 @@ const PageTitle = memo(
 	}: TitleProps): React.JSX.Element => {
 		const pSpacing: string = isHome ? 'mt-0.5' : 'fade-in mb-0.5';
 		const pClasses: string = cn(
-			'flex items-center gap-x-2 ps-5 font-hubot font-medium text-sm text-theme sm:text-base',
+			'flex items-center gap-x-2 ps-5 font-hubot text-sm text-theme sm:text-base',
 			pSpacing,
 		);
 

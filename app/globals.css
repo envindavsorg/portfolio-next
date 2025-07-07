@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
 	--theme: hsl(24, 90%, 47%);
 	--background: hsl(0, 0%, 98%);
@@ -30,6 +32,9 @@
 }
 
 @theme inline {
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
+
 	--color-theme: var(--theme);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
@@ -60,24 +65,22 @@
 	--breakpoint-2xl: 1400px;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--theme: hsl(51, 97%, 64%);
-		--background: hsl(0, 0%, 0%);
-		--foreground: hsl(0, 0%, 98%);
-		--border: hsl(0, 0%, 25%);
-		--code: hsl(222, 56%, 12%);
-		--primary: hsl(0, 0%, 98%);
-		--primary-foreground: hsl(240, 5%, 11%);
-		--secondary: hsl(240, 3%, 15%);
-		--secondary-foreground: hsl(0, 0%, 98%);
-		--muted: hsl(240, 3%, 15%);
-		--muted-foreground: hsl(240, 4%, 65%);
-		--accent: hsl(240, 3%, 15%);
-		--accent-foreground: hsl(0, 0%, 98%);
-		--destructive: hsl(0, 89%, 80%);
-		--destructive-foreground: hsl(0, 0%, 98%);
-	}
+.dark {
+	--theme: hsl(51, 97%, 64%);
+	--background: hsl(0, 0%, 0%);
+	--foreground: hsl(0, 0%, 98%);
+	--border: hsl(0, 0%, 25%);
+	--code: hsl(222, 56%, 12%);
+	--primary: hsl(0, 0%, 98%);
+	--primary-foreground: hsl(240, 5%, 11%);
+	--secondary: hsl(240, 3%, 15%);
+	--secondary-foreground: hsl(0, 0%, 98%);
+	--muted: hsl(240, 3%, 15%);
+	--muted-foreground: hsl(240, 4%, 65%);
+	--accent: hsl(240, 3%, 15%);
+	--accent-foreground: hsl(0, 0%, 98%);
+	--destructive: hsl(0, 89%, 80%);
+	--destructive-foreground: hsl(0, 0%, 98%);
 }
 
 @utility container {
@@ -91,6 +94,17 @@
 
 	&::-webkit-scrollbar {
 		display: none;
+	}
+}
+
+@utility card-border {
+	&::before {
+		@apply pointer-events-none absolute inset-0 rounded-xl content-[''] dark:bg-gradient-to-b dark:from-neutral-200/50 dark:to-transparent dark:mix-blend-soft-light;
+		padding: 1px;
+		mask:
+			linear-gradient(#ffffff, #ffffff) content-box,
+			linear-gradient(#ffffff, #ffffff);
+		mask-composite: exclude;
 	}
 }
 

@@ -29,6 +29,18 @@ export const query: string = String.raw`
 			        }
 		        }
 			}
+			repositories(ownerAffiliations: OWNER, first: 100) {
+                  totalCount
+                  nodes {
+                     stargazers {
+                        totalCount
+                     }
+                  }
+                  pageInfo {
+                     hasNextPage
+                     endCursor
+                  }
+               }
 		}
 	}
 `;

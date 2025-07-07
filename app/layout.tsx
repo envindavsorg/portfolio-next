@@ -2,8 +2,9 @@ import './globals.css';
 
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
 import Script from 'next/script';
 import { ViewTransitions } from 'next-view-transitions';
 import type React from 'react';
@@ -14,24 +15,6 @@ import { Toaster } from '@/components/ui/Sonner';
 import { cn } from '@/lib/utils';
 import { name } from '@/resources/config';
 import { absoluteUrl, constructMetadata } from '@/site/metadata';
-
-const geistSans = localFont({
-	src: '../fonts/GeistSansVF.woff2',
-	variable: '--font-geist-sans',
-	weight: '100 900',
-});
-
-const geistMono = localFont({
-	src: '../fonts/GeistMonoVF.woff2',
-	variable: '--font-geist-mono',
-	weight: '100 900',
-});
-
-const hubot = localFont({
-	src: '../fonts/HubotSans.woff2',
-	variable: '--font-hubot',
-	weight: '400 900',
-});
 
 export const metadata: Metadata = constructMetadata({
 	title: name,
@@ -53,18 +36,14 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 		<html
 			lang="fr"
 			dir="ltr"
-			className="scrollbar-hide h-full scroll-smooth antialiased"
+			className={cn(
+				'scrollbar-hide h-full scroll-smooth antialiased',
+				GeistSans.variable,
+				GeistMono.variable,
+			)}
 			suppressHydrationWarning
 		>
-			<body
-				className={cn(
-					'font-geist-mono tracking-tight antialiased',
-					'select-none bg-white dark:bg-black',
-					geistSans.variable,
-					geistMono.variable,
-					hubot.variable,
-				)}
-			>
+			<body className="select-none font-geist-mono tracking-tight antialiased">
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
 

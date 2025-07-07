@@ -27,5 +27,7 @@ export const Counter = ({ value, interval = 150 }: CounterProps) => {
 		}
 	}, [value, interval]);
 
-	return <NumberFlow value={displayValue} respectMotionPreference />;
+	return (
+		<NumberFlow className="font-mono" value={displayValue} respectMotionPreference />
+	);
 };
