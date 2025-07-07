@@ -39,7 +39,7 @@ const ThemeCardComponent = (): React.JSX.Element => {
 			className={cn(
 				'col-span-2 row-span-1 md:col-span-1 md:col-start-5 md:row-span-1 md:row-start-3',
 				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
-				'isolate rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
+				'isolate cursor-pointer rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',
 			)}
 		>

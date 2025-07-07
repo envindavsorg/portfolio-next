@@ -40,19 +40,19 @@ const TimeCardComponent = (): React.JSX.Element => {
 			)}
 		>
 			<NumberFlow
-				className="font-bold text-xl"
+				className="font-bold text-xl md:text-2xl"
 				value={time.getHours()}
 				format={{ minimumIntegerDigits: 2 }}
 			/>
 			<span className="select-none px-1 font-normal text-sm">:</span>
 			<NumberFlow
-				className="font-bold text-xl"
+				className="font-bold text-xl md:text-2xl"
 				value={time.getMinutes()}
 				format={{ minimumIntegerDigits: 2 }}
 			/>
 			<span className="select-none px-1 font-normal text-sm">:</span>
 			<NumberFlow
-				className="font-bold text-xl"
+				className="font-bold text-xl md:text-2xl"
 				value={time.getSeconds()}
 				format={{ minimumIntegerDigits: 2 }}
 			/>

@@ -1,24 +1,18 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { CaretLeft, CursorClick } from '@phosphor-icons/react';
+import { CaretLeftIcon, CursorClickIcon } from '@phosphor-icons/react';
 import {
 	AnimatePresence,
 	MotionConfig,
-	type Variants,
+	type MotionConfigProps,
 	motion,
-} from 'framer-motion';
+	type Variants,
+} from 'motion/react';
 import type React from 'react';
-import {
-	createContext,
-	useContext,
-	useEffect,
-	useId,
-	useRef,
-	useState,
-} from 'react';
+import { createContext, useContext, useEffect, useId, useRef, useState } from 'react';
+import { cn } from '@/lib/utils';
 
-const TRANSITION = {
+const TRANSITION: MotionConfigProps['transition'] = {
 	type: 'spring',
 	bounce: 0.1,
 	duration: 0.4,
@@ -36,16 +30,14 @@ interface FloatingPanelContextType {
 	setTitle: (title: string) => void;
 }
 
-const FloatingPanelContext = createContext<
-	FloatingPanelContextType | undefined
->(undefined);
+const FloatingPanelContext = createContext<FloatingPanelContextType | undefined>(
+	undefined,
+);
 
 const useFloatingPanel = () => {
 	const context = useContext(FloatingPanelContext);
 	if (!context) {
-		throw new Error(
-			'useFloatingPanel must be used within a FloatingPanelProvider',
-		);
+		throw new Error('useFloatingPanel must be used within a FloatingPanelProvider');
 	}
 	return context;
 };
@@ -84,10 +76,7 @@ interface FloatingPanelRootProps {
 	className?: string;
 }
 
-export const FloatingPanelRoot = ({
-	children,
-	className,
-}: FloatingPanelRootProps) => {
+export const FloatingPanelRoot = ({ children, className }: FloatingPanelRootProps) => {
 	const floatingPanelLogic = useFloatingPanelLogic();
 
 	return (
@@ -151,8 +140,7 @@ export const FloatingPanelContent = ({
 	children,
 	className,
 }: FloatingPanelContentProps) => {
-	const { isOpen, closeFloatingPanel, uniqueId, triggerRect, title } =
-		useFloatingPanel();
+	const { isOpen, closeFloatingPanel, uniqueId, triggerRect, title } = useFloatingPanel();
 	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -168,10 +156,7 @@ export const FloatingPanelContent = ({
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				contentRef.current &&
-				!contentRef.current.contains(event.target as Node)
-			) {
+			if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
 				closeFloatingPanel();
 			}
 		};
@@ -227,7 +212,7 @@ export const FloatingPanelContent = ({
 						>
 							<FloatingPanelTitle>{title}</FloatingPanelTitle>
 							{children}
-							<CursorClick className="-bottom-8 -right-8 absolute size-28 shrink-0 text-theme opacity-10" />
+							<CursorClickIcon className="-bottom-8 -right-8 absolute size-28 shrink-0 text-theme opacity-10" />
 						</motion.div>
 					</div>
 				</>
@@ -261,10 +246,7 @@ interface FloatingPanelBodyProps {
 	className?: string;
 }
 
-export const FloatingPanelBody = ({
-	children,
-	className,
-}: FloatingPanelBodyProps) => (
+export const FloatingPanelBody = ({ children, className }: FloatingPanelBodyProps) => (
 	<motion.div
 		className={className}
 		initial={{ opacity: 0, y: 10 }}
@@ -312,7 +294,7 @@ export const FloatingPanelCloseButton = ({
 			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.9 }}
 		>
-			<CaretLeft className="size-4" weight="bold" />
+			<CaretLeftIcon className="size-4" weight="bold" />
 		</motion.button>
 	);
 };

@@ -1,13 +1,12 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import type { Container, SingleOrMultiple } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import { type AnimationControls, motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'motion/react';
 import { useTheme } from 'next-themes';
-import type React from 'react';
 import { memo, useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface SparklesProps {
 	density?: number;
@@ -20,8 +19,7 @@ export const Sparkles = memo(({ density = 50, className }: SparklesProps) => {
 	const particlesMaxSize: number = 0.9;
 	const particlesSpeed: number = 2;
 	const particlesDensity: number = density;
-	const particlesColor: string =
-		resolvedTheme === 'dark' ? '#FFFFFF' : '#000000';
+	const particlesColor: string = resolvedTheme === 'dark' ? '#FFFFFF' : '#000000';
 
 	return (
 		<div
@@ -78,7 +76,7 @@ const SparklesEffect = (props: SparklesEffectProps) => {
 		});
 	}, []);
 
-	const controls: AnimationControls = useAnimation();
+	const controls = useAnimation();
 
 	const particlesLoaded = async (container?: Container): Promise<void> => {
 		if (container) {
