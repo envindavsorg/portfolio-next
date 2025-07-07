@@ -8,7 +8,6 @@ import { BadgeWithIcon } from '@/components/layout/Badges';
 import PageParagraph from '@/components/text/PageParagraph';
 import PageTitle from '@/components/text/PageTitle';
 import { Separator } from '@/components/ui/Separator';
-import { Location } from '@/components/widgets/Location';
 import { developerSince, name, title } from '@/resources/config';
 import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
 
@@ -31,7 +30,6 @@ const Page = (): React.JSX.Element => (
 					</PageParagraph>
 					<CV className="mt-6" />
 				</div>
-				<Location />
 			</div>
 		</FadeInStagger>
 
