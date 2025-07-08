@@ -1,5 +1,6 @@
 'use server';
 
+import { getCachedData, setCachedData } from '@/lib/cache';
 import { octokit } from '@/db/octokit';
 import { query } from '@/graphql/user';
 import {
@@ -18,6 +19,14 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 		throw new Error('→ GITHUB_USERNAME env variable is not set ...');
 	}
 
+	const cacheKey = `github-user-${username}`;
+	const cachedData = getCachedData<GitHubData>(cacheKey);
+	
+	if (cachedData) {
+		logger.info(`→ returning cached GitHub user data for ${username}`);
+		return cachedData;
+	}
+
 	try {
 		const { user } = await octokit.graphql<{
 			user: GitHubResponse;
@@ -25,7 +34,7 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 			username,
 		});
 
-		return {
+		const githubData: GitHubData = {
 			login: user.login,
 			name: user.name,
 			avatar: user.avatarUrl,
@@ -43,6 +52,11 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 				all: user.contributionsCollection,
 			},
 		};
+
+		setCachedData(cacheKey, githubData);
+		logger.info(`→ cached GitHub user data for ${username}`);
+		
+		return githubData;
 	} catch (error) {
 		logger.error('→ there is an error fetching GitHub user data: ', error);
 		throw new Error('→ failed to fetch GitHub user data ...');

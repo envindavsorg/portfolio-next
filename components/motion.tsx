@@ -7,6 +7,7 @@ import {
 	type MotionProps,
 	motion,
 } from 'framer-motion';
+import { stagger } from 'motion';
 import { defaultVariants } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
@@ -39,7 +40,14 @@ export function Motion({
 	return (
 		<Comp
 			{...defaultProps}
-			className={cn('text-2xl font-medium leading-relaxed dark:text-white', className)}
+			className={cn('font-medium text-2xl leading-relaxed dark:text-white', className)}
+			variants={{
+				visible: {
+					transition: {
+						delayChildren: stagger(0.1, { startDelay: 0.25 }),
+					},
+				},
+			}}
 			{...props}
 		>
 			{children}

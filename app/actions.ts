@@ -1,5 +1,6 @@
 'use server';
 
+import { getCachedData, setCachedData } from '@/lib/cache';
 import { octokit } from '@/lib/octokit';
 
 export async function getGithubStats() {
@@ -67,6 +68,17 @@ export async function getGithubStats() {
 }
 
 export async function getGithubContributions() {
+	const cacheKey = 'github-contributions';
+	const cachedData = getCachedData<{
+		totalContributions: number;
+		latestContributions: any[];
+		maxContributionDay: { contributionCount: number; date: string; color: string };
+	}>(cacheKey);
+
+	if (cachedData) {
+		return cachedData;
+	}
+
 	const gql = String.raw;
 	const { user } = await octokit.graphql<{
 		user: {
@@ -117,12 +129,16 @@ export async function getGithubContributions() {
 			}
 		}
 	}
-	const latestContributions = weeklyContributions.slice(-11);
+	const latestContributions = weeklyContributions.slice(-16);
 	const totalContributions =
 		user.contributionsCollection.contributionCalendar.totalContributions;
-	return {
+
+	const result = {
 		totalContributions,
 		latestContributions,
 		maxContributionDay,
 	};
+
+	setCachedData(cacheKey, result);
+	return result;
 }

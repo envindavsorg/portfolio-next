@@ -1,7 +1,7 @@
 'use client';
 
 import { GithubLogoIcon } from '@phosphor-icons/react/ssr';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 import { memo } from 'react';
 import type { getGithubContributions } from '@/app/actions';
@@ -32,15 +32,15 @@ export const GithubStatsCard = memo(
 			>
 				<div className="relative z-10 flex h-full flex-col justify-between gap-2">
 					<div className="flex items-center gap-2">
-						<GithubLogoIcon weight="duotone" className="size-4" />
-						<h2 className="font-medium text-sm">Mes statistiques GitHub</h2>
+						<GithubLogoIcon weight="duotone" className="size-6" />
+						<h2 className="font-medium text-base">Mes statistiques GitHub</h2>
 					</div>
 
 					<div className="flex flex-wrap items-end gap-4">
-						<GithubStatItem label="Followers" value={followers} />
-						<GithubStatItem label="Stars" value={stars} />
+						<GithubStatItem label="abonnés" value={followers} />
+						<GithubStatItem label="étoiles" value={stars} />
 						<GithubStatItem
-							label="Contributions"
+							label="contributions"
 							value={contributions.totalContributions}
 						/>
 					</div>
@@ -53,8 +53,8 @@ export const GithubStatsCard = memo(
 );
 
 const GithubStatItem = ({ label, value }: { label: string; value: number }) => (
-	<div className="col-span-1 flex flex-col items-start">
-		<p className="font-semibold text-lg text-neutral-700 dark:text-white">{value}</p>
+	<div className="col-span-1 flex flex-col items-start gap-y-0.5">
+		<p className="font-bold text-2xl">{value}</p>
 		<p className="text-neutral-500 text-xs dark:text-neutral-400">{label}</p>
 	</div>
 );
@@ -73,20 +73,19 @@ const ContributionsGraph = ({
 	contributions: Awaited<ReturnType<typeof getGithubContributions>>;
 }) => {
 	const daysFlat = contributions.latestContributions.flatMap((week) => {
-		const days = [...week.contributionDays];
-		for (let i = days.length; i < 7; i++) {
-			days.push({ color: '', contributionCount: 0, date: '' });
-		}
-		return days;
+		return week.contributionDays;
 	});
 
 	return (
-		<div className="absolute inset-0 z-0 grid grid-flow-col grid-rows-7 gap-1 p-0 opacity-50">
+		<div className="absolute inset-0 z-0 grid grid-flow-col grid-rows-7 gap-[2px] opacity-50 sm:gap-1 sm:p-0">
 			<div className="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/50 to-neutral-50/50 dark:from-neutral-950/95 dark:via-neutral-950/65 dark:to-transparent" />
 			{daysFlat.map((day, idx) => (
 				<div
 					key={`day-${idx}-${day.date}`}
-					className={cn('aspect-square rounded-[3px]', contributionsColorMap[day.color])}
+					className={cn(
+						'h-6 w-6 rounded-[2px] sm:aspect-square sm:h-auto sm:w-auto sm:rounded-[3px]',
+						contributionsColorMap[day.color] || 'bg-neutral-100 dark:bg-neutral-800',
+					)}
 				/>
 			))}
 		</div>

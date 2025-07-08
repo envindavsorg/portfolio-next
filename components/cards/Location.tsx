@@ -5,7 +5,7 @@ import createGlobe, { type COBEOptions } from 'cobe';
 import { motion } from 'motion/react';
 import { useTheme } from 'next-themes';
 import type React from 'react';
-import { memo, useEffect, useRef } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useSpring } from 'react-spring';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { dark, light, myLatitude, myLongitude, physics, yellow } from '@/lib/globe';
@@ -19,25 +19,8 @@ export const LocationCard = memo((): React.JSX.Element => {
 	const pointerInteractionMovement = useRef(0);
 	const [{ r }, api] = useSpring(() => physics);
 
-	useEffect(() => {
-		let width = 0;
-		let phi = 3;
-		const direction = 1;
-
-		const onResize = (): void => {
-			if (canvas.current) {
-				width = canvas.current.offsetWidth;
-			}
-		};
-
-		window.addEventListener('resize', onResize);
-		onResize();
-
-		if (!canvas.current) {
-			return;
-		}
-
-		const globeConfig: COBEOptions = {
+	const globeConfig = useMemo(
+		(): Omit<COBEOptions, 'width' | 'height' | 'onRender'> => ({
 			devicePixelRatio: 2,
 			phi: 0,
 			theta: 0.2,
@@ -48,10 +31,38 @@ export const LocationCard = memo((): React.JSX.Element => {
 			markerColor: yellow,
 			glowColor: resolvedTheme === 'dark' ? light : dark,
 			scale: 1,
-			width: width * 2,
-			height: width * 2,
 			dark: 0,
 			markers: [{ location: [myLatitude, myLongitude], size: 0.1 }],
+		}),
+		[resolvedTheme],
+	);
+
+	const onResize = useCallback((canvas: HTMLCanvasElement): number => {
+		return canvas.offsetWidth;
+	}, []);
+
+	useEffect(() => {
+		let width = 0;
+		let phi = 3;
+		const direction = 1;
+
+		const handleResize = (): void => {
+			if (canvas.current) {
+				width = onResize(canvas.current);
+			}
+		};
+
+		window.addEventListener('resize', handleResize);
+		handleResize();
+
+		if (!canvas.current) {
+			return;
+		}
+
+		const fullGlobeConfig: COBEOptions = {
+			...globeConfig,
+			width: width * 2,
+			height: width * 2,
 			onRender: (state: Record<string, any>) => {
 				const adjustment: number =
 					0.001 * (state.phi > 5.5 ? -1 : state.phi < 3.25 ? 1 : direction);
@@ -61,13 +72,13 @@ export const LocationCard = memo((): React.JSX.Element => {
 			},
 		};
 
-		const globe = createGlobe(canvas.current, globeConfig);
+		const globe = createGlobe(canvas.current, fullGlobeConfig);
 
 		return () => {
-			window.removeEventListener('resize', onResize);
+			window.removeEventListener('resize', handleResize);
 			globe.destroy();
 		};
-	}, [r, resolvedTheme]);
+	}, [r, globeConfig, onResize]);
 
 	return (
 		<motion.div
@@ -81,8 +92,8 @@ export const LocationCard = memo((): React.JSX.Element => {
 			)}
 		>
 			<div className="z-10 flex items-center gap-2">
-				<GlobeHemisphereWestIcon weight="duotone" className="size-4" />
-				<h2 className="font-medium text-sm">Paris, France</h2>
+				<GlobeHemisphereWestIcon weight="duotone" className="size-6" />
+				<h2 className="font-medium text-base">Paris, France</h2>
 			</div>
 
 			<div className="absolute inset-x-0 bottom-[-75%] mx-auto aspect-square h-[150%] translate-x-[-12.5%] [@media(max-width:420px)]:h-[320px]">
