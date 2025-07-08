@@ -20,7 +20,8 @@ export const AvatarCard = memo(
 			whileHover={{ scale: 1.05 }}
 			className={cn(
 				position,
-				'overflow-hidden rounded-xl border border-neutral-200/50 ring-1 ring-black/5 dark:border-neutral-700/50',
+				'overflow-hidden rounded-xl sm:h-66.5',
+				'border border-neutral-200/50 ring-1 ring-black/5 dark:border-neutral-700/50',
 			)}
 		>
 			<Image

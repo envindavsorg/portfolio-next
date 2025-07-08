@@ -3,7 +3,7 @@
 import NumberFlow from '@number-flow/react';
 import { motion } from 'motion/react';
 import type React from 'react';
-import { memo, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
@@ -11,31 +11,73 @@ interface TimeCardProps {
 	position: string;
 }
 
+interface TimeParts {
+	hours: number;
+	minutes: number;
+	seconds: number;
+}
+
 export const TimeCard = memo(({ position }: TimeCardProps): React.JSX.Element => {
-	const [time, setTime] = useState<Date>(() => new Date());
+	const [timeParts, setTimeParts] = useState<TimeParts>(() => {
+		const now = new Date();
+		return {
+			hours: now.getHours(),
+			minutes: now.getMinutes(),
+			seconds: now.getSeconds(),
+		};
+	});
+
+	const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
+	const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+	const updateTime = useCallback(() => {
+		const now = new Date();
+		const newHours = now.getHours();
+		const newMinutes = now.getMinutes();
+		const newSeconds = now.getSeconds();
+
+		setTimeParts((prev) => {
+			if (
+				prev.hours !== newHours ||
+				prev.minutes !== newMinutes ||
+				prev.seconds !== newSeconds
+			) {
+				return {
+					hours: newHours,
+					minutes: newMinutes,
+					seconds: newSeconds,
+				};
+			}
+			return prev;
+		});
+	}, []);
 
 	useEffect(() => {
-		const now: number = Date.now();
-		const delay: number = 1000 - (now % 1000);
-		let interval: NodeJS.Timeout;
+		const now = Date.now();
+		const delay = 1000 - (now % 1000);
 
 		const start = () => {
-			setTime(new Date());
-			interval = setInterval(() => setTime(new Date()), 1000);
+			updateTime();
+			intervalRef.current = setInterval(updateTime, 1000);
 		};
 
-		const timeout: NodeJS.Timeout = setTimeout(start, delay);
+		timeoutRef.current = setTimeout(start, delay);
 
 		return () => {
-			clearTimeout(timeout);
-			clearInterval(interval);
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current);
+			}
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
 		};
-	}, []);
+	}, [updateTime]);
+
+	const formatOptions = useMemo(() => ({ minimumIntegerDigits: 2 }), []);
 
 	return (
 		<motion.div
 			variants={defaultVariantsNoDelay}
-			whileHover={{ scale: 1.05 }}
 			className={cn(
 				position,
 				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
@@ -44,21 +86,21 @@ export const TimeCard = memo(({ position }: TimeCardProps): React.JSX.Element =>
 			)}
 		>
 			<NumberFlow
-				className="font-bold text-xl md:text-2xl"
-				value={time.getHours()}
-				format={{ minimumIntegerDigits: 2 }}
+				className="font-bold text-2xl"
+				value={timeParts.hours}
+				format={formatOptions}
 			/>
 			<span className="select-none px-1 font-normal text-sm">:</span>
 			<NumberFlow
-				className="font-bold text-xl md:text-2xl"
-				value={time.getMinutes()}
-				format={{ minimumIntegerDigits: 2 }}
+				className="font-bold text-2xl"
+				value={timeParts.minutes}
+				format={formatOptions}
 			/>
 			<span className="select-none px-1 font-normal text-sm">:</span>
 			<NumberFlow
-				className="font-bold text-xl md:text-2xl"
-				value={time.getSeconds()}
-				format={{ minimumIntegerDigits: 2 }}
+				className="font-bold text-2xl"
+				value={timeParts.seconds}
+				format={formatOptions}
 			/>
 		</motion.div>
 	);

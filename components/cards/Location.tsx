@@ -79,7 +79,7 @@ export const LocationCard = memo(({ position }: LocationCardProps): React.JSX.El
 			whileHover={{ scale: 1.05 }}
 			className={cn(
 				position,
-				'relative flex flex-col gap-6 overflow-hidden p-4 md:h-40',
+				'relative flex flex-col gap-6 overflow-hidden p-4',
 				'isolate rounded-xl bg-white/20 font-bold ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',
 			)}

@@ -44,7 +44,7 @@ export const ThemeCard = memo(({ position }: ThemeCardProps): React.JSX.Element 
 				position,
 				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
 				'isolate cursor-pointer rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
-				'border border-neutral-200/50 dark:border-neutral-700/50',
+				'aspect-square border border-neutral-200/50 dark:border-neutral-700/50',
 			)}
 		>
 			{getThemeIcon()}

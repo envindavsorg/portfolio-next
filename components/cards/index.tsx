@@ -26,19 +26,23 @@ export const Cards = async () => {
 				},
 			}}
 		>
-			<section className="mt-8 grid grid-cols-8 grid-rows-5 gap-4 sm:grid-cols-7 sm:grid-rows-3">
-				<AvatarCard position="col-span-4 row-span-3 sm:col-span-2 sm:row-span-3" />
+			<section className="mt-8 grid grid-cols-4 grid-rows-6 gap-4 sm:grid-cols-7 sm:grid-rows-3">
+				<AvatarCard position="col-span-2 row-span-3 col-start-1 row-start-1 sm:col-span-2 sm:row-span-3 sm:col-start-1 sm:row-start-1" />
+
+				<TimeCard position="col-span-2 row-span-1 col-start-3 row-start-1 sm:col-span-2 sm:row-span-1 sm:col-start-6 sm:row-start-1" />
+
+				<LocationCard position="col-span-2 row-span-2 col-start-3 row-start-2 sm:col-span-2 sm:row-span-2 sm:col-start-6 sm:row-start-2" />
+
 				<GithubStatsCard
 					followers={followers}
 					stars={stars}
 					contributions={contributions}
-					position="col-span-4 row-span-2 sm:col-span-3 sm:col-start-3 sm:row-span-2 sm:row-start-1"
+					position="col-span-4 row-span-2 col-start-1 row-start-4 sm:col-span-3 sm:row-span-2 sm:col-start-3 sm:row-start-1"
 				/>
-				<GitHubIconCard position="col-span-2 row-span-1 sm:col-span-1 sm:col-start-4 sm:row-span-1 sm:row-start-3" />
-				<ThemeCard position="col-span-2 row-span-1 sm:col-span-1 sm:col-start-5 sm:row-span-1 sm:row-start-3" />
-				<LocationCard position="col-span-4 col-start-5 row-span-3 row-start-2 sm:col-span-2 sm:col-start-6 sm:row-span-2 sm:row-start-2" />
-				<LinkedInCard position="col-span-2 row-span-1 sm:col-span-1 sm:col-start-3 sm:row-span-1 sm:row-start-3" />
-				<TimeCard position="col-span-4 col-start-5 row-start-1 sm:col-span-2 sm:col-start-6 sm:row-span-0" />
+
+				<GitHubIconCard position="col-span-2 row-span-1 col-start-1 row-start-6 sm:col-span-1 sm:row-span-1 sm:col-start-3 sm:row-start-3" />
+				<LinkedInCard position="col-span-1 row-span-1 col-start-3 row-start-6 sm:col-span-1 sm:row-span-1 sm:col-start-4 sm:row-start-3" />
+				<ThemeCard position="col-span-1 row-span-1 col-start-4 row-start-6 sm:col-span-1 sm:row-span-1 sm:col-start-5 sm:row-start-3" />
 			</section>
 		</Motion>
 	);

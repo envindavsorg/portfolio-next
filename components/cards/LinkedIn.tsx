@@ -24,9 +24,9 @@ export const LinkedInCard = memo(({ position }: LinkedInCardProps): React.JSX.El
 			whileHover={{ scale: 1.05 }}
 			className={cn(
 				position,
-				'relative hidden items-center justify-center overflow-hidden p-4 font-mono tabular-nums sm:flex',
+				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
 				'isolate rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
-				'border border-neutral-200/50 dark:border-neutral-700/50',
+				'aspect-square border border-neutral-200/50 dark:border-neutral-700/50',
 			)}
 		>
 			<LinkedinLogoIcon weight="duotone" className="text-3xl" />

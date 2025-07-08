@@ -28,7 +28,7 @@ export const GithubStatsCard = memo(
 				className={cn(
 					position,
 					'relative isolate overflow-hidden rounded-xl bg-white/20 p-4 ring-1 ring-black/5 dark:bg-white/10',
-					'border border-neutral-200/50 dark:border-neutral-700/50',
+					'border border-neutral-200/50 sm:h-43 dark:border-neutral-700/50',
 				)}
 			>
 				<div className="relative z-10 flex h-full flex-col justify-between gap-2">
