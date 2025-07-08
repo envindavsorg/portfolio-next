@@ -3,54 +3,55 @@
 import { GithubLogoIcon } from '@phosphor-icons/react/ssr';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { memo } from 'react';
 import type { getGithubContributions } from '@/app/actions';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
-export const GithubStatsCard = ({
-	followers,
-	stars,
-	contributions,
-}: {
+interface GitHubStatsCardProps {
 	followers: number;
 	stars: number;
 	contributions: Awaited<ReturnType<typeof getGithubContributions>>;
-}) => {
-	const MotionLink = motion(Link);
-	return (
-		<MotionLink
-			href="https://github.com/envindavsorg"
-			target="_blank"
-			title="Mon profil GitHub - Cuzeac Florin"
-			variants={defaultVariantsNoDelay}
-			whileHover={{ scale: 1.05 }}
-			className={cn(
-				'col-span-4 row-span-2 md:col-span-3 md:col-start-3 md:row-span-2 md:row-start-1',
-				'relative overflow-hidden p-4',
-				'isolate rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
-				'border border-neutral-200/50 dark:border-neutral-700/50',
-			)}
-		>
-			<div className="relative z-10 flex h-full flex-col justify-between gap-2">
-				<div className="flex items-center gap-2">
-					<GithubLogoIcon weight="duotone" className="size-4" />
-					<h2 className="font-medium text-sm">Mes statistiques GitHub</h2>
+	position: string;
+}
+
+export const GithubStatsCard = memo(
+	({ followers, stars, contributions, position }: GitHubStatsCardProps) => {
+		const MotionLink = motion.create(Link);
+		return (
+			<MotionLink
+				href="https://github.com/envindavsorg"
+				target="_blank"
+				title="Mon profil GitHub - Cuzeac Florin"
+				variants={defaultVariantsNoDelay}
+				whileHover={{ scale: 1.05 }}
+				className={cn(
+					position,
+					'relative isolate overflow-hidden rounded-xl bg-white/20 p-4 ring-1 ring-black/5 dark:bg-white/10',
+					'border border-neutral-200/50 dark:border-neutral-700/50',
+				)}
+			>
+				<div className="relative z-10 flex h-full flex-col justify-between gap-2">
+					<div className="flex items-center gap-2">
+						<GithubLogoIcon weight="duotone" className="size-4" />
+						<h2 className="font-medium text-sm">Mes statistiques GitHub</h2>
+					</div>
+
+					<div className="flex flex-wrap items-end gap-4">
+						<GithubStatItem label="Followers" value={followers} />
+						<GithubStatItem label="Stars" value={stars} />
+						<GithubStatItem
+							label="Contributions"
+							value={contributions.totalContributions}
+						/>
+					</div>
 				</div>
 
-				<div className="flex flex-wrap items-end gap-4">
-					<GithubStatItem label="Followers" value={followers} />
-					<GithubStatItem label="Stars" value={stars} />
-					<GithubStatItem
-						label="Contributions"
-						value={contributions.totalContributions}
-					/>
-				</div>
-			</div>
-
-			<ContributionsGraph contributions={contributions} />
-		</MotionLink>
-	);
-};
+				<ContributionsGraph contributions={contributions} />
+			</MotionLink>
+		);
+	},
+);
 
 const GithubStatItem = ({ label, value }: { label: string; value: number }) => (
 	<div className="col-span-1 flex flex-col items-start">

@@ -8,8 +8,12 @@ import { memo } from 'react';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
-const LinkedInCardComponent = (): React.JSX.Element => {
-	const MotionLink = motion(Link);
+interface LinkedInCardProps {
+	position: string;
+}
+
+export const LinkedInCard = memo(({ position }: LinkedInCardProps): React.JSX.Element => {
+	const MotionLink = motion.create(Link);
 
 	return (
 		<MotionLink
@@ -19,8 +23,8 @@ const LinkedInCardComponent = (): React.JSX.Element => {
 			variants={defaultVariantsNoDelay}
 			whileHover={{ scale: 1.05 }}
 			className={cn(
-				'col-span-2 row-span-1 md:col-span-1 md:col-start-3 md:row-span-1 md:row-start-3',
-				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
+				position,
+				'relative hidden items-center justify-center overflow-hidden p-4 font-mono tabular-nums sm:flex',
 				'isolate rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',
 			)}
@@ -28,7 +32,4 @@ const LinkedInCardComponent = (): React.JSX.Element => {
 			<LinkedinLogoIcon weight="duotone" className="text-3xl" />
 		</MotionLink>
 	);
-};
-
-export const LinkedInCard: React.MemoExoticComponent<() => React.JSX.Element> =
-	memo(LinkedInCardComponent);
+});

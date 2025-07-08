@@ -7,7 +7,11 @@ import { memo, useEffect, useState } from 'react';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
-const TimeCardComponent = (): React.JSX.Element => {
+interface TimeCardProps {
+	position: string;
+}
+
+export const TimeCard = memo(({ position }: TimeCardProps): React.JSX.Element => {
 	const [time, setTime] = useState<Date>(() => new Date());
 
 	useEffect(() => {
@@ -33,7 +37,7 @@ const TimeCardComponent = (): React.JSX.Element => {
 			variants={defaultVariantsNoDelay}
 			whileHover={{ scale: 1.05 }}
 			className={cn(
-				'col-span-4 col-start-5 row-start-1 md:col-span-2 md:col-start-6 md:row-span-0',
+				position,
 				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
 				'isolate rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',
@@ -58,7 +62,4 @@ const TimeCardComponent = (): React.JSX.Element => {
 			/>
 		</motion.div>
 	);
-};
-
-export const TimeCard: React.MemoExoticComponent<() => React.JSX.Element> =
-	memo(TimeCardComponent);
+});

@@ -27,7 +27,7 @@ export function Motion({
 	...props
 }: BaseMotionProps) {
 	const Comp = asChild
-		? (motion(Slot) as ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>)
+		? (motion.create(Slot) as ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>)
 		: motion.div;
 
 	const defaultProps: Partial<BaseMotionProps> = {

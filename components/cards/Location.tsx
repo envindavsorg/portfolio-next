@@ -8,18 +8,14 @@ import type React from 'react';
 import { memo, useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
-import {
-	dark,
-	light,
-	myLatitude,
-	myLongitude,
-	orange,
-	physics,
-	yellow,
-} from '@/lib/globe';
+import { dark, light, myLatitude, myLongitude, physics, yellow } from '@/lib/globe';
 import { cn } from '@/lib/utils';
 
-const LocationCardComponent = (): React.JSX.Element => {
+interface LocationCardProps {
+	position: string;
+}
+
+export const LocationCard = memo(({ position }: LocationCardProps): React.JSX.Element => {
 	const { resolvedTheme } = useTheme();
 
 	const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -82,7 +78,7 @@ const LocationCardComponent = (): React.JSX.Element => {
 			variants={defaultVariantsNoDelay}
 			whileHover={{ scale: 1.05 }}
 			className={cn(
-				'col-span-4 col-start-5 row-span-3 row-start-2 md:col-span-2 md:col-start-6 md:row-span-2 md:row-start-2',
+				position,
 				'relative flex flex-col gap-6 overflow-hidden p-4 md:h-40',
 				'isolate rounded-xl bg-white/20 font-bold ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',
@@ -137,7 +133,4 @@ const LocationCardComponent = (): React.JSX.Element => {
 			</div>
 		</motion.div>
 	);
-};
-
-export const LocationCard: React.MemoExoticComponent<() => React.JSX.Element> =
-	memo(LocationCardComponent);
+});

@@ -1,14 +1,14 @@
 'use client';
 
-import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
-import { Sparkles } from '@/components/background/Sparkles';
-import { Button } from '@/components/ui/Button';
-import sadCat from '@/gif/sad-cat.gif';
-import { ArrowLeft } from '@phosphor-icons/react';
+import { ArrowLeftIcon } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import type React from 'react';
 import { Suspense } from 'react';
+import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
+import { Sparkles } from '@/components/background/Sparkles';
+import { Button } from '@/components/ui/Button';
+import sadCat from '@/gif/sad-cat.gif';
 
 const NotFound = (): React.JSX.Element => {
 	const router = useRouter();
@@ -31,10 +31,10 @@ const NotFound = (): React.JSX.Element => {
 							</FadeIn>
 							<FadeIn>
 								<p className="leading-8">
-									<span className="font-bold">Oups !</span> Cette page n’existe
-									pas, peut-être avez-vous cliqué sur un{' '}
-									<span className="font-bold">ancien lien</span> ou avez-vous
-									fait une <span className="font-bold">faute de frappe</span>.
+									<span className="font-bold">Oups !</span> Cette page n’existe pas,
+									peut-être avez-vous cliqué sur un{' '}
+									<span className="font-bold">ancien lien</span> ou avez-vous fait une{' '}
+									<span className="font-bold">faute de frappe</span>.
 								</p>
 							</FadeIn>
 							<FadeIn>
@@ -44,7 +44,7 @@ const NotFound = (): React.JSX.Element => {
 									variant="outline"
 									onClick={() => router.back()}
 								>
-									<ArrowLeft className="size-4 shrink-0" />
+									<ArrowLeftIcon className="size-4 shrink-0" />
 									Revenir en arrière
 								</Button>
 							</FadeIn>
