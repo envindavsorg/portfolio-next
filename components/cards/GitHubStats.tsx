@@ -12,11 +12,10 @@ interface GitHubStatsCardProps {
 	followers: number;
 	stars: number;
 	contributions: Awaited<ReturnType<typeof getGithubContributions>>;
-	position: string;
 }
 
 export const GithubStatsCard = memo(
-	({ followers, stars, contributions, position }: GitHubStatsCardProps) => {
+	({ followers, stars, contributions }: GitHubStatsCardProps) => {
 		const MotionLink = motion.create(Link);
 		return (
 			<MotionLink
@@ -26,7 +25,7 @@ export const GithubStatsCard = memo(
 				variants={defaultVariantsNoDelay}
 				whileHover={{ scale: 1.05 }}
 				className={cn(
-					position,
+					'col-span-4 col-start-1 row-span-2 row-start-4 sm:col-span-3 sm:col-start-3 sm:row-span-2 sm:row-start-1',
 					'relative isolate overflow-hidden rounded-xl bg-white/20 p-4 ring-1 ring-black/5 dark:bg-white/10',
 					'border border-neutral-200/50 sm:h-43 dark:border-neutral-700/50',
 				)}

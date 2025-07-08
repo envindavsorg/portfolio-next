@@ -7,17 +7,13 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
-interface TimeCardProps {
-	position: string;
-}
-
 interface TimeParts {
 	hours: number;
 	minutes: number;
 	seconds: number;
 }
 
-export const TimeCard = memo(({ position }: TimeCardProps): React.JSX.Element => {
+export const TimeCard = memo((): React.JSX.Element => {
 	const [timeParts, setTimeParts] = useState<TimeParts>(() => {
 		const now = new Date();
 		return {
@@ -79,7 +75,7 @@ export const TimeCard = memo(({ position }: TimeCardProps): React.JSX.Element =>
 		<motion.div
 			variants={defaultVariantsNoDelay}
 			className={cn(
-				position,
+				'col-span-2 col-start-3 row-span-1 row-start-1 sm:col-span-2 sm:col-start-6 sm:row-span-1 sm:row-start-1',
 				'relative flex items-center justify-center overflow-hidden p-4 font-mono tabular-nums',
 				'isolate rounded-xl bg-white/20 ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',

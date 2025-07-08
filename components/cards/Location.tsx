@@ -11,11 +11,7 @@ import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { dark, light, myLatitude, myLongitude, physics, yellow } from '@/lib/globe';
 import { cn } from '@/lib/utils';
 
-interface LocationCardProps {
-	position: string;
-}
-
-export const LocationCard = memo(({ position }: LocationCardProps): React.JSX.Element => {
+export const LocationCard = memo((): React.JSX.Element => {
 	const { resolvedTheme } = useTheme();
 
 	const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -78,7 +74,7 @@ export const LocationCard = memo(({ position }: LocationCardProps): React.JSX.El
 			variants={defaultVariantsNoDelay}
 			whileHover={{ scale: 1.05 }}
 			className={cn(
-				position,
+				'col-span-2 col-start-3 row-span-2 row-start-2 sm:col-span-2 sm:col-start-6 sm:row-span-2 sm:row-start-2',
 				'relative flex flex-col gap-6 overflow-hidden p-4',
 				'isolate rounded-xl bg-white/20 font-bold ring-1 ring-black/5 dark:bg-white/10',
 				'border border-neutral-200/50 dark:border-neutral-700/50',
