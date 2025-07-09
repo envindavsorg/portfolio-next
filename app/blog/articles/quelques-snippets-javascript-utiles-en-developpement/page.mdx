@@ -1,0 +1,478 @@
+import React from 'react';
+import { slugify } from '@/lib/slug';
+import { ArticleTitle } from '@/components/blog/ArticleTitle';
+import { ViewsCounter } from '@/components/blog/ViewsCounter';
+import { Separator } from '@/components/ui/Separator';
+import { name } from '@/resources/config';
+import image from './js.webp';
+import cover from './cover.png';
+
+export const article = {
+    author: name,
+    date: '2025-07-02',
+    title: 'Quelques snippets JavaScript utiles en développement',
+    description: "Quelques snippets JavaScript utiles et à connaître absolument.",
+    image: cover,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+# Tous mes articles de blog
+
+<ArticleTitle>
+    {article.title}
+</ArticleTitle>
+
+<div className="mb-10">
+    <ViewsCounter article={article} slug={slugify(article.title)} />
+</div>
+
+**JavaScript** est un langage essentiel pour le développement web.
+Que vous soyez débutant ou développeur expérimenté, les snippets **JavaScript** peuvent vous
+aider à résoudre des problèmes courants plus facilement et plus rapidement.
+
+Ces **petits morceaux de code réutilisables** peuvent vous faire gagner du temps dans vos projets.
+
+<Image className="my-8 rounded-md" src={image} alt={article.title} />
+
+Voici une **sélection** des **20 meilleurs snippets**
+que tout développeur JavaScript devrait connaître.<br/><br/>
+
+## 1. Date et heure
+
+Ce code JavaScript crée un nouvel objet **Date** qui représente la date
+et l'heure actuelles au moment de l'exécution.
+En utilisant **console.log(date)**, il affiche cette date et heure sous forme
+d'une chaîne au format **ISO 8601** dans la console.<br/><br/>
+
+Le résultat affiché **2024-07-21T12:00:00.000Z** est un exemple qui montre une
+date fictive dans ce **format ISO** :
++ *2024-07-21* est la date (année-mois-jour).
++ *T12:00:00.000* représente l'heure (heure:minute:seconde.milliseconde).
++ *Z* indique que l'heure est au format **UTC (Temps Universel Coordonné)**.
+
+```js
+const date = new Date();
+console.log(date); // 2024-07-21T12:00:00.000Z
+```
+
+<Separator className="my-12" />
+
+## 2. Vérifiez si une variable est un tableau
+
+Le code utilise la méthode **Array.isArray()** en JavaScript pour vérifier
+si une donnée est un tableau (array).<br/><br/>
+
+**Voici comment cela fonctionne :** **Array.isArray**(variable) renvoie un booléen (true ou false)
+selon que variable est un tableau ou non.<br/><br/>
+
+Exemple expliqué :
++ *const arr = [1, 2, 3];:* Déclare une variable **arr** qui est un tableau contenant les éléments **1**, **2**, et **3**.
++ *console.log(Array.isArray(arr));:* Vérifie si **arr** est un tableau. Comme **arr** est effectivement un tableau, cela renvoie **true**.
++ *const str = 'Hello';:* Déclare une variable **str** qui est une chaîne de caractères.
++ *console.log(Array.isArray(str));:* Vérifie si **str** est un tableau. Étant donné que **str** est une chaîne de caractères et non un tableau, cela renvoie **false**.
+
+```js
+Array.isArray(variable);
+
+// Exemple
+const arr = [1, 2, 3];
+console.log(Array.isArray(arr)); // true
+
+const str = 'Hello';
+console.log(Array.isArray(str)); // false
+```
+
+<Separator className="my-12" />
+
+## 3. Fusionnez deux tableaux
+
+Le code utilise la méthode *concat()* en **JavaScript**
+pour combiner deux tableaux en un seul.<br/><br/>
+
+**Explication du code :** *const newArr = arr1.concat(arr2);:* Cette ligne crée un nouveau
+tableau **newArr** en concaténant (fusionnant) les éléments des tableaux **arr1** et **arr2**.
+Le tableau original **arr1** n’est pas modifié ; et *concat()* ne change pas **arr2** non plus,
+elle retourne un nouveau tableau.<br/><br/>
+
+Exemple expliqué :
++ *const arr1 = [1, 2, 3];:* Déclare **arr1** comme un tableau contenant les éléments **1**, **2**, et **3**.
++ *const arr2 = [4, 5, 6];:* Déclare **arr2** comme un tableau contenant les éléments **4**, **5**, et **6**.
++ *const arrMerged = arr1.concat(arr2);:* Crée un nouveau tableau **arrMerged** qui contient tous les éléments de **arr1** suivis de tous les éléments de **arr2**.
++ *console.log(arrMerged);:* Affiche le tableau fusionné **[1, 2, 3, 4, 5, 6]**.
++ La méthode *concat()* est utile pour créer un nouveau tableau qui résulte de la combinaison de plusieurs tableaux.
+
+```js
+const newArr = arr1.concat(arr2);
+
+// Exemple
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const arrMerged = arr1.concat(arr2);
+console.log(arrMerged); // [1, 2, 3, 4, 5, 6]
+```
+
+<Separator className="my-12" />
+
+## 4. Supprimez les doublons d'un tableau
+
+```js
+const uniqueArr = [...new Set(arr)];
+
+// Exemple
+const arr = [1, 2, 2, 3, 4, 4, 5];
+const uniqueArr = [...new Set(arr)];
+console.log(uniqueArr); // [1, 2, 3, 4, 5]
+```
+
+Ce code montre comment supprimer les doublons d'un tableau en JavaScript.
+Voici une explication étape par étape :
+
++ Définition du tableau original : *const arr = [1, 2, 2, 3, 4, 4, 5];*, arr est un tableau qui contient des nombres, y compris certains doublons.
++ Utilisation de Set pour obtenir des valeurs uniques : *const uniqueArr = [...new Set(arr)];*
+    + *new Set(arr) :* Crée un Set à partir du tableau **arr**. Un **Set** est une collection qui ne permet que des valeurs uniques, éliminant automatiquement les doublons.
+    + *[...new Set(arr)] :* Utilise l'opérateur de décomposition ... pour convertir le **Set** de valeurs uniques en un tableau.
++ Affichage du tableau avec les valeurs uniques : *console.log(uniqueArr); // [1, 2, 3, 4, 5]*, affiche dans la console le tableau **uniqueArr**, qui contient uniquement les éléments uniques extraits de **arr**.
+
+<br/><br/>En résumé, ce code utilise un **Set** pour éliminer les doublons du tableau **arr** et la syntaxe
+de décomposition pour convertir le **Set** de retour en un tableau de valeurs uniques.
+
+<Separator className="my-12" />
+
+## 5. Triez un tableau par ordre croissant
+
+```js
+arr.sort((a, b) => a - b);
+
+// Exemple
+const arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+arr.sort((a, b) => a - b);
+console.log(arr); // [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+```
+
+Ce code utilise la méthode sort sur un tableau en
+**JavaScript** pour trier les éléments par ordre croissant.<br/><br/>
+
++ *arr.sort((a, b) => a - b);* est la partie qui effectue le tri. La méthode sort accepte une fonction de comparaison qui détermine l'ordre des éléments en comparant deux éléments **a** et **b**.
++ La fonction de comparaison *(a, b) => a - b* soustrait **b** de **a**. Si le résultat est négatif, **a** est placé avant **b**. Si le résultat est positif, **b** est placé avant **a**. Si le résultat est zéro, l'ordre des éléments reste inchangé entre eux.
++ En conséquence, le tableau **arr** est trié du plus **petit** au plus **grand**.
+
+<br/><br/>Dans l'exemple donné, le tableau *[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]* est trié
+pour devenir *[1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]* après l'application de sort.
+Le *console.log(arr);* affiche le tableau trié dans la console.
+
+<Separator className="my-12" />
+
+## 6. Inversez un tableau
+
+```js
+arr.reverse();
+
+// Exemple
+const arr = [1, 2, 3, 4, 5];
+arr.reverse();
+console.log(arr); // [5, 4, 3, 2, 1]
+```
+
+La méthode *reverse* en **JavaScript** inverse l'ordre des éléments d'un tableau.
+
++ *arr.reverse();* modifie le tableau **arr** en place, inversant l'ordre de ses éléments.
++ Dans l'exemple donné, le tableau *[1, 2, 3, 4, 5]* est inversé pour devenir *[5, 4, 3, 2, 1]*.
++ Le *console.log(arr);* affiche le tableau inversé *[5, 4, 3, 2, 1]* dans la console.
+
+<Separator className="my-12" />
+
+## 7. Convertissez la chaîne en nombre
+
+```js
+const num = parseInt(str, 10);
+
+// Exemple
+const str = '42';
+const num = parseInt(str, 10);
+console.log(num); // 42
+```
+
+Le code utilise la fonction *parseInt* en **JavaScript** pour convertir
+une chaîne de caractères en un entier.
+
++ *parseInt(str, 10);* convertit la chaîne **str** en un entier en utilisant la **base 10**. Le deuxième argument, **10**, spécifie que la chaîne doit être interprétée comme un nombre décimal.
++ Dans l'exemple donné, str est **'42'**. La fonction *parseInt* convertit cette chaîne en l'entier **42**.
++ Le *console.log(num);* affiche la valeur entière **42** dans la console.
+
+<Separator className="my-12" />
+
+## 8. Générez un nombre aléatoire entre deux valeurs
+
+```js
+const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
+// Exemple
+const min = 1;
+const max = 10;
+const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+console.log(randomNum); // Un nombre aléatoire entre 1 et 10
+```
+
+Ce code génère un nombre entier aléatoire compris entre les valeurs **min** et **max**, incluses.
+
++ *Math.random()* génère un nombre décimal aléatoire compris entre **0** (inclus) et **1** (exclus).
++ *Math.random() * (max - min + 1)* étend cette plage pour qu'elle devienne de **0** à **(max - min + 1)**, ce qui permet d'inclure à la fois min et max.
++ *Math.floor(...)* arrondit la valeur aléatoire générée vers le bas à l'entier inférieur le plus proche.
++ *Enfin, ajouter **min** ajuste la plage pour démarrer à min au lieu de **0**.
+
+<br/><br/>Dans l'exemple donné, la variable *randomNum* contient un nombre entier aléatoire
+variant entre **1** et **10**. Le *console.log(randomNum);* affiche ce nombre aléatoire dans la console.
+
+<Separator className="my-12" />
+
+## 9. Vérifiez si une chaîne contient une sous-chaîne
+
+```js
+const isSubstring = str.includes(substring);
+
+// Exemple
+const str = 'Hello, world!';
+const substring = 'world';
+const isSubstring = str.includes(substring);
+console.log(isSubstring); // true
+```
+
+Ce code vérifie si une sous-chaîne est présente dans une chaîne principale
+en utilisant la méthode includes de **JavaScript*.
+
++ *str.includes(substring);* retourne **true** si la sous-chaîne substring est trouvée dans la chaîne **str**, sinon **false**.
++ Dans l'exemple donné, **str** est *'Hello, world!'* et **substring** est *'world'*.
++ La méthode includes trouve *'world'* dans *'Hello, world!'*, donc **isSubstring** est **true**.
++ Le *console.log(isSubstring);* affiche **true** dans la console, indiquant que la sous-chaîne **'world'** est présente dans la chaîne *'Hello, world!'*.
+
+<Separator className="my-12" />
+
+## 10. Obtenez la longueur d'un objet
+
+```js
+const objLength = Object.keys(obj).length;
+
+// Exemple
+const obj = { a: 1, b: 2, c: 3 };
+const objLength = Object.keys(obj).length;
+console.log(objLength); // 3
+```
+
+Ce code détermine le nombre de propriétés dans un objet en utilisant **Object.keys**.
+
++ *Object.keys(obj)* renvoie un tableau contenant les noms des propriétés propres (c'est-à-dire, les propriétés directement définies sur l'objet, sans celles héritées de la chaîne de prototypes) de l'objet **obj**.
++ *.length* ensuite, fournit le nombre d'éléments dans ce tableau, ce qui correspond au nombre de propriétés de l'objet.
++ Dans l'exemple fourni, obj possède trois propriétés : **'a'**, **'b'**, et **'c'**, donc **objLength** est **3**.
++ Le *console.log(objLength);* affiche **3** dans la console, indiquant que l'objet a trois propriétés.
+
+<Separator className="my-12" />
+
+## 11. Convertir un objet en tableau
+
+```js
+const arr = Object.entries(obj);
+
+// Exemple
+const obj = { a: 1, b: 2, c: 3 };
+const arr = Object.entries(obj);
+console.log(arr); // [['a', 1], ['b', 2], ['c', 3]]
+```
+
+Ce code convertit un objet en un tableau de paires clé-valeur en utilisant *Object.entries*.
+
++ *Object.entries(obj)* renvoie un tableau contenant des sous-tableaux pour chaque propriété propre de l'objet **obj**. Chaque sous-tableau est une paire contenant une clé et sa valeur correspondante.
++ *Object.entries(obj)* retourne *[['a', 1], ['b', 2], ['c', 3]]*, où chaque élément est une paire clé-valeur de l'objet.
++ Le *console.log(arr);* affiche *[['a', 1], ['b', 2], ['c', 3]]* dans la console.
+
+<Separator className="my-12" />
+
+## 12. Vérifiez si un objet est vide
+
+```js
+const array = Object.entries(object);
+
+// Exemple
+const obj = {};
+const isEmpty = Object.entries(obj).length === 0 && obj.constructor === Object;
+console.log(isEmpty); // true
+```
+
+Ce code vérifie si un objet est vide, c'est-à-dire qu'il ne possède aucune propriété.
+
++ *Object.entries(obj)* renvoie un tableau de paires clé-valeur pour les propriétés de l'objet **obj**. Si l'objet n'a pas de propriétés, ce tableau est vide.
++ *Object.entries(obj).length === 0* vérifie que le tableau des entrées de l'objet est vide, ce qui signifie que l'objet n'a pas de propriétés définies.
++ *obj.constructor === Object* vérifie que l'objet est créé à l'aide de la fonction constructeur **Object**, garantissant qu'il est bien un objet ordinaire et non une instance d'une sous-classe ou modifié d'une autre manière.
++ Dans l'exemple donné, **obj** est un **objet vide {}**.
++ Donc, *isEmpty* est évalué à true car le tableau des entrées est vide et **obj** est un objet régulier.
++ Le *console.log(isEmpty);* affiche true dans la console, indiquant que l'objet est vide.
+
+<Separator className="my-12" />
+
+## 13. Obtenez l'URL actuelle
+
+```js
+const url = window.location.href;
+
+// Exemple
+const currentUrl = window.location.href;
+console.log(currentUrl); // https://example.com/page
+```
+
+Ce code récupère l'**URL** actuelle de la page web en utilisant l'objet *window.location* dans le contexte d'un navigateur.
+
++ *window.location.href* retourne la chaîne de caractères qui représente l'**URL** complète de la page web actuellement chargée dans le navigateur.
++ Dans l'exemple fourni, currentUrl stocke cette **URL**.
++ Le *console.log(currentUrl);* affichera l'**URL** complète de la page, par exemple, **https://example.com/page**.
+
+<br/><br/>Notez que ce code fonctionne uniquement dans des environnements
+permettant l'accès à l'objet window, comme les navigateurs web.
+
+<Separator className="my-12" />
+
+## 14. Redirection vers une nouvelle URL
+
+```js
+window.location.href = 'https://example.com';
+
+// Exemple
+window.location.href = 'https://example.com';
+```
+
+Ce code redirige le navigateur vers une nouvelle **URL**.
+
++ *window.location.href = 'https://example.com';* change l'**URL** de la page actuelle pour **'https://example.com'**.
++ Lorsque cette ligne est exécutée dans un navigateur, le navigateur navigue immédiatement vers l'**URL** spécifiée, chargeant ainsi la nouvelle page.
+
+<br/><br/>Notez que l'utilisation de ce code entraînera une redirection qui interrompra
+tout script en cours sur la page actuelle.
+
+<Separator className="my-12" />
+
+## 15. Définissez un cookie
+
+```js
+document.cookie = 'name=value; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
+
+// Exemple
+document.cookie = 'name=John Doe; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
+```
+
+Ce code crée ou met à jour un cookie dans le navigateur.
+
++ *document.cookie* est utilisé pour définir un cookie dans le navigateur.
++ *'name=John Doe'* définit le nom du cookie comme name avec la valeur **John Doe**.
++ *expires=Sun, 1 Jan 2025 00:00:00 UTC* spécifie la date d'expiration du cookie. Après cette date, le cookie sera supprimé par le navigateur.
++ *path=/* indique que le cookie est accessible sur l'ensemble du site (toutes les pages et sous-répertoires).
++ Lorsque ce code est exécuté, le navigateur stocke ce cookie jusqu'à la date d'expiration spécifiée ou jusqu'à ce qu'il soit supprimé explicitement par le script.
+
+<Separator className="my-12" />
+
+## 16. Obtenez un cookie
+
+```js
+const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/, '$1');
+
+// Exemple
+const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/, '$1');
+console.log(cookieValue); // John Doe
+```
+
+Ce code extrait la valeur d'un cookie spécifique nommé name à partir du document cookie.
+
++ *document.cookie* renvoie tous les cookies sous forme de chaîne de caractères, où chaque cookie est séparé par un point-virgule **;**.
++ La méthode replace avec l'expression régulière */(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/* est utilisée pour rechercher et extraire la valeur du cookie nommé name.
+    + *(?:^|.*;\s*)* correspond au début de la chaîne ou à tout précédent point-virgule suivi d'espaces.
+    + *name\s*=\s*([^;]*)* correspond au nom du cookie suivi d'un signe égal **=**, puis capture la valeur assignée à ce cookie jusqu'à ce qu'un point-virgule **(ou la fin de la chaîne)** soit rencontré.
+    + *|^.*$* capture tout autre contenu si le cookie n'est pas trouvé, mais ne remplace cette portion par rien.
++ La partie entre parenthèses *([^;]*)* capture la valeur du cookie name, qui est ensuite renvoyée par la méthode replace.
+
+<br/><br/>Dans l'exemple donné, cookieValue contiendra la valeur **John Doe** si
+le cookie name est présent et a cette valeur. Le *console.log(cookieValue);*
+affichera **John Doe** dans la console.
+
+<Separator className="my-12" />
+
+## 17. Vérifiez si un cookie existe
+
+```js
+const cookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('name='));
+```
+
+Ce code vérifie si un cookie spécifique, nommé name, existe dans le navigateur.
+
++ *document.cookie.split(';')* divise la chaîne de tous les cookies en un tableau, où chaque élément représentera un cookie entier au format **key=value**.
++ *.some((item) => item.trim().startsWith('name='))* utilise la méthode *some* pour vérifier si au moins un des éléments du tableau répond à la condition suivante :
+    + *item.trim()* retire les espaces en début et fin de chaque cookie.
+    + *.startsWith('name=')* vérifie si le cookie commence par *'name='*, ce qui signifie que le cookie nommé **name** existe.
+
+<br/><br/>Si un cookie nommé **name** existe, *cookieExists* sera **true** sinon, ce sera **false**.
+
+<Separator className="my-12" />
+
+## 18. Supprimer un cookie
+
+```js
+document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+```
+
+Ce code supprime le cookie nommé **name** dans le navigateur.
+
++ *document.cookie = 'name=;'* définit le cookie **name** avec une valeur vide.
++ *expires=Thu, 01 Jan 1970 00:00:00 UTC* spécifie une **date** d'expiration dans le passé. Tous les cookies avec une date d'expiration passée sont supprimés par le navigateur.
++ *path=/* s'assure que l'action s'applique au cookie **name** sur l'ensemble du site Web.
++ En exécutant cette ligne, vous indiquez au navigateur de supprimer le cookie **name**.
+
+<Separator className="my-12" />
+
+## 19. Obtenez les dimensions actuelles de la fenêtre
+
+```js
+const windowWidth = window.innerWidth;
+const windowHeight = window.innerHeight;
+
+console.log(windowWidth, windowHeight); // Largeur et hauteur de la fenêtre
+```
+
+Ce code récupère et affiche la largeur et la hauteur de la fenêtre d'affichage visible du navigateur.
+
++ *window.innerWidth* retourne la **largeur intérieure** de la zone de contenu de la fenêtre, en pixels, incluant le défilement vertical mais excluant les barres de défilement latérales, bordures et decorations.
++ *window.innerHeight* retourne la **hauteur intérieure** de la zone de contenu de la fenêtre, mesurée de manière similaire.
++ Ces valeurs donnent les dimensions de la portion visible de la fenêtre dans le navigateur.
+
+<br/><br/>Le *console.log(windowWidth, windowHeight);* affiche ces dimensions **(largeur et hauteur)**
+dans la console, permettant de voir la **taille actuelle** de la fenêtre du navigateur.
+
+<Separator className="my-12" />
+
+## 20. Copiez le texte dans le presse-papiers
+
+```js
+navigator.clipboard.writeText(text);
+
+// Exemple
+navigator.clipboard.writeText('Hello, world!');
+```
+
+Ce code copie une chaîne de texte dans le presse-papiers du système en utilisant
+l'**API Clipboard** de **JavaScript**.
+
++ *navigator.clipboard.writeText(text)* utilise l'**API Clipboard** pour écrire du texte dans le presse-papiers.
++ Dans l'exemple donné, *'Hello, world!'* est le texte qui sera copié dans le presse-papiers.
++ Cette méthode retourne une promesse qui se résout si l'opération réussit, ou se rejette si elle échoue, généralement en raison de permissions ou de manque de support dans certains contextes.
+
+<br/><br/>Notez que l'utilisation de *navigator.clipboard.writeText* nécessite
+que la page soit servie via **HTTPS** ou en étant en **localhost**, et l'action doit généralement
+être initiée par une **interaction de l'utilisateur** (comme un clic).
+
+<br/><br/>Ces **20 snippets JavaScript** ne sont que la pointe de l’iceberg des possibilités offertes
+par ce langage. En incorporant ces snippets dans vos projets,
+vous pouvez améliorer votre efficacité et la qualité de votre code.
+Que ce soit pour manipuler des chaînes de caractères, gérer les cookies,
+ou même améliorer les performances de votre application,
+ces petits morceaux de code peuvent faire une grande différence.
+N’hésitez pas à les adapter à vos besoins spécifiques et à explorer davantage
+les vastes capacités de **JavaScript**.

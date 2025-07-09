@@ -71,11 +71,11 @@ export const Marquee = memo(
 		const blurGradients = useMemo(
 			() => ({
 				left: vertical
-					? 'pointer-events-none absolute top-0 left-0 right-0 z-10 h-8 bg-gradient-to-b from-white/80 to-transparent dark:from-black/80'
-					: 'pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-8 bg-gradient-to-r from-white/80 to-transparent dark:from-black/80',
+					? 'pointer-events-none absolute top-0 left-0 right-0 z-10 h-16 bg-gradient-to-b from-[hsl(0,0%,98%)] via-[hsl(0,0%,98%,0.8)] to-transparent dark:from-[hsl(0,0%,0%)] dark:via-[hsl(0,0%,0%,0.8)]'
+					: 'pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-16 bg-gradient-to-r from-[hsl(0,0%,98%)] via-[hsl(0,0%,98%,0.8)] to-transparent dark:from-[hsl(0,0%,0%)] dark:via-[hsl(0,0%,0%,0.8)]',
 				right: vertical
-					? 'pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-8 bg-gradient-to-t from-white/80 to-transparent dark:from-black/80'
-					: 'pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-8 bg-gradient-to-l from-white/80 to-transparent dark:from-black/80',
+					? 'pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-16 bg-gradient-to-t from-[hsl(0,0%,98%)] via-[hsl(0,0%,98%,0.8)] to-transparent dark:from-[hsl(0,0%,0%)] dark:via-[hsl(0,0%,0%,0.8)]'
+					: 'pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-16 bg-gradient-to-l from-[hsl(0,0%,98%)] via-[hsl(0,0%,98%,0.8)] to-transparent dark:from-[hsl(0,0%,0%)] dark:via-[hsl(0,0%,0%,0.8)]',
 			}),
 			[vertical],
 		);
