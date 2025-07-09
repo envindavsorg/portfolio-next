@@ -12,11 +12,7 @@ const nextConfig: NextConfig = {
 			},
 			{
 				protocol: 'https',
-				hostname: 'www.cuzeac-florin.app',
-			},
-			{
-				protocol: 'https',
-				hostname: 'media.licdn.com',
+				hostname: 'cuzeac-florin.app',
 			},
 		],
 	},

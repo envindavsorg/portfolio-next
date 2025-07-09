@@ -18,7 +18,7 @@ const SpeedInsights = lazy(() =>
 	import('@vercel/speed-insights/react').then((m) => ({ default: m.SpeedInsights })),
 );
 const Sparkles = lazy(() =>
-	import('@/components/background/Sparkles').then((m) => ({ default: m.Sparkles })),
+	import('@/components/animations/Sparkles').then((m) => ({ default: m.Sparkles })),
 );
 const Toaster = lazy(() =>
 	import('@/components/ui/Sonner').then((m) => ({ default: m.Toaster })),

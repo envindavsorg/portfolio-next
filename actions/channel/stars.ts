@@ -1,8 +1,8 @@
 'use server';
 
+import type { StaticImageData } from 'next/image';
 import { projectStars } from '@/actions/github/stars.action';
 import { logger } from '@/lib/logger';
-import type { StaticImageData } from 'next/image';
 
 export interface ChannelStarsData {
 	avatar: string | StaticImageData;

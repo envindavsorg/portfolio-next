@@ -17,7 +17,6 @@ export const physics = {
 	},
 };
 
-// my fixed location : coordinates (of Paris)
 export const myLatitude: number = 48.858093;
 export const myLongitude: number = 2.294694;
 
@@ -27,8 +26,7 @@ export const onPointerDown = (
 	pointerInteractionMovement: React.RefObject<number>,
 	event: React.PointerEvent<HTMLCanvasElement>,
 ): void => {
-	pointerInteracting.current =
-		event.clientX - pointerInteractionMovement.current;
+	pointerInteracting.current = event.clientX - pointerInteractionMovement.current;
 	canvas.current && (canvas.current.style.cursor = 'grabbing');
 };
 

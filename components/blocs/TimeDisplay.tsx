@@ -1,8 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 type TimeDisplayProps = {
 	timeZone: string;
@@ -26,10 +25,7 @@ export const TimeDisplay: React.FC<TimeDisplayProps> = ({
 				hour12: false,
 			};
 
-			const timeString: string = new Intl.DateTimeFormat(
-				locale,
-				options,
-			).format(now);
+			const timeString: string = new Intl.DateTimeFormat(locale, options).format(now);
 			setCurrentTime(timeString);
 		};
 

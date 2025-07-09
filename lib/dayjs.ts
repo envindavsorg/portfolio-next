@@ -1,7 +1,6 @@
-import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/fr.js';
-
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import duration from 'dayjs/plugin/duration';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';

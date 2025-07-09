@@ -1,15 +1,12 @@
 'use server';
 
 import crypto from 'node:crypto';
-import { redis } from '@/db/redis';
 import { unstable_noStore as noStore } from 'next/cache';
 import { headers } from 'next/headers';
+import { redis } from '@/db/redis';
 
 export const getBlogViews = async (): Promise<number> => {
-	if (
-		!process.env.UPSTASH_REDIS_REST_URL ||
-		!process.env.UPSTASH_REDIS_REST_TOKEN
-	) {
+	if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
 		return 0;
 	}
 
@@ -19,10 +16,7 @@ export const getBlogViews = async (): Promise<number> => {
 };
 
 export const getViewsCount = async () => {
-	if (
-		!process.env.UPSTASH_REDIS_REST_URL ||
-		!process.env.UPSTASH_REDIS_REST_TOKEN
-	) {
+	if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
 		return [];
 	}
 
@@ -48,9 +42,7 @@ export const increment = async (slug: string) => {
 
 	if (!hasViewed) {
 		const views = await redis.lrange('views', 0, -1);
-		const viewIndex: number = views.findIndex(
-			(view: any) => view.slug === slug,
-		);
+		const viewIndex: number = views.findIndex((view: any) => view.slug === slug);
 
 		if (viewIndex === -1) {
 			await redis.rpush('views', JSON.stringify({ slug, count: 1 }));

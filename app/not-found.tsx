@@ -7,7 +7,7 @@ import type React from 'react';
 import { FadeIn } from '@/components/animations/FadeIn';
 import PageParagraph from '@/components/text/PageParagraph';
 import { Button } from '@/components/ui/Button';
-import sadCat from '@/gif/sad-cat.gif';
+import sadCat from '@/images/sad-cat.gif';
 
 const NotFound = (): React.JSX.Element => {
 	const router = useRouter();

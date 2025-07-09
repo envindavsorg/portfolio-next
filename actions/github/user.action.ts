@@ -1,8 +1,8 @@
 'use server';
 
-import { getCachedData, setCachedData } from '@/lib/cache';
 import { octokit } from '@/db/octokit';
 import { query } from '@/graphql/user';
+import { getCachedData, setCachedData } from '@/lib/cache';
 import {
 	type GitHubData,
 	type GitHubResponse,
@@ -21,7 +21,7 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 
 	const cacheKey = `github-user-${username}`;
 	const cachedData = getCachedData<GitHubData>(cacheKey);
-	
+
 	if (cachedData) {
 		logger.info(`→ returning cached GitHub user data for ${username}`);
 		return cachedData;
@@ -55,7 +55,7 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 
 		setCachedData(cacheKey, githubData);
 		logger.info(`→ cached GitHub user data for ${username}`);
-		
+
 		return githubData;
 	} catch (error) {
 		logger.error('→ there is an error fetching GitHub user data: ', error);

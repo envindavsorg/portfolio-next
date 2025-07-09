@@ -127,18 +127,6 @@ h4 {
 	text-wrap: balance;
 }
 
-ul {
-	@apply mt-4 list-disc space-y-1 pl-5 text-foreground;
-}
-
-ol {
-	@apply mt-4 list-decimal space-y-2 pl-5 text-foreground;
-}
-
-li {
-	@apply pl-1;
-}
-
 /* Code Blocks */
 pre {
 	@apply bg-code rounded-md p-4 my-6 overflow-x-auto;

@@ -47,10 +47,8 @@ export const FadeIn = forwardRef<MotionDivElement, FadeInProps>(
 					viewport,
 				};
 
-		const Component = motion.div;
-
 		return (
-			<Component
+			<motion.div
 				ref={ref}
 				className={className}
 				variants={variants}
@@ -59,7 +57,7 @@ export const FadeIn = forwardRef<MotionDivElement, FadeInProps>(
 				{..._props}
 			>
 				{children}
-			</Component>
+			</motion.div>
 		);
 	},
 );

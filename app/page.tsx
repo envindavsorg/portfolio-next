@@ -13,12 +13,13 @@ import { BadgeWithIcon } from '@/components/layout/Badges';
 import { Counter } from '@/components/text/Counter';
 import PageParagraph from '@/components/text/PageParagraph';
 import PageTitle from '@/components/text/PageTitle';
+import { TextHoverEffect } from '@/components/text/TextHover';
 import { Separator } from '@/components/ui/Separator';
 import { name, title } from '@/resources/config';
 import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
 
 const firstName = name.trim().split(' ').pop() || 'Florin';
-const jobTitle = 'développeur front-end et designer web UX / UI';
+const jobTitle = 'développeur front-end et designer UX / UI';
 const experienceYears = 10;
 
 const structuredData = {
@@ -95,7 +96,14 @@ const Home = (): React.JSX.Element => {
 					<CV className="my-4" />
 					<PageParagraph>
 						Je travaille actuellement chez{' '}
-						<Link href="/work" className="font-medium text-foreground" prefetch={false}>
+						<Link
+							href="https://wefix.net"
+							aria-label="Voir le site de WeFix !"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="font-medium text-foreground"
+							prefetch={false}
+						>
 							<span className="text-theme">/</span>WeFix
 						</Link>
 						, leader de la réparation, où je développe des solutions web pour améliorer
@@ -226,6 +234,10 @@ const Home = (): React.JSX.Element => {
 				<Separator className="my-12" />
 
 				<ArticlesContent />
+
+				<div className="mt-20 flex items-center justify-center">
+					<TextHoverEffect text={firstName.toUpperCase()} />
+				</div>
 			</section>
 		</>
 	);

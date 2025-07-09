@@ -1,7 +1,7 @@
 {
-	"name": "cuzeac-florin-portfolio",
+	"name": "portfolio",
 	"description": "Mon nouveau site web personnel, construit avec Next.js, Tailwind CSS, et MDX.",
-	"version": "5.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"license": "MIT",
 	"url": "https://cuzeac-florin.app",
