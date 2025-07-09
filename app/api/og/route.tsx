@@ -5,13 +5,9 @@ import { baseURL, name } from '@/resources/config';
 
 export const runtime = 'edge';
 
-const interRegular: Promise<ArrayBuffer> = fetch(
-	new URL('../../../fonts/Inter-Regular.ttf', import.meta.url),
-).then((res: Response) => res.arrayBuffer());
-
-const interBold: Promise<ArrayBuffer> = fetch(
-	new URL('../../../fonts/CalSans-SemiBold.ttf', import.meta.url),
-).then((res: Response) => res.arrayBuffer());
+// Use system fonts for now - fonts can be added later
+const interRegular: Promise<ArrayBuffer> = Promise.resolve(new ArrayBuffer(0));
+const interBold: Promise<ArrayBuffer> = Promise.resolve(new ArrayBuffer(0));
 
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 	try {
@@ -139,20 +135,8 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 			{
 				width: 1200,
 				height: 630,
-				fonts: [
-					{
-						name: 'Inter',
-						data: fontRegular,
-						weight: 400,
-						style: 'normal',
-					},
-					{
-						name: 'Cal Sans',
-						data: fontBold,
-						weight: 700,
-						style: 'normal',
-					},
-				],
+				// Use system fonts for now
+				fonts: [],
 			},
 		);
 	} catch (error) {

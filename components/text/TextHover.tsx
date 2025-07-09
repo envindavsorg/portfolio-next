@@ -3,21 +3,31 @@
 import { motion } from 'motion/react';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { useOptimizedIntersection } from '@/hooks/useOptimizedIntersection';
 
 interface TextHoverEffectProps {
 	text: string;
 	duration?: number;
 	automatic?: boolean;
+	triggerOnView?: boolean;
 }
 
 export const TextHoverEffect = ({
 	text,
 	duration,
+	triggerOnView = true,
 }: TextHoverEffectProps): React.JSX.Element => {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const [cursor, setCursor] = useState({ x: 0, y: 0 });
 	const [hovered, setHovered] = useState(false);
 	const [maskPosition, setMaskPosition] = useState({ cx: '50%', cy: '50%' });
+	const [hasTriggered, setHasTriggered] = useState(false);
+
+	const [intersectionRef, isIntersecting] = useOptimizedIntersection({
+		threshold: 0.3,
+		once: true,
+		enabled: triggerOnView,
+	});
 
 	useEffect(() => {
 		if (svgRef.current && cursor.x !== null && cursor.y !== null) {
@@ -31,9 +41,24 @@ export const TextHoverEffect = ({
 		}
 	}, [cursor]);
 
+	useEffect(() => {
+		if (triggerOnView && isIntersecting && !hasTriggered) {
+			setHasTriggered(true);
+		}
+	}, [isIntersecting, triggerOnView, hasTriggered]);
+
+	const combinedRef = (node: SVGSVGElement | null) => {
+		svgRef.current = node;
+		if (intersectionRef.current !== node) {
+			(intersectionRef as React.RefObject<SVGSVGElement | null>).current = node;
+		}
+	};
+
+	const shouldAnimate = triggerOnView ? hasTriggered : true;
+
 	return (
 		<svg
-			ref={svgRef}
+			ref={combinedRef}
 			width="100%"
 			height="100%"
 			viewBox="0 0 300 100"
@@ -77,17 +102,19 @@ export const TextHoverEffect = ({
 					<rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
 				</mask>
 			</defs>
-			<text
+			<motion.text
 				x="50%"
 				y="50%"
 				textAnchor="middle"
 				dominantBaseline="middle"
 				strokeWidth="0.3"
 				className="fill-transparent stroke-neutral-700/40 font-bold font-geist-sans text-7xl dark:stroke-neutral-400/50"
-				style={{ opacity: hovered ? 0.7 : 0 }}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: hovered ? 0.7 : 0 }}
+				transition={{ duration: 0.2 }}
 			>
 				{text}
-			</text>
+			</motion.text>
 			<motion.text
 				x="50%"
 				y="50%"
@@ -96,18 +123,23 @@ export const TextHoverEffect = ({
 				strokeWidth="0.3"
 				className="fill-transparent stroke-neutral-700/40 font-bold font-geist-sans text-7xl dark:stroke-neutral-400/50"
 				initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
-				animate={{
-					strokeDashoffset: 0,
-					strokeDasharray: 1000,
-				}}
+				animate={
+					shouldAnimate
+						? {
+								strokeDashoffset: 0,
+								strokeDasharray: 1000,
+							}
+						: {}
+				}
 				transition={{
 					duration: 4,
 					ease: 'easeInOut',
+					delay: 0.5,
 				}}
 			>
 				{text}
 			</motion.text>
-			<text
+			<motion.text
 				x="50%"
 				y="50%"
 				textAnchor="middle"
@@ -116,9 +148,12 @@ export const TextHoverEffect = ({
 				strokeWidth="0.3"
 				mask="url(#textMask)"
 				className="fill-transparent font-bold font-geist-sans text-7xl"
+				initial={{ opacity: 0 }}
+				animate={{ opacity: shouldAnimate ? 1 : 0 }}
+				transition={{ duration: 0.5, delay: 1 }}
 			>
 				{text}
-			</text>
+			</motion.text>
 		</svg>
 	);
 };

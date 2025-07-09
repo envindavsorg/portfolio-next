@@ -1,19 +1,19 @@
-export const baseURL: string = 'cuzeac-florin.app';
-export const name: string = 'Cuzeac Florin';
-export const title: string = 'Crée, innove, impacte.';
-export const id: string = '@cuzeacflorin';
-export const initials: string = 'CF';
-export const githubUsername: string = 'envindavsorg';
-export const mail: string = 'florin@cuzeac.com';
-export const phone: string = '+33658058665';
+export const baseURL = 'cuzeac-florin.app' as const;
+export const name = 'Cuzeac Florin' as const;
+export const title = 'Crée, innove, impacte.' as const;
+export const id = '@cuzeacflorin' as const;
+export const initials = 'CF' as const;
+export const githubUsername = 'envindavsorg' as const;
+export const mail = 'florin@cuzeac.com' as const;
+export const phone = '+33658058665' as const;
 
-const birthYear: number = 1994;
-export const age: number = new Date().getFullYear() - birthYear;
-export const developerSince: number = new Date().getFullYear() - 2018;
+const birthYear = 1994 as const;
+export const age = new Date().getFullYear() - birthYear;
+export const developerSince = new Date().getFullYear() - 2018;
 
-export const keywords: string[] = [
+export const keywords = [
 	'next.js',
-	'framer motion',
+	'motion',
 	'react',
 	'javascript',
 	'typescript',
@@ -22,10 +22,10 @@ export const keywords: string[] = [
 	'web development',
 	'responsive ui',
 	'portfolio',
-];
+] as const;
 
 // Enable localization
-export const i18n: boolean = false;
+export const i18n = false as const;
 
 // Enable or disable routes
 export const routes = {
@@ -35,28 +35,24 @@ export const routes = {
 	'/blog': true,
 	'/contact': true,
 	'/github': true,
-} as const;
+} as const satisfies Record<string, boolean>;
 
 // Manage localized content in the messages folder
-type Options = {
-	locales: string[];
-	defaultLocale: string;
-};
-
-export const i18nOptions: Options = {
+export const i18nOptions = {
 	// A list of all locales that are supported, e.g. ['en', 'fr']
 	locales: ['fr', 'en'],
 	// Locale used by default and as a fallback
 	defaultLocale: 'fr',
+} as const satisfies {
+	locales: readonly string[];
+	defaultLocale: string;
 };
 
 // enable or disable the display of the location and time
-type Display = {
-	location: boolean;
-	time: boolean;
-};
-
-export const display: Display = {
+export const display = {
 	location: true,
 	time: true,
+} as const satisfies {
+	location: boolean;
+	time: boolean;
 };

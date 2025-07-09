@@ -2,14 +2,14 @@ import { routes } from '@/resources/config';
 
 export type RouteKey = keyof typeof routes;
 
-export type Navigation = {
-	name: string;
-	description: string;
-	link: RouteKey;
-	position?: number;
-};
+export interface Navigation {
+	readonly name: string;
+	readonly description: string;
+	readonly link: RouteKey;
+	readonly position?: number;
+}
 
-const data: Navigation[] = [
+const data = [
 	{
 		name: 'Accueil',
 		description: 'Page d’accueil de mon site',
@@ -40,10 +40,10 @@ const data: Navigation[] = [
 		description: 'N’hésitez pas à me contacter',
 		link: '/contact' as const,
 	},
-];
+] as const satisfies ReadonlyArray<Pick<Navigation, 'name' | 'description' | 'link'>>;
 
-const TOTAL_LINES = 30;
-const LINE_SPACING = 4;
+const TOTAL_LINES = 30 as const;
+const LINE_SPACING = 4 as const;
 const activeItems = data.filter((navItem) => routes[navItem.link]);
 const totalUsedLines = activeItems.length * (LINE_SPACING + 1);
 

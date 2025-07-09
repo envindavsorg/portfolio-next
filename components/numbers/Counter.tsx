@@ -6,7 +6,7 @@ import {
 	useInView,
 	useMotionValue,
 	useSpring,
-} from 'framer-motion';
+} from 'motion/react';
 import type React from 'react';
 import type { RefObject } from 'react';
 import { useEffect, useRef } from 'react';

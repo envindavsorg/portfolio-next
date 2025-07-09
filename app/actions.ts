@@ -2,6 +2,7 @@
 
 import { getCachedData, setCachedData } from '@/lib/cache';
 import { octokit } from '@/lib/octokit';
+import { githubUsername } from '@/resources/config';
 
 export async function getGithubStats() {
 	const gql = String.raw;
@@ -54,7 +55,7 @@ export async function getGithubStats() {
             }
          }
       `,
-		{ login: 'olivercederborg' },
+		{ login: githubUsername },
 	);
 	return {
 		issues: user.closedIssues.totalCount + user.openIssues.totalCount,
@@ -114,7 +115,7 @@ export async function getGithubContributions() {
             }
          }
       `,
-		{ login: 'olivercederborg' },
+		{ login: githubUsername },
 	);
 
 	const weeklyContributions = user.contributionsCollection.contributionCalendar.weeks;

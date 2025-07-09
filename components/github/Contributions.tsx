@@ -4,7 +4,7 @@ import { Alert, AlertDescription } from '@/components/ui/Alert';
 import { dayjs } from '@/lib/dayjs';
 import { cn } from '@/lib/utils';
 import { GitDiff, GithubLogo } from '@phosphor-icons/react/dist/ssr';
-import { type Variants, motion } from 'framer-motion';
+import { type Variants, motion } from 'motion/react';
 import Image from 'next/image';
 import type React from 'react';
 import { Fragment, memo, useEffect, useRef, useState } from 'react';

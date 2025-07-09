@@ -8,7 +8,7 @@ import { PugIcon } from '@/components/icons/Pug';
 import { SassIcon } from '@/components/icons/Sass';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import type React from 'react';
 
 type Languages = {

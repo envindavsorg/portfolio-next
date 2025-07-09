@@ -2,12 +2,10 @@
 
 import { Slot } from '@radix-ui/react-slot';
 import {
-	type ForwardRefComponent,
-	type HTMLMotionProps,
-	type MotionProps,
 	motion,
-} from 'framer-motion';
-import { stagger } from 'motion';
+	stagger,
+	type Variants,
+} from 'motion/react';
 import { defaultVariants } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +13,11 @@ type BaseMotionProps = {
 	children: React.ReactNode;
 	className?: string;
 	asChild?: boolean;
-} & MotionProps;
+	initial?: string;
+	animate?: string;
+	exit?: string;
+	variants?: Variants;
+};
 
 export function Motion({
 	children,
@@ -27,9 +29,7 @@ export function Motion({
 	variants,
 	...props
 }: BaseMotionProps) {
-	const Comp = asChild
-		? (motion.create(Slot) as ForwardRefComponent<HTMLDivElement, HTMLMotionProps<'div'>>)
-		: motion.div;
+	const Comp = asChild ? motion.create(Slot) : motion.div;
 
 	const defaultProps: Partial<BaseMotionProps> = {
 		initial: initial || 'hidden',

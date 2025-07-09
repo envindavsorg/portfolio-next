@@ -13,7 +13,6 @@ export const AvatarCard = memo(
 	(): React.JSX.Element => (
 		<motion.div
 			variants={defaultVariantsNoDelay}
-			whileHover={{ scale: 1.05 }}
 			className={cn(
 				'col-span-2 col-start-1 row-span-3 row-start-1 sm:col-span-2 sm:col-start-1 sm:row-span-3 sm:row-start-1',
 				'overflow-hidden rounded-xl sm:h-66.5',

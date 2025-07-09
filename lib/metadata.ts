@@ -28,7 +28,7 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		description,
 		metadataBase: new URL(`https://${baseURL}`),
 		applicationName: name,
-		keywords,
+		keywords: [...keywords],
 		openGraph: {
 			title,
 			description,

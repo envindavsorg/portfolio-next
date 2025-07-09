@@ -1,35 +1,34 @@
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { type RefObject, useEffect, useRef, useState } from 'react';
 
 interface UseIntersectionObserverOptions extends IntersectionObserverInit {
 	once?: boolean;
 	enabled?: boolean;
 }
 
-/**
- * Optimized intersection observer hook with better performance
- */
-export function useOptimizedIntersection<T extends HTMLElement = HTMLElement>(
-	options: UseIntersectionObserverOptions = {}
-): [RefObject<T | null>, boolean] {
+export const useOptimizedIntersection = <T extends HTMLElement = HTMLElement>(
+	options: UseIntersectionObserverOptions = {},
+): [RefObject<T | null>, boolean] => {
 	const { once = false, enabled = true, ...observerOptions } = options;
 	const elementRef = useRef<T>(null);
 	const [isIntersecting, setIsIntersecting] = useState(false);
 	const observerRef = useRef<IntersectionObserver | null>(null);
 
 	useEffect(() => {
-		if (!enabled) return;
+		if (!enabled) {
+			return;
+		}
 
 		const element = elementRef.current;
-		if (!element) return;
+		if (!element) {
+			return;
+		}
 
-		// Create observer only once
 		if (!observerRef.current) {
 			observerRef.current = new IntersectionObserver(
 				([entry]) => {
 					const isVisible = entry.isIntersecting;
 					setIsIntersecting(isVisible);
-					
-					// Disconnect after first intersection if once is true
+
 					if (once && isVisible && observerRef.current) {
 						observerRef.current.disconnect();
 					}
@@ -38,7 +37,7 @@ export function useOptimizedIntersection<T extends HTMLElement = HTMLElement>(
 					threshold: 0.1,
 					rootMargin: '50px',
 					...observerOptions,
-				}
+				},
 			);
 		}
 
@@ -51,7 +50,6 @@ export function useOptimizedIntersection<T extends HTMLElement = HTMLElement>(
 		};
 	}, [enabled, once, observerOptions.threshold, observerOptions.rootMargin]);
 
-	// Cleanup on unmount
 	useEffect(() => {
 		return () => {
 			if (observerRef.current) {
@@ -61,4 +59,4 @@ export function useOptimizedIntersection<T extends HTMLElement = HTMLElement>(
 	}, []);
 
 	return [elementRef, isIntersecting];
-}
+};

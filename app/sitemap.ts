@@ -4,22 +4,31 @@ import { routes } from '@/resources/config';
 import type { RouteKey } from '@/resources/navigation';
 
 export const getSlugs = async (dir: string): Promise<string[]> => {
-	const entries: Dirent[] = await fs.readdir(dir, {
-		recursive: true,
-		withFileTypes: true,
-	});
+	const walkDir = async (currentDir: string): Promise<string[]> => {
+		const entries = await fs.readdir(currentDir, { withFileTypes: true });
+		const slugs: string[] = [];
 
-	return entries
-		.filter((entry: Dirent) => entry.isFile() && entry.name === 'page.mdx')
-		.map((entry: Dirent) => {
-			const relativePath: string = path.relative(
-				dir,
-				path.join(entry.parentPath, entry.name),
-			);
+		for (const entry of entries) {
+			const fullPath = path.join(currentDir, entry.name);
+			
+			if (entry.isDirectory()) {
+				// Recursively walk subdirectories
+				const subSlugs = await walkDir(fullPath);
+				slugs.push(...subSlugs);
+			} else if (entry.isFile() && entry.name === 'page.mdx') {
+				// Get the relative path and extract the directory
+				const relativePath = path.relative(dir, fullPath);
+				const slug = path.dirname(relativePath).replace(/\\/g, '/');
+				if (slug !== '.') {
+					slugs.push(slug);
+				}
+			}
+		}
 
-			return path.dirname(relativePath);
-		})
-		.map((slug: string) => slug.replace(/\\/g, '/'));
+		return slugs;
+	};
+
+	return await walkDir(dir);
 };
 
 interface Pages {

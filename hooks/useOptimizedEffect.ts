@@ -1,23 +1,17 @@
-import { useEffect, useRef, type DependencyList, type EffectCallback } from 'react';
+import { type DependencyList, type EffectCallback, useEffect, useRef } from 'react';
 
-/**
- * Optimized useEffect hook that prevents unnecessary re-runs
- * Uses deep comparison for dependency arrays
- */
-export function useOptimizedEffect(
+export const useOptimizedEffect = (
 	effect: EffectCallback,
 	deps?: DependencyList,
-): void {
+): void => {
 	const prevDeps = useRef<DependencyList | undefined>(undefined);
 	const hasChanged = useRef(true);
 
-	// Compare dependencies
 	if (deps !== undefined) {
-		hasChanged.current = !prevDeps.current || 
+		hasChanged.current =
+			!prevDeps.current ||
 			deps.length !== prevDeps.current.length ||
-			deps.some((dep, index) => 
-				!Object.is(dep, prevDeps.current?.[index])
-			);
+			deps.some((dep, index) => !Object.is(dep, prevDeps.current?.[index]));
 	}
 
 	useEffect(() => {
@@ -26,4 +20,4 @@ export function useOptimizedEffect(
 			return effect();
 		}
 	}, deps);
-}
+};
