@@ -5,7 +5,6 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 import { ViewTransitions } from 'next-view-transitions';
 import type React from 'react';
 import { Sparkles } from '@/components/background/Sparkles';
@@ -59,14 +58,6 @@ const RootLayout = async ({ children }: Readonly<RootLayoutProps>) => (
 					<>
 						<Analytics mode={'production'} debug={true} />
 						<SpeedInsights debug={false} />
-
-						{process.env.NODE_ENV === 'production' && (
-							<Script
-								defer
-								src={process.env.UMAMI_SCRIPT}
-								data-website-id={process.env.UMAMI_WEBSITE_ID}
-							/>
-						)}
 					</>
 				)}
 			</body>

@@ -1,8 +1,8 @@
 'use server';
 
+import type { StaticImageData } from 'next/image';
 import { githubUser } from '@/actions/github/user.action';
 import { logger } from '@/lib/logger';
-import type { StaticImageData } from 'next/image';
 
 export interface ChannelSubscribersData {
 	avatar: string | StaticImageData;
@@ -12,9 +12,7 @@ export interface ChannelSubscribersData {
 	icon: string;
 }
 
-export const channelSubscribers = async (): Promise<
-	ChannelSubscribersData[]
-> => {
+export const channelSubscribers = async (): Promise<ChannelSubscribersData[]> => {
 	try {
 		const { avatar, login, followers, following } = await githubUser(
 			process.env.GITHUB_USERNAME!,
@@ -29,11 +27,10 @@ export const channelSubscribers = async (): Promise<
 				icon: 'github',
 			},
 			{
-				avatar:
-					'https://media.licdn.com/dms/image/v2/D4E03AQGMBLwqpxHRGA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1715716598040?e=1736380800&v=beta&t=hksHAUUltYsAhm_vvQk7W0azVMQKy3WKi0waGCZvEBs',
+				avatar: '/og-author.png',
 				name: 'Florin Cuzeac',
 				link: 'https://www.linkedin.com/in/cuzeacflorin',
-				metric: 2327,
+				metric: 2414,
 				icon: 'linkedin',
 			},
 		];

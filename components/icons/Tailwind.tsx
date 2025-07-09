@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const TailwindIcon = (props: SVGProps<SVGSVGElement>) => (
+export const TailwindIcon = (props: SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
 		viewBox="0 0 256 154"
 		width="1em"
@@ -11,13 +11,7 @@ export const TailwindIcon = (props: SVGProps<SVGSVGElement>) => (
 		{...props}
 	>
 		<defs>
-			<linearGradient
-				x1="-2.778%"
-				y1="32%"
-				x2="100%"
-				y2="67.556%"
-				id="gradient"
-			>
+			<linearGradient x1="-2.778%" y1="32%" x2="100%" y2="67.556%" id="gradient">
 				<stop stopColor="#2298BD" offset="0%" />
 				<stop stopColor="#0ED7B5" offset="100%" />
 			</linearGradient>

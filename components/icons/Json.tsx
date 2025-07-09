@@ -1,7 +1,7 @@
-import React from 'react';
+import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const JsonIcon = (props: SVGProps<SVGSVGElement>) => (
+export const JsonIcon = (props: SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="1em"

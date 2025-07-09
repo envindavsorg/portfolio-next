@@ -1,9 +1,7 @@
 import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const FramerMotionIcon = (
-	props: SVGProps<SVGSVGElement>,
-): React.ReactElement => (
+export const FramerMotionIcon = (props: SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
 		viewBox="0 0 256 384"
 		width="1em"

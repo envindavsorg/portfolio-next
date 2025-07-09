@@ -1,16 +1,17 @@
+import type React from 'react';
+import { useMemo } from 'react';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
+import { NextJSIcon } from '@/components/icons/Next';
 import { ReactIcon } from '@/components/icons/React';
 import { TailwindIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
 import { Badge } from '@/components/ui/Badge';
-import type React from 'react';
-import { useMemo } from 'react';
 
 type BadgeWithIconProps = {
-	type: 'html' | 'css' | 'js' | 'react' | 'vue' | 'ts' | 'tailwind';
+	type: 'html' | 'css' | 'js' | 'react' | 'next' | 'vue' | 'ts' | 'tailwind';
 };
 
 const BADGE_CONFIG = {
@@ -18,14 +19,13 @@ const BADGE_CONFIG = {
 	css: { icon: CSSIcon, label: 'CSS' },
 	js: { icon: JavaScriptIcon, label: 'JavaScript' },
 	react: { icon: ReactIcon, label: 'React' },
-	vue: { icon: VueIcon, label: 'Vue' },
+	next: { icon: NextJSIcon, label: 'Next.js' },
+	vue: { icon: VueIcon, label: 'Vue.js' },
 	ts: { icon: TypeScriptIcon, label: 'TypeScript' },
-	tailwind: { icon: TailwindIcon, label: 'Tailwind' },
+	tailwind: { icon: TailwindIcon, label: 'Tailwind.css' },
 } as const;
 
-export const BadgeWithIcon = ({
-	type,
-}: BadgeWithIconProps): React.JSX.Element => {
+export const BadgeWithIcon = ({ type }: BadgeWithIconProps): React.JSX.Element => {
 	const { icon: IconComponent, label } = useMemo(() => {
 		return BADGE_CONFIG[type] || { icon: null, label: '' };
 	}, [type]);

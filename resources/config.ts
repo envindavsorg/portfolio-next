@@ -24,9 +24,6 @@ export const keywords: string[] = [
 	'portfolio',
 ];
 
-// Enable or disable the reading progress bar
-export const progressBar: boolean = false;
-
 // Enable localization
 export const i18n: boolean = false;
 

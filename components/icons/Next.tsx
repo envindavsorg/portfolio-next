@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const NextJSIcon = (props: SVGProps<SVGSVGElement>) => (
+export const NextJSIcon = (props: SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
 		width="1em"
 		height="1em"
@@ -24,25 +24,12 @@ export const NextJSIcon = (props: SVGProps<SVGSVGElement>) => (
 			<circle cx={90} cy={90} r={90} fill="black" />
 		</mask>
 		<g mask="url(#mask0_408_139)">
-			<circle
-				cx={90}
-				cy={90}
-				r={87}
-				fill="#000000"
-				stroke="#FFFFFF"
-				strokeWidth={6}
-			/>
+			<circle cx={90} cy={90} r={87} fill="#000000" stroke="#FFFFFF" strokeWidth={6} />
 			<path
 				d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z"
 				fill="url(#paint0_linear_408_139)"
 			/>
-			<rect
-				x={115}
-				y={54}
-				width={12}
-				height={72}
-				fill="url(#paint1_linear_408_139)"
-			/>
+			<rect x={115} y={54} width={12} height={72} fill="url(#paint1_linear_408_139)" />
 		</g>
 		<defs>
 			<linearGradient

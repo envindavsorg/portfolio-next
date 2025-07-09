@@ -1,7 +1,7 @@
-import React from 'react';
+import type React from 'react';
 import type { SVGProps } from 'react';
 
-export const FlaskIcon = (props: SVGProps<SVGSVGElement>) => (
+export const FlaskIcon = (props: SVGProps<SVGSVGElement>): React.JSX.Element => (
 	<svg
 		fill="#ffffff"
 		width="1em"

@@ -19,13 +19,10 @@ export interface ArticleWithSlug extends Article {
 }
 
 const importArticle = async (articleFilename: string): Promise<ArticleWithSlug> => {
-	const articleModule = await import(`../app/website/blog/articles/${articleFilename}`);
+	const articleModule = await import(`../app/blog/articles/${articleFilename}`);
 	const { article } = articleModule;
 
-	const contentPath: string = path.resolve(
-		'./app/website/blog/articles',
-		articleFilename,
-	);
+	const contentPath: string = path.resolve('./app/blog/articles', articleFilename);
 	const content: string = await fs.readFile(contentPath, 'utf-8');
 
 	article.readingTime = readingDuration(content, {
@@ -47,7 +44,7 @@ const importArticle = async (articleFilename: string): Promise<ArticleWithSlug> 
 
 export const getAllArticles = async (): Promise<ArticleWithSlug[]> => {
 	const articleFilenames: string[] = await glob('*/page.mdx', {
-		cwd: './app/website/blog/articles',
+		cwd: './app/blog/articles',
 	});
 
 	const articles: Awaited<ArticleWithSlug>[] = await Promise.all(

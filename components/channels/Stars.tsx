@@ -1,27 +1,43 @@
-import { type ChannelStarsData, channelStars } from '@/actions/channel/stars';
-import { ChannelSkeleton } from '@/components/channels/Skeleton';
-import { Counter } from '@/components/numbers/Counter';
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
-import { GithubLogo } from '@phosphor-icons/react/dist/ssr';
+import { ArrowUpRightIcon, GithubLogoIcon } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import Link from 'next/link';
 import type React from 'react';
 import { Suspense } from 'react';
+import { type ChannelStarsData, channelStars } from '@/actions/channel/stars';
+import { ChannelSkeleton } from '@/components/channels/Skeleton';
+import { Counter } from '@/components/numbers/Counter';
+import { cn } from '@/lib/utils';
 
-export const StarsChannel = async (): Promise<React.JSX.Element> => {
+interface StarsChannelProps {
+	className?: string;
+}
+
+export const StarsChannel = async ({
+	className,
+}: StarsChannelProps): Promise<React.JSX.Element> => {
 	const subscribers: ChannelStarsData[] = await channelStars();
 
 	return (
 		<Suspense
 			fallback={
-				<div className="mt-6 flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+				<div
+					className={cn(
+						className,
+						'flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0',
+					)}
+				>
 					{Array.from({ length: 2 }).map((_, idx: number) => (
 						<ChannelSkeleton key={`${idx}-channel-skeleton`} />
 					))}
 				</div>
 			}
 		>
-			<div className="mt-6 flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
+			<div
+				className={cn(
+					className,
+					'flex w-full flex-col space-x-0 space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0',
+				)}
+			>
 				{subscribers.map(({ avatar, name, link, metric }, idx: number) => (
 					<div key={`${name}-${idx}`} className="group flex w-full">
 						<Link
@@ -43,7 +59,7 @@ export const StarsChannel = async (): Promise<React.JSX.Element> => {
 										priority
 									/>
 									<div className="-bottom-0.5 -right-1.5 absolute rounded-full bg-foreground p-1 *:size-3 *:text-background">
-										<GithubLogo />
+										<GithubLogoIcon weight="duotone" />
 									</div>
 								</div>
 								<div className="flex flex-col gap-y-0.5">
@@ -55,8 +71,8 @@ export const StarsChannel = async (): Promise<React.JSX.Element> => {
 								</div>
 							</div>
 							<div className="group-hover:-rotate-12 transform text-neutral-700 transition-transform duration-300 dark:text-neutral-300">
-								<ArrowUpRight
-									weight="regular"
+								<ArrowUpRightIcon
+									weight="duotone"
 									className="text-lg group-hover:text-theme"
 								/>
 							</div>

@@ -1,8 +1,7 @@
-import { ogImageSchema } from '@/lib/validations/og';
-import { baseURL, name } from '@/resources/config';
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
-import type React from 'react';
+import { ogImageSchema } from '@/lib/validations/og';
+import { baseURL, name } from '@/resources/config';
 
 export const runtime = 'edge';
 
@@ -157,6 +156,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 			},
 		);
 	} catch (error) {
+		console.error(error);
 		return new Response(`Failed to generate image`, {
 			status: 500,
 		});
