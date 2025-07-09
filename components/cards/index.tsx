@@ -19,7 +19,7 @@ export const Cards = async (): Promise<React.JSX.Element> => {
 
 		return (
 			<Motion asChild animate="visible">
-				<section className="mt-8 grid grid-cols-4 grid-rows-6 gap-4 sm:grid-cols-7 sm:grid-rows-3">
+				<section className="mt-8 grid grid-cols-4 grid-rows-6 gap-3 sm:grid-cols-7 sm:grid-rows-3">
 					<AvatarCard />
 					<TimeCard />
 					<LocationCard />

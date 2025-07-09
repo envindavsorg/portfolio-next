@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type React from 'react';
 import { FadeInStagger } from '@/components/animations/FadeIn';
+import { CV } from '@/components/blocs/CV';
 import { Cards } from '@/components/cards';
 import { Counter } from '@/components/text/Counter';
 import PageParagraph from '@/components/text/PageParagraph';
@@ -21,6 +22,7 @@ const Home = (): React.JSX.Element => (
 				</span>
 				, passionné par la création d’applications fiables, belles et fonctionnelles.
 			</PageParagraph>
+			<CV className="my-4" />
 			<PageParagraph>
 				Je travaille actuellement chez{' '}
 				<Link href={'/work'} className="font-medium text-foreground">

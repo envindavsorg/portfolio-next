@@ -1,6 +1,6 @@
 'use client';
 
-import { CaretLeftIcon, CursorClickIcon } from '@phosphor-icons/react';
+import { ArrowLeftIcon } from '@phosphor-icons/react';
 import {
 	AnimatePresence,
 	MotionConfig,
@@ -108,7 +108,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 		<motion.button
 			ref={triggerRef}
 			layoutId={`floating-panel-trigger-${uniqueId}`}
-			className="h-11 rounded-md border border-neutral-200 bg-background px-8 dark:border-neutral-700"
+			className="group relative h-14 cursor-pointer overflow-hidden rounded-md border border-neutral-200/50 px-10 ring-1 ring-black/5 transition-all duration-500 dark:border-neutral-700/50"
 			style={{ borderRadius: 8 }}
 			onClick={handleClick}
 			whileHover={{ scale: 1.05 }}
@@ -122,11 +122,12 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 			>
 				<motion.span
 					layoutId={`floating-panel-label-${uniqueId}`}
-					className="font-bold text-sm"
+					className="font-semibold text-neutral-600 leading-8 dark:text-neutral-300"
 				>
 					{title}
 				</motion.span>
 			</motion.div>
+			<div className="-left-16 absolute top-0 h-full w-8 rotate-[30deg] scale-y-150 bg-white/10 transition-all duration-700 group-hover:left-[calc(100%+1rem)]" />
 		</motion.button>
 	);
 };
@@ -195,7 +196,9 @@ export const FloatingPanelContent = ({
 							ref={contentRef}
 							layoutId={`floating-panel-${uniqueId}`}
 							className={cn(
-								'fixed z-50 aspect-square overflow-hidden rounded-md border border-neutral-200 bg-neutral-50 p-4 outline-none dark:border-neutral-700 dark:bg-neutral-800',
+								'fixed z-50 aspect-square overflow-hidden rounded-md p-4 outline-none',
+								'border border-neutral-200/50 dark:border-neutral-700/50',
+								'bg-white ring-1 ring-black/5 dark:bg-black',
 								className,
 							)}
 							style={{
@@ -212,7 +215,6 @@ export const FloatingPanelContent = ({
 						>
 							<FloatingPanelTitle>{title}</FloatingPanelTitle>
 							{children}
-							<CursorClickIcon className="-bottom-8 -right-8 absolute size-28 shrink-0 text-theme opacity-10" />
 						</motion.div>
 					</div>
 				</>
@@ -232,7 +234,7 @@ const FloatingPanelTitle = ({ children }: FloatingPanelTitleProps) => {
 		<motion.div layoutId={`floating-panel-label-container-${uniqueId}`}>
 			<motion.div
 				layoutId={`floating-panel-label-${uniqueId}`}
-				className="font-extrabold text-sm"
+				className="font-semibold text-neutral-600 text-sm dark:text-neutral-300"
 				id={`floating-panel-title-${uniqueId}`}
 			>
 				{children}
@@ -288,13 +290,13 @@ export const FloatingPanelCloseButton = ({
 	return (
 		<motion.button
 			type="button"
-			className={cn('flex items-center', className)}
+			className={cn('flex cursor-pointer items-center', className)}
 			onClick={closeFloatingPanel}
 			aria-label="Fermer le panneau flottant"
 			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.9 }}
 		>
-			<CaretLeftIcon className="size-4" weight="bold" />
+			<ArrowLeftIcon className="size-5" weight="duotone" />
 		</motion.button>
 	);
 };
@@ -313,6 +315,7 @@ export const FloatingPanelButton = ({
 	<motion.button
 		className={cn(
 			'z-20 flex w-full items-center gap-2 rounded-md px-4 py-2 text-left text-sm hover:bg-background',
+			'cursor-pointer',
 			className,
 		)}
 		onClick={onClick}
