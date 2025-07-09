@@ -19,7 +19,7 @@ import { absoluteUrl, constructMetadata } from '@/site/metadata';
 export const metadata: Metadata = constructMetadata({
 	title: name,
 	description:
-		"Développeur web, passionné par la création d'applications belles et fonctionnelles, et de nouvelles technologies.",
+		"Florin, développeur web avec 10 ans d'expérience, passionné par la création d'applications fiables, belles et fonctionnelles. Actuellement chez WeFix.",
 	image: absoluteUrl(`/api/og?heading=${name}&type=image&mode=dark`),
 });
 
