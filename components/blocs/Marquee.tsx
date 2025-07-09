@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils';
 import type React from 'react';
+import { memo, useMemo } from 'react';
+import { cn } from '@/lib/utils';
 
 interface MarqueeProps {
 	className?: string;
@@ -8,49 +9,95 @@ interface MarqueeProps {
 	children?: React.ReactNode;
 	vertical?: boolean;
 	repeat?: number;
-	[key: string]: any;
+	duration?: string;
+	gap?: string;
 }
 
-export const Marquee = ({
-	className,
-	reverse,
-	pauseOnHover = false,
-	children,
-	vertical = false,
-	repeat = 4,
-	...props
-}: MarqueeProps): React.JSX.Element => (
-	<div
-		{...props}
-		className={cn(
-			'group relative flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]',
-			{
-				'flex-row': !vertical,
-				'flex-col': vertical,
-			},
-			className,
-		)}
-	>
-		{/* Left Blur */}
-		<div className="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-8 bg-gradient-to-r from-white/80 to-transparent dark:from-black/80" />
+const DEFAULT_CONFIG = {
+	duration: '40s',
+	gap: '1rem',
+	repeat: 4,
+} as const;
 
-		{/* Right Blur */}
-		<div className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-8 bg-gradient-to-l from-white/80 to-transparent dark:from-black/80" />
+export const Marquee = memo(
+	({
+		className,
+		reverse = false,
+		pauseOnHover = false,
+		children,
+		vertical = false,
+		repeat = DEFAULT_CONFIG.repeat,
+		duration = DEFAULT_CONFIG.duration,
+		gap = DEFAULT_CONFIG.gap,
+		...props
+	}: MarqueeProps): React.JSX.Element => {
+		const containerClasses = useMemo(
+			() =>
+				cn(
+					'group relative flex overflow-hidden p-2',
+					vertical ? 'flex-col' : 'flex-row',
+					className,
+				),
+			[vertical, className],
+		);
 
-		{Array(repeat)
-			.fill(0)
-			.map((_, i) => (
-				<div
-					key={i}
-					className={cn('flex shrink-0 justify-around [gap:var(--gap)]', {
-						'animate-marquee flex-row': !vertical,
-						'animate-marquee-vertical flex-col': vertical,
-						'group-hover:[animation-play-state:paused]': pauseOnHover,
-						'[animation-direction:reverse]': reverse,
-					})}
-				>
-					{children}
-				</div>
-			))}
-	</div>
+		const itemClasses = useMemo(
+			() =>
+				cn(
+					'flex shrink-0 justify-around',
+					vertical ? 'animate-marquee-vertical flex-col' : 'animate-marquee flex-row',
+					pauseOnHover && 'group-hover:[animation-play-state:paused]',
+					reverse && '[animation-direction:reverse]',
+				),
+			[vertical, pauseOnHover, reverse],
+		);
+
+		const containerStyle = useMemo(
+			() => ({
+				'--duration': duration,
+				'--gap': gap,
+				gap: `var(--gap)`,
+			}),
+			[duration, gap],
+		);
+
+		const itemStyle = useMemo(
+			() => ({
+				gap: `var(--gap)`,
+			}),
+			[],
+		);
+
+		const blurGradients = useMemo(
+			() => ({
+				left: vertical
+					? 'pointer-events-none absolute top-0 left-0 right-0 z-10 h-8 bg-gradient-to-b from-white/80 to-transparent dark:from-black/80'
+					: 'pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-8 bg-gradient-to-r from-white/80 to-transparent dark:from-black/80',
+				right: vertical
+					? 'pointer-events-none absolute bottom-0 left-0 right-0 z-10 h-8 bg-gradient-to-t from-white/80 to-transparent dark:from-black/80'
+					: 'pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-8 bg-gradient-to-l from-white/80 to-transparent dark:from-black/80',
+			}),
+			[vertical],
+		);
+
+		const repeatedItems = useMemo(
+			() =>
+				Array.from({ length: repeat }, (_, i) => (
+					<div key={i} className={itemClasses} style={itemStyle}>
+						{children}
+					</div>
+				)),
+			[repeat, itemClasses, itemStyle, children],
+		);
+
+		return (
+			<div {...props} className={containerClasses} style={containerStyle}>
+				{/* Blur Gradients */}
+				<div className={blurGradients.left} />
+				<div className={blurGradients.right} />
+
+				{repeatedItems}
+			</div>
+		);
+	},
 );

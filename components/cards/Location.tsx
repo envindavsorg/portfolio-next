@@ -93,7 +93,7 @@ export const LocationCard = memo((): React.JSX.Element => {
 		>
 			<div className="z-10 flex items-center gap-2">
 				<GlobeHemisphereWestIcon weight="duotone" className="size-6" />
-				<h2 className="font-medium text-base">Paris, France</h2>
+				<h2 className="font-medium text-base">Paris</h2>
 			</div>
 
 			<div className="absolute inset-x-0 bottom-[-75%] mx-auto aspect-square h-[150%] translate-x-[-12.5%] [@media(max-width:420px)]:h-[320px]">

@@ -33,7 +33,7 @@ export const GithubStatsCard = memo(
 				<div className="relative z-10 flex h-full flex-col justify-between gap-2">
 					<div className="flex items-center gap-2">
 						<GithubLogoIcon weight="duotone" className="size-6" />
-						<h2 className="font-medium text-base">Mes statistiques GitHub</h2>
+						<h2 className="font-medium text-base">Mes statistiques</h2>
 					</div>
 
 					<div className="flex flex-wrap items-end gap-4">
