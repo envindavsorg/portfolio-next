@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import type React from 'react';
 import { Suspense } from 'react';
+import { getBlogViews } from '@/actions/blog/views.actions';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { Articles } from '@/components/blog/Articles';
 import PageTitle from '@/components/text/PageTitle';
@@ -47,11 +48,12 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const BlogPage = async (): Promise<React.JSX.Element> => {
 	const articles = await getAllArticles();
+	const totalBlogViews = await getBlogViews(true);
 
 	return (
 		<section>
 			<PageTitle name={name} title={title}>
-				- tous les articles que j'ai écrit
+				- tous les articles que j'ai écrit | {totalBlogViews} vues sur le blog
 			</PageTitle>
 
 			<Separator className="my-12" />

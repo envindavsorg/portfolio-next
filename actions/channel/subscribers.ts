@@ -14,9 +14,7 @@ export interface ChannelSubscribersData {
 
 export const channelSubscribers = async (): Promise<ChannelSubscribersData[]> => {
 	try {
-		const { avatar, login, followers, following } = await githubUser(
-			process.env.GITHUB_USERNAME!,
-		);
+		const { avatar, login, followers, following } = await githubUser();
 
 		return [
 			{

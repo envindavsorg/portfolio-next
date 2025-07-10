@@ -22,11 +22,26 @@ export function getCachedData<T>(key: string): T | null {
 	return entry.data;
 }
 
-export function setCachedData<T>(key: string, data: T): void {
+export function setCachedData<T>(key: string, data: T, customDuration?: number): void {
 	cache.set(key, {
 		data,
 		timestamp: Date.now(),
 	});
+}
+
+export function getCachedDataWithCustomDuration<T>(key: string, duration: number): T | null {
+	const entry = cache.get(key);
+	if (!entry) {
+		return null;
+	}
+
+	const now = Date.now();
+	if (now - entry.timestamp > duration) {
+		cache.delete(key);
+		return null;
+	}
+
+	return entry.data;
 }
 
 export function clearCache(): void {

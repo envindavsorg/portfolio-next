@@ -4,14 +4,13 @@ import { GithubLogoIcon } from '@phosphor-icons/react/ssr';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { memo } from 'react';
-import type { getGithubContributions } from '@/app/actions';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
 interface GitHubStatsCardProps {
 	followers: number;
 	stars: number;
-	contributions: Awaited<ReturnType<typeof getGithubContributions>>;
+	contributions: Awaited<ReturnType<any>>;
 }
 
 export const GithubStatsCard = memo(
@@ -70,16 +69,18 @@ const contributionsColorMap: Record<string, string> = {
 const ContributionsGraph = ({
 	contributions,
 }: {
-	contributions: Awaited<ReturnType<typeof getGithubContributions>>;
+	contributions: Awaited<ReturnType<any>>;
 }) => {
-	const daysFlat = contributions.latestContributions.flatMap((week) => {
-		return week.contributionDays;
-	});
+	const daysFlat = contributions.latestContributions.flatMap(
+		(week: { contributionDays: any }) => {
+			return week.contributionDays;
+		},
+	);
 
 	return (
 		<div className="absolute inset-0 z-0 grid grid-flow-col grid-rows-7 gap-[2px] opacity-50 sm:gap-1 sm:p-0">
 			<div className="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/50 to-neutral-50/50 dark:from-neutral-950/95 dark:via-neutral-950/65 dark:to-transparent" />
-			{daysFlat.map((day, idx) => (
+			{daysFlat.map((day: { date: any; color: string | number }, idx: any) => (
 				<div
 					key={`day-${idx}-${day.date}`}
 					className={cn(

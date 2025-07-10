@@ -12,7 +12,6 @@ import {
 	channelSubscribers,
 } from '@/actions/channel/subscribers';
 import { ChannelSkeleton } from '@/components/channels/Skeleton';
-import { Counter } from '@/components/numbers/Counter';
 
 export const SubscribersChannel = async (): Promise<React.JSX.Element> => {
 	const subscribers: ChannelSubscribersData[] = await channelSubscribers();
@@ -56,7 +55,7 @@ export const SubscribersChannel = async (): Promise<React.JSX.Element> => {
 								<div className="flex flex-col gap-y-0.5">
 									<p className="font-extrabold font-geist-sans">{name}</p>
 									<p className="text-neutral-600 text-sm dark:text-neutral-400">
-										<Counter value={metric} className="font-semibold" /> abonnés
+										{metric} abonnés
 									</p>
 									<p className="sr-only">{name}</p>
 								</div>

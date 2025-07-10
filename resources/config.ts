@@ -8,8 +8,9 @@ export const mail = 'florin@cuzeac.com' as const;
 export const phone = '+33658058665' as const;
 
 const birthYear = 1994 as const;
-export const age = new Date().getFullYear() - birthYear;
-export const developerSince = new Date().getFullYear() - 2018;
+const date = new Date() as Date;
+export const age = date.getFullYear() - birthYear;
+export const developerSince = date.getFullYear() - 2018;
 
 export const keywords = [
 	'next.js',

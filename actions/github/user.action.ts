@@ -1,40 +1,120 @@
 'use server';
 
 import { octokit } from '@/db/octokit';
-import { query } from '@/graphql/user';
 import { getCachedData, setCachedData } from '@/lib/cache';
-import {
-	type GitHubData,
-	type GitHubResponse,
-	totalCommitsBestDay,
-	totalCommitsPerDay,
-	totalCommitsThisWeek,
-	totalCommitsThisYear,
-} from '@/lib/github';
 import { logger } from '@/lib/logger';
 
-export const githubUser = async (username: string): Promise<GitHubData> => {
-	if (!username) {
-		logger.error('→ username parameter is required !');
-		throw new Error('→ GITHUB_USERNAME env variable is not set ...');
-	}
+const { GITHUB_USERNAME } = process.env;
 
-	const cacheKey = `github-user-${username}`;
-	const cachedData = getCachedData<GitHubData>(cacheKey);
+export const githubUser = async (): Promise<any> => {
+	const cacheKey = `github-user-${GITHUB_USERNAME}`;
+	const cachedData = getCachedData(cacheKey);
 
 	if (cachedData) {
-		logger.info(`→ returning cached GitHub user data for ${username}`);
+		logger.info(`→ returning cached GitHub user data for ${GITHUB_USERNAME}`);
 		return cachedData;
 	}
 
+	const gql = String.raw;
+
 	try {
 		const { user } = await octokit.graphql<{
-			user: GitHubResponse;
-		}>(query, {
-			username,
-		});
+			user: {
+				login: string;
+				name: string;
+				avatarUrl: string;
+				followers: {
+					totalCount: number;
+				};
+				following: {
+					totalCount: number;
+				};
+				contributionsCollection: {
+					contributionCalendar: {
+						totalContributions: number;
+						weeks: {
+							contributionDays: {
+								color: string;
+								contributionCount: number;
+								date: string;
+							}[];
+						}[];
+					};
+				};
+				repositories: {
+					totalCount: number;
+					nodes: {
+						stargazers: { totalCount: number };
+					}[];
+					pageInfo: {
+						hasNextPage: boolean;
+						endCursor: string | null;
+					};
+				};
+			};
+		}>(
+			gql`
+			query ($username: String!) {
+				user(login: $username) {
+					login
+					name
+					avatarUrl
+					followers {
+						totalCount
+					}
+					following {
+						totalCount
+					}
+					contributionsCollection {
+						contributionCalendar {
+					        totalContributions
+		                    weeks {
+		                        contributionDays {
+		                            color
+		                            contributionCount
+		                            date
+		                        }
+		                    }
+				        }
+					}
+					repositories(ownerAffiliations: OWNER, first: 100) {
+		                totalCount
+		                nodes {
+		                    stargazers {
+		                        totalCount
+		                    }
+		                }
+		                pageInfo {
+		                    hasNextPage
+		                    endCursor
+		                }
+		            }
+				}
+			}
+		`,
+			{ username: GITHUB_USERNAME },
+		);
 
-		const githubData: GitHubData = {
+		const weeklyContributions = user.contributionsCollection.contributionCalendar.weeks;
+
+		// find the day with the highest contribution count.
+		let maxContributionDay = { contributionCount: 0, date: '', color: '' };
+
+		for (const week of weeklyContributions) {
+			for (const day of week.contributionDays) {
+				if (day.contributionCount > maxContributionDay.contributionCount) {
+					maxContributionDay = day;
+				}
+			}
+		}
+		const latestContributions = weeklyContributions.slice(-16);
+		const totalContributions =
+			user.contributionsCollection.contributionCalendar.totalContributions;
+
+		// Extract colors from the contribution calendar
+		const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+
+		const data = {
 			login: user.login,
 			name: user.name,
 			avatar: user.avatarUrl,
@@ -44,19 +124,24 @@ export const githubUser = async (username: string): Promise<GitHubData> => {
 				(totalStars, repo) => totalStars + repo.stargazers.totalCount,
 				0,
 			),
+			contributions: {
+				totalContributions,
+				latestContributions,
+				maxContributionDay,
+			},
+			// For backward compatibility with existing components
 			commits: {
-				thisYear: totalCommitsThisYear(user),
-				thisWeek: totalCommitsThisWeek(user),
-				bestDay: totalCommitsBestDay(user),
-				perDay: totalCommitsPerDay(user),
-				all: user.contributionsCollection,
+				all: {
+					contributionCalendar: {
+						weeks: weeklyContributions,
+						colors,
+					},
+				},
 			},
 		};
 
-		setCachedData(cacheKey, githubData);
-		logger.info(`→ cached GitHub user data for ${username}`);
-
-		return githubData;
+		setCachedData(cacheKey, data);
+		return data;
 	} catch (error) {
 		logger.error('→ there is an error fetching GitHub user data: ', error);
 		throw new Error('→ failed to fetch GitHub user data ...');

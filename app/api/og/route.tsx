@@ -5,15 +5,8 @@ import { baseURL, name } from '@/resources/config';
 
 export const runtime = 'edge';
 
-// Use system fonts for now - fonts can be added later
-const interRegular: Promise<ArrayBuffer> = Promise.resolve(new ArrayBuffer(0));
-const interBold: Promise<ArrayBuffer> = Promise.resolve(new ArrayBuffer(0));
-
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 	try {
-		const fontRegular: ArrayBuffer = await interRegular;
-		const fontBold: ArrayBuffer = await interBold;
-
 		const url: URL = new URL(req.url);
 		const values = ogImageSchema.parse(Object.fromEntries(url.searchParams));
 		const heading: string =

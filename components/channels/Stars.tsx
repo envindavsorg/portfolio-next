@@ -5,7 +5,6 @@ import type React from 'react';
 import { Suspense } from 'react';
 import { type ChannelStarsData, channelStars } from '@/actions/channel/stars';
 import { ChannelSkeleton } from '@/components/channels/Skeleton';
-import { Counter } from '@/components/numbers/Counter';
 import { cn } from '@/lib/utils';
 
 interface StarsChannelProps {
@@ -65,7 +64,7 @@ export const StarsChannel = async ({
 								<div className="flex flex-col gap-y-0.5">
 									<p className="font-extrabold font-geist-sans">{name}</p>
 									<p className="text-neutral-600 text-sm dark:text-neutral-400">
-										<Counter value={metric} className="font-semibold" /> étoiles
+										{metric} étoiles
 									</p>
 									<p className="sr-only">{name}</p>
 								</div>

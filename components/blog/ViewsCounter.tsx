@@ -1,6 +1,11 @@
 import { CircleIcon } from '@phosphor-icons/react/dist/ssr';
-import React, { cache, memo } from 'react';
-import { getViewsCount, increment, type ViewData } from '@/actions/blog/views.actions';
+import type React from 'react';
+import { cache, memo } from 'react';
+import {
+	getViewsCount,
+	incrementViewsCount,
+	type ViewData,
+} from '@/actions/blog/views.actions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { formatDate } from '@/lib/formatDate';
 import { initials, name } from '@/resources/config';
@@ -16,7 +21,7 @@ interface ViewsCounterProps {
 	slug: string;
 }
 
-export const incrementViews = cache(increment);
+export const incrementViews = cache(incrementViewsCount);
 
 const formatViewCount = (count: number): string => {
 	if (count === 0) {
@@ -28,25 +33,30 @@ const formatViewCount = (count: number): string => {
 	return `${count} vues`;
 };
 
-const AuthorInfo = memo(({ author, date }: { author: string; date: string }) => (
-	<>
-		<p className="text-primary font-medium">{author}</p>
-		<div className="inline-flex items-center gap-x-2">
-			<time className="text-muted-foreground text-sm" dateTime={date}>
-				{formatDate(date)}
-			</time>
-			<CircleIcon
-				className="size-1.5 shrink-0 text-muted-foreground"
-				weight="duotone"
-				aria-hidden="true"
-			/>
-		</div>
-	</>
-));
+const AuthorInfo = memo(
+	({ author, date }: { author: string; date: string }): React.JSX.Element => (
+		<>
+			<p className="font-medium text-primary">{author}</p>
+			<div className="inline-flex items-center gap-x-2">
+				<time className="text-muted-foreground text-sm" dateTime={date}>
+					{formatDate(date)}
+				</time>
+				<CircleIcon
+					className="size-1.5 shrink-0 text-muted-foreground"
+					weight="duotone"
+					aria-hidden="true"
+				/>
+			</div>
+		</>
+	),
+);
 
 AuthorInfo.displayName = 'AuthorInfo';
 
-export const ViewsCounter = async ({ article, slug }: ViewsCounterProps) => {
+export const ViewsCounter = async ({
+	article,
+	slug,
+}: ViewsCounterProps): Promise<React.JSX.Element> => {
 	try {
 		const views: ViewData[] = await getViewsCount(true);
 		const viewsForSlug = views?.find((view: ViewData) => view.slug === slug);

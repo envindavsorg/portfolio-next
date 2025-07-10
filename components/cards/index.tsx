@@ -1,6 +1,5 @@
 import type React from 'react';
 import { githubUser } from '@/actions/github/user.action';
-import { getGithubContributions } from '@/app/actions';
 import { AvatarCard } from '@/components/cards/Avatar';
 import { GitHubIconCard } from '@/components/cards/GitHubIcon';
 import { GithubStatsCard } from '@/components/cards/GitHubStats';
@@ -12,10 +11,7 @@ import { Motion } from '@/components/motion';
 
 export const Cards = async (): Promise<React.JSX.Element> => {
 	try {
-		const [contributions, { followers, stars }] = await Promise.all([
-			getGithubContributions(),
-			githubUser(process.env.GITHUB_USERNAME!),
-		]);
+		const { followers, stars, contributions } = await githubUser();
 
 		return (
 			<Motion asChild animate="visible">
