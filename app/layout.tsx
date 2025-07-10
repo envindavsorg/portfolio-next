@@ -63,7 +63,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 					</div>
 
 					<Suspense fallback={null}>
-						<Toaster position="bottom-right" />
+						<Toaster position="bottom-right" richColors closeButton />
 						<Sparkles density={50} />
 					</Suspense>
 

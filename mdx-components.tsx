@@ -1,5 +1,5 @@
+import { TerminalWindowIcon } from '@phosphor-icons/react/ssr';
 import type { MDXComponents } from 'mdx/types';
-import { Caveat } from 'next/font/google';
 import Image, { type ImageProps } from 'next/image';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
@@ -12,31 +12,32 @@ import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { ReactIcon } from '@/components/icons/React';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
+import { PackageManagerSnippet } from '@/components/mdx/PackageManagerSnippet';
 import { CopyButton } from '@/components/ui/CopyButton';
-import { cn } from '@/lib/utils';
-
-const caveat = Caveat({
-	weight: '600',
-	style: 'normal',
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-caveat',
-});
+import {
+	Snippet,
+	SnippetCopyButton,
+	SnippetHeader,
+	SnippetTabsContent,
+	SnippetTabsList,
+	SnippetTabsTrigger,
+} from '@/components/ui/kibo-ui/Snippet';
 
 const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
-	bash: <BashIcon className="size-5 shrink-0" />,
-	js: <JavaScriptIcon className="size-5 shrink-0" />,
-	javascript: <JavaScriptIcon className="size-5 shrink-0" />,
-	ts: <TypeScriptIcon className="size-5 shrink-0" />,
-	typescript: <TypeScriptIcon className="size-5 shrink-0" />,
-	css: <CSSIcon className="size-5 shrink-0" />,
-	tsx: <ReactIcon className="size-5 shrink-0" />,
-	jsx: <ReactIcon className="size-5 shrink-0" />,
-	html: <HTML5Icon className="size-5 shrink-0" />,
+	bash: <BashIcon className="size-4 shrink-0" />,
+	js: <JavaScriptIcon className="size-4 shrink-0" />,
+	javascript: <JavaScriptIcon className="size-4 shrink-0" />,
+	ts: <TypeScriptIcon className="size-4 shrink-0" />,
+	typescript: <TypeScriptIcon className="size-4 shrink-0" />,
+	css: <CSSIcon className="size-4 shrink-0" />,
+	tsx: <ReactIcon className="size-4 shrink-0" />,
+	jsx: <ReactIcon className="size-4 shrink-0" />,
+	html: <HTML5Icon className="size-4 shrink-0" />,
 };
 
 const MDXLink = memo(({ href, children, ...props }: AnchorProps) => {
-	const className = 'font-medium text-foreground underline underline-offset-4 hover:text-theme transition-colors duration-200';
+	const className =
+		'font-medium text-foreground underline underline-offset-4 hover:text-theme transition-colors duration-200';
 
 	if (href?.startsWith('/')) {
 		return (
@@ -94,12 +95,55 @@ const MDXCode = memo(
 			);
 		}
 
+		if (language === 'bash') {
+			const codeString = children as string;
+
+			const isPackageManagerCommand =
+				codeString.match(/^(npx|npm|yarn|pnpm|bun)\s+/) ||
+				codeString.match(/^(install|add|run|start|dev|build|test|i)\s+/) ||
+				codeString.includes('create-') ||
+				codeString.match(/^(npm|yarn|pnpm|bun)\s+(install|add|run|start|dev|build|test)/);
+
+			if (isPackageManagerCommand) {
+				let baseCommand = codeString;
+				baseCommand = baseCommand.replace(/^(npx|npm|yarn|pnpm|bun)\s+/, '').trim();
+
+				if (codeString.match(/^(npm|yarn|pnpm|bun)\s+(run|start|dev|build|test)/)) {
+					const match = codeString.match(/^(npm|yarn|pnpm|bun)\s+(.+)/);
+					if (match) baseCommand = match[2];
+				}
+
+				return <PackageManagerSnippet baseCommand={baseCommand} {...props} />;
+			}
+
+			return (
+				<Snippet value="bash" className="my-6">
+					<SnippetHeader>
+						<div className="flex items-center gap-x-3">
+							<TerminalWindowIcon className="size-5" />
+							<SnippetTabsList>
+								<SnippetTabsTrigger value="bash">terminal: bash</SnippetTabsTrigger>
+							</SnippetTabsList>
+						</div>
+						<SnippetCopyButton value={codeString} />
+					</SnippetHeader>
+					<SnippetTabsContent value="bash">
+						<code
+							dangerouslySetInnerHTML={{ __html: codeHTML }}
+							{...props}
+							style={{ display: 'block', overflowX: 'auto' }}
+						/>
+					</SnippetTabsContent>
+				</Snippet>
+			);
+		}
+
 		return (
 			<div className="flex flex-col gap-y-6">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-x-3">
 						{icon}
-						<p className="font-bold font-geist-sans text-sm text-white sm:text-base">
+						<p className="text-sm text-white sm:text-base">
 							{language || 'Snippet de code'}
 						</p>
 					</div>
@@ -144,33 +188,45 @@ type BlockquoteProps = ComponentPropsWithoutRef<'blockquote'>;
 const components: MDXComponents = {
 	h1: memo((props: HeadingProps) => (
 		<h1
-			className={cn(
-				'fade-in mb-6 pt-8 font-extrabold font-hubot text-3xl md:text-4xl text-foreground first:pt-0',
-				caveat.className,
-			)}
+			className="fade-in mb-6 pt-8 font-extrabold font-hubot text-3xl text-foreground first:pt-0 md:text-4xl"
 			{...props}
 		/>
 	)),
 	h2: memo((props: HeadingProps) => (
 		<h2
-			className="mt-12 mb-6 font-extrabold font-hubot text-2xl md:text-3xl text-foreground"
+			className="mt-12 mb-6 font-extrabold font-hubot text-2xl text-foreground md:text-3xl"
 			{...props}
 		/>
 	)),
 	h3: memo((props: HeadingProps) => (
-		<h3 className="mt-10 mb-4 font-bold font-hubot text-xl md:text-2xl text-foreground" {...props} />
+		<h3
+			className="mt-10 mb-4 font-bold font-hubot text-foreground text-xl md:text-2xl"
+			{...props}
+		/>
 	)),
 	h4: memo((props: HeadingProps) => (
-		<h4 className="mt-8 mb-3 font-bold font-hubot text-lg md:text-xl text-foreground" {...props} />
+		<h4
+			className="mt-8 mb-3 font-bold font-hubot text-foreground text-lg md:text-xl"
+			{...props}
+		/>
 	)),
 	p: memo((props: ParagraphProps) => (
-		<p className="mb-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300" {...props} />
+		<p
+			className="mb-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300"
+			{...props}
+		/>
 	)),
 	ol: memo((props: ListProps) => (
-		<ol className="mb-6 list-decimal space-y-3 pl-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300" {...props} />
+		<ol
+			className="mb-6 list-decimal space-y-3 pl-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300"
+			{...props}
+		/>
 	)),
 	ul: memo((props: ListProps) => (
-		<ul className="mb-6 list-disc space-y-3 pl-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300" {...props} />
+		<ul
+			className="mb-6 list-disc space-y-3 pl-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300"
+			{...props}
+		/>
 	)),
 	li: memo((props: ListItemProps) => <li className="pl-1" {...props} />),
 	em: memo((props: ComponentPropsWithoutRef<'em'>) => (
@@ -183,7 +239,7 @@ const components: MDXComponents = {
 	code: MDXCode,
 	blockquote: memo((props: BlockquoteProps) => (
 		<blockquote
-			className="my-8 ml-[0.075em] rounded-r-md border-theme/30 border-l-4 bg-muted/20 py-4 pl-6 text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300 italic"
+			className="my-8 ml-[0.075em] rounded-r-md border-theme/30 border-l-4 bg-muted/20 py-4 pl-6 text-base text-neutral-600 italic leading-8 md:text-lg dark:text-neutral-300"
 			{...props}
 		/>
 	)),

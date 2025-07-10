@@ -1,7 +1,8 @@
 'use server';
 
 import type { StaticImageData } from 'next/image';
-import { projectStars } from '@/actions/github/stars.action';
+import { getRepositoryStars } from '@/actions/github/stars.action';
+import { getCachedData, setCachedData } from '@/lib/cache';
 import { logger } from '@/lib/logger';
 
 export interface ChannelStarsData {
@@ -11,36 +12,92 @@ export interface ChannelStarsData {
 	metric: number;
 }
 
+interface RepositoryConfig {
+	owner: string;
+	name: string;
+	displayName?: string;
+}
+
+const POPULAR_REPOSITORIES: RepositoryConfig[] = [
+	{ owner: 'vercel', name: 'next.js', displayName: 'Next.js' },
+	{ owner: 'facebook', name: 'react', displayName: 'React' },
+	{ owner: 'microsoft', name: 'typescript', displayName: 'TypeScript' },
+	{ owner: 'tailwindlabs', name: 'tailwindcss', displayName: 'Tailwind CSS' },
+] as const;
+
+const FALLBACK_DATA: ChannelStarsData[] = [
+	{
+		avatar: 'https://github.com/vercel.png',
+		name: '@Next.js',
+		link: 'https://github.com/vercel/next.js',
+		metric: 120000,
+	},
+	{
+		avatar: 'https://github.com/facebook.png',
+		name: '@React',
+		link: 'https://github.com/facebook/react',
+		metric: 220000,
+	},
+];
+
 export const channelStars = async (): Promise<ChannelStarsData[]> => {
-	enum Providers {
-		NEXT = 'next.js',
-		REACT = 'react',
-		VERCEL = 'vercel',
-		FACEBOOK = 'facebook',
+	const cacheKey = 'channel-stars-data';
+	const cachedData = getCachedData<ChannelStarsData[]>(cacheKey);
+
+	if (cachedData) {
+		logger.info('→ returning cached channel stars data');
+		return cachedData;
 	}
 
 	try {
-		const [next, react] = await Promise.all([
-			projectStars(Providers.VERCEL, Providers.NEXT),
-			projectStars(Providers.FACEBOOK, Providers.REACT),
-		]);
+		// Use the first two repositories for better performance
+		const repositoriesToFetch = POPULAR_REPOSITORIES.slice(0, 2);
 
-		return [
-			{
-				avatar: next.avatar,
-				name: `@${next.name}`,
-				link: `https://github.com/${next.owner}/${next.name}`,
-				metric: next.stars,
-			},
-			{
-				avatar: react.avatar,
-				name: `@${react.name}`,
-				link: `https://github.com/${react.owner}/${react.name}`,
-				metric: react.stars,
-			},
-		];
+		const repoPromises = repositoriesToFetch.map(async (repo) => {
+			try {
+				return await getRepositoryStars(repo.owner, repo.name);
+			} catch (error) {
+				logger.warn(`→ failed to fetch ${repo.owner}/${repo.name}:`, error);
+				return null;
+			}
+		});
+
+		const results = await Promise.all(repoPromises);
+
+		const channelData: ChannelStarsData[] = [];
+
+		for (let i = 0; i < results.length; i++) {
+			const result = results[i];
+			const config = repositoriesToFetch[i];
+
+			if (result) {
+				channelData.push({
+					avatar: result.avatar,
+					name: `@${config.displayName || result.name}`,
+					link: `https://github.com/${result.owner}/${result.name}`,
+					metric: result.stars,
+				});
+			} else {
+				// Use fallback data if repository fetch failed
+				if (FALLBACK_DATA[i]) {
+					channelData.push(FALLBACK_DATA[i]);
+				}
+			}
+		}
+
+		// Ensure we always return at least the fallback data
+		const finalData = channelData.length > 0 ? channelData : FALLBACK_DATA;
+
+		// Cache for 1 hour (3600 seconds)
+		setCachedData(cacheKey, finalData, 3600);
+
+		logger.info(`→ successfully fetched ${finalData.length} channel stars data entries`);
+		return finalData;
 	} catch (error) {
-		logger.error('→ there is an error fetching stars channel data: ', error);
-		throw new Error('→ failed to fetch stars channel data ...');
+		logger.error('→ error fetching channel stars data:', error);
+
+		// Return fallback data on error and cache it briefly
+		setCachedData(cacheKey, FALLBACK_DATA, 300); // Cache for 5 minutes
+		return FALLBACK_DATA;
 	}
 };

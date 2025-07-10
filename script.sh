@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ "$VERCEL_GIT_COMMIT_REF" == "master"  ]] ; then
+if [[ "$VERCEL_GIT_COMMIT_REF" == "main"  ]] ; then
     # Don't build
     echo "🛑 - Build cancelled for 'my-portfolio'"
     exit 0;
