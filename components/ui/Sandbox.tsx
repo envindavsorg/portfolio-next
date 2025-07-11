@@ -20,23 +20,76 @@ import type {
 	HTMLAttributes,
 	ReactNode,
 } from 'react';
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useState,
+	memo,
+	useMemo,
+	Suspense,
+	lazy,
+} from 'react';
 import { cn } from '@/lib/utils';
 
-export type SandboxProviderProps = SandpackProviderProps;
+// Lazy load option for improved performance
+const LazyComponents = {
+	Provider: lazy(() =>
+		import('@codesandbox/sandpack-react').then((m) => ({ default: m.SandpackProvider })),
+	),
+	CodeEditor: lazy(() =>
+		import('@codesandbox/sandpack-react').then((m) => ({
+			default: m.SandpackCodeEditor,
+		})),
+	),
+	Console: lazy(() =>
+		import('@codesandbox/sandpack-react').then((m) => ({ default: m.SandpackConsole })),
+	),
+	Preview: lazy(() =>
+		import('@codesandbox/sandpack-react').then((m) => ({ default: m.SandpackPreview })),
+	),
+	FileExplorer: lazy(() =>
+		import('@codesandbox/sandpack-react').then((m) => ({
+			default: m.SandpackFileExplorer,
+		})),
+	),
+	Layout: lazy(() =>
+		import('@codesandbox/sandpack-react').then((m) => ({ default: m.SandpackLayout })),
+	),
+};
 
-export const SandboxProvider = ({
+export type SandboxProviderProps = SandpackProviderProps & {
+	lazy?: boolean;
+};
+
+export const SandboxProvider = memo(({
 	className,
+	lazy = false,
 	...props
-}: SandpackProviderProps): ReactNode => (
-	<div className={cn('size-full', className)}>
-		<SandpackProvider className="!size-full !max-h-none" {...props} />
-	</div>
-);
+}: SandboxProviderProps): ReactNode => {
+	if (lazy) {
+		return (
+			<div className={cn('size-full', className)}>
+				<Suspense fallback={<div className="h-full animate-pulse rounded-lg bg-muted" />}>
+					<LazyComponents.Provider className="!size-full !max-h-none" {...props} />
+				</Suspense>
+			</div>
+		);
+	}
+
+	return (
+		<div className={cn('size-full', className)}>
+			<SandpackProvider className="!size-full !max-h-none" {...props} />
+		</div>
+	);
+});
+
+SandboxProvider.displayName = 'SandboxProvider';
 
 export type SandboxLayoutProps = SandpackLayoutProps;
 
-export const SandboxLayout = ({
+export const SandboxLayout = memo(({
 	className,
 	...props
 }: SandpackLayoutProps): ReactNode => (
@@ -44,7 +97,9 @@ export const SandboxLayout = ({
 		className={cn('!rounded-none !border-none !bg-transparent !h-full', className)}
 		{...props}
 	/>
-);
+));
+
+SandboxLayout.displayName = 'SandboxLayout';
 
 export type SandboxTabsContextValue = {
 	selectedTab: string | undefined;
@@ -69,7 +124,7 @@ export type SandboxTabsProps = HTMLAttributes<HTMLDivElement> & {
 	onValueChange?: (value: string) => void;
 };
 
-export const SandboxTabs = ({
+export const SandboxTabs = memo(({
 	className,
 	defaultValue,
 	value,
@@ -94,8 +149,13 @@ export const SandboxTabs = ({
 		[value, onValueChange],
 	);
 
+	const contextValue = useMemo(
+		() => ({ selectedTab, setSelectedTab }),
+		[selectedTab, setSelectedTab]
+	);
+
 	return (
-		<SandboxTabsContext.Provider value={{ selectedTab, setSelectedTab }}>
+		<SandboxTabsContext.Provider value={contextValue}>
 			<div
 				className={cn(
 					'group relative flex size-full flex-col overflow-hidden rounded-lg border text-sm',
@@ -108,11 +168,13 @@ export const SandboxTabs = ({
 			</div>
 		</SandboxTabsContext.Provider>
 	);
-};
+});
+
+SandboxTabs.displayName = 'SandboxTabs';
 
 export type SandboxTabsListProps = HTMLAttributes<HTMLDivElement>;
 
-export const SandboxTabsList = ({
+export const SandboxTabsList = memo(({
 	className,
 	...props
 }: SandboxTabsListProps): ReactNode => (
@@ -124,7 +186,9 @@ export const SandboxTabsList = ({
 		role="tablist"
 		{...props}
 	/>
-);
+));
+
+SandboxTabsList.displayName = 'SandboxTabsList';
 
 export type SandboxTabsTriggerProps = Omit<
 	ButtonHTMLAttributes<HTMLButtonElement>,
@@ -133,7 +197,7 @@ export type SandboxTabsTriggerProps = Omit<
 	value: string;
 };
 
-export const SandboxTabsTrigger = ({
+export const SandboxTabsTrigger = memo(({
 	className,
 	value,
 	...props
@@ -144,72 +208,87 @@ export const SandboxTabsTrigger = ({
 		setSelectedTab(value);
 	}, [setSelectedTab, value]);
 
+	const isSelected = selectedTab === value;
+	const dataState = isSelected ? 'active' : 'inactive';
+
 	return (
 		<button
-			aria-selected={selectedTab === value}
+			aria-selected={isSelected}
 			className={cn(
 				'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1 font-medium text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow',
 				className,
 			)}
-			data-state={selectedTab === value ? 'active' : 'inactive'}
+			data-state={dataState}
 			onClick={handleClick}
 			role="tab"
 			{...props}
 		/>
 	);
-};
+});
+
+SandboxTabsTrigger.displayName = 'SandboxTabsTrigger';
 
 export type SandboxTabsContentProps = HTMLAttributes<HTMLDivElement> & {
 	value: string;
 };
 
-export const SandboxTabsContent = ({
+export const SandboxTabsContent = memo(({
 	className,
 	value,
 	...props
 }: SandboxTabsContentProps): ReactNode => {
 	const { selectedTab } = useSandboxTabsContext();
 
+	const isActive = selectedTab === value;
+	const ariaHidden = !isActive;
+	const dataState = isActive ? 'active' : 'inactive';
+
 	return (
 		<div
-			aria-hidden={selectedTab !== value}
+			aria-hidden={ariaHidden}
 			className={cn(
 				'flex-1 overflow-y-auto ring-offset-background transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-				selectedTab === value
+				isActive
 					? 'h-auto w-auto opacity-100'
 					: 'pointer-events-none absolute h-0 w-0 opacity-0',
 				className,
 			)}
-			data-state={selectedTab === value ? 'active' : 'inactive'}
+			data-state={dataState}
 			role="tabpanel"
 			{...props}
 		/>
 	);
-};
+});
+
+SandboxTabsContent.displayName = 'SandboxTabsContent';
 
 export type SandboxCodeEditorProps = CodeEditorProps;
 
-export const SandboxCodeEditor = ({
+export const SandboxCodeEditor = memo(({
 	showTabs = false,
 	...props
 }: SandboxCodeEditorProps): ReactNode => (
 	<SandpackCodeEditor showTabs={showTabs} {...props} />
-);
+));
+
+SandboxCodeEditor.displayName = 'SandboxCodeEditor';
 
 export type SandboxConsoleProps = Parameters<typeof SandpackConsole>[0];
 
-export const SandboxConsole = ({
+export const SandboxConsole = memo(({
 	className,
 	...props
 }: SandboxConsoleProps): ReactNode => (
 	<SandpackConsole className={cn('h-full', className)} {...props} />
-);
+));
+
+SandboxConsole.displayName = 'SandboxConsole';
 
 export type SandboxPreviewProps = PreviewProps & {
 	className?: string;
 };
 
-export const SandboxPreview = ({
+export const SandboxPreview = memo(({
 	className,
 	showOpenInCodeSandbox = false,
 	...props
@@ -219,11 +298,13 @@ export const SandboxPreview = ({
 		showOpenInCodeSandbox={showOpenInCodeSandbox}
 		{...props}
 	/>
-);
+));
+
+SandboxPreview.displayName = 'SandboxPreview';
 
 export type SandboxFileExplorerProps = ComponentProps<typeof SandpackFileExplorer>;
 
-export const SandboxFileExplorer = ({
+export const SandboxFileExplorer = memo(({
 	autoHiddenFiles = true,
 	className,
 	...props
@@ -233,4 +314,6 @@ export const SandboxFileExplorer = ({
 		className={cn('h-full', className)}
 		{...props}
 	/>
-);
+));
+
+SandboxFileExplorer.displayName = 'SandboxFileExplorer';
