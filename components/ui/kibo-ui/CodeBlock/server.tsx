@@ -22,6 +22,7 @@ export const CodeBlockContent = async ({
 	syntaxHighlighting = true,
 	...props
 }: CodeBlockContentProps) => {
+	// noinspection ES6RedundantAwait
 	const html = syntaxHighlighting
 		? await codeToHtml(children as string, {
 				lang: language ?? 'typescript',

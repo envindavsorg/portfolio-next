@@ -71,6 +71,7 @@ import {
 	SiVuedotjs,
 	SiWebassembly,
 } from '@icons-pack/react-simple-icons';
+import { CheckIcon, CopyIcon } from '@phosphor-icons/react';
 import { useControllableState } from '@radix-ui/react-use-controllable-state';
 import {
 	transformerNotationDiff,
@@ -79,7 +80,6 @@ import {
 	transformerNotationHighlight,
 	transformerNotationWordHighlight,
 } from '@shikijs/transformers';
-import { CheckIcon, CopyIcon } from 'lucide-react';
 import type { ComponentProps, HTMLAttributes, ReactElement, ReactNode } from 'react';
 import { cloneElement, createContext, useContext, useEffect, useState } from 'react';
 import { type BundledLanguage, type CodeOptionsMultipleThemes, codeToHtml } from 'shiki';
@@ -318,7 +318,7 @@ export const CodeBlock = ({
 	return (
 		<CodeBlockContext.Provider value={{ value, onValueChange, data }}>
 			<div
-				className={cn('size-full overflow-hidden rounded-md border', className)}
+				className={cn('group size-full overflow-hidden rounded-md border', className)}
 				{...props}
 			/>
 		</CodeBlockContext.Provider>
@@ -329,25 +329,28 @@ export type CodeBlockHeaderProps = HTMLAttributes<HTMLDivElement>;
 
 export const CodeBlockHeader = ({ className, ...props }: CodeBlockHeaderProps) => (
 	<div
-		className={cn('flex flex-row items-center border-b bg-secondary p-1', className)}
+		className={cn(
+			'flex flex-row items-center border-b bg-white/20 py-1 pr-1 pl-3',
+			className,
+		)}
 		{...props}
 	/>
 );
 
 export type CodeBlockFilesProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
-	children: (item: CodeBlockData) => ReactNode;
+	childrenAction: (item: CodeBlockData) => ReactNode;
 };
 
 export const CodeBlockFiles = ({
 	className,
-	children,
+	childrenAction,
 	...props
 }: CodeBlockFilesProps) => {
 	const { data } = useContext(CodeBlockContext);
 
 	return (
 		<div className={cn('flex grow flex-row items-center gap-2', className)} {...props}>
-			{data.map(children)}
+			{data.map(childrenAction)}
 		</div>
 	);
 };
@@ -378,12 +381,9 @@ export const CodeBlockFilename = ({
 	}
 
 	return (
-		<div
-			className="flex items-center gap-2 bg-secondary px-4 py-1.5 text-muted-foreground text-xs"
-			{...props}
-		>
-			{Icon && <Icon className="h-4 w-4 shrink-0" />}
-			<span className="flex-1 truncate">{children}</span>
+		<div className="flex items-center gap-x-3" {...props}>
+			{Icon && <Icon className="size-4 shrink-0" />}
+			<span className="flex-1 truncate text-sm">{children}</span>
 		</div>
 	);
 };
@@ -421,16 +421,16 @@ export type CodeBlockSelectContentProps = Omit<
 	ComponentProps<typeof SelectContent>,
 	'children'
 > & {
-	children: (item: CodeBlockData) => ReactNode;
+	childrenAction: (item: CodeBlockData) => ReactNode;
 };
 
 export const CodeBlockSelectContent = ({
-	children,
+	childrenAction,
 	...props
 }: CodeBlockSelectContentProps) => {
 	const { data } = useContext(CodeBlockContext);
 
-	return <SelectContent {...props}>{data.map(children)}</SelectContent>;
+	return <SelectContent {...props}>{data.map(childrenAction)}</SelectContent>;
 };
 
 export type CodeBlockSelectItemProps = ComponentProps<typeof SelectItem>;
@@ -485,13 +485,13 @@ export const CodeBlockCopyButton = ({
 
 	return (
 		<Button
-			className={cn('shrink-0', className)}
+			className="opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100"
 			onClick={copyToClipboard}
 			size="icon"
 			variant="ghost"
 			{...props}
 		>
-			{children ?? <Icon className="text-muted-foreground" size={14} />}
+			{children ?? <Icon className="size-5" />}
 		</Button>
 	);
 };
@@ -516,13 +516,13 @@ const CodeBlockFallback = ({ children, ...props }: CodeBlockFallbackProps) => (
 );
 
 export type CodeBlockBodyProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
-	children: (item: CodeBlockData) => ReactNode;
+	childrenAction: (item: CodeBlockData) => ReactNode;
 };
 
-export const CodeBlockBody = ({ children, ...props }: CodeBlockBodyProps) => {
+export const CodeBlockBody = ({ childrenAction, ...props }: CodeBlockBodyProps) => {
 	const { data } = useContext(CodeBlockContext);
 
-	return <div {...props}>{data.map(children)}</div>;
+	return <div {...props}>{data.map(childrenAction)}</div>;
 };
 
 export type CodeBlockItemProps = HTMLAttributes<HTMLDivElement> & {
@@ -585,7 +585,6 @@ export const CodeBlockContent = ({
 
 		highlight(children as string, language, themes)
 			.then(setHtml)
-			// biome-ignore lint/suspicious/noConsole: "it's fine"
 			.catch(console.error);
 	}, [children, themes, syntaxHighlighting, language]);
 
@@ -593,11 +592,5 @@ export const CodeBlockContent = ({
 		return <CodeBlockFallback>{children}</CodeBlockFallback>;
 	}
 
-	return (
-		<div
-			// biome-ignore lint/security/noDangerouslySetInnerHtml: "Kinda how Shiki works"
-			dangerouslySetInnerHTML={{ __html: html }}
-			{...props}
-		/>
-	);
+	return <div dangerouslySetInnerHTML={{ __html: html }} {...props} />;
 };

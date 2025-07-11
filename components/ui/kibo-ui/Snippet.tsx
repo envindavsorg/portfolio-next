@@ -66,11 +66,7 @@ export const SnippetCopyButton = ({
 		});
 	}
 
-	const icon = isCopied ? (
-		<CheckIcon className="size-5" />
-	) : (
-		<CopyIcon className="size-5" />
-	);
+	const Icon = isCopied ? CheckIcon : CopyIcon;
 
 	return (
 		<Button
@@ -80,7 +76,7 @@ export const SnippetCopyButton = ({
 			variant="ghost"
 			{...props}
 		>
-			{children ?? icon}
+			{children ?? <Icon className="size-5" />}
 		</Button>
 	);
 };

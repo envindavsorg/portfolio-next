@@ -5,29 +5,11 @@ import type React from 'react';
 import type { ComponentPropsWithoutRef } from 'react';
 import { memo, useMemo } from 'react';
 import { highlight } from 'sugar-high';
-import { BashIcon } from '@/components/icons/Bash';
-import { CSSIcon } from '@/components/icons/CSS';
-import { HTML5Icon } from '@/components/icons/HTML';
-import { JavaScriptIcon } from '@/components/icons/JavaScript';
-import { ReactIcon } from '@/components/icons/React';
-import { TypeScriptIcon } from '@/components/icons/TypeScript';
+import { CodeBlock } from '@/components/mdx/CodeBlock';
 import { PackageManager } from '@/components/mdx/PackageManager';
 import { TerminalCommand } from '@/components/mdx/TerminalCommand';
-import { CopyButton } from '@/components/ui/CopyButton';
 
-const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
-	bash: <BashIcon className="size-4 shrink-0" />,
-	js: <JavaScriptIcon className="size-4 shrink-0" />,
-	javascript: <JavaScriptIcon className="size-4 shrink-0" />,
-	ts: <TypeScriptIcon className="size-4 shrink-0" />,
-	typescript: <TypeScriptIcon className="size-4 shrink-0" />,
-	css: <CSSIcon className="size-4 shrink-0" />,
-	tsx: <ReactIcon className="size-4 shrink-0" />,
-	jsx: <ReactIcon className="size-4 shrink-0" />,
-	html: <HTML5Icon className="size-4 shrink-0" />,
-};
-
-const MDXLink = memo(({ href, children, ...props }: AnchorProps) => {
+const MDXLink = memo(({ href, children, ...props }: AnchorProps): React.JSX.Element => {
 	const className =
 		'font-medium text-foreground underline underline-offset-4 hover:text-theme transition-colors duration-200';
 
@@ -63,7 +45,11 @@ const MDXLink = memo(({ href, children, ...props }: AnchorProps) => {
 MDXLink.displayName = 'MDXLink';
 
 const MDXCode = memo(
-	({ className, children, ...props }: ComponentPropsWithoutRef<'code'>) => {
+	({
+		className,
+		children,
+		...props
+	}: ComponentPropsWithoutRef<'code'>): React.JSX.Element => {
 		const language = useMemo(() => {
 			const match = /language-(\w+)/.exec(className || '');
 			return match ? match[1] : null;
@@ -73,9 +59,23 @@ const MDXCode = memo(
 			return highlight(children as string);
 		}, [children]);
 
-		const icon = useMemo(() => {
-			return language ? LANGUAGE_ICONS[language] : null;
-		}, [language]);
+		const shouldUseCodeBlock = useMemo(() => {
+			const codeString = children as string;
+			return (
+				language &&
+				language !== 'bash' &&
+				language !== 'text' &&
+				codeString.includes('\n') &&
+				codeString.length > 50
+			);
+		}, [language, children]);
+
+		if (shouldUseCodeBlock) {
+			return (
+				// biome-ignore lint/correctness/noChildrenProp: explanation
+				<CodeBlock language={language!} children={children as string} {...props} />
+			);
+		}
 
 		if (language === 'text') {
 			return (
@@ -108,47 +108,34 @@ const MDXCode = memo(
 				return <PackageManager baseCommand={baseCommand} {...props} />;
 			}
 
-			// Use TerminalCommandSnippet for general terminal commands
 			return <TerminalCommand command={codeString} {...props} />;
 		}
 
 		return (
-			<div className="flex flex-col gap-y-6">
-				<div className="flex items-center justify-between">
-					<div className="flex items-center gap-x-3">
-						{icon}
-						<p className="text-sm text-white sm:text-base">
-							{language || 'Snippet de code'}
-						</p>
-					</div>
-					<CopyButton
-						value={children as string}
-						aria-label={`Copier le code ${language || ''}`}
-					/>
-				</div>
-				<code
-					dangerouslySetInnerHTML={{ __html: codeHTML }}
-					{...props}
-					style={{ display: 'block', overflowX: 'auto' }}
-				/>
-			</div>
+			<code
+				dangerouslySetInnerHTML={{ __html: codeHTML }}
+				{...props}
+				style={{ display: 'block', overflowX: 'auto' }}
+			/>
 		);
 	},
 );
 
 MDXCode.displayName = 'MDXCode';
 
-const MDXImage = memo((props: ImageProps) => (
-	<Image
-		{...props}
-		loading="lazy"
-		sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-		style={{
-			width: '100%',
-			height: 'auto',
-		}}
-	/>
-));
+const MDXImage = memo(
+	(props: ImageProps): React.JSX.Element => (
+		<Image
+			{...props}
+			loading="lazy"
+			sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+			style={{
+				width: '100%',
+				height: 'auto',
+			}}
+		/>
+	),
+);
 
 MDXImage.displayName = 'MDXImage';
 
