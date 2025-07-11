@@ -14,6 +14,7 @@ import {
 	SandpackPreview,
 	SandpackProvider,
 } from '@codesandbox/sandpack-react';
+import { CodeIcon } from '@phosphor-icons/react';
 import type {
 	ButtonHTMLAttributes,
 	ComponentProps,
@@ -33,7 +34,6 @@ import {
 } from 'react';
 import { cn } from '@/lib/utils';
 
-// Lazy load option for improved performance
 const LazyComponents = {
 	Provider: lazy(() =>
 		import('@codesandbox/sandpack-react').then((m) => ({ default: m.SandpackProvider })),
@@ -158,7 +158,7 @@ export const SandboxTabs = memo(
 			<SandboxTabsContext.Provider value={contextValue}>
 				<div
 					className={cn(
-						'group relative flex size-full flex-col overflow-hidden rounded-lg border text-sm',
+						'group relative flex size-full flex-col gap-0 overflow-hidden rounded-lg border text-sm',
 						className,
 					)}
 					{...props}
@@ -176,15 +176,21 @@ SandboxTabs.displayName = 'SandboxTabs';
 export type SandboxTabsListProps = HTMLAttributes<HTMLDivElement>;
 
 export const SandboxTabsList = memo(
-	({ className, ...props }: SandboxTabsListProps): ReactNode => (
+	({ className, children, ...props }: SandboxTabsListProps): ReactNode => (
 		<div
 			className={cn(
-				'inline-flex gap-1.5 w-full shrink-0 items-center justify-start border-b bg-white/20 py-1 pr-1 pl-3',
+				'flex flex-row items-center justify-between border-b bg-white/20 py-1 pr-1 pl-3',
 				className,
 			)}
-			role="tablist"
 			{...props}
-		/>
+		>
+			<div className="flex items-center gap-x-3">
+				<CodeIcon className="size-5 text-foreground" />
+				<div className="inline-flex h-9 w-fit items-center justify-center rounded-lg bg-muted p-[3px] text-muted-foreground">
+					{children}
+				</div>
+			</div>
+		</div>
 	),
 );
 
@@ -212,7 +218,7 @@ export const SandboxTabsTrigger = memo(
 			<button
 				aria-selected={isSelected}
 				className={cn(
-					'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1 font-medium text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow',
+					'inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-transparent px-2 py-1 font-medium text-foreground text-sm transition-[color,box-shadow] focus-visible:border-ring focus-visible:outline-1 focus-visible:outline-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:shadow-sm dark:text-muted-foreground dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 dark:data-[state=active]:text-foreground',
 					className,
 				)}
 				data-state={dataState}

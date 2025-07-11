@@ -54,7 +54,7 @@ date fictive dans ce **format ISO** :
 
 ```js
 const date = new Date();
-console.log(date); // 2024-07-21T12:00:00.000Z
+console.log(date);
 ```
 
 <Separator className="my-12" />
@@ -74,14 +74,11 @@ Exemple expliqué :
 + *console.log(Array.isArray(str));:* Vérifie si **str** est un tableau. Étant donné que **str** est une chaîne de caractères et non un tableau, cela renvoie **false**.
 
 ```js
-Array.isArray(variable);
-
-// Exemple
 const arr = [1, 2, 3];
-console.log(Array.isArray(arr)); // true
+console.log('[1, 2, 3] est un tableau : ', Array.isArray(arr));
 
 const str = 'Hello';
-console.log(Array.isArray(str)); // false
+console.log('Hello n\'est pas un tableau : ', Array.isArray(str));
 ```
 
 <Separator className="my-12" />
@@ -104,13 +101,10 @@ Exemple expliqué :
 + La méthode *concat()* est utile pour créer un nouveau tableau qui résulte de la combinaison de plusieurs tableaux.
 
 ```js
-const newArr = arr1.concat(arr2);
-
-// Exemple
 const arr1 = [1, 2, 3];
 const arr2 = [4, 5, 6];
 const arrMerged = arr1.concat(arr2);
-console.log(arrMerged); // [1, 2, 3, 4, 5, 6]
+console.log(arrMerged);
 ```
 
 <Separator className="my-12" />
@@ -118,12 +112,9 @@ console.log(arrMerged); // [1, 2, 3, 4, 5, 6]
 ## 4. Supprimez les doublons d'un tableau
 
 ```js
-const uniqueArr = [...new Set(arr)];
-
-// Exemple
 const arr = [1, 2, 2, 3, 4, 4, 5];
 const uniqueArr = [...new Set(arr)];
-console.log(uniqueArr); // [1, 2, 3, 4, 5]
+console.log(uniqueArr);
 ```
 
 Ce code montre comment supprimer les doublons d'un tableau en JavaScript.
@@ -143,12 +134,9 @@ de décomposition pour convertir le **Set** de retour en un tableau de valeurs u
 ## 5. Triez un tableau par ordre croissant
 
 ```js
-arr.sort((a, b) => a - b);
-
-// Exemple
 const arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
 arr.sort((a, b) => a - b);
-console.log(arr); // [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
+console.log(arr);
 ```
 
 Ce code utilise la méthode sort sur un tableau en
@@ -167,12 +155,9 @@ Le *console.log(arr);* affiche le tableau trié dans la console.
 ## 6. Inversez un tableau
 
 ```js
-arr.reverse();
-
-// Exemple
 const arr = [1, 2, 3, 4, 5];
 arr.reverse();
-console.log(arr); // [5, 4, 3, 2, 1]
+console.log(arr);
 ```
 
 La méthode *reverse* en **JavaScript** inverse l'ordre des éléments d'un tableau.
@@ -186,12 +171,9 @@ La méthode *reverse* en **JavaScript** inverse l'ordre des éléments d'un tabl
 ## 7. Convertissez la chaîne en nombre
 
 ```js
-const num = parseInt(str, 10);
-
-// Exemple
 const str = '42';
 const num = parseInt(str, 10);
-console.log(num); // 42
+console.log(num);
 ```
 
 Le code utilise la fonction *parseInt* en **JavaScript** pour convertir
@@ -206,13 +188,10 @@ une chaîne de caractères en un entier.
 ## 8. Générez un nombre aléatoire entre deux valeurs
 
 ```js
-const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-
-// Exemple
 const min = 1;
 const max = 10;
 const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-console.log(randomNum); // Un nombre aléatoire entre 1 et 10
+console.log(randomNum);
 ```
 
 Ce code génère un nombre entier aléatoire compris entre les valeurs **min** et **max**, incluses.
@@ -230,13 +209,10 @@ variant entre **1** et **10**. Le *console.log(randomNum);* affiche ce nombre al
 ## 9. Vérifiez si une chaîne contient une sous-chaîne
 
 ```js
-const isSubstring = str.includes(substring);
-
-// Exemple
 const str = 'Hello, world!';
 const substring = 'world';
 const isSubstring = str.includes(substring);
-console.log(isSubstring); // true
+console.log(isSubstring);
 ```
 
 Ce code vérifie si une sous-chaîne est présente dans une chaîne principale
@@ -252,12 +228,9 @@ en utilisant la méthode includes de **JavaScript*.
 ## 10. Obtenez la longueur d'un objet
 
 ```js
-const objLength = Object.keys(obj).length;
-
-// Exemple
 const obj = { a: 1, b: 2, c: 3 };
 const objLength = Object.keys(obj).length;
-console.log(objLength); // 3
+console.log(objLength);
 ```
 
 Ce code détermine le nombre de propriétés dans un objet en utilisant **Object.keys**.
@@ -272,12 +245,9 @@ Ce code détermine le nombre de propriétés dans un objet en utilisant **Object
 ## 11. Convertir un objet en tableau
 
 ```js
-const arr = Object.entries(obj);
-
-// Exemple
 const obj = { a: 1, b: 2, c: 3 };
 const arr = Object.entries(obj);
-console.log(arr); // [['a', 1], ['b', 2], ['c', 3]]
+console.log(arr);
 ```
 
 Ce code convertit un objet en un tableau de paires clé-valeur en utilisant *Object.entries*.
@@ -291,12 +261,9 @@ Ce code convertit un objet en un tableau de paires clé-valeur en utilisant *Obj
 ## 12. Vérifiez si un objet est vide
 
 ```js
-const array = Object.entries(object);
-
-// Exemple
 const obj = {};
 const isEmpty = Object.entries(obj).length === 0 && obj.constructor === Object;
-console.log(isEmpty); // true
+console.log(isEmpty);
 ```
 
 Ce code vérifie si un objet est vide, c'est-à-dire qu'il ne possède aucune propriété.
@@ -313,11 +280,8 @@ Ce code vérifie si un objet est vide, c'est-à-dire qu'il ne possède aucune pr
 ## 13. Obtenez l'URL actuelle
 
 ```js
-const url = window.location.href;
-
-// Exemple
 const currentUrl = window.location.href;
-console.log(currentUrl); // https://example.com/page
+console.log(currentUrl);
 ```
 
 Ce code récupère l'**URL** actuelle de la page web en utilisant l'objet *window.location* dans le contexte d'un navigateur.
@@ -335,9 +299,6 @@ permettant l'accès à l'objet window, comme les navigateurs web.
 
 ```js
 window.location.href = 'https://example.com';
-
-// Exemple
-window.location.href = 'https://example.com';
 ```
 
 Ce code redirige le navigateur vers une nouvelle **URL**.
@@ -353,9 +314,6 @@ tout script en cours sur la page actuelle.
 ## 15. Définissez un cookie
 
 ```js
-document.cookie = 'name=value; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
-
-// Exemple
 document.cookie = 'name=John Doe; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
 ```
 
@@ -373,10 +331,7 @@ Ce code crée ou met à jour un cookie dans le navigateur.
 
 ```js
 const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/, '$1');
-
-// Exemple
-const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/, '$1');
-console.log(cookieValue); // John Doe
+console.log(cookieValue);
 ```
 
 Ce code extrait la valeur d'un cookie spécifique nommé name à partir du document cookie.
@@ -398,6 +353,7 @@ affichera **John Doe** dans la console.
 
 ```js
 const cookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('name='));
+console.log(cookieExists);
 ```
 
 Ce code vérifie si un cookie spécifique, nommé name, existe dans le navigateur.
@@ -431,8 +387,7 @@ Ce code supprime le cookie nommé **name** dans le navigateur.
 ```js
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
-
-console.log(windowWidth, windowHeight); // Largeur et hauteur de la fenêtre
+console.log(windowWidth, windowHeight);
 ```
 
 Ce code récupère et affiche la largeur et la hauteur de la fenêtre d'affichage visible du navigateur.
@@ -449,9 +404,6 @@ dans la console, permettant de voir la **taille actuelle** de la fenêtre du nav
 ## 20. Copiez le texte dans le presse-papiers
 
 ```js
-navigator.clipboard.writeText(text);
-
-// Exemple
 navigator.clipboard.writeText('Hello, world!');
 ```
 
