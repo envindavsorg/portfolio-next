@@ -7,6 +7,7 @@ import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { NextJSIcon } from '@/components/icons/Next';
 import { ReactIcon } from '@/components/icons/React';
+import { ShadcnIcon } from '@/components/icons/Shadcn';
 import { TailwindIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
@@ -51,7 +52,7 @@ const Badge = ({
 };
 
 type BadgeWithIconProps = {
-	type: 'html' | 'css' | 'js' | 'react' | 'next' | 'vue' | 'ts' | 'tailwind';
+	type: 'html' | 'css' | 'js' | 'react' | 'next' | 'vue' | 'ts' | 'tailwind' | 'shadcn';
 };
 
 const BADGE_CONFIG = {
@@ -63,6 +64,7 @@ const BADGE_CONFIG = {
 	vue: { icon: VueIcon, label: 'Vue.js' },
 	ts: { icon: TypeScriptIcon, label: 'TypeScript' },
 	tailwind: { icon: TailwindIcon, label: 'Tailwind.css' },
+	shadcn: { icon: ShadcnIcon, label: 'shadcn/ui' },
 } as const;
 
 const BadgeWithIcon = ({ type }: BadgeWithIconProps): React.JSX.Element => {

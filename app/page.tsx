@@ -7,7 +7,10 @@ import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { Cards } from '@/components/blocs/cards';
 import { Marquee } from '@/components/blocs/Marquee';
-import { StarsChannel } from '@/components/channels/Stars';
+import {
+	StarsChannelForDesign,
+	StarsChannelForFrameworks,
+} from '@/components/channels/Stars';
 import { SubscribersChannel } from '@/components/channels/Subscribers';
 import { Counter } from '@/components/text/Counter';
 import PageParagraph from '@/components/text/PageParagraph';
@@ -29,6 +32,7 @@ import {
 } from '@/components/ui/Glimpse';
 import { glimpse } from '@/components/ui/Glimpse/server';
 import { Separator } from '@/components/ui/Separator';
+import { Status, StatusIndicator, StatusLabel } from '@/components/ui/Status';
 import { name, title } from '@/resources/config';
 import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
 
@@ -221,9 +225,14 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</PageParagraph>
 				</FadeIn>
 
-				<StarsChannel className="my-12" />
+				<FadeIn className="my-12 flex flex-col gap-y-4">
+					<PageParagraph>
+						Mes deux frameworks favoris, qui sont aussi très populaires, sont :
+					</PageParagraph>
+					<StarsChannelForFrameworks />
+				</FadeIn>
 
-				<FadeIn asChild>
+				<FadeIn className="flex flex-col gap-y-4">
 					<PageParagraph>
 						Pour le design de mes applications, je commence par maîtriser{' '}
 						<BadgeWithIcon type="css" /> avant d'adopter{' '}
@@ -238,8 +247,18 @@ const Home = async (): Promise<React.JSX.Element> => {
 						, un framework de styling modulaire et performant. Tailwind accélère le
 						développement grâce à sa vaste collection de classes utilitaires et sa
 						personnalisation simple, tout en garantissant des interfaces cohérentes et
-						évolutives.
+						évolutives. J'intègre ensuite{' '}
+						<Link
+							href="https://ui.shadcn.com/"
+							aria-label="Voir le site de shadcn/ui !"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<BadgeWithIcon type="shadcn" />
+						</Link>
+						, une bibliothèque de composants React flexible et accessible.
 					</PageParagraph>
+					<StarsChannelForDesign />
 				</FadeIn>
 
 				<Separator className="my-12" />
@@ -263,17 +282,42 @@ const Home = async (): Promise<React.JSX.Element> => {
 					>
 						GitHub
 					</Link>
-					, n'hésitez pas à me rendre une petite visite sur mes profils et pourquoi pas{' '}
-					<Link
-						href="/contact"
-						aria-label="Contactez-moi"
-						className="font-bold text-theme"
-					>
-						me laisser
-					</Link>{' '}
-					un message 😃
+					, n'hésitez pas à me rendre une petite visite sur mes profils et pourquoi pas me
+					laisser un message 😃
 				</PageParagraph>
 				<SubscribersChannel />
+
+				<Separator className="my-12" />
+
+				<FadeIn className="flex flex-col gap-y-3">
+					<Status status="online">
+						<StatusIndicator />
+						<StatusLabel>en cours d'évolution</StatusLabel>
+					</Status>
+					<h3 className="mt-3 font-semibold text-foreground text-xl">
+						Portfolio en perpétuelle évolution
+					</h3>
+					<PageParagraph>
+						Ce portfolio est bien plus qu'une simple vitrine : c'est un écosystème vivant
+						qui grandit avec moi. Chaque nouveau projet, chaque compétence acquise, chaque
+						expérience vécue vient enrichir cet espace numérique. Comme un jardin digital,
+						il fleurit continuellement avec mes découvertes, mes créations et mes
+						aventures dans le monde du développement.
+						<span className="mt-2 block font-medium text-foreground">
+							Revenez régulièrement pour découvrir les nouveautés ! 🌱
+						</span>
+					</PageParagraph>
+					<div className="mt-6 flex items-center gap-2 text-muted-foreground text-sm">
+						<span>Dernière mise à jour :</span>
+						<time className="font-medium text-foreground">
+							{new Date().toLocaleDateString('fr-FR', {
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							})}
+						</time>
+					</div>
+				</FadeIn>
 
 				{/*<Separator className="my-12" />
 

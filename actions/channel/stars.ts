@@ -18,29 +18,17 @@ interface RepositoryConfig {
 	displayName?: string;
 }
 
-const POPULAR_REPOSITORIES: RepositoryConfig[] = [
+const FRAMEWORK_REPOSITORIES: RepositoryConfig[] = [
 	{ owner: 'vercel', name: 'next.js', displayName: 'Next.js' },
 	{ owner: 'facebook', name: 'react', displayName: 'React' },
-	{ owner: 'microsoft', name: 'typescript', displayName: 'TypeScript' },
-	{ owner: 'tailwindlabs', name: 'tailwindcss', displayName: 'Tailwind CSS' },
 ] as const;
 
-const FALLBACK_DATA: ChannelStarsData[] = [
-	{
-		avatar: 'https://github.com/vercel.png',
-		name: '@Next.js',
-		link: 'https://github.com/vercel/next.js',
-		metric: 120000,
-	},
-	{
-		avatar: 'https://github.com/facebook.png',
-		name: '@React',
-		link: 'https://github.com/facebook/react',
-		metric: 220000,
-	},
-];
+const DESIGN_REPOSITORIES: RepositoryConfig[] = [
+	{ owner: 'tailwindlabs', name: 'tailwindcss', displayName: 'Tailwind CSS' },
+	{ owner: 'shadcn-ui', name: 'ui', displayName: 'shadcn/ui' },
+] as const;
 
-export const channelStars = async (): Promise<ChannelStarsData[]> => {
+export const channelStarsForFrameworks = async (): Promise<ChannelStarsData[]> => {
 	const cacheKey = 'channel-stars-data';
 	const cachedData = getCachedData<ChannelStarsData[]>(cacheKey);
 
@@ -50,10 +38,7 @@ export const channelStars = async (): Promise<ChannelStarsData[]> => {
 	}
 
 	try {
-		// Use the first two repositories for better performance
-		const repositoriesToFetch = POPULAR_REPOSITORIES.slice(0, 2);
-
-		const repoPromises = repositoriesToFetch.map(async (repo) => {
+		const repoPromises = FRAMEWORK_REPOSITORIES.map(async (repo) => {
 			try {
 				return await getRepositoryStars(repo.owner, repo.name);
 			} catch (error) {
@@ -68,7 +53,7 @@ export const channelStars = async (): Promise<ChannelStarsData[]> => {
 
 		for (let i = 0; i < results.length; i++) {
 			const result = results[i];
-			const config = repositoriesToFetch[i];
+			const config = FRAMEWORK_REPOSITORIES[i];
 
 			if (result) {
 				channelData.push({
@@ -77,27 +62,68 @@ export const channelStars = async (): Promise<ChannelStarsData[]> => {
 					link: `https://github.com/${result.owner}/${result.name}`,
 					metric: result.stars,
 				});
-			} else {
-				// Use fallback data if repository fetch failed
-				if (FALLBACK_DATA[i]) {
-					channelData.push(FALLBACK_DATA[i]);
-				}
 			}
 		}
 
-		// Ensure we always return at least the fallback data
-		const finalData = channelData.length > 0 ? channelData : FALLBACK_DATA;
-
 		// Cache for 1 hour (3600 seconds)
-		setCachedData(cacheKey, finalData);
+		setCachedData(cacheKey, channelData);
 
-		logger.info(`→ successfully fetched ${finalData.length} channel stars data entries`);
-		return finalData;
+		logger.info(
+			`→ successfully fetched ${channelData.length} channel stars data entries`,
+		);
+		return channelData;
 	} catch (error) {
 		logger.error('→ error fetching channel stars data:', error);
+		return [];
+	}
+};
 
-		// Return fallback data on error and cache it briefly
-		setCachedData(cacheKey, FALLBACK_DATA); // Cache for 5 minutes
-		return FALLBACK_DATA;
+export const channelStarsForDesign = async (): Promise<ChannelStarsData[]> => {
+	const cacheKey = 'channel-stars-design-data';
+	const cachedData = getCachedData<ChannelStarsData[]>(cacheKey);
+
+	if (cachedData) {
+		logger.info('→ returning cached channel stars design data');
+		return cachedData;
+	}
+
+	try {
+		const repoPromises = DESIGN_REPOSITORIES.map(async (repo) => {
+			try {
+				return await getRepositoryStars(repo.owner, repo.name);
+			} catch (error) {
+				logger.warn(`→ failed to fetch ${repo.owner}/${repo.name}:`, error);
+				return null;
+			}
+		});
+
+		const results = await Promise.all(repoPromises);
+
+		const channelData: ChannelStarsData[] = [];
+
+		for (let i = 0; i < results.length; i++) {
+			const result = results[i];
+			const config = DESIGN_REPOSITORIES[i];
+
+			if (result) {
+				channelData.push({
+					avatar: result.avatar,
+					name: `@${config.displayName || result.name}`,
+					link: `https://github.com/${result.owner}/${result.name}`,
+					metric: result.stars,
+				});
+			}
+		}
+
+		// Cache for 1 hour (3600 seconds)
+		setCachedData(cacheKey, channelData);
+
+		logger.info(
+			`→ successfully fetched ${channelData.length} channel stars design data entries`,
+		);
+		return channelData;
+	} catch (error) {
+		logger.error('→ error fetching channel stars design data:', error);
+		return [];
 	}
 };
