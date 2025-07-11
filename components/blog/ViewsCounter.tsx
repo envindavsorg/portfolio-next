@@ -1,6 +1,6 @@
 import { CircleIcon } from '@phosphor-icons/react/dist/ssr';
 import type React from 'react';
-import { cache, memo } from 'react';
+import { cache } from 'react';
 import {
 	getViewsCount,
 	incrementViewsCount,
@@ -33,26 +33,6 @@ const formatViewCount = (count: number): string => {
 	return `${count} vues`;
 };
 
-const AuthorInfo = memo(
-	({ author, date }: { author: string; date: string }): React.JSX.Element => (
-		<>
-			<p className="font-medium text-primary">{author}</p>
-			<div className="inline-flex items-center gap-x-2">
-				<time className="text-muted-foreground text-sm" dateTime={date}>
-					{formatDate(date)}
-				</time>
-				<CircleIcon
-					className="size-1.5 shrink-0 text-muted-foreground"
-					weight="duotone"
-					aria-hidden="true"
-				/>
-			</div>
-		</>
-	),
-);
-
-AuthorInfo.displayName = 'AuthorInfo';
-
 export const ViewsCounter = async ({
 	article,
 	slug,
@@ -75,9 +55,17 @@ export const ViewsCounter = async ({
 					<AvatarFallback>{initials}</AvatarFallback>
 				</Avatar>
 				<div className="flex select-none flex-col gap-1">
-					<AuthorInfo author={article.author} date={article.date} />
-					<div className="flex items-center gap-x-2 text-muted-foreground text-sm">
-						<span>{formatViewCount(viewCount)}</span>
+					<p className="font-medium text-primary">{article.author}</p>
+					<div className="inline-flex items-center gap-x-2">
+						<time className="text-muted-foreground text-sm" dateTime={article.date}>
+							{formatDate(article.date)}
+						</time>
+						<CircleIcon
+							className="size-1.5 shrink-0 text-muted-foreground"
+							weight="duotone"
+							aria-hidden="true"
+						/>
+						<span className="text-sm">{formatViewCount(viewCount)}</span>
 					</div>
 				</div>
 			</div>
@@ -90,9 +78,17 @@ export const ViewsCounter = async ({
 					<AvatarFallback>{initials}</AvatarFallback>
 				</Avatar>
 				<div className="inline-flex select-none flex-col gap-1 overflow-hidden leading-tight">
-					<AuthorInfo author={article.author} date={article.date} />
-					<div className="flex items-center gap-x-2 text-muted-foreground text-sm">
-						<span>0 vues</span>
+					<p className="font-medium text-primary">{article.author}</p>
+					<div className="inline-flex items-center gap-x-2">
+						<time className="text-muted-foreground text-sm" dateTime={article.date}>
+							{formatDate(article.date)}
+						</time>
+						<CircleIcon
+							className="size-1.5 shrink-0 text-muted-foreground"
+							weight="duotone"
+							aria-hidden="true"
+						/>
+						<span className="text-sm">Aucune vue</span>
 					</div>
 				</div>
 			</div>

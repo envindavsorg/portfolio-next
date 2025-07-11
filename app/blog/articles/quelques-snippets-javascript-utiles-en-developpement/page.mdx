@@ -113,8 +113,10 @@ console.log(arrMerged);
 
 ```js
 const arr = [1, 2, 2, 3, 4, 4, 5];
+console.log('Tableau original:', arr);
+
 const uniqueArr = [...new Set(arr)];
-console.log(uniqueArr);
+console.log('Tableau sans doublons:', uniqueArr);
 ```
 
 Ce code montre comment supprimer les doublons d'un tableau en JavaScript.
@@ -135,8 +137,10 @@ de décomposition pour convertir le **Set** de retour en un tableau de valeurs u
 
 ```js
 const arr = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+console.log('Tableau avant tri:', arr);
+
 arr.sort((a, b) => a - b);
-console.log(arr);
+console.log('Tableau trié par ordre croissant:', arr);
 ```
 
 Ce code utilise la méthode sort sur un tableau en
@@ -156,8 +160,10 @@ Le *console.log(arr);* affiche le tableau trié dans la console.
 
 ```js
 const arr = [1, 2, 3, 4, 5];
+console.log('Tableau original:', arr);
+
 arr.reverse();
-console.log(arr);
+console.log('Tableau inversé:', arr);
 ```
 
 La méthode *reverse* en **JavaScript** inverse l'ordre des éléments d'un tableau.
@@ -172,8 +178,15 @@ La méthode *reverse* en **JavaScript** inverse l'ordre des éléments d'un tabl
 
 ```js
 const str = '42';
+console.log('Chaîne originale:', str, '(type:', typeof str + ')');
+
 const num = parseInt(str, 10);
-console.log(num);
+console.log('Nombre converti:', num, '(type:', typeof num + ')');
+
+// Exemple avec une chaîne plus complexe
+const complexStr = '42.7px';
+const complexNum = parseInt(complexStr, 10);
+console.log('Conversion de "42.7px":', complexNum);
 ```
 
 Le code utilise la fonction *parseInt* en **JavaScript** pour convertir
@@ -190,8 +203,17 @@ une chaîne de caractères en un entier.
 ```js
 const min = 1;
 const max = 10;
+console.log(`Génération d'un nombre aléatoire entre ${min} et ${max}:`);
+
 const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-console.log(randomNum);
+console.log('Nombre aléatoire généré:', randomNum);
+
+// Générons plusieurs nombres pour voir la randomisation
+console.log('\nPlusieurs exemples:');
+for (let i = 0; i < 5; i++) {
+  const newRandom = Math.floor(Math.random() * (max - min + 1)) + min;
+  console.log(`Essai ${i + 1}:`, newRandom);
+}
 ```
 
 Ce code génère un nombre entier aléatoire compris entre les valeurs **min** et **max**, incluses.
@@ -211,8 +233,17 @@ variant entre **1** et **10**. Le *console.log(randomNum);* affiche ce nombre al
 ```js
 const str = 'Hello, world!';
 const substring = 'world';
+console.log('Chaîne principale:', str);
+console.log('Sous-chaîne recherchée:', substring);
+
 const isSubstring = str.includes(substring);
-console.log(isSubstring);
+console.log('La sous-chaîne est-elle présente?', isSubstring);
+
+// Exemples supplémentaires
+console.log('\nAutres exemples:');
+console.log('Contient "Hello"?', str.includes('Hello'));
+console.log('Contient "javascript"?', str.includes('javascript'));
+console.log('Contient "World" (sensible à la casse)?', str.includes('World'));
 ```
 
 Ce code vérifie si une sous-chaîne est présente dans une chaîne principale
@@ -229,8 +260,22 @@ en utilisant la méthode includes de **JavaScript*.
 
 ```js
 const obj = { a: 1, b: 2, c: 3 };
+console.log('Objet:', obj);
+console.log('Clés de l\'objet:', Object.keys(obj));
+
 const objLength = Object.keys(obj).length;
-console.log(objLength);
+console.log('Nombre de propriétés:', objLength);
+
+// Exemple avec un objet plus complexe
+const complexObj = {
+  name: 'John',
+  age: 30,
+  city: 'Paris',
+  hobbies: ['reading', 'coding'],
+  isActive: true
+};
+console.log('\nObjet complexe:', complexObj);
+console.log('Nombre de propriétés:', Object.keys(complexObj).length);
 ```
 
 Ce code détermine le nombre de propriétés dans un objet en utilisant **Object.keys**.
@@ -246,8 +291,16 @@ Ce code détermine le nombre de propriétés dans un objet en utilisant **Object
 
 ```js
 const obj = { a: 1, b: 2, c: 3 };
+console.log('Objet original:', obj);
+
 const arr = Object.entries(obj);
-console.log(arr);
+console.log('Tableau de paires clé-valeur:', arr);
+
+// Utilisation pratique pour itérer
+console.log('\nItération sur les paires:');
+arr.forEach(([key, value]) => {
+  console.log(`Clé: ${key}, Valeur: ${value}`);
+});
 ```
 
 Ce code convertit un objet en un tableau de paires clé-valeur en utilisant *Object.entries*.
@@ -262,8 +315,20 @@ Ce code convertit un objet en un tableau de paires clé-valeur en utilisant *Obj
 
 ```js
 const obj = {};
+console.log('Objet à tester:', obj);
+
 const isEmpty = Object.entries(obj).length === 0 && obj.constructor === Object;
-console.log(isEmpty);
+console.log('L\'objet est-il vide?', isEmpty);
+
+// Tests avec différents objets
+const objWithProps = { name: 'test' };
+const isEmptyWithProps = Object.entries(objWithProps).length === 0 && objWithProps.constructor === Object;
+console.log('\nObjet avec propriétés:', objWithProps);
+console.log('Est-il vide?', isEmptyWithProps);
+
+const nullObj = null;
+// console.log('Objet null:', nullObj);
+// Note: Cette ligne provoquerait une erreur car null n'a pas de constructor
 ```
 
 Ce code vérifie si un objet est vide, c'est-à-dire qu'il ne possède aucune propriété.
@@ -280,8 +345,17 @@ Ce code vérifie si un objet est vide, c'est-à-dire qu'il ne possède aucune pr
 ## 13. Obtenez l'URL actuelle
 
 ```js
-const currentUrl = window.location.href;
-console.log(currentUrl);
+// Note: Ce code fonctionne uniquement dans un navigateur
+if (typeof window !== 'undefined') {
+  const currentUrl = window.location.href;
+  console.log('URL actuelle:', currentUrl);
+  console.log('Protocole:', window.location.protocol);
+  console.log('Hôte:', window.location.host);
+  console.log('Chemin:', window.location.pathname);
+} else {
+  console.log('Nous ne sommes pas dans un environnement navigateur');
+  console.log('window.location n\'est pas disponible');
+}
 ```
 
 Ce code récupère l'**URL** actuelle de la page web en utilisant l'objet *window.location* dans le contexte d'un navigateur.
@@ -298,7 +372,21 @@ permettant l'accès à l'objet window, comme les navigateurs web.
 ## 14. Redirection vers une nouvelle URL
 
 ```js
-window.location.href = 'https://example.com';
+// Note: Ce code provoque une redirection immédiate dans un navigateur
+// Pour la démonstration, nous l'encapsulons dans une fonction
+
+function redirectToUrl(url) {
+  console.log('Redirection vers:', url);
+  console.log('URL actuelle avant redirection:', window.location.href);
+
+  // Dans un vrai environnement navigateur, cette ligne redirigerait:
+  // window.location.href = url;
+
+  console.log('(Redirection simulée - dans un vrai navigateur, la page changerait)');
+}
+
+// Exemple d'utilisation
+redirectToUrl('https://example.com');
 ```
 
 Ce code redirige le navigateur vers une nouvelle **URL**.
@@ -314,7 +402,22 @@ tout script en cours sur la page actuelle.
 ## 15. Définissez un cookie
 
 ```js
-document.cookie = 'name=John Doe; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
+// Note: Les cookies ne fonctionnent que dans un environnement navigateur
+function setCookie() {
+  console.log('Définition d\'un cookie...');
+
+  // Dans un navigateur, cette ligne définirait réellement le cookie:
+  // document.cookie = 'name=John Doe; expires=Sun, 1 Jan 2025 00:00:00 UTC; path=/';
+
+  console.log('Cookie défini: name=John Doe');
+  console.log('Expiration: Sun, 1 Jan 2025 00:00:00 UTC');
+  console.log('Chemin: / (accessible sur tout le site)');
+
+  // Simulation de la valeur du cookie
+  console.log('(Dans un navigateur, document.cookie contiendrait maintenant ce cookie)');
+}
+
+setCookie();
 ```
 
 Ce code crée ou met à jour un cookie dans le navigateur.
@@ -330,8 +433,28 @@ Ce code crée ou met à jour un cookie dans le navigateur.
 ## 16. Obtenez un cookie
 
 ```js
-const cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)name\s*=\s*([^;]*).*$)|^.*$/, '$1');
-console.log(cookieValue);
+// Simulation des cookies pour la démonstration
+const simulatedCookies = 'sessionId=abc123; name=John Doe; theme=dark; path=/';
+
+console.log('Cookies simulés:', simulatedCookies);
+
+// Fonction pour extraire la valeur d'un cookie spécifique
+function getCookieValue(cookieString, cookieName) {
+  const cookieValue = cookieString.replace(
+    new RegExp(`(?:(?:^|.*;\\s*)${cookieName}\\s*=\\s*([^;]*).*$)|^.*$`),
+    '$1'
+  );
+  return cookieValue;
+}
+
+const nameValue = getCookieValue(simulatedCookies, 'name');
+console.log('Valeur du cookie "name":', nameValue);
+
+const themeValue = getCookieValue(simulatedCookies, 'theme');
+console.log('Valeur du cookie "theme":', themeValue);
+
+const nonExistentValue = getCookieValue(simulatedCookies, 'nonexistent');
+console.log('Cookie inexistant:', nonExistentValue || '(vide)');
 ```
 
 Ce code extrait la valeur d'un cookie spécifique nommé name à partir du document cookie.
@@ -352,8 +475,31 @@ affichera **John Doe** dans la console.
 ## 17. Vérifiez si un cookie existe
 
 ```js
-const cookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('name='));
-console.log(cookieExists);
+// Simulation des cookies pour la démonstration
+const simulatedCookies = 'sessionId=abc123; name=John Doe; theme=dark';
+
+console.log('Cookies simulés:', simulatedCookies);
+
+// Fonction pour vérifier si un cookie existe
+function checkCookieExists(cookieString, cookieName) {
+  const cookieExists = cookieString
+    .split(';')
+    .some((item) => item.trim().startsWith(`${cookieName}=`));
+  return cookieExists;
+}
+
+const nameExists = checkCookieExists(simulatedCookies, 'name');
+console.log('Le cookie "name" existe-t-il?', nameExists);
+
+const ageExists = checkCookieExists(simulatedCookies, 'age');
+console.log('Le cookie "age" existe-t-il?', ageExists);
+
+// Affichage de tous les cookies disponibles
+console.log('\nTous les cookies disponibles:');
+simulatedCookies.split(';').forEach(cookie => {
+  const [name, value] = cookie.trim().split('=');
+  console.log(`- ${name}: ${value}`);
+});
 ```
 
 Ce code vérifie si un cookie spécifique, nommé name, existe dans le navigateur.
@@ -370,7 +516,29 @@ Ce code vérifie si un cookie spécifique, nommé name, existe dans le navigateu
 ## 18. Supprimer un cookie
 
 ```js
-document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+// Fonction pour supprimer un cookie (simulation)
+function deleteCookie(cookieName) {
+  console.log(`Suppression du cookie "${cookieName}"...`);
+
+  // Dans un navigateur, cette ligne supprimerait le cookie:
+  // document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+
+  console.log('Cookie défini avec:');
+  console.log(`- Nom: ${cookieName}`);
+  console.log('- Valeur: (vide)');
+  console.log('- Expiration: Thu, 01 Jan 1970 (dans le passé)');
+  console.log('- Chemin: /');
+  console.log(`Le cookie "${cookieName}" a été supprimé du navigateur`);
+}
+
+// Exemple d'utilisation
+deleteCookie('name');
+
+// Démonstration avec plusieurs cookies
+console.log('\nSuppression de plusieurs cookies:');
+['sessionId', 'theme', 'language'].forEach(cookieName => {
+  deleteCookie(cookieName);
+});
 ```
 
 Ce code supprime le cookie nommé **name** dans le navigateur.
@@ -385,9 +553,39 @@ Ce code supprime le cookie nommé **name** dans le navigateur.
 ## 19. Obtenez les dimensions actuelles de la fenêtre
 
 ```js
-const windowWidth = window.innerWidth;
-const windowHeight = window.innerHeight;
-console.log(windowWidth, windowHeight);
+// Simulation des dimensions de fenêtre (car window n'existe pas dans ce contexte)
+function getWindowDimensions() {
+  if (typeof window !== 'undefined') {
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    console.log('Largeur de la fenêtre:', windowWidth, 'pixels');
+    console.log('Hauteur de la fenêtre:', windowHeight, 'pixels');
+    console.log('Ratio largeur/hauteur:', (windowWidth / windowHeight).toFixed(2));
+
+    // Informations supplémentaires
+    console.log('\nInformations supplémentaires:');
+    console.log('Largeur extérieure:', window.outerWidth);
+    console.log('Hauteur extérieure:', window.outerHeight);
+    console.log('Position X:', window.screenX);
+    console.log('Position Y:', window.screenY);
+
+    return { width: windowWidth, height: windowHeight };
+  } else {
+    // Simulation pour la démonstration
+    const mockWidth = 1920;
+    const mockHeight = 1080;
+
+    console.log('Simulation - Largeur de la fenêtre:', mockWidth, 'pixels');
+    console.log('Simulation - Hauteur de la fenêtre:', mockHeight, 'pixels');
+    console.log('(Dans un navigateur réel, les valeurs seraient dynamiques)');
+
+    return { width: mockWidth, height: mockHeight };
+  }
+}
+
+const dimensions = getWindowDimensions();
+console.log('\nDimensions récupérées:', dimensions);
 ```
 
 Ce code récupère et affiche la largeur et la hauteur de la fenêtre d'affichage visible du navigateur.
@@ -404,7 +602,41 @@ dans la console, permettant de voir la **taille actuelle** de la fenêtre du nav
 ## 20. Copiez le texte dans le presse-papiers
 
 ```js
-navigator.clipboard.writeText('Hello, world!');
+// Fonction pour copier du texte dans le presse-papiers
+async function copyToClipboard(text) {
+  console.log('Tentative de copie du texte:', text);
+
+  // Vérification de la disponibilité de l'API Clipboard
+  if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      // await navigator.clipboard.writeText(text);
+      console.log('✅ Texte copié avec succès dans le presse-papiers!');
+      console.log('(Dans un navigateur réel avec HTTPS, le texte serait effectivement copié)');
+    } catch (error) {
+      console.log('❌ Erreur lors de la copie:', error.message);
+    }
+  } else {
+    console.log('❌ API Clipboard non disponible');
+    console.log('Conditions requises:');
+    console.log('- Navigateur moderne');
+    console.log('- Connexion HTTPS ou localhost');
+    console.log('- Interaction utilisateur récente');
+  }
+}
+
+// Exemples d'utilisation
+copyToClipboard('Hello, world!');
+copyToClipboard('Code JavaScript copié!');
+copyToClipboard('https://example.com');
+
+// Fonction alternative pour les anciens navigateurs
+function fallbackCopyToClipboard(text) {
+  console.log('\nMéthode alternative (pour anciens navigateurs):');
+  console.log('Texte à copier:', text);
+  console.log('Instructions: Sélectionnez le texte et appuyez sur Ctrl+C (ou Cmd+C sur Mac)');
+}
+
+fallbackCopyToClipboard('Texte de secours');
 ```
 
 Ce code copie une chaîne de texte dans le presse-papiers du système en utilisant

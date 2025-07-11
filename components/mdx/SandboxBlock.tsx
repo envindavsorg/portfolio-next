@@ -106,7 +106,7 @@ if (typeof document !== 'undefined') {
 			'/index.html': `<!DOCTYPE html>
 <html>
 <head>
-	<title>JavaScript Example</title>
+	<title>Example en JavaScript</title>
 	<style>
 		body { 
 			font-family: Arial, sans-serif; 
@@ -145,8 +145,8 @@ if (typeof document !== 'undefined') {
 </head>
 <body>
 	<div id="output">
-		<h3>🚀 Running JavaScript...</h3>
-		<p style="margin: 0; color: #6c757d;">Output will appear here</p>
+		<h3>Code JavaScript en cours de lancement 🚀</h3>
+		<p style="margin: 0; color: #6c757d;">Voir le résultat dans la console</p>
 	</div>
 	<script src="helper.js"></script>
 	<script src="index.js"></script>
