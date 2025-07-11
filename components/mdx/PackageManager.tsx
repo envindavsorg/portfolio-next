@@ -1,8 +1,8 @@
 'use client';
 
 import { TerminalWindowIcon } from '@phosphor-icons/react';
-import type { ComponentPropsWithoutRef } from 'react';
-import { useState } from 'react';
+import type React from 'react';
+import { type ComponentPropsWithoutRef, useState } from 'react';
 import { toast } from 'sonner';
 import {
 	Snippet,
@@ -13,7 +13,7 @@ import {
 	SnippetTabsTrigger,
 } from '@/components/ui/kibo-ui/Snippet';
 
-interface PackageManagerSnippetProps extends ComponentPropsWithoutRef<'code'> {
+interface PackageManagerProps extends ComponentPropsWithoutRef<'code'> {
 	baseCommand: string;
 }
 
@@ -69,7 +69,9 @@ const generateCommands = (baseCommand: string) => {
 	];
 };
 
-export const PackageManagerSnippet = ({ baseCommand }: PackageManagerSnippetProps) => {
+export const PackageManager = ({
+	baseCommand,
+}: PackageManagerProps): React.JSX.Element => {
 	const commands = generateCommands(baseCommand);
 	const [value, setValue] = useState(commands[0].label);
 	const activeCommand = commands.find((command) => command.label === value);

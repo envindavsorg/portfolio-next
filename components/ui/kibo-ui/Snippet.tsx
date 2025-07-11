@@ -74,7 +74,7 @@ export const SnippetCopyButton = ({
 
 	return (
 		<Button
-			className="opacity-0 transition-opacity group-hover:opacity-100"
+			className="opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100"
 			onClick={copyToClipboard}
 			size="icon"
 			variant="ghost"

@@ -1,4 +1,3 @@
-import { TerminalWindowIcon } from '@phosphor-icons/react/ssr';
 import type { MDXComponents } from 'mdx/types';
 import Image, { type ImageProps } from 'next/image';
 import { Link } from 'next-view-transitions';
@@ -12,16 +11,9 @@ import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { ReactIcon } from '@/components/icons/React';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { PackageManagerSnippet } from '@/components/mdx/PackageManagerSnippet';
+import { PackageManager } from '@/components/mdx/PackageManager';
+import { TerminalCommand } from '@/components/mdx/TerminalCommand';
 import { CopyButton } from '@/components/ui/CopyButton';
-import {
-	Snippet,
-	SnippetCopyButton,
-	SnippetHeader,
-	SnippetTabsContent,
-	SnippetTabsList,
-	SnippetTabsTrigger,
-} from '@/components/ui/kibo-ui/Snippet';
 
 const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
 	bash: <BashIcon className="size-4 shrink-0" />,
@@ -113,29 +105,11 @@ const MDXCode = memo(
 					if (match) baseCommand = match[2];
 				}
 
-				return <PackageManagerSnippet baseCommand={baseCommand} {...props} />;
+				return <PackageManager baseCommand={baseCommand} {...props} />;
 			}
 
-			return (
-				<Snippet value="bash" className="my-6">
-					<SnippetHeader>
-						<div className="flex items-center gap-x-3">
-							<TerminalWindowIcon className="size-5" />
-							<SnippetTabsList>
-								<SnippetTabsTrigger value="bash">terminal: bash</SnippetTabsTrigger>
-							</SnippetTabsList>
-						</div>
-						<SnippetCopyButton value={codeString} />
-					</SnippetHeader>
-					<SnippetTabsContent value="bash">
-						<code
-							dangerouslySetInnerHTML={{ __html: codeHTML }}
-							{...props}
-							style={{ display: 'block', overflowX: 'auto' }}
-						/>
-					</SnippetTabsContent>
-				</Snippet>
-			);
+			// Use TerminalCommandSnippet for general terminal commands
+			return <TerminalCommand command={codeString} {...props} />;
 		}
 
 		return (
