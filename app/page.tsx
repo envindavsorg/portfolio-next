@@ -1,3 +1,4 @@
+import { RocketLaunchIcon } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
 import Script from 'next/script';
 import type React from 'react';
@@ -9,11 +10,16 @@ import { ArticlesContent } from '@/components/blog/ArticlesContent';
 import { Cards } from '@/components/cards';
 import { StarsChannel } from '@/components/channels/Stars';
 import { SubscribersChannel } from '@/components/channels/Subscribers';
-import { BadgeWithIcon } from '@/components/layout/Badges';
 import { Counter } from '@/components/text/Counter';
 import PageParagraph from '@/components/text/PageParagraph';
 import PageTitle from '@/components/text/PageTitle';
 import { TextHoverEffect } from '@/components/text/TextHover';
+import {
+	Announcement,
+	AnnouncementTag,
+	AnnouncementTitle,
+} from '@/components/ui/Announcement';
+import { BadgeWithIcon } from '@/components/ui/Badge';
 import { Separator } from '@/components/ui/Separator';
 import { name, title } from '@/resources/config';
 import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
@@ -82,6 +88,13 @@ const Home = (): React.JSX.Element => {
 			/>
 
 			<section>
+				<Announcement className="mb-6">
+					<AnnouncementTag>Mise à jour</AnnouncementTag>
+					<AnnouncementTitle>
+						Mon nouveau portfolio !
+						<RocketLaunchIcon className="size-4 shrink-0 text-muted-foreground" />
+					</AnnouncementTitle>
+				</Announcement>
 				<PageTitle name={name} title={title} isHome>
 					- {jobTitle}
 				</PageTitle>

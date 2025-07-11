@@ -1,94 +1,3 @@
-@import "../node_modules/.pnpm/tailwindcss@4.1.11/node_modules/tailwindcss/dist/lib.d.mts";
-
-@custom-variant dark (&:is(.dark *));
-
-:root {
-	/* Design Tokens */
-
-	--background: hsl(0, 0%, 98%);
-	--foreground: hsl(0, 0%, 0%);
-	--border: hsl(0, 0%, 90%);
-	--code: hsl(225, 77%, 5%);
-	--primary: hsl(240, 5%, 11%);
-	--primary-foreground: hsl(0, 0%, 98%);
-	--secondary: hsl(240, 4%, 96%);
-	--secondary-foreground: hsl(240, 5%, 11%);
-	--muted: hsl(240, 4%, 96%);
-	--muted-foreground: hsl(240, 3%, 46%);
-	--accent: hsl(240, 4%, 96%);
-	--accent-foreground: hsl(240, 5%, 11%);
-	--destructive: hsl(0, 76%, 51%);
-	--destructive-foreground: hsl(0, 0%, 98%);
-	--radius: 0.5rem;
-	--translate-y: 24px;
-}
-
-.dark {
-	--background: hsl(0, 0%, 0%);
-	--foreground: hsl(0, 0%, 98%);
-	--border: hsl(0, 0%, 25%);
-	--code: hsl(222, 56%, 12%);
-	--primary: hsl(0, 0%, 98%);
-	--primary-foreground: hsl(240, 5%, 11%);
-	--secondary: hsl(240, 3%, 15%);
-	--secondary-foreground: hsl(0, 0%, 98%);
-	--muted: hsl(240, 3%, 15%);
-	--muted-foreground: hsl(240, 4%, 65%);
-	--accent: hsl(240, 3%, 15%);
-	--accent-foreground: hsl(0, 0%, 98%);
-	--destructive: hsl(0, 89%, 80%);
-	--destructive-foreground: hsl(0, 0%, 98%);
-}
-
-@theme {
-	--font-sans: var(--font-geist-sans);
-	--font-mono: var(--font-geist-mono);
-	--font-geist-sans: var(--font-geist-sans);
-	--font-geist-mono: var(--font-geist-mono);
-
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--color-border: var(--border);
-	--color-code: var(--code);
-	--color-primary: var(--primary);
-	--color-primary-foreground: var(--primary-foreground);
-	--color-secondary: var(--secondary);
-	--color-secondary-foreground: var(--secondary-foreground);
-	--color-muted: var(--muted);
-	--color-muted-foreground: var(--muted-foreground);
-	--color-accent: var(--accent);
-	--color-accent-foreground: var(--accent-foreground);
-	--color-destructive: var(--destructive);
-	--color-destructive-foreground: var(--destructive-foreground);
-	--radius: var(--radius);
-	--breakpoint-2xl: 1400px;
-}
-
-/* Utilities */
-
-@utility animate-marquee {
-	animation: marquee var(--duration, 40s) linear infinite;
-}
-
-@utility animate-marquee-vertical {
-	animation: marquee-vertical var(--duration, 40s) linear infinite;
-}
-
-/* Base Styles */
-
-/* Typography */
-h1,
-h2,
-h3,
-h4 {
-	text-wrap: balance;
-}
-
-/* Selection */
-::selection {
-	@apply bg-theme text-white dark:text-black;
-}
-
 /* Hover Effects */
 @media (hover: hover) {
 	.animated-list:hover li {
@@ -97,13 +6,6 @@ h4 {
 	.animated-list:hover li:hover {
 		opacity: 1;
 	}
-}
-
-/* Input Normalization */
-input[type="text"],
-input[type="email"] {
-	-webkit-appearance: none;
-	appearance: none;
 }
 
 /* View Transitions */
@@ -154,24 +56,5 @@ input[type="email"] {
 	}
 	100% {
 		opacity: 1;
-	}
-}
-
-/* Marquee Animations */
-@keyframes marquee {
-	from {
-		transform: translateX(0);
-	}
-	to {
-		transform: translateX(calc(-100% - var(--gap)));
-	}
-}
-
-@keyframes marquee-vertical {
-	from {
-		transform: translateY(0);
-	}
-	to {
-		transform: translateY(calc(-100% - var(--gap)));
 	}
 }

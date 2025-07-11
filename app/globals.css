@@ -15,6 +15,13 @@ body {
 	}
 }
 
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -169,4 +176,35 @@ body {
 		mask-composite: exclude;
 		pointer-events: none;
 	}
+}
+
+/* marquee */
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(-100% - var(--gap, 1rem)));
+	}
+}
+
+@keyframes marquee-vertical {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(calc(-100% - var(--gap, 1rem)));
+	}
+}
+
+@utility animate-marquee {
+	--gap: 1rem;
+	--duration: 40s;
+	animation: marquee var(--duration) linear infinite;
+}
+
+@utility animate-marquee-vertical {
+	--gap: 1rem;
+	--duration: 40s;
+	animation: marquee-vertical var(--duration) linear infinite;
 }
