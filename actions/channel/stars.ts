@@ -89,7 +89,7 @@ export const channelStars = async (): Promise<ChannelStarsData[]> => {
 		const finalData = channelData.length > 0 ? channelData : FALLBACK_DATA;
 
 		// Cache for 1 hour (3600 seconds)
-		setCachedData(cacheKey, finalData, 3600);
+		setCachedData(cacheKey, finalData);
 
 		logger.info(`→ successfully fetched ${finalData.length} channel stars data entries`);
 		return finalData;
@@ -97,7 +97,7 @@ export const channelStars = async (): Promise<ChannelStarsData[]> => {
 		logger.error('→ error fetching channel stars data:', error);
 
 		// Return fallback data on error and cache it briefly
-		setCachedData(cacheKey, FALLBACK_DATA, 300); // Cache for 5 minutes
+		setCachedData(cacheKey, FALLBACK_DATA); // Cache for 5 minutes
 		return FALLBACK_DATA;
 	}
 };

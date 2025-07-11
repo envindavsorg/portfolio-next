@@ -24,36 +24,3 @@ export const keywords = [
 	'responsive ui',
 	'portfolio',
 ] as const;
-
-// Enable localization
-export const i18n = false as const;
-
-// Enable or disable routes
-export const routes = {
-	'/': true,
-	'/work': true,
-	'/stack': true,
-	'/blog': true,
-	'/contact': true,
-	'/github': true,
-} as const satisfies Record<string, boolean>;
-
-// Manage localized content in the messages folder
-export const i18nOptions = {
-	// A list of all locales that are supported, e.g. ['en', 'fr']
-	locales: ['fr', 'en'],
-	// Locale used by default and as a fallback
-	defaultLocale: 'fr',
-} as const satisfies {
-	locales: readonly string[];
-	defaultLocale: string;
-};
-
-// enable or disable the display of the location and time
-export const display = {
-	location: true,
-	time: true,
-} as const satisfies {
-	location: boolean;
-	time: boolean;
-};

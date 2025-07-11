@@ -80,8 +80,7 @@ const MDXCode = memo(
 				language !== 'text' &&
 				language !== 'js' &&
 				language !== 'javascript' &&
-				codeString.includes('\n') &&
-				codeString.length > 50
+				(codeString.includes('\n') || language === 'css')
 			);
 		}, [language, children]);
 

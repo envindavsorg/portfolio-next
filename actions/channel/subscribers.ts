@@ -99,7 +99,7 @@ export const channelSubscribers = async (): Promise<ChannelSubscribersData[]> =>
 		});
 
 		// Cache for 2 hours (7200 seconds) since social metrics don't change frequently
-		setCachedData(cacheKey, subscribersData, 7200);
+		setCachedData(cacheKey, subscribersData);
 
 		logger.info(
 			`→ successfully fetched ${subscribersData.length} channel subscribers data entries`,
@@ -109,7 +109,7 @@ export const channelSubscribers = async (): Promise<ChannelSubscribersData[]> =>
 		logger.error('→ error fetching channel subscribers data:', error);
 
 		// Return fallback data on error and cache it briefly
-		setCachedData(cacheKey, FALLBACK_DATA, 300); // Cache for 5 minutes
+		setCachedData(cacheKey, FALLBACK_DATA); // Cache for 5 minutes
 		return FALLBACK_DATA;
 	}
 };

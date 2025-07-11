@@ -1,9 +1,15 @@
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
-import { ogImageSchema } from '@/lib/validations/og';
+import * as z from 'zod';
 import { baseURL, name } from '@/resources/config';
 
 export const runtime = 'edge';
+
+const ogImageSchema = z.object({
+	heading: z.string(),
+	type: z.string(),
+	mode: z.enum(['light', 'dark']).default('dark'),
+});
 
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 	try {
@@ -35,6 +41,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 			>
 				<div tw="flex flex-col flex-1 py-10">
 					<div tw="flex items-center" style={{ gap: '12px' }}>
+						{/** biome-ignore lint/performance/noImgElement: explanation */}
 						<img
 							src={avatar}
 							alt={name}

@@ -1,3 +1,4 @@
+import type { ComponentType, SVGProps } from 'react';
 import { BunIcon } from '@/components/icons/Bun';
 import { CSSIcon } from '@/components/icons/CSS';
 import { ExpressIcon } from '@/components/icons/Express';
@@ -9,9 +10,9 @@ import { HTML5Icon } from '@/components/icons/HTML';
 import { JavaScriptIcon } from '@/components/icons/JavaScript';
 import { MarkdownIcon } from '@/components/icons/Markdown';
 import { MongoDBIcon } from '@/components/icons/MongoDB';
-import { NPMIcon } from '@/components/icons/NPM';
 import { NextJSIcon } from '@/components/icons/Next';
 import { NodejsIcon } from '@/components/icons/Node';
+import { NPMIcon } from '@/components/icons/NPM';
 import { PNPMIcon } from '@/components/icons/PNPM';
 import { PostgreIcon } from '@/components/icons/Postgre';
 import { PugIcon } from '@/components/icons/Pug';
@@ -20,7 +21,6 @@ import { SassIcon } from '@/components/icons/Sass';
 import { TailwindIcon } from '@/components/icons/Tailwind';
 import { TypeScriptIcon } from '@/components/icons/TypeScript';
 import { VueIcon } from '@/components/icons/Vue';
-import type { ComponentType, SVGProps } from 'react';
 
 export interface Stack {
 	icon: ComponentType<SVGProps<SVGSVGElement>>;

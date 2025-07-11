@@ -1,2 +1,0 @@
-ignores: ["@biomejs/biome", "@types/node", "autoprefixer", "postcss", "turbo", "sharp"]
-skip-missing: true
