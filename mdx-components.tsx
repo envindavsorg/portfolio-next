@@ -245,9 +245,9 @@ if (typeof document !== 'undefined') {
 					>
 						<SandboxTabs defaultValue="code" className="h-[400px]">
 							<SandboxTabsList>
-								<SandboxTabsTrigger value="code">📄 JavaScript</SandboxTabsTrigger>
-								<SandboxTabsTrigger value="preview">🔍 Preview</SandboxTabsTrigger>
-								<SandboxTabsTrigger value="console">📟 Console</SandboxTabsTrigger>
+								<SandboxTabsTrigger value="code">JavaScript</SandboxTabsTrigger>
+								<SandboxTabsTrigger value="preview">Preview</SandboxTabsTrigger>
+								<SandboxTabsTrigger value="console">Console</SandboxTabsTrigger>
 							</SandboxTabsList>
 							<SandboxTabsContent value="code">
 								<SandboxCodeEditor />
