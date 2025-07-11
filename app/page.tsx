@@ -2,11 +2,10 @@ import { RocketLaunchIcon } from '@phosphor-icons/react/ssr';
 import Link from 'next/link';
 import Script from 'next/script';
 import type React from 'react';
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { Cards } from '@/components/blocs/cards';
-import { Marquee } from '@/components/blocs/Marquee';
 import {
 	StarsChannelForDesign,
 	StarsChannelForFrameworks,
@@ -31,10 +30,16 @@ import {
 	GlimpseTrigger,
 } from '@/components/ui/Glimpse';
 import { glimpse } from '@/components/ui/Glimpse/server';
+import {
+	Marquee,
+	MarqueeContent,
+	MarqueeFade,
+	MarqueeItem,
+} from '@/components/ui/Marquee';
 import { Separator } from '@/components/ui/Separator';
 import { Status, StatusIndicator, StatusLabel } from '@/components/ui/Status';
 import { name, title } from '@/resources/config';
-import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
+import { type Stack, stack } from '@/resources/stack';
 
 const firstName = name.trim().split(' ').pop() || 'Florin';
 const jobTitle = 'développeur front-end et designer UX / UI';
@@ -60,38 +65,7 @@ const structuredData = {
 	],
 };
 
-const StackMarqueeItem = memo(
-	({ icon: Icon, title, index }: Stack & { index: number }) => (
-		<div
-			key={`${title}-${index}`}
-			className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800"
-		>
-			<Icon className="size-7 shrink-0 md:size-8" />
-			<p className="sr-only">{title}</p>
-		</div>
-	),
-);
-
-StackMarqueeItem.displayName = 'StackMarqueeItem';
-
 const Home = async (): Promise<React.JSX.Element> => {
-	const stackMarqueeItems = useMemo(
-		() =>
-			stackMarqueeRow.map((stack, idx) => (
-				<StackMarqueeItem key={`${stack.title}-${idx}`} {...stack} index={idx} />
-			)),
-		[],
-	);
-
-	const inverseStackMarqueeItems = useMemo(
-		() =>
-			inverseStackMarqueeRow.map((stack, idx) => (
-				<StackMarqueeItem key={`${stack.title}-${idx}`} {...stack} index={idx} />
-			)),
-		[],
-	);
-
-	// glimpse
 	const portfolioGitHubUrl = 'https://github.com/envindavsorg/portfolio-next/';
 	const portfolioData = await glimpse(portfolioGitHubUrl);
 
@@ -173,12 +147,34 @@ const Home = async (): Promise<React.JSX.Element> => {
 				</FadeIn>
 
 				<FadeIn className="my-12" asChild>
-					<div className="flex flex-col">
-						<Marquee pauseOnHover className="[--duration:20s]">
-							{stackMarqueeItems}
+					<div className="flex flex-col gap-y-4">
+						<Marquee>
+							<MarqueeFade side="left" />
+							<MarqueeFade side="right" />
+							<MarqueeContent direction="left">
+								{stack.map(({ icon: Icon, title }: Stack, index) => (
+									<MarqueeItem key={index}>
+										<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
+											<Icon className="size-7 shrink-0 md:size-8" />
+											<p className="sr-only">{title}</p>
+										</div>
+									</MarqueeItem>
+								))}
+							</MarqueeContent>
 						</Marquee>
-						<Marquee reverse pauseOnHover className="[--duration:20s]">
-							{inverseStackMarqueeItems}
+						<Marquee>
+							<MarqueeFade side="left" />
+							<MarqueeFade side="right" />
+							<MarqueeContent direction="right">
+								{stack.map(({ icon: Icon, title }: Stack, index) => (
+									<MarqueeItem key={index}>
+										<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
+											<Icon className="size-7 shrink-0 md:size-8" />
+											<p className="sr-only">{title}</p>
+										</div>
+									</MarqueeItem>
+								))}
+							</MarqueeContent>
 						</Marquee>
 					</div>
 				</FadeIn>
