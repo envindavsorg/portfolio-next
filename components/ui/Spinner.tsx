@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils';
-import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import type React from 'react';
+import { cn } from '@/lib/utils';
 
 const loadingVariants = cva(
 	'direction-alternate animate-pulse rounded-full duration-700',
@@ -32,10 +32,7 @@ export const Spinner = ({
 	size,
 	...props
 }: Props): React.JSX.Element => (
-	<div
-		className={cn('flex items-center justify-center gap-1', className)}
-		{...props}
-	>
+	<div className={cn('flex items-center justify-center gap-1', className)} {...props}>
 		<div className={cn(loadingVariants({ variant, size }))} />
 		<div className={cn(loadingVariants({ variant, size }), 'delay-100')} />
 		<div className={cn(loadingVariants({ variant, size }), 'delay-300')} />

@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef, useContext, useId } from 'react';
@@ -10,6 +9,7 @@ import {
 	FormProvider,
 	useFormContext,
 } from 'react-hook-form';
+import { cn } from '@/lib/utils';
 import { Label } from './Label';
 
 const Form = FormProvider;
@@ -69,10 +69,7 @@ const FormItemContext = React.createContext<FormItemContextValue>(
 	{} as FormItemContextValue,
 );
 
-const FormItem = forwardRef<
-	HTMLDivElement,
-	React.HTMLAttributes<HTMLDivElement>
->(
+const FormItem = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
 	(
 		{ className, ...props }: React.HTMLAttributes<HTMLDivElement>,
 		ref,
@@ -98,9 +95,7 @@ const FormLabel = forwardRef<
 	): React.JSX.Element => {
 		const { formItemId } = useFormField();
 
-		return (
-			<Label ref={ref} className={className} htmlFor={formItemId} {...props} />
-		);
+		return <Label ref={ref} className={className} htmlFor={formItemId} {...props} />;
 	},
 );
 FormLabel.displayName = 'FormLabel';
@@ -108,29 +103,21 @@ FormLabel.displayName = 'FormLabel';
 const FormControl = forwardRef<
 	React.ComponentRef<typeof Slot>,
 	React.ComponentPropsWithoutRef<typeof Slot>
->(
-	(
-		{ ...props }: React.ComponentPropsWithoutRef<typeof Slot>,
-		ref,
-	): React.JSX.Element => {
-		const { error, formItemId, formDescriptionId, formMessageId } =
-			useFormField();
+>(({ ...props }: React.ComponentPropsWithoutRef<typeof Slot>, ref): React.JSX.Element => {
+	const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
-		return (
-			<Slot
-				ref={ref}
-				id={formItemId}
-				aria-describedby={
-					error
-						? `${formDescriptionId} ${formMessageId}`
-						: `${formDescriptionId}`
-				}
-				aria-invalid={!!error}
-				{...props}
-			/>
-		);
-	},
-);
+	return (
+		<Slot
+			ref={ref}
+			id={formItemId}
+			aria-describedby={
+				error ? `${formDescriptionId} ${formMessageId}` : `${formDescriptionId}`
+			}
+			aria-invalid={!!error}
+			{...props}
+		/>
+	);
+});
 FormControl.displayName = 'FormControl';
 
 const FormDescription = forwardRef<
@@ -143,9 +130,7 @@ const FormDescription = forwardRef<
 	): React.JSX.Element => {
 		const { formDescriptionId } = useFormField();
 
-		return (
-			<p ref={ref} id={formDescriptionId} className={className} {...props} />
-		);
+		return <p ref={ref} id={formDescriptionId} className={className} {...props} />;
 	},
 );
 FormDescription.displayName = 'FormDescription';
@@ -155,11 +140,7 @@ const FormMessage = forwardRef<
 	React.HTMLAttributes<HTMLParagraphElement>
 >(
 	(
-		{
-			className,
-			children,
-			...props
-		}: React.HTMLAttributes<HTMLParagraphElement>,
+		{ className, children, ...props }: React.HTMLAttributes<HTMLParagraphElement>,
 		ref,
 	): React.JSX.Element | null => {
 		const { error, formMessageId } = useFormField();
@@ -173,10 +154,7 @@ const FormMessage = forwardRef<
 			<p
 				ref={ref}
 				id={formMessageId}
-				className={cn(
-					'font-medium text-red-600 text-xs dark:text-red-300',
-					className,
-				)}
+				className={cn('font-medium text-red-600 text-xs dark:text-red-300', className)}
 				{...props}
 			>
 				{body}

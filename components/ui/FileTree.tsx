@@ -1,13 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/Button';
-import { ScrollArea } from '@/components/ui/ScrollArea';
-import { cn } from '@/lib/utils';
-import {
-	File as FileIcon,
-	Folder as FolderIcon,
-	FolderOpen as FolderOpenIcon,
-} from '@phosphor-icons/react';
+import { FileIcon, FolderIcon, FolderOpenIcon } from '@phosphor-icons/react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import type React from 'react';
 import {
@@ -18,6 +11,9 @@ import {
 	useEffect,
 	useState,
 } from 'react';
+import { Button } from '@/components/ui/Button';
+import { ScrollArea } from '@/components/ui/ScrollArea';
+import { cn } from '@/lib/utils';
 
 type TreeViewElement = {
 	id: string;
@@ -80,9 +76,7 @@ const Tree = forwardRef<HTMLDivElement, TreeViewProps>(
 		}: TreeViewProps,
 		ref,
 	) => {
-		const [selectedId, setSelectedId] = useState<string | undefined>(
-			initialSelectedId,
-		);
+		const [selectedId, setSelectedId] = useState<string | undefined>(initialSelectedId);
 		const [expandedItems, setExpandedItems] = useState<string[] | undefined>(
 			initialExpandedItems,
 		);
@@ -194,24 +188,23 @@ const Tree = forwardRef<HTMLDivElement, TreeViewProps>(
 
 Tree.displayName = 'Tree';
 
-const TreeIndicator = forwardRef<
-	HTMLDivElement,
-	React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }: React.HTMLAttributes<HTMLDivElement>, ref) => {
-	const { direction } = useTree();
+const TreeIndicator = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+	({ className, ...props }: React.HTMLAttributes<HTMLDivElement>, ref) => {
+		const { direction } = useTree();
 
-	return (
-		<div
-			dir={direction}
-			ref={ref}
-			className={cn(
-				'absolute left-1.5 h-full w-px rounded-md bg-neutral-200 py-3 duration-300 ease-in-out hover:bg-slate-300 rtl:right-1.5 dark:bg-neutral-700',
-				className,
-			)}
-			{...props}
-		/>
-	);
-});
+		return (
+			<div
+				dir={direction}
+				ref={ref}
+				className={cn(
+					'absolute left-1.5 h-full w-px rounded-md bg-neutral-200 py-3 duration-300 ease-in-out hover:bg-slate-300 rtl:right-1.5 dark:bg-neutral-700',
+					className,
+				)}
+				{...props}
+			/>
+		);
+	},
+);
 
 TreeIndicator.displayName = 'TreeIndicator';
 
@@ -272,8 +265,8 @@ const Folder = forwardRef<
 					onClick={() => handleExpand(value)}
 				>
 					{expandedItems?.includes(value)
-						? openIcon ?? <FolderOpenIcon className="size-5 shrink-0" />
-						: closeIcon ?? <FolderIcon className="size-5 shrink-0" />}
+						? (openIcon ?? <FolderOpenIcon className="size-5 shrink-0" />)
+						: (closeIcon ?? <FolderIcon className="size-5 shrink-0" />)}
 					<span>{element}</span>
 				</AccordionPrimitive.Trigger>
 				<AccordionPrimitive.Content className="relative h-full overflow-hidden text-base data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
@@ -419,9 +412,7 @@ const CollapseButton = forwardRef<
 				{...props}
 			>
 				{children}
-				<span className="sr-only">
-					Actionner le groupe de fichiers et dossiers
-				</span>
+				<span className="sr-only">Actionner le groupe de fichiers et dossiers</span>
 			</Button>
 		);
 	},

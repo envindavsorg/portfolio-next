@@ -11,7 +11,7 @@ import {
 	CodeBlockHeader,
 	CodeBlockItem,
 	CodeBlock as KiboCodeBlock,
-} from '@/components/ui/kibo-ui/CodeBlock';
+} from '@/components/ui/CodeBlock';
 
 interface CodeBlockProps {
 	language?: string;

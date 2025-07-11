@@ -1,9 +1,9 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import type React from 'react';
 import { forwardRef } from 'react';
+import { cn } from '@/lib/utils';
 
 const ScrollArea = forwardRef<
 	React.ComponentRef<typeof ScrollAreaPrimitive.Root>,
@@ -41,10 +41,8 @@ const ScrollBar = forwardRef<
 		orientation={orientation}
 		className={cn(
 			'flex touch-none select-none transition-colors',
-			orientation === 'vertical' &&
-				'h-full w-1.5 border-l border-l-transparent p-px',
-			orientation === 'horizontal' &&
-				'h-1.5 flex-col border-t border-t-transparent p-px',
+			orientation === 'vertical' && 'h-full w-1.5 border-l border-l-transparent p-px',
+			orientation === 'horizontal' && 'h-1.5 flex-col border-t border-t-transparent p-px',
 			className,
 		)}
 		{...props}

@@ -11,7 +11,7 @@ import {
 	SnippetTabsContent,
 	SnippetTabsList,
 	SnippetTabsTrigger,
-} from '@/components/ui/kibo-ui/Snippet';
+} from '@/components/ui/Snippet';
 
 interface PackageManagerProps extends ComponentPropsWithoutRef<'code'> {
 	baseCommand: string;
