@@ -13,7 +13,7 @@ const PageParagraph = memo(
 		<FadeIn>
 			<p
 				className={cn(
-					'text-base text-neutral-600 leading-8 md:text-lg dark:text-neutral-300',
+					'text-neutral-600 text-sm leading-8 sm:text-base dark:text-neutral-300',
 					className,
 				)}
 			>

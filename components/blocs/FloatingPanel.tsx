@@ -108,7 +108,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 		<motion.button
 			ref={triggerRef}
 			layoutId={`floating-panel-trigger-${uniqueId}`}
-			className="group relative h-14 cursor-pointer overflow-hidden rounded-md border border-neutral-200/50 px-10 ring-1 ring-black/5 transition-all duration-500 dark:border-neutral-700/50"
+			className="group relative h-12 cursor-pointer overflow-hidden rounded-md border border-neutral-200/50 px-8 ring-1 ring-black/5 transition-all duration-500 dark:border-neutral-700/50"
 			style={{ borderRadius: 8 }}
 			onClick={handleClick}
 			whileHover={{ scale: 1.05 }}
@@ -122,7 +122,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 			>
 				<motion.span
 					layoutId={`floating-panel-label-${uniqueId}`}
-					className="font-semibold text-neutral-600 leading-8 dark:text-neutral-300"
+					className="font-semibold text-neutral-600 text-sm leading-8 dark:text-neutral-300"
 				>
 					{title}
 				</motion.span>

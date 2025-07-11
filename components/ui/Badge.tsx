@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import type * as React from 'react';
+import type React from 'react';
 import { useMemo } from 'react';
 import { CSSIcon } from '@/components/icons/CSS';
 import { HTML5Icon } from '@/components/icons/HTML';
@@ -75,8 +75,11 @@ const BadgeWithIcon = ({ type }: BadgeWithIconProps): React.JSX.Element => {
 	}
 
 	return (
-		<Badge className="inline-flex items-center gap-1.5 align-middle" variant="outline">
-			<IconComponent className="size-3.5 flex-shrink-0" />
+		<Badge
+			className="inline-flex items-center gap-1.5 py-1.5 align-middle"
+			variant="outline"
+		>
+			<IconComponent className="size-4 shrink-0" />
 			<span className="leading-none">{label}</span>
 		</Badge>
 	);

@@ -75,7 +75,7 @@ const Tree = forwardRef<HTMLDivElement, TreeViewProps>(
 			...props
 		}: TreeViewProps,
 		ref,
-	) => {
+	): React.JSX.Element => {
 		const [selectedId, setSelectedId] = useState<string | undefined>(initialSelectedId);
 		const [expandedItems, setExpandedItems] = useState<string[] | undefined>(
 			initialExpandedItems,
@@ -189,7 +189,10 @@ const Tree = forwardRef<HTMLDivElement, TreeViewProps>(
 Tree.displayName = 'Tree';
 
 const TreeIndicator = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-	({ className, ...props }: React.HTMLAttributes<HTMLDivElement>, ref) => {
+	(
+		{ className, ...props }: React.HTMLAttributes<HTMLDivElement>,
+		ref,
+	): React.JSX.Element => {
 		const { direction } = useTree();
 
 		return (
@@ -233,7 +236,7 @@ const Folder = forwardRef<
 			...props
 		}: FolderProps,
 		ref,
-	) => {
+	): React.JSX.Element => {
 		const {
 			direction,
 			handleExpand,
@@ -321,7 +324,7 @@ const File = forwardRef<
 			children?: React.ReactNode;
 		},
 		ref,
-	) => {
+	): React.JSX.Element => {
 		const { direction, selectedId, selectItem } = useTree();
 		const isSelected = isSelect ?? selectedId === value;
 		return (

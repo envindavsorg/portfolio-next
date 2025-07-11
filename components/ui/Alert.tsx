@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import type * as React from 'react';
+import type React from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -23,7 +23,8 @@ const Alert = ({
 	className,
 	variant,
 	...props
-}: React.ComponentProps<'div'> & VariantProps<typeof alertVariants>) => (
+}: React.ComponentProps<'div'> &
+	VariantProps<typeof alertVariants>): React.JSX.Element => (
 	<div
 		data-slot="alert"
 		role="alert"
@@ -32,7 +33,10 @@ const Alert = ({
 	/>
 );
 
-const AlertTitle = ({ className, ...props }: React.ComponentProps<'div'>) => (
+const AlertTitle = ({
+	className,
+	...props
+}: React.ComponentProps<'div'>): React.JSX.Element => (
 	<div
 		data-slot="alert-title"
 		className={cn(
@@ -43,7 +47,10 @@ const AlertTitle = ({ className, ...props }: React.ComponentProps<'div'>) => (
 	/>
 );
 
-const AlertDescription = ({ className, ...props }: React.ComponentProps<'div'>) => (
+const AlertDescription = ({
+	className,
+	...props
+}: React.ComponentProps<'div'>): React.JSX.Element => (
 	<div
 		data-slot="alert-description"
 		className={cn(

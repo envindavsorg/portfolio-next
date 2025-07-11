@@ -34,7 +34,7 @@ export const SubscribersChannel = async (): Promise<React.JSX.Element> => {
 							aria-label={name}
 							target="_blank"
 							rel="noreferrer"
-							className="flex w-full items-center justify-between rounded-md border border-neutral-200 bg-neutral-50 p-3 no-underline transition-transform duration-300 dark:border-neutral-700 dark:bg-neutral-800"
+							className="flex w-full items-center justify-between rounded-md border border-neutral-200/50 bg-white/20 p-3 no-underline ring-1 ring-black/5 transition-transform duration-300 dark:border-neutral-700/50 dark:bg-white/10"
 						>
 							<div className="flex items-center space-x-4">
 								<div className="relative">

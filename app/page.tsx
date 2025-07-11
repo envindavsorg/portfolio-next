@@ -7,7 +7,6 @@ import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { Cards } from '@/components/blocs/cards';
 import { Marquee } from '@/components/blocs/Marquee';
-import { ArticlesContent } from '@/components/blog/ArticlesContent';
 import { StarsChannel } from '@/components/channels/Stars';
 import { SubscribersChannel } from '@/components/channels/Subscribers';
 import { Counter } from '@/components/text/Counter';
@@ -20,6 +19,15 @@ import {
 	AnnouncementTitle,
 } from '@/components/ui/Announcement';
 import { BadgeWithIcon } from '@/components/ui/Badge';
+import {
+	Glimpse,
+	GlimpseContent,
+	GlimpseDescription,
+	GlimpseImage,
+	GlimpseTitle,
+	GlimpseTrigger,
+} from '@/components/ui/Glimpse';
+import { glimpse } from '@/components/ui/Glimpse/server';
 import { Separator } from '@/components/ui/Separator';
 import { name, title } from '@/resources/config';
 import { inverseStackMarqueeRow, type Stack, stackMarqueeRow } from '@/resources/stack';
@@ -62,7 +70,7 @@ const StackMarqueeItem = memo(
 
 StackMarqueeItem.displayName = 'StackMarqueeItem';
 
-const Home = (): React.JSX.Element => {
+const Home = async (): Promise<React.JSX.Element> => {
 	const stackMarqueeItems = useMemo(
 		() =>
 			stackMarqueeRow.map((stack, idx) => (
@@ -79,6 +87,10 @@ const Home = (): React.JSX.Element => {
 		[],
 	);
 
+	// glimpse
+	const portfolioGitHubUrl = 'https://github.com/envindavsorg/portfolio-next/';
+	const portfolioData = await glimpse(portfolioGitHubUrl);
+
 	return (
 		<>
 			<Script
@@ -88,19 +100,38 @@ const Home = (): React.JSX.Element => {
 			/>
 
 			<section>
-				<Announcement className="mb-6">
-					<AnnouncementTag>Mise à jour</AnnouncementTag>
-					<AnnouncementTitle>
-						Mon nouveau portfolio !
-						<RocketLaunchIcon className="size-4 shrink-0 text-muted-foreground" />
-					</AnnouncementTitle>
-				</Announcement>
+				<Glimpse closeDelay={0} openDelay={0}>
+					<GlimpseTrigger asChild>
+						<Link
+							href="https://wefix.net"
+							aria-label="Voir le site de WeFix !"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="font-medium text-foreground"
+							prefetch={false}
+						>
+							<Announcement className="mb-6">
+								<AnnouncementTag>Mise à jour 2.0</AnnouncementTag>
+								<AnnouncementTitle>
+									Mon nouveau portfolio !
+									<RocketLaunchIcon className="size-4 shrink-0 text-muted-foreground" />
+								</AnnouncementTitle>
+							</Announcement>
+						</Link>
+					</GlimpseTrigger>
+					<GlimpseContent className="mt-3 w-80">
+						<GlimpseImage src={portfolioData.image ?? ''} />
+						<GlimpseTitle>{portfolioData.title}</GlimpseTitle>
+						<GlimpseDescription>{portfolioData.description}</GlimpseDescription>
+					</GlimpseContent>
+				</Glimpse>
 				<PageTitle name={name} title={title} isHome>
 					- {jobTitle}
 				</PageTitle>
 				<FadeInStagger className="mt-6 flex flex-col gap-y-2" faster>
 					<PageParagraph>
-						Bonjour, je suis {firstName} ✌️, développeur web avec{' '}
+						Je suis {firstName} ✌️, développeur web avec une forte appétence pour le
+						design, avec{' '}
 						<span className="text-foreground">
 							<Counter value={experienceYears} /> ans d'expérience
 						</span>
@@ -110,7 +141,7 @@ const Home = (): React.JSX.Element => {
 					<PageParagraph>
 						Je travaille actuellement chez{' '}
 						<Link
-							href="https://wefix.net"
+							href="https://wefix.net/"
 							aria-label="Voir le site de WeFix !"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -244,9 +275,9 @@ const Home = (): React.JSX.Element => {
 				</PageParagraph>
 				<SubscribersChannel />
 
-				<Separator className="my-12" />
+				{/*<Separator className="my-12" />
 
-				<ArticlesContent />
+				<ArticlesContent />*/}
 
 				<div className="mt-20 flex items-center justify-center">
 					<TextHoverEffect text={firstName.toUpperCase()} />
