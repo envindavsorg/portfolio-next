@@ -1,14 +1,15 @@
 'use client';
 
 import {
-	ExportIcon,
+	CopyIcon,
 	EyeIcon,
 	FileArrowDownIcon,
 	SparkleIcon,
 } from '@phosphor-icons/react/ssr';
 import { motion } from 'motion/react';
 import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { FadeIn } from '@/components/animations/FadeIn';
 import {
 	FloatingPanelBody,
@@ -19,6 +20,10 @@ import {
 	FloatingPanelTrigger,
 } from '@/components/blocs/FloatingPanel';
 import { name } from '@/resources/config';
+
+const Sparkles = lazy(() =>
+	import('@/components/animations/Sparkles').then((m) => ({ default: m.Sparkles })),
+);
 
 const CV_CONFIG = {
 	filePath: '/cv-cuzeac-florin.pdf',
@@ -43,7 +48,6 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 		sizeKB: 0,
 		lastModified: new Date().toLocaleDateString('fr-FR'),
 	});
-	const [isSharing, setIsSharing] = useState(false);
 
 	const pdfUrl = CV_CONFIG.filePath;
 
@@ -76,41 +80,27 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 		document.body.removeChild(link);
 	}, [pdfUrl]);
 
-	const handleShare = useCallback(async () => {
-		if (isSharing) return;
-
-		setIsSharing(true);
-
+	const handleCopy = useCallback(async () => {
 		try {
-			const shareUrl = `${window.location.origin}${pdfUrl}`;
-
-			if (navigator.share) {
-				try {
-					await navigator.share({
-						title: CV_CONFIG.title,
-						text: CV_CONFIG.shareText,
-						url: shareUrl,
-					});
-				} catch (error) {
-					if (error instanceof Error && error.name !== 'AbortError') {
-						console.error('Share failed:', error);
-						await navigator.clipboard?.writeText(shareUrl);
-					}
-				}
-			} else {
-				await navigator.clipboard?.writeText(shareUrl);
-			}
-		} finally {
-			setTimeout(() => setIsSharing(false), 1000);
+			const copyUrl = `${window.location.origin}${pdfUrl}`;
+			await navigator.clipboard.writeText(copyUrl);
+			toast.success('Lien copié dans le presse-papiers !', {
+				description: 'Vous pouvez maintenant partager ce lien',
+			});
+		} catch (error) {
+			console.error('Copy failed:', error);
+			toast.error('Erreur lors de la copie', {
+				description: 'Impossible de copier le lien',
+			});
 		}
-	}, [pdfUrl, isSharing]);
+	}, [pdfUrl]);
 
 	return (
 		<FadeIn>
 			<FloatingPanelRoot className={className}>
 				<FloatingPanelTrigger title="Découvrez mon CV" />
 				<FloatingPanelContent className="h-auto w-full max-w-2xl overflow-hidden">
-					<FloatingPanelBody className="flex flex-col gap-4 pt-4 md:flex-row md:items-stretch md:gap-6 md:pt-5">
+					<FloatingPanelBody className="flex flex-col gap-4 pt-4 pb-1 md:flex-row md:items-stretch md:gap-6 md:pt-5 md:pb-2">
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							animate={{ opacity: 1, x: 0 }}
@@ -118,7 +108,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 							className="flex-1"
 						>
 							<div className="group relative flex h-full flex-col justify-center rounded-xl border border-neutral-200/50 bg-white/80 p-4 backdrop-blur-sm dark:border-neutral-700/50 dark:bg-black/80">
-								<div className="flex items-center gap-3">
+								<div className="relative flex items-center gap-3 overflow-hidden">
 									<div className="flex size-14 items-center justify-center rounded-xl border border-neutral-200/50 bg-white/20 ring-1 ring-black/5 dark:border-neutral-700/50 dark:bg-white/10">
 										<div className="font-bold text-base">CV</div>
 									</div>
@@ -126,6 +116,9 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 										<h3 className="font-bold text-foreground text-lg">{name}</h3>
 										<p className="text-muted-foreground text-xs">développeur front-end</p>
 									</div>
+									<Suspense fallback={null}>
+										<Sparkles density={50} />
+									</Suspense>
 								</div>
 								<div className="mt-4 hidden md:block">
 									<div className="flex items-center gap-x-2">
@@ -157,13 +150,14 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-300 hover:scale-[1.02] dark:border-neutral-700/50 dark:bg-white/10"
 								>
 									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-300 group-hover:scale-x-100" />
-									<div className="relative z-10 flex items-center gap-3">
+									<div className="relative z-10 flex flex-row-reverse items-center gap-3 max-md:justify-between md:flex-row">
 										<EyeIcon className="h-5 w-5 flex-shrink-0" weight="duotone" />
-										<div>
+										<div className="hidden md:block">
 											<div className="font-medium text-sm md:text-base">Visualiser</div>
-											<div className="hidden text-xs opacity-90 md:block">
-												dans une nouvelle fenêtre
-											</div>
+											<div className="text-xs opacity-90">dans une nouvelle fenêtre</div>
+										</div>
+										<div className="font-medium text-sm md:hidden md:text-base">
+											Visualiser le CV
 										</div>
 									</div>
 								</motion.button>
@@ -176,16 +170,17 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-300 hover:scale-[1.02] dark:border-neutral-700/50 dark:bg-white/10"
 								>
 									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-300 group-hover:scale-x-100" />
-									<div className="relative z-10 flex items-center gap-3">
+									<div className="relative z-10 flex flex-row-reverse items-center gap-3 max-md:justify-between md:flex-row">
 										<FileArrowDownIcon
 											className="h-5 w-5 flex-shrink-0"
 											weight="duotone"
 										/>
-										<div>
+										<div className="hidden md:block">
 											<div className="font-medium text-sm md:text-base">Télécharger</div>
-											<div className="hidden text-xs opacity-90 md:block">
-												sur votre appareil
-											</div>
+											<div className="text-xs opacity-90">sur votre appareil</div>
+										</div>
+										<div className="font-medium text-sm md:hidden md:text-base">
+											Télécharger le CV
 										</div>
 									</div>
 								</motion.button>
@@ -194,20 +189,20 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: 0.5 }}
-									onClick={handleShare}
-									disabled={isSharing}
-									className={`group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-300 hover:scale-[1.02] dark:border-neutral-700/50 dark:bg-white/10 ${isSharing ? 'cursor-not-allowed opacity-75' : ''}`}
+									onClick={handleCopy}
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-300 hover:scale-[1.02] dark:border-neutral-700/50 dark:bg-white/10"
 								>
 									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-300 group-hover:scale-x-100" />
-									<div className="relative z-10 flex items-center gap-3">
-										<ExportIcon className="h-5 w-5 flex-shrink-0" weight="duotone" />
-										<div>
+									<div className="relative z-10 flex flex-row-reverse items-center gap-3 max-md:justify-between md:flex-row">
+										<CopyIcon className="h-5 w-5 flex-shrink-0" weight="duotone" />
+										<div className="hidden md:block">
 											<div className="font-medium text-sm md:text-base">
-												{isSharing ? 'Partage en cours...' : 'Partager'}
+												Copier le lien
 											</div>
-											<div className="hidden text-xs opacity-90 md:block">
-												{isSharing ? 'Veuillez patienter' : 'ou copier le lien'}
-											</div>
+											<div className="text-xs opacity-90">dans le presse-papiers</div>
+										</div>
+										<div className="font-medium text-sm md:hidden md:text-base">
+											Copier le lien et partager
 										</div>
 									</div>
 								</motion.button>
