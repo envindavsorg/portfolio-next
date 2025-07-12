@@ -77,7 +77,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
 			/>
 
-			<section>
+			<section className="relative">
 				<Glimpse closeDelay={0} openDelay={0}>
 					<GlimpseTrigger asChild>
 						<Link
@@ -108,12 +108,12 @@ const Home = async (): Promise<React.JSX.Element> => {
 				</PageTitle>
 				<FadeInStagger className="mt-6 flex flex-col gap-y-2" faster>
 					<PageParagraph>
-						Je suis {firstName} ✌️, développeur web avec une forte appétence pour le
-						design, avec{' '}
+						Développeur web full-stack avec{' '}
 						<span className="text-foreground">
 							<Counter value={experienceYears} /> ans d'expérience
 						</span>
-						, passionné par la création d'applications fiables, belles et fonctionnelles.
+						. Je conçois et développe des solutions digitales innovantes, alliant
+						excellence technique et design soigné.
 					</PageParagraph>
 					<CV className="my-4" />
 					<PageParagraph>

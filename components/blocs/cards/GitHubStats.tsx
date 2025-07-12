@@ -84,7 +84,7 @@ const ContributionsGraph = ({
 				<div
 					key={`day-${idx}-${day.date}`}
 					className={cn(
-						'h-6 w-6 rounded-[2px] sm:aspect-square sm:h-auto sm:w-auto sm:rounded-[3px]',
+						'h-5 w-5 rounded-[2px] sm:aspect-square sm:h-auto sm:w-auto sm:rounded-[3px]',
 						contributionsColorMap[day.color] || 'bg-neutral-100 dark:bg-neutral-800',
 					)}
 				/>
