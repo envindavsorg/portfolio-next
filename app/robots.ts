@@ -1,17 +1,13 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
-export default function robots(): MetadataRoute.Robots {
-	return {
-		rules: {
-			userAgent: '*',
-			allow: '/',
-			disallow: [
-				'/api/',
-				'/_next/',
-				'/admin/',
-			],
-		},
-		sitemap: 'https://cuzeac-florin.app/sitemap.xml',
-		host: 'https://cuzeac-florin.app',
-	};
-}
+const robots = (): MetadataRoute.Robots => ({
+	rules: {
+		userAgent: '*',
+		allow: '/',
+		disallow: ['/api/', '/_next/', '/admin/'],
+	},
+	sitemap: 'https://cuzeacflorin.fr/sitemap.xml',
+	host: 'https://cuzeacflorin.fr',
+});
+
+export default robots;

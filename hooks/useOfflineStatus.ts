@@ -8,7 +8,7 @@ interface OfflineStatus {
 	wasOffline: boolean;
 }
 
-export function useOfflineStatus(): OfflineStatus {
+const useOfflineStatus = (): OfflineStatus => {
 	const [isOnline, setIsOnline] = useState(true);
 	const [wasOffline, setWasOffline] = useState(false);
 
@@ -66,4 +66,6 @@ export function useOfflineStatus(): OfflineStatus {
 		isOffline: !isOnline,
 		wasOffline,
 	};
-}
+};
+
+export default useOfflineStatus;

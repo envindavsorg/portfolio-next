@@ -1,9 +1,6 @@
 import { type DependencyList, type EffectCallback, useEffect, useRef } from 'react';
 
-export const useOptimizedEffect = (
-	effect: EffectCallback,
-	deps?: DependencyList,
-): void => {
+const useOptimizedEffect = (effect: EffectCallback, deps?: DependencyList): void => {
 	const prevDeps = useRef<DependencyList | undefined>(undefined);
 	const hasChanged = useRef(true);
 
@@ -21,3 +18,5 @@ export const useOptimizedEffect = (
 		}
 	}, deps);
 };
+
+export default useOptimizedEffect;

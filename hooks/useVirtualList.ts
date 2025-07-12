@@ -25,12 +25,12 @@ interface VirtualListReturn {
 	}>;
 }
 
-export function useVirtualList({
+const useVirtualList = ({
 	itemHeight,
 	containerHeight,
 	overscan = 5,
 	itemCount,
-}: VirtualListOptions): VirtualListReturn {
+}: VirtualListOptions): VirtualListReturn => {
 	const [scrollTop, setScrollTop] = useState(0);
 	const containerRef = useRef<HTMLDivElement>(null);
 
@@ -84,4 +84,6 @@ export function useVirtualList({
 		},
 		items: visibleItems,
 	};
-}
+};
+
+export default useVirtualList;

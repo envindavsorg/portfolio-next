@@ -15,7 +15,7 @@ export interface Post {
 
 const postsDirectory = path.join(process.cwd(), 'app/blog/articles');
 
-export async function getAllPosts(): Promise<Post[]> {
+export const getAllPosts = async (): Promise<Post[]> => {
 	try {
 		const folders = fs.readdirSync(postsDirectory, { withFileTypes: true });
 		const posts: Post[] = [];
@@ -48,9 +48,9 @@ export async function getAllPosts(): Promise<Post[]> {
 		console.error('Error reading posts:', error);
 		return [];
 	}
-}
+};
 
-export async function getPost(slug: string): Promise<Post | null> {
+export const getPost = async (slug: string): Promise<Post | null> => {
 	try {
 		const fullPath = path.join(postsDirectory, slug, 'page.mdx');
 
@@ -75,4 +75,4 @@ export async function getPost(slug: string): Promise<Post | null> {
 		console.error('Error reading post:', error);
 		return null;
 	}
-}
+};

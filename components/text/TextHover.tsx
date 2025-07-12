@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import type React from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useOptimizedIntersection } from '@/hooks/useOptimizedIntersection';
+import useOptimizedIntersection from '@/hooks/useOptimizedIntersection';
 
 interface TextHoverEffectProps {
 	text: string;
@@ -49,17 +49,21 @@ export const TextHoverEffect = ({
 	}, [isIntersecting, triggerOnView, hasTriggered]);
 
 	// Memoize ref callback to prevent recreation on every render
-	const combinedRef = useCallback((node: SVGSVGElement | null) => {
-		svgRef.current = node;
-		if (intersectionRef.current !== node) {
-			(intersectionRef as React.RefObject<SVGSVGElement | null>).current = node;
-		}
-	}, [intersectionRef]);
+	const combinedRef = useCallback(
+		(node: SVGSVGElement | null) => {
+			svgRef.current = node;
+			if (intersectionRef.current !== node) {
+				(intersectionRef as React.RefObject<SVGSVGElement | null>).current = node;
+			}
+		},
+		[intersectionRef],
+	);
 
 	// Memoize animation condition
-	const shouldAnimate = useMemo(() => 
-		triggerOnView ? hasTriggered : true,
-	[triggerOnView, hasTriggered]);
+	const shouldAnimate = useMemo(
+		() => (triggerOnView ? hasTriggered : true),
+		[triggerOnView, hasTriggered],
+	);
 
 	return (
 		<svg

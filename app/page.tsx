@@ -69,7 +69,6 @@ const Home = async (): Promise<React.JSX.Element> => {
 	const portfolioGitHubUrl = 'https://github.com/envindavsorg/portfolio-next/';
 	const portfolioData = await glimpse(portfolioGitHubUrl);
 
-	// Pre-rendered stack items for server component
 	const stackItemsMemo = stack.map(({ icon: Icon, title }: Stack, index) => (
 		<MarqueeItem key={`${title}-${index}`}>
 			<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
@@ -79,7 +78,6 @@ const Home = async (): Promise<React.JSX.Element> => {
 		</MarqueeItem>
 	));
 
-	// Pre-formatted date for server component
 	const formattedDateMemo = new Date().toLocaleDateString('fr-FR', {
 		day: 'numeric',
 		month: 'long',
@@ -168,16 +166,12 @@ const Home = async (): Promise<React.JSX.Element> => {
 						<Marquee>
 							<MarqueeFade side="left" />
 							<MarqueeFade side="right" />
-							<MarqueeContent direction="left">
-								{stackItemsMemo}
-							</MarqueeContent>
+							<MarqueeContent direction="left">{stackItemsMemo}</MarqueeContent>
 						</Marquee>
 						<Marquee>
 							<MarqueeFade side="left" />
 							<MarqueeFade side="right" />
-							<MarqueeContent direction="right">
-								{stackItemsMemo}
-							</MarqueeContent>
+							<MarqueeContent direction="right">{stackItemsMemo}</MarqueeContent>
 						</Marquee>
 					</div>
 				</FadeIn>
@@ -303,14 +297,13 @@ const Home = async (): Promise<React.JSX.Element> => {
 						il fleurit continuellement avec mes découvertes, mes créations et mes
 						aventures dans le monde du développement.
 						<span className="mt-2 block font-medium text-foreground">
-							Revenez régulièrement pour découvrir les nouveautés ! 🌱
+							N'hésitez pas à revenir de temps en temps pour découvrir les nouveautés et
+							suivre l'évolution de mes créations ! 🌱
 						</span>
 					</PageParagraph>
 					<div className="mt-6 flex items-center gap-2 text-muted-foreground text-sm">
 						<span>Dernière mise à jour :</span>
-						<time className="font-medium text-foreground">
-							{formattedDateMemo}
-						</time>
+						<time className="font-medium text-foreground">{formattedDateMemo}</time>
 					</div>
 				</FadeIn>
 

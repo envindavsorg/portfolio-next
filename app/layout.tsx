@@ -26,7 +26,9 @@ const Toaster = lazy(() =>
 	import('@/components/ui/Sonner').then((m) => ({ default: m.Toaster })),
 );
 const OfflineIndicator = lazy(() =>
-	import('@/components/ui/OfflineIndicator').then((m) => ({ default: m.OfflineIndicator })),
+	import('@/components/ui/OfflineIndicator').then((m) => ({
+		default: m.OfflineIndicator,
+	})),
 );
 
 export const metadata: Metadata = constructMetadata();

@@ -1,10 +1,10 @@
 'use client';
 
 import { WifiSlashIcon } from '@phosphor-icons/react/ssr';
-import { motion, AnimatePresence } from 'motion/react';
-import { useOfflineStatus } from '@/hooks/useOfflineStatus';
+import { AnimatePresence, motion } from 'motion/react';
+import useOfflineStatus from '@/hooks/useOfflineStatus';
 
-export function OfflineIndicator() {
+export const OfflineIndicator = () => {
 	const { isOffline, wasOffline, isOnline } = useOfflineStatus();
 
 	return (
@@ -19,17 +19,13 @@ export function OfflineIndicator() {
 					<div className="flex items-center gap-3 rounded-lg bg-red-500 px-4 py-3 text-white shadow-lg">
 						<WifiSlashIcon className="size-5 shrink-0" />
 						<div className="flex-1">
-							<p className="font-medium text-sm">
-								Connexion perdue
-							</p>
-							<p className="text-red-100 text-xs">
-								Vous naviguez hors ligne
-							</p>
+							<p className="font-medium text-sm">Connexion perdue</p>
+							<p className="text-red-100 text-xs">Vous naviguez hors ligne</p>
 						</div>
 					</div>
 				</motion.div>
 			)}
-			
+
 			{isOnline && wasOffline && (
 				<motion.div
 					initial={{ y: -100, opacity: 0 }}
@@ -47,16 +43,12 @@ export function OfflineIndicator() {
 					<div className="flex items-center gap-3 rounded-lg bg-green-500 px-4 py-3 text-white shadow-lg">
 						<div className="size-2 rounded-full bg-green-200 animate-pulse" />
 						<div className="flex-1">
-							<p className="font-medium text-sm">
-								Connexion rétablie
-							</p>
-							<p className="text-green-100 text-xs">
-								Vous êtes de nouveau en ligne
-							</p>
+							<p className="font-medium text-sm">Connexion rétablie</p>
+							<p className="text-green-100 text-xs">Vous êtes de nouveau en ligne</p>
 						</div>
 					</div>
 				</motion.div>
 			)}
 		</AnimatePresence>
 	);
-}
+};

@@ -2,7 +2,7 @@
 
 import type React from 'react';
 import { memo } from 'react';
-import { useVirtualList } from '@/hooks/useVirtualList';
+import useVirtualList from '@/hooks/useVirtualList';
 import { cn } from '@/lib/utils';
 
 interface VirtualListProps<T> {
@@ -15,7 +15,7 @@ interface VirtualListProps<T> {
 	getItemKey?: (item: T, index: number) => string | number;
 }
 
-function VirtualListComponent<T>({
+const VirtualListComponent = <T,>({
 	items,
 	itemHeight,
 	height,
@@ -23,8 +23,12 @@ function VirtualListComponent<T>({
 	className,
 	overscan = 5,
 	getItemKey = (_, index) => index,
-}: VirtualListProps<T>) {
-	const { containerProps, innerProps, items: virtualItems } = useVirtualList({
+}: VirtualListProps<T>) => {
+	const {
+		containerProps,
+		innerProps,
+		items: virtualItems,
+	} = useVirtualList({
 		itemHeight,
 		containerHeight: height,
 		itemCount: items.length,
@@ -32,10 +36,7 @@ function VirtualListComponent<T>({
 	});
 
 	return (
-		<div
-			{...containerProps}
-			className={cn('virtual-list-container', className)}
-		>
+		<div {...containerProps} className={cn('virtual-list-container', className)}>
 			<div {...innerProps}>
 				{virtualItems.map(({ index, style }) => {
 					const item = items[index];
@@ -54,6 +55,6 @@ function VirtualListComponent<T>({
 			</div>
 		</div>
 	);
-}
+};
 
 export const VirtualList = memo(VirtualListComponent) as typeof VirtualListComponent;

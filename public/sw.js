@@ -28,9 +28,10 @@ const CACHE_STRATEGIES = {
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
 	console.log('SW: Installing service worker');
-	
+
 	event.waitUntil(
-		caches.open(STATIC_CACHE)
+		caches
+			.open(STATIC_CACHE)
 			.then((cache) => {
 				console.log('SW: Caching static assets');
 				return cache.addAll(STATIC_ASSETS);
@@ -41,27 +42,27 @@ self.addEventListener('install', (event) => {
 			})
 			.catch((error) => {
 				console.error('SW: Error caching static assets:', error);
-			})
+			}),
 	);
 });
 
 // Activate event - clean old caches
 self.addEventListener('activate', (event) => {
 	console.log('SW: Activating service worker');
-	
+
 	event.waitUntil(
-		caches.keys()
+		caches
+			.keys()
 			.then((cacheNames) => {
 				return Promise.all(
 					cacheNames
 						.filter((cacheName) => {
-							return cacheName !== STATIC_CACHE && 
-								   cacheName !== DYNAMIC_CACHE;
+							return cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE;
 						})
 						.map((cacheName) => {
 							console.log('SW: Deleting old cache:', cacheName);
 							return caches.delete(cacheName);
-						})
+						}),
 				);
 			})
 			.then(() => {
@@ -70,7 +71,7 @@ self.addEventListener('activate', (event) => {
 			})
 			.catch((error) => {
 				console.error('SW: Error during activation:', error);
-			})
+			}),
 	);
 });
 
@@ -102,7 +103,7 @@ self.addEventListener('fetch', (event) => {
 });
 
 // Cache first strategy
-async function handleCacheFirst(request) {
+const handleCacheFirst = async (request) => {
 	try {
 		const cachedResponse = await caches.match(request);
 		if (cachedResponse) {
@@ -119,15 +120,15 @@ async function handleCacheFirst(request) {
 		console.error('SW: Cache first strategy failed:', error);
 		return new Response('Offline', { status: 503 });
 	}
-}
+};
 
 // Network first strategy
-async function handleNetworkFirst(request) {
+const handleNetworkFirst = async (request) => {
 	try {
 		const networkResponse = await fetch(request);
 		if (networkResponse.ok) {
 			const cache = await caches.open(DYNAMIC_CACHE);
-			cache.put(request, networkResponse.clone());
+			await cache.put(request, networkResponse.clone());
 		}
 		return networkResponse;
 	} catch (error) {
@@ -138,15 +139,15 @@ async function handleNetworkFirst(request) {
 		}
 		return new Response('Offline', { status: 503 });
 	}
-}
+};
 
 // Network first with fallback for pages
-async function handleNetworkFirstWithFallback(request) {
+const handleNetworkFirstWithFallback = async (request) => {
 	try {
 		const networkResponse = await fetch(request);
 		if (networkResponse.ok) {
 			const cache = await caches.open(DYNAMIC_CACHE);
-			cache.put(request, networkResponse.clone());
+			await cache.put(request, networkResponse.clone());
 		}
 		return networkResponse;
 	} catch (error) {
@@ -164,7 +165,7 @@ async function handleNetworkFirstWithFallback(request) {
 			}
 		}
 
-		return new Response('Offline', { 
+		return new Response('Offline', {
 			status: 503,
 			headers: { 'Content-Type': 'text/html' },
 			body: `
@@ -180,13 +181,13 @@ async function handleNetworkFirstWithFallback(request) {
 					<p>Please check your internet connection and try again.</p>
 				</body>
 				</html>
-			`
+			`,
 		});
 	}
-}
+};
 
 // Stale while revalidate strategy
-async function handleStaleWhileRevalidate(request) {
+const handleStaleWhileRevalidate = async (request) => {
 	const cache = await caches.open(DYNAMIC_CACHE);
 	const cachedResponse = await cache.match(request);
 
@@ -209,12 +210,12 @@ async function handleStaleWhileRevalidate(request) {
 
 	// If no cache, wait for network
 	return fetchPromise;
-}
+};
 
 // Handle background sync for offline actions
 self.addEventListener('sync', (event) => {
 	console.log('SW: Background sync triggered:', event.tag);
-	
+
 	if (event.tag === 'background-analytics') {
 		event.waitUntil(sendPendingAnalytics());
 	}
@@ -223,7 +224,7 @@ self.addEventListener('sync', (event) => {
 // Handle push notifications (future enhancement)
 self.addEventListener('push', (event) => {
 	console.log('SW: Push notification received');
-	
+
 	const options = {
 		body: event.data ? event.data.text() : 'New update available!',
 		icon: '/android-chrome-192x192.png',
@@ -234,35 +235,31 @@ self.addEventListener('push', (event) => {
 			{
 				action: 'view',
 				title: 'View',
-				icon: '/android-chrome-192x192.png'
+				icon: '/android-chrome-192x192.png',
 			},
 			{
 				action: 'close',
-				title: 'Close'
-			}
-		]
+				title: 'Close',
+			},
+		],
 	};
 
-	event.waitUntil(
-		self.registration.showNotification('Portfolio Update', options)
-	);
+	event.waitUntil(self.registration.showNotification('Portfolio Update', options));
 });
 
 // Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
 	console.log('SW: Notification clicked:', event.action);
-	
+
 	event.notification.close();
 
 	if (event.action === 'view') {
-		event.waitUntil(
-			clients.openWindow('/')
-		);
+		event.waitUntil(clients.openWindow('/'));
 	}
 });
 
 // Utility function for background analytics (placeholder)
-async function sendPendingAnalytics() {
+const sendPendingAnalytics = async () => {
 	// This would send any pending analytics data when back online
 	console.log('SW: Sending pending analytics data');
-}
+};

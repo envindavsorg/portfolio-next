@@ -2,11 +2,11 @@
 
 import { useEffect } from 'react';
 
-export function ServiceWorkerProvider() {
+export const ServiceWorkerProvider = () => {
 	useEffect(() => {
 		if (
-			typeof window !== 'undefined' && 
-			'serviceWorker' in navigator && 
+			typeof window !== 'undefined' &&
+			'serviceWorker' in navigator &&
 			process.env.NODE_ENV === 'production'
 		) {
 			const registerSW = async () => {
@@ -21,12 +21,12 @@ export function ServiceWorkerProvider() {
 						if (newWorker) {
 							newWorker.addEventListener('statechange', () => {
 								if (
-									newWorker.state === 'installed' && 
+									newWorker.state === 'installed' &&
 									navigator.serviceWorker.controller
 								) {
 									// New content is available, notify user
 									console.log('New content available! Please refresh.');
-									
+
 									// You could show a toast notification here
 									if (window.confirm('New content available! Refresh to update?')) {
 										window.location.reload();
@@ -53,4 +53,4 @@ export function ServiceWorkerProvider() {
 	}, []);
 
 	return null;
-}
+};

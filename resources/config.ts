@@ -1,4 +1,4 @@
-export const baseURL = 'cuzeac-florin.app' as const;
+export const baseURL = 'cuzeacflorin.fr' as const;
 export const name = 'Cuzeac Florin' as const;
 export const title = 'Crée, innove, impacte.' as const;
 export const id = '@cuzeacflorin' as const;

@@ -84,7 +84,7 @@ const manifest = (): MetadataRoute.Manifest => ({
 			sizes: '1200x630',
 			type: 'image/png',
 			form_factor: 'wide',
-			label: 'Page d\'accueil du portfolio',
+			label: "Page d'accueil du portfolio",
 		},
 	],
 	prefer_related_applications: false,

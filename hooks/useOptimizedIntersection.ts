@@ -5,7 +5,7 @@ interface UseIntersectionObserverOptions extends IntersectionObserverInit {
 	enabled?: boolean;
 }
 
-export const useOptimizedIntersection = <T extends HTMLElement = HTMLElement>(
+const useOptimizedIntersection = <T extends HTMLElement = HTMLElement>(
 	options: UseIntersectionObserverOptions = {},
 ): [RefObject<T | null>, boolean] => {
 	const { once = false, enabled = true, ...observerOptions } = options;
@@ -60,3 +60,5 @@ export const useOptimizedIntersection = <T extends HTMLElement = HTMLElement>(
 
 	return [elementRef, isIntersecting];
 };
+
+export default useOptimizedIntersection;

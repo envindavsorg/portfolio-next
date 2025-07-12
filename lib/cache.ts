@@ -7,7 +7,7 @@ interface CacheEntry<T> {
 
 const cache = new Map<string, CacheEntry<any>>();
 
-export function getCachedData<T>(key: string): T | null {
+export const getCachedData = <T>(key: string): T | null => {
 	const entry = cache.get(key);
 	if (!entry) {
 		return null;
@@ -20,19 +20,19 @@ export function getCachedData<T>(key: string): T | null {
 	}
 
 	return entry.data;
-}
+};
 
-export function setCachedData<T>(key: string, data: T): void {
+export const setCachedData = <T>(key: string, data: T): void => {
 	cache.set(key, {
 		data,
 		timestamp: Date.now(),
 	});
-}
+};
 
-export function getCachedDataWithCustomDuration<T>(
+export const getCachedDataWithCustomDuration = <T>(
 	key: string,
 	duration: number,
-): T | null {
+): T | null => {
 	const entry = cache.get(key);
 	if (!entry) {
 		return null;
@@ -45,8 +45,8 @@ export function getCachedDataWithCustomDuration<T>(
 	}
 
 	return entry.data;
-}
+};
 
-export function clearCache(): void {
+export const clearCache = (): void => {
 	cache.clear();
-}
+};
