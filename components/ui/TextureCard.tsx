@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 export const TextureCard = React.forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement> & { children?: React.ReactNode }
->(({ className, children, ...props }, ref) => {
+>(({ className, children, ...props }, ref): React.JSX.Element => {
 	return (
 		<div
 			ref={ref}

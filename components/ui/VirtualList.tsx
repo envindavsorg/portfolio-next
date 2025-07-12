@@ -23,7 +23,7 @@ const VirtualListComponent = <T,>({
 	className,
 	overscan = 5,
 	getItemKey = (_, index) => index,
-}: VirtualListProps<T>) => {
+}: VirtualListProps<T>): React.JSX.Element => {
 	const {
 		containerProps,
 		innerProps,

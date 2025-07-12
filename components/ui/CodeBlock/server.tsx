@@ -5,6 +5,7 @@ import {
 	transformerNotationHighlight,
 	transformerNotationWordHighlight,
 } from '@shikijs/transformers';
+import type React from 'react';
 import type { HTMLAttributes } from 'react';
 import { type BundledLanguage, type CodeOptionsMultipleThemes, codeToHtml } from 'shiki';
 
@@ -21,7 +22,7 @@ export const CodeBlockContent = async ({
 	language,
 	syntaxHighlighting = true,
 	...props
-}: CodeBlockContentProps) => {
+}: CodeBlockContentProps): Promise<React.JSX.Element> => {
 	// noinspection ES6RedundantAwait
 	const html = syntaxHighlighting
 		? await codeToHtml(children as string, {

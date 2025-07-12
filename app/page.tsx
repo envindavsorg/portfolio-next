@@ -93,14 +93,14 @@ const Home = async (): Promise<React.JSX.Element> => {
 			/>
 
 			<section className="relative">
-				<Glimpse closeDelay={0} openDelay={0}>
+				<Glimpse closeDelay={150} openDelay={600}>
 					<GlimpseTrigger asChild>
 						<Link
 							href="https://wefix.net"
 							aria-label="Voir le site de WeFix !"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="font-medium text-foreground"
+							className="inline-block font-medium text-foreground"
 							prefetch={false}
 						>
 							<Announcement className="mb-6">
@@ -112,7 +112,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 							</Announcement>
 						</Link>
 					</GlimpseTrigger>
-					<GlimpseContent className="mt-3 w-80">
+					<GlimpseContent className="w-80" sideOffset={-2}>
 						<GlimpseImage src={portfolioData.image ?? ''} />
 						<GlimpseTitle>{portfolioData.title}</GlimpseTitle>
 						<GlimpseDescription>{portfolioData.description}</GlimpseDescription>

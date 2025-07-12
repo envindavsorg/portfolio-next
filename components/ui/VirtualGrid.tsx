@@ -28,52 +28,51 @@ const VirtualGridComponent = <T,>({
 	className,
 	overscan = 5,
 	getItemKey = (_, index) => index,
-}: VirtualGridProps<T>) => {
+}: VirtualGridProps<T>): React.JSX.Element => {
 	const [scrollTop, setScrollTop] = useState(0);
-	const [scrollLeft, setScrollLeft] = useState(0);
+	const [_scrollLeft, setScrollLeft] = useState(0);
 	const containerRef = useRef<HTMLDivElement>(null);
 
-	const { columnsCount, rowsCount, visibleItems, totalHeight, totalWidth } =
-		useMemo(() => {
-			const columnsCount = Math.floor((width + gap) / (itemWidth + gap));
-			const rowsCount = Math.ceil(items.length / columnsCount);
+	const { visibleItems, totalHeight, totalWidth } = useMemo(() => {
+		const columnsCount = Math.floor((width + gap) / (itemWidth + gap));
+		const rowsCount = Math.ceil(items.length / columnsCount);
 
-			const visibleRowsCount = Math.ceil(height / (itemHeight + gap));
-			const startRow = Math.floor(scrollTop / (itemHeight + gap));
-			const endRow = Math.min(startRow + visibleRowsCount, rowsCount);
+		const visibleRowsCount = Math.ceil(height / (itemHeight + gap));
+		const startRow = Math.floor(scrollTop / (itemHeight + gap));
+		const endRow = Math.min(startRow + visibleRowsCount, rowsCount);
 
-			// Add overscan
-			const overscanStart = Math.max(0, startRow - overscan);
-			const overscanEnd = Math.min(rowsCount, endRow + overscan);
+		// Add overscan
+		const overscanStart = Math.max(0, startRow - overscan);
+		const overscanEnd = Math.min(rowsCount, endRow + overscan);
 
-			const visibleItems = [];
-			for (let row = overscanStart; row < overscanEnd; row++) {
-				for (let col = 0; col < columnsCount; col++) {
-					const index = row * columnsCount + col;
-					if (index >= items.length) break;
+		const visibleItems = [];
+		for (let row = overscanStart; row < overscanEnd; row++) {
+			for (let col = 0; col < columnsCount; col++) {
+				const index = row * columnsCount + col;
+				if (index >= items.length) break;
 
-					visibleItems.push({
-						index,
-						item: items[index],
-						style: {
-							position: 'absolute' as const,
-							left: col * (itemWidth + gap),
-							top: row * (itemHeight + gap),
-							width: itemWidth,
-							height: itemHeight,
-						},
-					});
-				}
+				visibleItems.push({
+					index,
+					item: items[index],
+					style: {
+						position: 'absolute' as const,
+						left: col * (itemWidth + gap),
+						top: row * (itemHeight + gap),
+						width: itemWidth,
+						height: itemHeight,
+					},
+				});
 			}
+		}
 
-			return {
-				columnsCount,
-				rowsCount,
-				visibleItems,
-				totalHeight: rowsCount * (itemHeight + gap) - gap,
-				totalWidth: columnsCount * (itemWidth + gap) - gap,
-			};
-		}, [items, itemWidth, itemHeight, width, height, gap, scrollTop, overscan]);
+		return {
+			columnsCount,
+			rowsCount,
+			visibleItems,
+			totalHeight: rowsCount * (itemHeight + gap) - gap,
+			totalWidth: columnsCount * (itemWidth + gap) - gap,
+		};
+	}, [items, itemWidth, itemHeight, width, height, gap, scrollTop, overscan]);
 
 	const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
 		setScrollTop(e.currentTarget.scrollTop);

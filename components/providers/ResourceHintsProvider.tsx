@@ -11,19 +11,6 @@ interface ResourceHint {
 
 // Critical resources to preload
 const PRELOAD_RESOURCES: ResourceHint[] = [
-	// Critical fonts
-	{
-		href: '/fonts/geist-sans.woff2',
-		as: 'font',
-		type: 'font/woff2',
-		crossOrigin: 'anonymous',
-	},
-	{
-		href: '/fonts/geist-mono.woff2',
-		as: 'font',
-		type: 'font/woff2',
-		crossOrigin: 'anonymous',
-	},
 	// Critical images
 	{
 		href: '/og-author.png',
@@ -82,7 +69,7 @@ export const ResourceHintsProvider = () => {
 			if (type) link.type = type;
 			if (crossOrigin) link.crossOrigin = crossOrigin;
 
-			// Add importance hint for critical resources
+			// Add an importance hint for critical resources
 			if (rel === 'preload') {
 				link.setAttribute('importance', 'high');
 			}
