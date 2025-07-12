@@ -107,6 +107,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 	return (
 		<motion.button
 			ref={triggerRef}
+			data-trigger-id={uniqueId}
 			layoutId={`floating-panel-trigger-${uniqueId}`}
 			className="group relative h-12 cursor-pointer overflow-hidden rounded-md border border-neutral-200/50 px-8 ring-1 ring-black/5 transition-all duration-500 dark:border-neutral-700/50"
 			style={{ borderRadius: 8 }}
@@ -141,7 +142,8 @@ export const FloatingPanelContent = ({
 	children,
 	className,
 }: FloatingPanelContentProps) => {
-	const { isOpen, closeFloatingPanel, uniqueId, triggerRect, title } = useFloatingPanel();
+	const { isOpen, closeFloatingPanel, uniqueId, triggerRect, title, openFloatingPanel } =
+		useFloatingPanel();
 	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -175,9 +177,71 @@ export const FloatingPanelContent = ({
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [closeFloatingPanel]);
 
+	// Handle window resize to reposition the panel
+	useEffect(() => {
+		const handleResize = () => {
+			if (isOpen && triggerRect) {
+				// Find the trigger element and update its position
+				const triggerElement = document.querySelector(
+					`[data-trigger-id="${uniqueId}"]`,
+				) as HTMLElement;
+				if (triggerElement) {
+					const newRect = triggerElement.getBoundingClientRect();
+					openFloatingPanel(newRect);
+				}
+			}
+		};
+
+		if (isOpen) {
+			window.addEventListener('resize', handleResize);
+			return () => window.removeEventListener('resize', handleResize);
+		}
+	}, [isOpen, triggerRect, uniqueId, openFloatingPanel]);
+
+	// Calculate container boundaries for proper positioning
+	const getContainerBounds = () => {
+		// Find the main container element (usually has 'container' class)
+		const container = document.querySelector('.container') || document.body;
+		if (container) {
+			const containerRect = container.getBoundingClientRect();
+			return {
+				left: containerRect.left + 16, // Add some padding
+				right: containerRect.right - 16, // Add some padding
+				width: containerRect.width - 32, // Account for padding
+			};
+		}
+		return {
+			left: 16,
+			right: window.innerWidth - 16,
+			width: window.innerWidth - 32,
+		};
+	};
+
 	const variants: Variants = {
 		hidden: { opacity: 0, scale: 0.9, y: 10 },
 		visible: { opacity: 1, scale: 1, y: 0 },
+	};
+
+	// Calculate proper positioning within container bounds
+	const getPositionStyle = () => {
+		if (!triggerRect) {
+			return {
+				left: '50%',
+				top: '50%',
+				transformOrigin: 'center',
+			};
+		}
+
+		const containerBounds = getContainerBounds();
+
+		return {
+			left: triggerRect.left,
+			top: triggerRect.bottom + 8,
+			transformOrigin: 'top left',
+			maxWidth: containerBounds.width,
+			// Ensure the panel doesn't go beyond container bounds
+			right: 'auto',
+		};
 	};
 
 	return (
@@ -196,16 +260,12 @@ export const FloatingPanelContent = ({
 							ref={contentRef}
 							layoutId={`floating-panel-${uniqueId}`}
 							className={cn(
-								'fixed z-50 aspect-square overflow-hidden rounded-md p-4 outline-none',
+								'fixed z-50 overflow-hidden rounded-md p-4 outline-none',
 								'border border-neutral-200/50 dark:border-neutral-700/50',
 								'bg-white ring-1 ring-black/5 dark:bg-black',
 								className,
 							)}
-							style={{
-								left: triggerRect ? triggerRect.left : '50%',
-								top: triggerRect ? triggerRect.bottom + 8 : '50%',
-								transformOrigin: 'top left',
-							}}
+							style={getPositionStyle()}
 							initial="hidden"
 							animate="visible"
 							exit="hidden"
