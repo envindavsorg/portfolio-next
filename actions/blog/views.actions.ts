@@ -32,7 +32,8 @@ export const getBlogViews = async (dynamic = false) => {
 
 export const getViewsCount = async (dynamic = false) => {
 	if (!UPSTASH_REDIS_REST_URL || !UPSTASH_REDIS_REST_TOKEN) return [];
-	if (dynamic) noStore();
+	// Only use noStore for truly dynamic content, allow static generation when possible
+	if (dynamic && NODE_ENV !== 'production') noStore();
 
 	try {
 		const views = await redis.lrange<ViewData>('views', 0, -1);

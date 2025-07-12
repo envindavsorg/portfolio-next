@@ -2,15 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type React from 'react';
 import { useMemo } from 'react';
-import { CSSIcon } from '@/components/icons/CSS';
-import { HTML5Icon } from '@/components/icons/HTML';
-import { JavaScriptIcon } from '@/components/icons/JavaScript';
-import { NextJSIcon } from '@/components/icons/Next';
-import { ReactIcon } from '@/components/icons/React';
-import { ShadcnIcon } from '@/components/icons/Shadcn';
-import { TailwindIcon } from '@/components/icons/Tailwind';
-import { TypeScriptIcon } from '@/components/icons/TypeScript';
-import { VueIcon } from '@/components/icons/Vue';
+import { DynamicIcon } from '@/components/icons/IconLoader';
 import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
@@ -56,23 +48,23 @@ type BadgeWithIconProps = {
 };
 
 const BADGE_CONFIG = {
-	html: { icon: HTML5Icon, label: 'HTML' },
-	css: { icon: CSSIcon, label: 'CSS' },
-	js: { icon: JavaScriptIcon, label: 'JavaScript' },
-	react: { icon: ReactIcon, label: 'React' },
-	next: { icon: NextJSIcon, label: 'Next.js' },
-	vue: { icon: VueIcon, label: 'Vue.js' },
-	ts: { icon: TypeScriptIcon, label: 'TypeScript' },
-	tailwind: { icon: TailwindIcon, label: 'Tailwind.css' },
-	shadcn: { icon: ShadcnIcon, label: 'shadcn/ui' },
+	html: { iconName: 'html', label: 'HTML' },
+	css: { iconName: 'css', label: 'CSS' },
+	js: { iconName: 'javascript', label: 'JavaScript' },
+	react: { iconName: 'react', label: 'React' },
+	next: { iconName: 'next', label: 'Next.js' },
+	vue: { iconName: 'vue', label: 'Vue.js' },
+	ts: { iconName: 'typescript', label: 'TypeScript' },
+	tailwind: { iconName: 'tailwind', label: 'Tailwind.css' },
+	shadcn: { iconName: 'shadcn', label: 'shadcn/ui' },
 } as const;
 
 const BadgeWithIcon = ({ type }: BadgeWithIconProps): React.JSX.Element => {
-	const { icon: IconComponent, label } = useMemo(() => {
-		return BADGE_CONFIG[type] || { icon: null, label: '' };
+	const { iconName, label } = useMemo(() => {
+		return BADGE_CONFIG[type] || { iconName: null, label: '' };
 	}, [type]);
 
-	if (!IconComponent) {
+	if (!iconName) {
 		return <Badge>{label}</Badge>;
 	}
 
@@ -81,7 +73,7 @@ const BadgeWithIcon = ({ type }: BadgeWithIconProps): React.JSX.Element => {
 			className="inline-flex items-center gap-1.5 py-1.5 align-middle"
 			variant="outline"
 		>
-			<IconComponent className="size-4 shrink-0" />
+			<DynamicIcon name={iconName} className="size-4 shrink-0" />
 			<span className="leading-none">{label}</span>
 		</Badge>
 	);

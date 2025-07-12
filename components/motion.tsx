@@ -6,6 +6,7 @@ import {
 	stagger,
 	type Variants,
 } from 'motion/react';
+import { memo, useMemo } from 'react';
 import { defaultVariants } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
@@ -19,7 +20,19 @@ type BaseMotionProps = {
 	variants?: Variants;
 };
 
-export function Motion({
+// Move stagger variants outside component to prevent recreation
+const STAGGER_VARIANTS = {
+	visible: {
+		transition: {
+			delayChildren: stagger(0.1, { startDelay: 0.25 }),
+		},
+	},
+} as const;
+
+// Memoize motion component
+const MotionSlot = memo(motion.create(Slot));
+
+export const Motion = memo(function Motion({
 	children,
 	className,
 	asChild,
@@ -29,28 +42,23 @@ export function Motion({
 	variants,
 	...props
 }: BaseMotionProps) {
-	const Comp = asChild ? motion.create(Slot) : motion.div;
+	const Comp = asChild ? MotionSlot : motion.div;
 
-	const defaultProps: Partial<BaseMotionProps> = {
+	// Memoize default props to prevent object recreation
+	const defaultProps = useMemo(() => ({
 		initial: initial || 'hidden',
 		animate: animate || 'visible',
 		exit: exit || 'hidden',
 		variants: variants || defaultVariants,
-	};
+	}), [initial, animate, exit, variants]);
 	return (
 		<Comp
 			{...defaultProps}
 			className={cn('font-medium text-2xl leading-relaxed dark:text-white', className)}
-			variants={{
-				visible: {
-					transition: {
-						delayChildren: stagger(0.1, { startDelay: 0.25 }),
-					},
-				},
-			}}
+			variants={STAGGER_VARIANTS}
 			{...props}
 		>
 			{children}
 		</Comp>
 	);
-}
+});

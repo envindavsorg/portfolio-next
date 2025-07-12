@@ -6,6 +6,8 @@ import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
 import type React from 'react';
 import { lazy, Suspense } from 'react';
+import { ResourceHintsProvider } from '@/components/providers/ResourceHintsProvider';
+import { ServiceWorkerProvider } from '@/components/providers/ServiceWorkerProvider';
 import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { constructMetadata } from '@/lib/metadata';
@@ -22,6 +24,9 @@ const Sparkles = lazy(() =>
 );
 const Toaster = lazy(() =>
 	import('@/components/ui/Sonner').then((m) => ({ default: m.Toaster })),
+);
+const OfflineIndicator = lazy(() =>
+	import('@/components/ui/OfflineIndicator').then((m) => ({ default: m.OfflineIndicator })),
 );
 
 export const metadata: Metadata = constructMetadata();
@@ -57,6 +62,8 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
+					<ResourceHintsProvider />
+					<ServiceWorkerProvider />
 
 					<div className="container flex min-h-screen max-w-2xl flex-col">
 						<main className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">{children}</main>
@@ -65,6 +72,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 					<Suspense fallback={null}>
 						<Toaster position="bottom-right" richColors closeButton />
 						<Sparkles density={50} />
+						<OfflineIndicator />
 					</Suspense>
 
 					{process.env.NODE_ENV === 'production' && (

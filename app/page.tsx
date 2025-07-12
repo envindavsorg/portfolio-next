@@ -69,6 +69,23 @@ const Home = async (): Promise<React.JSX.Element> => {
 	const portfolioGitHubUrl = 'https://github.com/envindavsorg/portfolio-next/';
 	const portfolioData = await glimpse(portfolioGitHubUrl);
 
+	// Pre-rendered stack items for server component
+	const stackItemsMemo = stack.map(({ icon: Icon, title }: Stack, index) => (
+		<MarqueeItem key={`${title}-${index}`}>
+			<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
+				<Icon className="size-7 shrink-0 md:size-8" />
+				<p className="sr-only">{title}</p>
+			</div>
+		</MarqueeItem>
+	));
+
+	// Pre-formatted date for server component
+	const formattedDateMemo = new Date().toLocaleDateString('fr-FR', {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+	});
+
 	return (
 		<>
 			<Script
@@ -152,28 +169,14 @@ const Home = async (): Promise<React.JSX.Element> => {
 							<MarqueeFade side="left" />
 							<MarqueeFade side="right" />
 							<MarqueeContent direction="left">
-								{stack.map(({ icon: Icon, title }: Stack, index) => (
-									<MarqueeItem key={index}>
-										<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
-											<Icon className="size-7 shrink-0 md:size-8" />
-											<p className="sr-only">{title}</p>
-										</div>
-									</MarqueeItem>
-								))}
+								{stackItemsMemo}
 							</MarqueeContent>
 						</Marquee>
 						<Marquee>
 							<MarqueeFade side="left" />
 							<MarqueeFade side="right" />
 							<MarqueeContent direction="right">
-								{stack.map(({ icon: Icon, title }: Stack, index) => (
-									<MarqueeItem key={index}>
-										<div className="flex aspect-square items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 p-3 dark:border-neutral-700 dark:bg-neutral-800">
-											<Icon className="size-7 shrink-0 md:size-8" />
-											<p className="sr-only">{title}</p>
-										</div>
-									</MarqueeItem>
-								))}
+								{stackItemsMemo}
 							</MarqueeContent>
 						</Marquee>
 					</div>
@@ -306,11 +309,7 @@ const Home = async (): Promise<React.JSX.Element> => {
 					<div className="mt-6 flex items-center gap-2 text-muted-foreground text-sm">
 						<span>Dernière mise à jour :</span>
 						<time className="font-medium text-foreground">
-							{new Date().toLocaleDateString('fr-FR', {
-								day: 'numeric',
-								month: 'long',
-								year: 'numeric',
-							})}
+							{formattedDateMemo}
 						</time>
 					</div>
 				</FadeIn>

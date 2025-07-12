@@ -7,6 +7,11 @@ interface MetadataOptions {
 	description?: string;
 	image?: string;
 	noIndex?: boolean;
+	canonicalUrl?: string;
+	tags?: string[];
+	publishedTime?: string;
+	modifiedTime?: string;
+	type?: 'website' | 'article';
 }
 
 const defaultDescription =
@@ -18,6 +23,11 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		description = defaultDescription,
 		image = absoluteUrl(`/api/og?heading=${name}&type=image&mode=dark`),
 		noIndex = false,
+		canonicalUrl,
+		tags,
+		publishedTime,
+		modifiedTime,
+		type = 'website',
 	} = options;
 
 	return {
@@ -28,11 +38,19 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		description,
 		metadataBase: new URL(`https://${baseURL}`),
 		applicationName: name,
-		keywords: [...keywords],
+		keywords: tags ? [...keywords, ...tags] : [...keywords],
 		openGraph: {
 			title,
 			description,
-			type: 'website',
+			type,
+			...(type === 'article' && {
+				article: {
+					publishedTime,
+					modifiedTime,
+					authors: [name],
+					tags,
+				},
+			}),
 			images: [
 				{
 					url: image,
@@ -46,7 +64,7 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 			siteName: name,
 		},
 		alternates: {
-			canonical: '/',
+			canonical: canonicalUrl || '/',
 		},
 		appleWebApp: {
 			capable: true,

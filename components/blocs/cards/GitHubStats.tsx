@@ -3,7 +3,7 @@
 import { GithubLogoIcon } from '@phosphor-icons/react/ssr';
 import { motion } from 'motion/react';
 import Link from 'next/link';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { defaultVariantsNoDelay } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
 
@@ -58,24 +58,26 @@ const GithubStatItem = ({ label, value }: { label: string; value: number }) => (
 	</div>
 );
 
-const contributionsColorMap: Record<string, string> = {
+// Move outside component to prevent recreation on each render
+const CONTRIBUTIONS_COLOR_MAP: Record<string, string> = {
 	'#ebedf0': 'bg-[#ebedf0] dark:bg-[#262626]',
 	'#9be9a8': 'bg-[#9be9a8] dark:bg-[#0e4429]',
 	'#40c463': 'bg-[#40c463] dark:bg-[#006d32]',
 	'#30a14e': 'bg-[#30a14e] dark:bg-[#26a641]',
 	'#216e39': 'bg-[#216e39] dark:bg-[#39d353]',
-};
+} as const;
 
-const ContributionsGraph = ({
+const ContributionsGraph = memo(({
 	contributions,
 }: {
 	contributions: Awaited<ReturnType<any>>;
 }) => {
-	const daysFlat = contributions.latestContributions.flatMap(
-		(week: { contributionDays: any }) => {
-			return week.contributionDays;
-		},
-	);
+	// Memoize flattened days to prevent recalculation on each render
+	const daysFlat = useMemo(() => 
+		contributions.latestContributions.flatMap(
+			(week: { contributionDays: any }) => week.contributionDays
+		),
+	[contributions.latestContributions]);
 
 	return (
 		<div className="absolute inset-0 z-0 grid grid-flow-col grid-rows-7 gap-[2px] opacity-50 sm:gap-1 sm:p-0">
@@ -85,10 +87,10 @@ const ContributionsGraph = ({
 					key={`day-${idx}-${day.date}`}
 					className={cn(
 						'h-5 w-5 rounded-[2px] sm:aspect-square sm:h-auto sm:w-auto sm:rounded-[3px]',
-						contributionsColorMap[day.color] || 'bg-neutral-100 dark:bg-neutral-800',
+						CONTRIBUTIONS_COLOR_MAP[day.color] || 'bg-neutral-100 dark:bg-neutral-800',
 					)}
 				/>
 			))}
 		</div>
 	);
-};
+});

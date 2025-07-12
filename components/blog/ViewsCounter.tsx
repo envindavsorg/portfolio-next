@@ -38,7 +38,8 @@ export const ViewsCounter = async ({
 	slug,
 }: ViewsCounterProps): Promise<React.JSX.Element> => {
 	try {
-		const views: ViewData[] = await getViewsCount(true);
+		// Use static generation for better performance
+		const views: ViewData[] = await getViewsCount(false);
 		const viewsForSlug = views?.find((view: ViewData) => view.slug === slug);
 		const viewCount: number = Number(viewsForSlug?.count || 0);
 

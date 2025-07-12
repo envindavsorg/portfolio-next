@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useOptimizedIntersection } from '@/hooks/useOptimizedIntersection';
 
 interface TextHoverEffectProps {
@@ -29,6 +29,7 @@ export const TextHoverEffect = ({
 		enabled: triggerOnView,
 	});
 
+	// Memoize mask position calculation to avoid object recreation
 	useEffect(() => {
 		if (svgRef.current && cursor.x !== null && cursor.y !== null) {
 			const svgRect = svgRef.current.getBoundingClientRect();
@@ -47,14 +48,18 @@ export const TextHoverEffect = ({
 		}
 	}, [isIntersecting, triggerOnView, hasTriggered]);
 
-	const combinedRef = (node: SVGSVGElement | null) => {
+	// Memoize ref callback to prevent recreation on every render
+	const combinedRef = useCallback((node: SVGSVGElement | null) => {
 		svgRef.current = node;
 		if (intersectionRef.current !== node) {
 			(intersectionRef as React.RefObject<SVGSVGElement | null>).current = node;
 		}
-	};
+	}, [intersectionRef]);
 
-	const shouldAnimate = triggerOnView ? hasTriggered : true;
+	// Memoize animation condition
+	const shouldAnimate = useMemo(() => 
+		triggerOnView ? hasTriggered : true,
+	[triggerOnView, hasTriggered]);
 
 	return (
 		<svg
@@ -65,7 +70,9 @@ export const TextHoverEffect = ({
 			xmlns="http://www.w3.org/2000/svg"
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => setHovered(false)}
-			onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+			onMouseMove={useCallback((e: React.MouseEvent) => {
+				setCursor({ x: e.clientX, y: e.clientY });
+			}, [])}
 			className="select-none"
 		>
 			<defs>
