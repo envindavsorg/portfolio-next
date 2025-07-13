@@ -12,7 +12,6 @@ import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { constructMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
-import { name } from '@/resources/config';
 
 const Analytics = lazy(() =>
 	import('@vercel/analytics/react').then((m) => ({ default: m.Analytics })),
@@ -37,8 +36,8 @@ export const metadata: Metadata = constructMetadata();
 export const viewport: Viewport = {
 	viewportFit: 'cover',
 	themeColor: [
-		{ media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
-		{ media: '(prefers-color-scheme: dark)', color: '#000000' },
+		{ media: '(prefers-color-scheme: light)', color: 'hsl(0, 0%, 98%)' },
+		{ media: '(prefers-color-scheme: dark)', color: 'hsl(0, 0%, 0%)' },
 	],
 	colorScheme: 'dark light',
 	width: 'device-width',
@@ -62,14 +61,6 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			)}
 			suppressHydrationWarning
 		>
-			<head>
-				<meta name="apple-mobile-web-app-capable" content="yes" />
-				<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-				<meta name="apple-mobile-web-app-title" content="Cuzeac Florin" />
-				<link rel="apple-touch-icon" href="/icon.png" />
-				<link rel="apple-touch-startup-image" href="/icon.png" />
-				<title>{name}</title>
-			</head>
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
