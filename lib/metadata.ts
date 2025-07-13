@@ -69,8 +69,8 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		appleWebApp: {
 			capable: true,
 			statusBarStyle: 'black-translucent',
-			startupImage: '/og.png',
-			title,
+			startupImage: '/icon.png',
+			title: 'Cuzeac Florin',
 		},
 		formatDetection: {
 			telephone: false,
@@ -88,7 +88,7 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		icons: {
 			icon: '/favicon.ico',
 			shortcut: '/favicon-16x16.png',
-			apple: '/apple-touch-icon.png',
+			apple: '/icon.png',
 		},
 		robots: {
 			index: !noIndex,

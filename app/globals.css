@@ -149,6 +149,22 @@ h4 {
 	}
 }
 
+/* Ensure immediate theme color changes for Safari status bar */
+@supports (-webkit-appearance: none) {
+	:root {
+		color-scheme: light dark;
+	}
+	
+	.dark {
+		color-scheme: dark;
+	}
+	
+	/* Force hardware acceleration for smooth theme transitions */
+	html {
+		transform: translateZ(0);
+	}
+}
+
 @utility container {
 	margin-inline: auto;
 	padding-inline: 1rem;

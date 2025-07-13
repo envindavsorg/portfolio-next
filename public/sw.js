@@ -6,10 +6,11 @@ const DYNAMIC_CACHE = 'dynamic-v1.0.0';
 const STATIC_ASSETS = [
 	'/',
 	'/blog',
-	'/manifest.json',
+	'/manifest.webmanifest',
 	'/og.png',
 	'/og-author.png',
 	'/favicon.ico',
+	'/icon.png',
 	'/android-chrome-192x192.png',
 	'/android-chrome-512x512.png',
 	'/apple-touch-icon.png',

@@ -30,14 +30,19 @@ const OfflineIndicator = lazy(() =>
 		default: m.OfflineIndicator,
 	})),
 );
+const PWAInstallPrompt = lazy(() =>
+	import('@/components/ui/PWAInstallPrompt').then((m) => ({
+		default: m.PWAInstallPrompt,
+	})),
+);
 
 export const metadata: Metadata = constructMetadata();
 
 export const viewport: Viewport = {
 	viewportFit: 'cover',
 	themeColor: [
-		{ media: '(prefers-color-scheme: light)', color: 'hsl(0, 0%, 98%)' },
-		{ media: '(prefers-color-scheme: dark)', color: 'hsl(0, 0%, 0%)' },
+		{ media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
+		{ media: '(prefers-color-scheme: dark)', color: '#000000' },
 	],
 	colorScheme: 'dark light',
 	width: 'device-width',
@@ -61,6 +66,13 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			)}
 			suppressHydrationWarning
 		>
+			<head>
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+				<meta name="apple-mobile-web-app-title" content="Cuzeac Florin" />
+				<link rel="apple-touch-icon" href="/icon.png" />
+				<link rel="apple-touch-startup-image" href="/icon.png" />
+			</head>
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
@@ -75,6 +87,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 						<Toaster position="bottom-right" richColors closeButton />
 						<Sparkles density={50} />
 						<OfflineIndicator />
+						<PWAInstallPrompt />
 					</Suspense>
 
 					{process.env.NODE_ENV === 'production' && (

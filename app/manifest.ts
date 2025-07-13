@@ -1,10 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { name } from '@/resources/config';
-import { dark } from '@/resources/theme';
+import { dark, light } from '@/resources/theme';
 
 const manifest = (): MetadataRoute.Manifest => ({
-	name: 'Portfolio - Cuzeac Florin',
-	short_name: name,
+	name: 'Cuzeac Florin',
+	short_name: 'Cuzeac Florin',
 	description:
 		"Développeur web avec 10 ans d'expérience, passionné par la création d'applications belles et fonctionnelles. Portfolio professionnel avec blog technique.",
 	start_url: '/',
@@ -38,6 +38,24 @@ const manifest = (): MetadataRoute.Manifest => ({
 			type: 'image/png',
 		},
 		{
+			src: '/icon.png',
+			sizes: '192x192',
+			type: 'image/png',
+			purpose: 'any',
+		},
+		{
+			src: '/icon.png',
+			sizes: '512x512',
+			type: 'image/png',
+			purpose: 'any',
+		},
+		{
+			src: '/icon.png',
+			sizes: '1024x1024',
+			type: 'image/png',
+			purpose: 'maskable',
+		},
+		{
 			src: '/android-chrome-192x192.png',
 			sizes: '192x192',
 			type: 'image/png',
@@ -58,7 +76,7 @@ const manifest = (): MetadataRoute.Manifest => ({
 			url: '/blog',
 			icons: [
 				{
-					src: '/android-chrome-192x192.png',
+					src: '/icon.png',
 					sizes: '192x192',
 					type: 'image/png',
 				},
@@ -71,7 +89,7 @@ const manifest = (): MetadataRoute.Manifest => ({
 			url: 'https://github.com/envindavsorg',
 			icons: [
 				{
-					src: '/android-chrome-192x192.png',
+					src: '/icon.png',
 					sizes: '192x192',
 					type: 'image/png',
 				},
@@ -84,7 +102,7 @@ const manifest = (): MetadataRoute.Manifest => ({
 			sizes: '1200x630',
 			type: 'image/png',
 			form_factor: 'wide',
-			label: "Page d'accueil du portfolio",
+			label: 'Portfolio Cuzeac Florin - Développeur Web',
 		},
 	],
 	prefer_related_applications: false,
