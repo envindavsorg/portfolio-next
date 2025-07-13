@@ -68,9 +68,8 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		},
 		appleWebApp: {
 			capable: true,
-			statusBarStyle: 'black-translucent',
-			startupImage: '/icon.png',
-			title: 'Cuzeac Florin',
+			statusBarStyle: 'default',
+			title: 'Portfolio',
 		},
 		formatDetection: {
 			telephone: false,

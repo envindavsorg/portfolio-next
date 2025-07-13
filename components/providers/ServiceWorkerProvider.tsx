@@ -6,8 +6,7 @@ export const ServiceWorkerProvider = () => {
 	useEffect(() => {
 		if (
 			typeof window !== 'undefined' &&
-			'serviceWorker' in navigator &&
-			process.env.NODE_ENV === 'production'
+			'serviceWorker' in navigator
 		) {
 			const registerSW = async () => {
 				try {
