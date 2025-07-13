@@ -6,7 +6,7 @@ const DYNAMIC_CACHE = 'dynamic-v1.0.0';
 const STATIC_ASSETS = [
 	'/',
 	'/blog',
-	'/manifest.webmanifest',
+	'/site.webmanifest',
 	'/og.png',
 	'/og-author.png',
 	'/favicon.ico',
