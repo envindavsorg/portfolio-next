@@ -10,13 +10,8 @@ import {
 } from 'motion/react';
 import type React from 'react';
 import { createContext, useContext, useEffect, useId, useRef, useState } from 'react';
+import useMotionConfig from '@/hooks/useMotionConfig';
 import { cn } from '@/lib/utils';
-
-const TRANSITION: MotionConfigProps['transition'] = {
-	type: 'spring',
-	bounce: 0.1,
-	duration: 0.4,
-};
 
 interface FloatingPanelContextType {
 	isOpen: boolean;
@@ -78,10 +73,11 @@ interface FloatingPanelRootProps {
 
 export const FloatingPanelRoot = ({ children, className }: FloatingPanelRootProps) => {
 	const floatingPanelLogic = useFloatingPanelLogic();
+	const motionConfig = useMotionConfig();
 
 	return (
 		<FloatingPanelContext.Provider value={floatingPanelLogic}>
-			<MotionConfig transition={TRANSITION}>
+			<MotionConfig transition={motionConfig}>
 				<div className={cn('relative', className)}>{children}</div>
 			</MotionConfig>
 		</FloatingPanelContext.Provider>
@@ -109,11 +105,11 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 			ref={triggerRef}
 			data-trigger-id={uniqueId}
 			layoutId={`floating-panel-trigger-${uniqueId}`}
-			className="group relative h-12 cursor-pointer overflow-hidden rounded-md border border-neutral-200/50 px-8 ring-1 ring-black/5 transition-all duration-500 dark:border-neutral-700/50"
-			style={{ borderRadius: 8 }}
+			className="group relative h-12 cursor-pointer overflow-hidden rounded-md border border-neutral-200/50 px-8 ring-1 ring-black/5 transition-all duration-300 dark:border-neutral-700/50"
+			style={{ borderRadius: 8, willChange: 'transform' }}
 			onClick={handleClick}
-			whileHover={{ scale: 1.05 }}
-			whileTap={{ scale: 0.95 }}
+			whileHover={{ scale: 1.02 }}
+			whileTap={{ scale: 0.98 }}
 			aria-haspopup="dialog"
 			aria-expanded={false}
 		>
@@ -128,7 +124,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 					{title}
 				</motion.span>
 			</motion.div>
-			<div className="-left-16 absolute top-0 h-full w-8 rotate-[30deg] scale-y-150 bg-white/10 transition-all duration-700 group-hover:left-[calc(100%+1rem)]" />
+			<div className="-left-16 absolute top-0 h-full w-8 rotate-[30deg] scale-y-150 bg-white/10 transition-all duration-500 group-hover:left-[calc(100%+1rem)]" />
 		</motion.button>
 	);
 };
@@ -218,7 +214,7 @@ export const FloatingPanelContent = ({
 	};
 
 	const variants: Variants = {
-		hidden: { opacity: 0, scale: 0.9, y: 10 },
+		hidden: { opacity: 0, scale: 0.95, y: 8 },
 		visible: { opacity: 1, scale: 1, y: 0 },
 	};
 
@@ -249,11 +245,12 @@ export const FloatingPanelContent = ({
 			{isOpen && (
 				<>
 					<motion.div
-						initial={{ backdropFilter: 'blur(0px)' }}
-						animate={{ backdropFilter: 'blur(4px)' }}
-						exit={{ backdropFilter: 'blur(0px)' }}
-						className="fixed inset-0 z-50"
-						style={{ overflow: 'hidden' }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.15 }}
+						className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm"
+						style={{ overflow: 'hidden', willChange: 'opacity' }}
 					/>
 					<div className="relative">
 						<motion.div
@@ -265,7 +262,7 @@ export const FloatingPanelContent = ({
 								'bg-white ring-1 ring-black/5 dark:bg-black',
 								className,
 							)}
-							style={getPositionStyle()}
+							style={{ ...getPositionStyle(), willChange: 'transform, opacity' }}
 							initial="hidden"
 							animate="visible"
 							exit="hidden"
@@ -311,9 +308,10 @@ interface FloatingPanelBodyProps {
 export const FloatingPanelBody = ({ children, className }: FloatingPanelBodyProps) => (
 	<motion.div
 		className={className}
-		initial={{ opacity: 0, y: 10 }}
+		initial={{ opacity: 0, y: 6 }}
 		animate={{ opacity: 1, y: 0 }}
-		transition={{ delay: 0.2 }}
+		transition={{ delay: 0.1, duration: 0.2 }}
+		style={{ willChange: 'transform, opacity' }}
 	>
 		{children}
 	</motion.div>
@@ -330,9 +328,10 @@ export const FloatingPanelFooter = ({
 }: FloatingPanelFooterProps) => (
 	<motion.div
 		className={className}
-		initial={{ opacity: 0, y: 10 }}
+		initial={{ opacity: 0, y: 6 }}
 		animate={{ opacity: 1, y: 0 }}
-		transition={{ delay: 0.3 }}
+		transition={{ delay: 0.15, duration: 0.2 }}
+		style={{ willChange: 'transform, opacity' }}
 	>
 		{children}
 	</motion.div>
@@ -353,8 +352,9 @@ export const FloatingPanelCloseButton = ({
 			className={cn('flex cursor-pointer items-center', className)}
 			onClick={closeFloatingPanel}
 			aria-label="Fermer le panneau flottant"
-			whileHover={{ scale: 1.1 }}
-			whileTap={{ scale: 0.9 }}
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+			style={{ willChange: 'transform' }}
 		>
 			<ArrowLeftIcon className="size-5" weight="duotone" />
 		</motion.button>
@@ -379,8 +379,9 @@ export const FloatingPanelButton = ({
 			className,
 		)}
 		onClick={onClick}
-		whileHover={{ scale: 1.02 }}
-		whileTap={{ scale: 0.98 }}
+		whileHover={{ scale: 1.01 }}
+		whileTap={{ scale: 0.99 }}
+		style={{ willChange: 'transform' }}
 	>
 		{children}
 	</motion.button>
