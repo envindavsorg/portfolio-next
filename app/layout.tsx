@@ -12,6 +12,7 @@ import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { constructMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
+import { name } from '@/resources/config';
 
 const Analytics = lazy(() =>
 	import('@vercel/analytics/react').then((m) => ({ default: m.Analytics })),
@@ -28,11 +29,6 @@ const Toaster = lazy(() =>
 const OfflineIndicator = lazy(() =>
 	import('@/components/ui/OfflineIndicator').then((m) => ({
 		default: m.OfflineIndicator,
-	})),
-);
-const PWAInstallPrompt = lazy(() =>
-	import('@/components/ui/PWAInstallPrompt').then((m) => ({
-		default: m.PWAInstallPrompt,
 	})),
 );
 
@@ -72,6 +68,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 				<meta name="apple-mobile-web-app-title" content="Cuzeac Florin" />
 				<link rel="apple-touch-icon" href="/icon.png" />
 				<link rel="apple-touch-startup-image" href="/icon.png" />
+				<title>{name}</title>
 			</head>
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
@@ -87,7 +84,6 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 						<Toaster position="bottom-right" richColors closeButton />
 						<Sparkles density={50} />
 						<OfflineIndicator />
-						<PWAInstallPrompt />
 					</Suspense>
 
 					{process.env.NODE_ENV === 'production' && (
