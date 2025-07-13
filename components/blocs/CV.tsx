@@ -58,7 +58,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 					setPdfMetadata(metadata);
 				}
 			} catch (error) {
-				console.warn('Could not fetch PDF metadata:', error);
+				// PDF metadata fetch failed - using defaults
 			}
 		};
 
@@ -86,7 +86,6 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 				description: 'Vous pouvez maintenant partager ce lien',
 			});
 		} catch (error) {
-			console.error('Copy failed:', error);
 			toast.error('Erreur lors de la copie', {
 				description: 'Impossible de copier le lien',
 			});

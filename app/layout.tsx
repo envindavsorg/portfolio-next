@@ -69,13 +69,19 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 			</head>
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
+				<a 
+					href="#main-content" 
+					className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:rounded"
+				>
+					Skip to main content
+				</a>
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
 					<ResourceHintsProvider />
 					<ServiceWorkerProvider />
 
 					<div className="container flex min-h-screen max-w-2xl flex-col">
-						<main className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">{children}</main>
+						<main id="main-content" className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">{children}</main>
 					</div>
 
 					<Suspense fallback={null}>

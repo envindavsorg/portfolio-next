@@ -1,11 +1,8 @@
 'use client';
 
 import { Slot } from '@radix-ui/react-slot';
-import {
-	motion,
-	stagger,
-	type Variants,
-} from 'motion/react';
+import { motion, stagger, type Variants } from 'motion/react';
+import type React from 'react';
 import { memo, useMemo } from 'react';
 import { defaultVariants } from '@/components/motion.variants';
 import { cn } from '@/lib/utils';
@@ -20,7 +17,6 @@ type BaseMotionProps = {
 	variants?: Variants;
 };
 
-// Move stagger variants outside component to prevent recreation
 const STAGGER_VARIANTS = {
 	visible: {
 		transition: {
@@ -29,36 +25,39 @@ const STAGGER_VARIANTS = {
 	},
 } as const;
 
-// Memoize motion component
 const MotionSlot = memo(motion.create(Slot));
 
-export const Motion = memo(function Motion({
-	children,
-	className,
-	asChild,
-	initial,
-	animate,
-	exit,
-	variants,
-	...props
-}: BaseMotionProps) {
-	const Comp = asChild ? MotionSlot : motion.div;
+export const Motion = memo(
+	({
+		children,
+		className,
+		asChild,
+		initial,
+		animate,
+		exit,
+		variants,
+		...props
+	}: BaseMotionProps): React.JSX.Element => {
+		const Comp = asChild ? MotionSlot : motion.div;
 
-	// Memoize default props to prevent object recreation
-	const defaultProps = useMemo(() => ({
-		initial: initial || 'hidden',
-		animate: animate || 'visible',
-		exit: exit || 'hidden',
-		variants: variants || defaultVariants,
-	}), [initial, animate, exit, variants]);
-	return (
-		<Comp
-			{...defaultProps}
-			className={cn('font-medium text-2xl leading-relaxed dark:text-white', className)}
-			variants={STAGGER_VARIANTS}
-			{...props}
-		>
-			{children}
-		</Comp>
-	);
-});
+		const defaultProps = useMemo(
+			() => ({
+				initial: initial || 'hidden',
+				animate: animate || 'visible',
+				exit: exit || 'hidden',
+				variants: variants || defaultVariants,
+			}),
+			[initial, animate, exit, variants],
+		);
+		return (
+			<Comp
+				{...defaultProps}
+				className={cn('font-medium text-2xl leading-relaxed dark:text-white', className)}
+				variants={STAGGER_VARIANTS}
+				{...props}
+			>
+				{children}
+			</Comp>
+		);
+	},
+);

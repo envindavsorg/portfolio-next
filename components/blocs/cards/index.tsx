@@ -17,7 +17,10 @@ export const Cards = async (): Promise<React.JSX.Element> => {
 		return (
 			<Motion asChild animate="visible">
 				<TextureCard className="mt-2 w-full max-w-none sm:mt-8 sm:overflow-hidden">
-					<section className="grid grid-cols-4 grid-rows-6 gap-3 max-sm:p-6 sm:grid-cols-7 sm:grid-rows-3">
+					<section
+						className="grid grid-cols-4 grid-rows-6 gap-3 max-sm:p-6 sm:grid-cols-7 sm:grid-rows-3"
+						aria-label="Portfolio information cards"
+					>
 						<AvatarCard />
 						<TimeCard />
 						<LocationCard />
@@ -33,11 +36,13 @@ export const Cards = async (): Promise<React.JSX.Element> => {
 				</TextureCard>
 			</Motion>
 		);
-	} catch (error) {
-		console.error('Failed to load GitHub data:', error);
+	} catch (_error) {
 		return (
 			<Motion asChild animate="visible">
-				<section className="mt-8 grid grid-cols-4 grid-rows-6 gap-4 sm:grid-cols-7 sm:grid-rows-3">
+				<section
+					className="mt-8 grid grid-cols-4 grid-rows-6 gap-4 sm:grid-cols-7 sm:grid-rows-3"
+					aria-label="Portfolio information cards"
+				>
 					<AvatarCard />
 					<TimeCard />
 					<LocationCard />

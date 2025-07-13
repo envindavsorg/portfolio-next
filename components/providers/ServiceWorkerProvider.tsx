@@ -24,7 +24,6 @@ export const ServiceWorkerProvider = () => {
 									navigator.serviceWorker.controller
 								) {
 									// New content is available, notify user
-									console.log('New content available! Please refresh.');
 
 									// You could show a toast notification here
 									if (window.confirm('New content available! Refresh to update?')) {
@@ -37,13 +36,12 @@ export const ServiceWorkerProvider = () => {
 
 					// Listen for controlling service worker changes
 					navigator.serviceWorker.addEventListener('controllerchange', () => {
-						console.log('Service worker updated, reloading page');
 						window.location.reload();
 					});
 
-					console.log('Service Worker registered successfully');
+					// Service Worker registered successfully
 				} catch (error) {
-					console.log('Service Worker registration failed:', error);
+					// Service Worker registration failed
 				}
 			};
 
