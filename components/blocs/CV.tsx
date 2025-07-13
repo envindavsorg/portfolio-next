@@ -9,6 +9,7 @@ import {
 import { motion } from 'motion/react';
 import type React from 'react';
 import { useCallback, useEffect, useState } from 'react';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { toast } from 'sonner';
 import { FadeIn } from '@/components/animations/FadeIn';
 import {
@@ -39,6 +40,7 @@ export type CVProps = React.HTMLProps<HTMLElement> & {
 };
 
 export const CV: React.FC<CVProps> = ({ className }) => {
+	const reducedMotion = useReducedMotion();
 	const [pdfMetadata, setPdfMetadata] = useState<PDFMetadata>({
 		pages: 2,
 		sizeKB: 0,
@@ -98,13 +100,13 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 				<FloatingPanelContent className="h-auto w-full max-w-2xl overflow-hidden">
 					<FloatingPanelBody className="flex flex-col gap-4 pt-1 pb-1 md:flex-row md:items-stretch md:gap-6 md:pt-5 md:pb-2">
 						<motion.div
-							initial={{ opacity: 0, x: -10 }}
+							initial={reducedMotion ? { opacity: 1 } : { opacity: 0, x: -10 }}
 							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.05, duration: 0.3 }}
+							transition={reducedMotion ? { duration: 0 } : { delay: 0.05, duration: 0.2 }}
 							className="flex-1"
 							style={{ willChange: 'transform, opacity' }}
 						>
-							<div className="group relative hidden h-full flex-col justify-center rounded-xl border border-neutral-200/50 bg-white/80 p-4 backdrop-blur-sm md:flex dark:border-neutral-700/50 dark:bg-black/80">
+							<div className="group relative hidden h-full flex-col justify-center rounded-xl border border-neutral-200/50 bg-white/90 p-4 md:flex dark:border-neutral-700/50 dark:bg-black/90">
 								<div className="relative flex items-center gap-3 overflow-hidden">
 									<div className="flex size-14 items-center justify-center rounded-xl border border-neutral-200/50 bg-white/20 ring-1 ring-black/5 dark:border-neutral-700/50 dark:bg-white/10">
 										<div className="font-bold text-base">CV</div>
@@ -130,22 +132,22 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 						</motion.div>
 
 						<motion.div
-							initial={{ opacity: 0, x: 10 }}
+							initial={reducedMotion ? { opacity: 1 } : { opacity: 0, x: 10 }}
 							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.1, duration: 0.3 }}
+							transition={reducedMotion ? { duration: 0 } : { delay: 0.1, duration: 0.2 }}
 							className="flex-1"
 							style={{ willChange: 'transform, opacity' }}
 						>
 							<div className="flex h-full flex-col gap-2.5">
 								<motion.button
-									initial={{ opacity: 0, y: 6 }}
+									initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.15, duration: 0.25 }}
+									transition={reducedMotion ? { duration: 0 } : { delay: 0.15, duration: 0.2 }}
 									onClick={handleView}
-									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-200 hover:scale-[1.01] dark:border-neutral-700/50 dark:bg-white/10"
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
 								>
-									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 group-hover:scale-x-100" />
+									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 md:group-hover:scale-x-100" />
 									<div className="relative z-10 flex flex-row-reverse items-center gap-3 max-md:justify-between md:flex-row">
 										<EyeIcon className="h-5 w-5 flex-shrink-0" weight="duotone" />
 										<div className="hidden md:block">
@@ -159,14 +161,14 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 								</motion.button>
 
 								<motion.button
-									initial={{ opacity: 0, y: 6 }}
+									initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.2, duration: 0.25 }}
+									transition={reducedMotion ? { duration: 0 } : { delay: 0.2, duration: 0.2 }}
 									onClick={handleDownload}
-									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-200 hover:scale-[1.01] dark:border-neutral-700/50 dark:bg-white/10"
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
 								>
-									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 group-hover:scale-x-100" />
+									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 md:group-hover:scale-x-100" />
 									<div className="relative z-10 flex flex-row-reverse items-center gap-3 max-md:justify-between md:flex-row">
 										<FileArrowDownIcon
 											className="h-5 w-5 flex-shrink-0"
@@ -183,14 +185,14 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 								</motion.button>
 
 								<motion.button
-									initial={{ opacity: 0, y: 6 }}
+									initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.25, duration: 0.25 }}
+									transition={reducedMotion ? { duration: 0 } : { delay: 0.25, duration: 0.2 }}
 									onClick={handleCopy}
-									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-gradient-to-r bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-all duration-200 hover:scale-[1.01] dark:border-neutral-700/50 dark:bg-white/10"
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
 								>
-									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 group-hover:scale-x-100" />
+									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 md:group-hover:scale-x-100" />
 									<div className="relative z-10 flex flex-row-reverse items-center gap-3 max-md:justify-between md:flex-row">
 										<CopyIcon className="h-5 w-5 flex-shrink-0" weight="duotone" />
 										<div className="hidden md:block">
@@ -210,9 +212,9 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 
 					<FloatingPanelFooter className="mt-3 border-neutral-200/50 border-t pt-3 dark:border-neutral-700/50">
 						<motion.div
-							initial={{ opacity: 0, y: 6 }}
+							initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.3, duration: 0.25 }}
+							transition={reducedMotion ? { duration: 0 } : { delay: 0.3, duration: 0.2 }}
 							className="flex w-full items-center justify-between"
 							style={{ willChange: 'transform, opacity' }}
 						>

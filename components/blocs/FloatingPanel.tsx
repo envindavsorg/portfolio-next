@@ -110,6 +110,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 			onClick={handleClick}
 			whileHover={{ scale: 1.02 }}
 			whileTap={{ scale: 0.98 }}
+			transition={{ type: "spring", stiffness: 400, damping: 25 }}
 			aria-haspopup="dialog"
 			aria-expanded={false}
 		>
@@ -249,7 +250,7 @@ export const FloatingPanelContent = ({
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.15 }}
-						className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm"
+						className="fixed inset-0 z-50 bg-black/20 md:backdrop-blur-sm"
 						style={{ overflow: 'hidden', willChange: 'opacity' }}
 					/>
 					<div className="relative">
