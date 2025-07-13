@@ -108,5 +108,6 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 			images: [image],
 			creator: id,
 		},
+		manifest: '/manifest.webmanifest',
 	};
 };
