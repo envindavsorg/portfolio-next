@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import type React from 'react';
 import { Suspense } from 'react';
 import { getBlogViews } from '@/actions/blog/views.actions';
-import { FadeIn } from '@/components/animations/FadeIn';
+import { FadeIn } from '@/components/blocs/FadeIn';
 import { Articles } from '@/components/blog/Articles';
 import PageTitle from '@/components/text/PageTitle';
 import { Separator } from '@/components/ui/Separator';

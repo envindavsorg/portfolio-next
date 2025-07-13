@@ -12,6 +12,7 @@ import { ThemeMeta } from '@/components/theme/ThemeMeta';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { constructMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
+import { name } from '@/resources/config';
 
 const Analytics = lazy(() =>
 	import('@vercel/analytics/react').then((m) => ({ default: m.Analytics })),
@@ -20,7 +21,7 @@ const SpeedInsights = lazy(() =>
 	import('@vercel/speed-insights/react').then((m) => ({ default: m.SpeedInsights })),
 );
 const Sparkles = lazy(() =>
-	import('@/components/animations/Sparkles').then((m) => ({ default: m.Sparkles })),
+	import('@/components/blocs/Sparkles').then((m) => ({ default: m.Sparkles })),
 );
 const Toaster = lazy(() =>
 	import('@/components/ui/Sonner').then((m) => ({ default: m.Toaster })),
@@ -67,21 +68,18 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 				<meta name="apple-mobile-web-app-title" content="Portfolio" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+				<title>{name}</title>
 			</head>
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
-				<a 
-					href="#main-content" 
-					className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:rounded"
-				>
-					Skip to main content
-				</a>
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
 					<ThemeMeta />
 					<ResourceHintsProvider />
 					<ServiceWorkerProvider />
 
 					<div className="container flex min-h-screen max-w-2xl flex-col">
-						<main id="main-content" className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">{children}</main>
+						<main id="main-content" className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">
+							{children}
+						</main>
 					</div>
 
 					<Suspense fallback={null}>

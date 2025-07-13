@@ -4,7 +4,7 @@ import { ArrowLeftIcon } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import type React from 'react';
-import { FadeIn } from '@/components/animations/FadeIn';
+import { FadeIn } from '@/components/blocs/FadeIn';
 import PageParagraph from '@/components/text/PageParagraph';
 import { Button } from '@/components/ui/Button';
 import sadCat from '@/images/sad-cat.gif';

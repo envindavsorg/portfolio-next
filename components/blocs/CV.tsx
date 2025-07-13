@@ -9,9 +9,8 @@ import {
 import { motion } from 'motion/react';
 import type React from 'react';
 import { useCallback, useEffect, useState } from 'react';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { toast } from 'sonner';
-import { FadeIn } from '@/components/animations/FadeIn';
+import { FadeIn } from '@/components/blocs/FadeIn';
 import {
 	FloatingPanelBody,
 	FloatingPanelCloseButton,
@@ -20,6 +19,7 @@ import {
 	FloatingPanelRoot,
 	FloatingPanelTrigger,
 } from '@/components/blocs/FloatingPanel';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { name } from '@/resources/config';
 
 const CV_CONFIG = {
@@ -101,7 +101,9 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 						<motion.div
 							initial={reducedMotion ? { opacity: 1 } : { opacity: 0, x: -10 }}
 							animate={{ opacity: 1, x: 0 }}
-							transition={reducedMotion ? { duration: 0 } : { delay: 0.05, duration: 0.2 }}
+							transition={
+								reducedMotion ? { duration: 0 } : { delay: 0.05, duration: 0.2 }
+							}
 							className="flex-1"
 							style={{ willChange: 'transform, opacity' }}
 						>
@@ -141,7 +143,9 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 								<motion.button
 									initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={reducedMotion ? { duration: 0 } : { delay: 0.15, duration: 0.2 }}
+									transition={
+										reducedMotion ? { duration: 0 } : { delay: 0.15, duration: 0.2 }
+									}
 									onClick={handleView}
 									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
@@ -162,7 +166,9 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 								<motion.button
 									initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={reducedMotion ? { duration: 0 } : { delay: 0.2, duration: 0.2 }}
+									transition={
+										reducedMotion ? { duration: 0 } : { delay: 0.2, duration: 0.2 }
+									}
 									onClick={handleDownload}
 									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
@@ -186,7 +192,9 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 								<motion.button
 									initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 6 }}
 									animate={{ opacity: 1, y: 0 }}
-									transition={reducedMotion ? { duration: 0 } : { delay: 0.25, duration: 0.2 }}
+									transition={
+										reducedMotion ? { duration: 0 } : { delay: 0.25, duration: 0.2 }
+									}
 									onClick={handleCopy}
 									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}

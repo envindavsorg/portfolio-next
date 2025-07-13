@@ -4,7 +4,7 @@ import NumberFlow from '@number-flow/react';
 import { motion } from 'motion/react';
 import type React from 'react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { cn } from '@/lib/utils';
 
 interface TimeParts {

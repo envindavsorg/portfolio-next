@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import type React from 'react';
 import { memo, useState } from 'react';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { Lens } from '@/components/ui/Lens';
 import avatar from '@/images/avatar.webp';
 import { cn } from '@/lib/utils';

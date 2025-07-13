@@ -1,6 +1,6 @@
 import type React from 'react';
 import { memo } from 'react';
-import { FadeIn } from '@/components/animations/FadeIn';
+import { FadeIn } from '@/components/blocs/FadeIn';
 import { cn } from '@/lib/utils';
 
 interface PageParagraphProps {

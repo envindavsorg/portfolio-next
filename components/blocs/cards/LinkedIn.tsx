@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import type React from 'react';
 import { memo } from 'react';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { cn } from '@/lib/utils';
 
 export const LinkedInCard = memo((): React.JSX.Element => {

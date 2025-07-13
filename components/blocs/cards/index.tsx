@@ -7,7 +7,7 @@ import { LinkedInCard } from '@/components/blocs/cards/LinkedIn';
 import { LocationCard } from '@/components/blocs/cards/Location';
 import { ThemeCard } from '@/components/blocs/cards/Theme';
 import { TimeCard } from '@/components/blocs/cards/Time';
-import { Motion } from '@/components/motion';
+import { Motion } from '@/components/motion/motion';
 import { TextureCard } from '@/components/ui/TextureCard';
 
 export const Cards = async (): Promise<React.JSX.Element> => {

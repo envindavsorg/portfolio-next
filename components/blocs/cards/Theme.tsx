@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { useTheme } from 'next-themes';
 import type React from 'react';
 import { memo, useEffect, useState } from 'react';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { cn } from '@/lib/utils';
 
 export const ThemeCard = memo((): React.JSX.Element => {

@@ -7,7 +7,7 @@ import { useTheme } from 'next-themes';
 import type React from 'react';
 import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useSpring } from 'react-spring';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { dark, light, myLatitude, myLongitude, physics, yellow } from '@/lib/globe';
 import { cn } from '@/lib/utils';
 

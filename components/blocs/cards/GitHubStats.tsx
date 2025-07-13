@@ -4,7 +4,7 @@ import { GithubLogoIcon } from '@phosphor-icons/react/ssr';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { memo, useMemo } from 'react';
-import { defaultVariantsNoDelay } from '@/components/motion.variants';
+import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { cn } from '@/lib/utils';
 
 interface GitHubStatsCardProps {
@@ -67,30 +67,30 @@ const CONTRIBUTIONS_COLOR_MAP: Record<string, string> = {
 	'#216e39': 'bg-[#216e39] dark:bg-[#39d353]',
 } as const;
 
-const ContributionsGraph = memo(({
-	contributions,
-}: {
-	contributions: Awaited<ReturnType<any>>;
-}) => {
-	// Memoize flattened days to prevent recalculation on each render
-	const daysFlat = useMemo(() => 
-		contributions.latestContributions.flatMap(
-			(week: { contributionDays: any }) => week.contributionDays
-		),
-	[contributions.latestContributions]);
+const ContributionsGraph = memo(
+	({ contributions }: { contributions: Awaited<ReturnType<any>> }) => {
+		// Memoize flattened days to prevent recalculation on each render
+		const daysFlat = useMemo(
+			() =>
+				contributions.latestContributions.flatMap(
+					(week: { contributionDays: any }) => week.contributionDays,
+				),
+			[contributions.latestContributions],
+		);
 
-	return (
-		<div className="absolute inset-0 z-0 grid grid-flow-col grid-rows-7 gap-[2px] opacity-50 sm:gap-1 sm:p-0">
-			<div className="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/50 to-neutral-50/50 dark:from-neutral-950/95 dark:via-neutral-950/65 dark:to-transparent" />
-			{daysFlat.map((day: { date: any; color: string | number }, idx: any) => (
-				<div
-					key={`day-${idx}-${day.date}`}
-					className={cn(
-						'h-5 w-5 rounded-[2px] sm:aspect-square sm:h-auto sm:w-auto sm:rounded-[3px]',
-						CONTRIBUTIONS_COLOR_MAP[day.color] || 'bg-neutral-100 dark:bg-neutral-800',
-					)}
-				/>
-			))}
-		</div>
-	);
-});
+		return (
+			<div className="absolute inset-0 z-0 grid grid-flow-col grid-rows-7 gap-[2px] opacity-50 sm:gap-1 sm:p-0">
+				<div className="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/50 to-neutral-50/50 dark:from-neutral-950/95 dark:via-neutral-950/65 dark:to-transparent" />
+				{daysFlat.map((day: { date: any; color: string | number }, idx: any) => (
+					<div
+						key={`day-${idx}-${day.date}`}
+						className={cn(
+							'h-5 w-5 rounded-[2px] sm:aspect-square sm:h-auto sm:w-auto sm:rounded-[3px]',
+							CONTRIBUTIONS_COLOR_MAP[day.color] || 'bg-neutral-100 dark:bg-neutral-800',
+						)}
+					/>
+				))}
+			</div>
+		);
+	},
+);

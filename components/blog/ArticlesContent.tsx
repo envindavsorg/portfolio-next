@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type React from 'react';
 import { Suspense } from 'react';
-import { FadeIn } from '@/components/animations/FadeIn';
+import { FadeIn } from '@/components/blocs/FadeIn';
 import { Articles } from '@/components/blog/Articles';
 import PageParagraph from '@/components/text/PageParagraph';
 import { type ArticleWithSlug, getRecentArticles } from '@/lib/articles';

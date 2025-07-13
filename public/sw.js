@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/correctness/noUnusedVariables: for PWA */
+
 const CACHE_NAME = 'portfolio-v1.0.0';
 const STATIC_CACHE = 'static-v1.0.0';
 const DYNAMIC_CACHE = 'dynamic-v1.0.0';
@@ -114,7 +116,7 @@ const handleCacheFirst = async (request) => {
 		const networkResponse = await fetch(request);
 		if (networkResponse.ok) {
 			const cache = await caches.open(STATIC_CACHE);
-			cache.put(request, networkResponse.clone());
+			await cache.put(request, networkResponse.clone());
 		}
 		return networkResponse;
 	} catch (error) {
@@ -133,7 +135,7 @@ const handleNetworkFirst = async (request) => {
 		}
 		return networkResponse;
 	} catch (error) {
-		console.log('SW: Network failed, trying cache:', request.url);
+		console.log('SW: Network failed, trying cache:', request.url, error);
 		const cachedResponse = await caches.match(request);
 		if (cachedResponse) {
 			return cachedResponse;
@@ -153,12 +155,13 @@ const handleNetworkFirstWithFallback = async (request) => {
 		return networkResponse;
 	} catch (error) {
 		console.log('SW: Network failed, trying cache:', request.url);
+		console.error(error);
 		const cachedResponse = await caches.match(request);
 		if (cachedResponse) {
 			return cachedResponse;
 		}
 
-		// Fallback to cached homepage for navigation requests
+		// Fallback to cache homepage for navigation requests
 		if (request.mode === 'navigate') {
 			const homepageResponse = await caches.match('/');
 			if (homepageResponse) {
@@ -204,7 +207,7 @@ const handleStaleWhileRevalidate = async (request) => {
 			console.log('SW: Background fetch failed:', error);
 		});
 
-	// Return cached version immediately if available
+	// Return a cached version immediately if available
 	if (cachedResponse) {
 		return cachedResponse;
 	}

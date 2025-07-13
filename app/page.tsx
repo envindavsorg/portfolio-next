@@ -3,9 +3,9 @@ import Link from 'next/link';
 import Script from 'next/script';
 import type React from 'react';
 import { memo } from 'react';
-import { FadeIn, FadeInStagger } from '@/components/animations/FadeIn';
 import { CV } from '@/components/blocs/CV';
 import { Cards } from '@/components/blocs/cards';
+import { FadeIn, FadeInStagger } from '@/components/blocs/FadeIn';
 import {
 	StarsChannelForDesign,
 	StarsChannelForFrameworks,

@@ -4,7 +4,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { motion, stagger, type Variants } from 'motion/react';
 import type React from 'react';
 import { memo, useMemo } from 'react';
-import { defaultVariants } from '@/components/motion.variants';
+import { defaultVariants } from '@/components/motion/motion.variants';
 import { cn } from '@/lib/utils';
 
 type BaseMotionProps = {
