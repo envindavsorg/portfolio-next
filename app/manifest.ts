@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { name } from '@/resources/config';
-import { dark, light } from '@/resources/theme';
+import { dark } from '@/resources/theme';
 
 const manifest = (): MetadataRoute.Manifest => ({
 	name: 'Cuzeac Florin',
