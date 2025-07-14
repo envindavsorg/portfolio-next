@@ -14,7 +14,7 @@ import { SubscribersChannel } from '@/components/channels/Subscribers';
 import { Counter } from '@/components/text/Counter';
 import PageParagraph from '@/components/text/PageParagraph';
 import PageTitle from '@/components/text/PageTitle';
-import { TextHoverEffect } from '@/components/text/TextHover';
+import { TextHover } from '@/components/text/TextHover';
 import {
 	Announcement,
 	AnnouncementTag,
@@ -307,12 +307,8 @@ const Home = async (): Promise<React.JSX.Element> => {
 					</div>
 				</FadeIn>
 
-				{/*<Separator className="my-12" />
-
-				<ArticlesContent />*/}
-
 				<div className="mt-20 flex items-center justify-center">
-					<TextHoverEffect text={firstName.toUpperCase()} />
+					<TextHover text={firstName.toUpperCase()} />
 				</div>
 			</section>
 		</>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useReducedMotion = (): boolean => {
+export const useReducedMotion = (): boolean => {
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
 	useEffect(() => {

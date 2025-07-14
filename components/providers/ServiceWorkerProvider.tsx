@@ -4,10 +4,7 @@ import { useEffect } from 'react';
 
 export const ServiceWorkerProvider = () => {
 	useEffect(() => {
-		if (
-			typeof window !== 'undefined' &&
-			'serviceWorker' in navigator
-		) {
+		if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 			const registerSW = async () => {
 				try {
 					const registration = await navigator.serviceWorker.register('/sw.js', {
@@ -40,7 +37,7 @@ export const ServiceWorkerProvider = () => {
 					});
 
 					// Service Worker registered successfully
-				} catch (error) {
+				} catch (_error) {
 					// Service Worker registration failed
 				}
 			};
