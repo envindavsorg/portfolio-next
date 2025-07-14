@@ -6,6 +6,7 @@ import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
 import type React from 'react';
 import { lazy, Suspense } from 'react';
+import { BackToTop } from '@/components/BackToTop';
 import { OnekoCat } from '@/components/blocs/OnekoCat';
 import { LenisProvider } from '@/components/providers/LenisProvider';
 import { ResourceHintsProvider } from '@/components/providers/ResourceHintsProvider';
@@ -101,6 +102,10 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 								<SpeedInsights debug={false} />
 							</Suspense>
 						)}
+
+						<div className="relative z-[100]">
+							<BackToTop />
+						</div>
 					</LenisProvider>
 				</ThemeProvider>
 			</body>

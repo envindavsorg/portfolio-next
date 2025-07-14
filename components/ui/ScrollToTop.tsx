@@ -1,9 +1,9 @@
 'use client';
 
 import { ArrowUpIcon } from '@phosphor-icons/react';
-import { motion, AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { useLenis } from '@/hooks/useLenis';
+import useLenis from '@/hooks/useLenis';
 
 export const ScrollToTop = () => {
 	const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +34,7 @@ export const ScrollToTop = () => {
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.8 }}
 					onClick={handleScrollToTop}
-					className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-colors hover:bg-foreground/90 focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2"
+					className="fixed right-6 bottom-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background shadow-lg transition-colors hover:bg-foreground/90 focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2"
 					aria-label="Scroll to top"
 					whileHover={{ scale: 1.1 }}
 					whileTap={{ scale: 0.9 }}

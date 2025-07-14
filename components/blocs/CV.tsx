@@ -19,7 +19,7 @@ import {
 	FloatingPanelRoot,
 	FloatingPanelTrigger,
 } from '@/components/blocs/FloatingPanel';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
+import useReducedMotion from '@/hooks/useReducedMotion';
 import { name } from '@/resources/config';
 
 const CV_CONFIG = {

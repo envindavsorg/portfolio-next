@@ -3,7 +3,7 @@
 import Lenis from 'lenis';
 import type React from 'react';
 import { useEffect, useRef } from 'react';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
+import useReducedMotion from '@/hooks/useReducedMotion';
 
 interface LenisProviderProps {
 	children: React.ReactNode;

@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
 import type Lenis from 'lenis';
+import { useCallback, useEffect, useState } from 'react';
 
-export const useLenis = () => {
+const useLenis = () => {
 	const [lenis, setLenis] = useState<Lenis | null>(null);
 
 	useEffect(() => {
@@ -36,3 +36,5 @@ export const useLenis = () => {
 		isScrolling: lenis?.isScrolling ?? false,
 	};
 };
+
+export default useLenis;
