@@ -6,7 +6,7 @@ import type React from 'react';
 import { memo, useState } from 'react';
 import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { Lens } from '@/components/ui/Lens';
-import avatar from '@/images/avatar.webp';
+import me from '@/images/me.webp';
 import { cn } from '@/lib/utils';
 import { name } from '@/resources/config';
 
@@ -25,7 +25,7 @@ export const AvatarCard = memo((): React.JSX.Element => {
 			<Lens hovering={hovering} setHovering={setHovering}>
 				<Image
 					alt={name}
-					src={avatar}
+					src={me}
 					height={300}
 					width={300}
 					className="h-full object-cover grayscale-[0.35] filter"

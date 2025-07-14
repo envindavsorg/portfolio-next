@@ -6,6 +6,8 @@ import type { Metadata, Viewport } from 'next';
 import { ViewTransitions } from 'next-view-transitions';
 import type React from 'react';
 import { lazy, Suspense } from 'react';
+import { OnekoCat } from '@/components/blocs/OnekoCat';
+import { LenisProvider } from '@/components/providers/LenisProvider';
 import { ResourceHintsProvider } from '@/components/providers/ResourceHintsProvider';
 import { ServiceWorkerProvider } from '@/components/providers/ServiceWorkerProvider';
 import { ThemeMeta } from '@/components/theme/ThemeMeta';
@@ -56,7 +58,7 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			lang="fr"
 			dir="ltr"
 			className={cn(
-				'scrollbar-hide h-full scroll-smooth antialiased',
+				'scrollbar-hide h-full antialiased',
 				GeistSans.variable,
 				GeistMono.variable,
 			)}
@@ -72,28 +74,34 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => (
 			</head>
 			<body className="select-none bg-background font-geist-mono tracking-tight antialiased">
 				<ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-					<ThemeMeta />
-					<ResourceHintsProvider />
-					<ServiceWorkerProvider />
+					<LenisProvider>
+						<ThemeMeta />
+						<ResourceHintsProvider />
+						<ServiceWorkerProvider />
 
-					<div className="container flex min-h-screen max-w-2xl flex-col">
-						<main id="main-content" className="flex flex-1 flex-col pt-30 pb-20 md:pt-38">
-							{children}
-						</main>
-					</div>
+						<div className="container flex min-h-screen max-w-2xl flex-col">
+							<main
+								id="main-content"
+								className="flex flex-1 flex-col pt-30 pb-20 md:pt-38"
+							>
+								{children}
+								<OnekoCat />
+							</main>
+						</div>
 
-					<Suspense fallback={null}>
-						<Toaster position="bottom-right" richColors closeButton />
-						<Sparkles density={50} />
-						<OfflineIndicator />
-					</Suspense>
-
-					{process.env.NODE_ENV === 'production' && (
 						<Suspense fallback={null}>
-							<Analytics mode={'production'} debug={false} />
-							<SpeedInsights debug={false} />
+							<Toaster position="bottom-right" richColors closeButton />
+							<Sparkles density={10} />
+							<OfflineIndicator />
 						</Suspense>
-					)}
+
+						{process.env.NODE_ENV === 'production' && (
+							<Suspense fallback={null}>
+								<Analytics mode={'production'} debug={false} />
+								<SpeedInsights debug={false} />
+							</Suspense>
+						)}
+					</LenisProvider>
 				</ThemeProvider>
 			</body>
 		</html>
