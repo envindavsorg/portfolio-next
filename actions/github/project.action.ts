@@ -1,8 +1,8 @@
 'use server';
 
-import { octokit } from '@/db/octokit';
 import { getCachedData, setCachedData } from '@/lib/cache';
 import { logger } from '@/lib/logger';
+import { octokit } from '@/lib/octokit';
 
 interface ProjectLanguage {
 	name: string;

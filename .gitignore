@@ -41,5 +41,7 @@ next-env.d.ts
 
 # turbo
 .turbo
+
+# claude
 /CLAUDE.md
 /.claude/

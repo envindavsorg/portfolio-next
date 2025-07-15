@@ -2,9 +2,16 @@ import { LineVerticalIcon } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import { Link } from 'next-view-transitions';
 import type React from 'react';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import type { ArticleWithSlug } from '@/lib/articles';
-import { formatDate } from '@/lib/formatDate';
+
+const formatDate = (dateString: string): string =>
+	new Date(`${dateString}T00:00:00Z`).toLocaleDateString('fr-FR', {
+		day: 'numeric',
+		month: 'short',
+		year: 'numeric',
+		timeZone: 'UTC',
+	});
 
 interface ArticleProps {
 	article: ArticleWithSlug;
@@ -12,6 +19,8 @@ interface ArticleProps {
 
 export const Article = memo(({ article }: ArticleProps): React.JSX.Element => {
 	const { date, slug, title, image, readingTimeShort } = article;
+
+	const formattedDate = useMemo(() => formatDate(date), [date]);
 
 	return (
 		<li className="group py-3 transition-opacity first:pt-0 last:pb-0">
@@ -29,7 +38,7 @@ export const Article = memo(({ article }: ArticleProps): React.JSX.Element => {
 									dateTime={date}
 									className="shrink-0 font-medium text-theme text-xs tracking-tight min-[530px]:text-sm"
 								>
-									{formatDate(date)}
+									{formattedDate}
 								</time>
 								<LineVerticalIcon className="size-4" aria-hidden="true" />
 								<span className="shrink-0 font-medium text-foreground text-xs tracking-tight min-[530px]:text-sm">

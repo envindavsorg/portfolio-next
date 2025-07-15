@@ -2,22 +2,37 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { baseURL } from '@/resources/config';
 
-export const cn = (...inputs: ClassValue[]): string => {
-	return twMerge(clsx(inputs));
-};
+export const cn = (...inputs: ClassValue[]): string => twMerge(clsx(inputs));
 
 export const absoluteUrl = (path: string): string => `https://${baseURL}${path}`;
 
-export const getRouterLastPathSegment = (pathname: string): string => {
-	const segment: string[] = pathname.split('/').filter(Boolean);
+interface Accents {
+	[key: string]: string;
+}
 
-	if (segment.length > 1) {
-		return segment[segment.length - 1];
-	}
-
-	if (segment.length === 1) {
-		return segment[0];
-	}
-
-	return '/';
+const accents: Accents = {
+	é: 'e',
+	è: 'e',
+	ê: 'e',
+	ë: 'e',
+	à: 'a',
+	â: 'a',
+	ä: 'a',
+	î: 'i',
+	ï: 'i',
+	ô: 'o',
+	ö: 'o',
+	ù: 'u',
+	û: 'u',
+	ü: 'u',
+	ç: 'c',
 };
+
+export const slugify = (title: string): string =>
+	title
+		.split('')
+		.map((char): string => accents[char] || char)
+		.join('')
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/(^-|-$)+/g, '');

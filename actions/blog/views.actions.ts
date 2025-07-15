@@ -3,8 +3,8 @@
 import crypto from 'node:crypto';
 import { unstable_noStore as noStore } from 'next/cache';
 import { headers } from 'next/headers';
-import { redis } from '@/db/redis';
 import { logger } from '@/lib/logger';
+import { redis } from '@/lib/redis';
 
 export interface ViewData {
 	slug: string;

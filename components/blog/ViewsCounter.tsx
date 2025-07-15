@@ -7,7 +7,6 @@ import {
 	type ViewData,
 } from '@/actions/blog/views.actions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
-import { formatDate } from '@/lib/formatDate';
 import { fullName, fullNameInitials } from '@/resources/config';
 
 interface ViewsCounterProps {
@@ -32,6 +31,14 @@ const formatViewCount = (count: number): string => {
 	}
 	return `${count} vues`;
 };
+
+const formatDate = (dateString: string): string =>
+	new Date(`${dateString}T00:00:00Z`).toLocaleDateString('fr-FR', {
+		day: 'numeric',
+		month: 'short',
+		year: 'numeric',
+		timeZone: 'UTC',
+	});
 
 export const ViewsCounter = async ({
 	article,
