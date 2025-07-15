@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
 import * as z from 'zod';
-import { baseURL, name } from '@/resources/config';
+import { baseURL, fullName } from '@/resources/config';
 
 export const runtime = 'edge';
 
@@ -44,7 +44,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 						{/** biome-ignore lint/performance/noImgElement: explanation */}
 						<img
 							src={avatar}
-							alt={name}
+							alt={fullName}
 							tw="rounded-full"
 							style={{
 								width: '56px',
@@ -58,7 +58,7 @@ export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 								tw="text-2xl m-0"
 								style={{ fontFamily: 'Cal Sans', fontWeight: 'bold' }}
 							>
-								{name}
+								{fullName}
 							</h2>
 							<p
 								tw="m-0 text-sm mt-0.5"

@@ -54,7 +54,7 @@ export const GlimpseImage = ({
 	src,
 	...props
 }: GlimpseImageProps): React.JSX.Element => (
-	// biome-ignore lint/performance/noImgElement: "Kibo UI is framework agnostic"
+	// biome-ignore lint/performance/noImgElement: "framework-agnostic"
 	<img
 		alt={alt ?? ''}
 		src={src || '/og.jpeg'}

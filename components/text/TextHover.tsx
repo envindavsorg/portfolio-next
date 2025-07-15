@@ -12,7 +12,7 @@ interface TextHoverProps {
 	triggerOnView?: boolean;
 }
 
-export const TextHover = memo(
+const TextHover = memo(
 	({ text, duration, triggerOnView = true }: TextHoverProps): React.JSX.Element => {
 		const svgRef = useRef<SVGSVGElement>(null);
 		const textRef = useRef<SVGTextElement>(null);
@@ -120,7 +120,7 @@ export const TextHover = memo(
 			[triggerOnView, hasTriggered],
 		);
 
-		const fontSize = isMobile ? '3rem' : '4.5rem';
+		const fontSize = isMobile ? '4rem' : '4.5rem';
 		const strokeWidth = isMobile ? '0.2' : '0.3';
 
 		return (
@@ -252,3 +252,7 @@ export const TextHover = memo(
 		);
 	},
 );
+
+TextHover.displayName = 'TextHover';
+
+export { TextHover };

@@ -1,9 +1,9 @@
 import { Octokit } from 'octokit';
-import { name } from '@/resources/config';
+import { fullName } from '@/resources/config';
 
 export const octokit = new Octokit({
 	auth: process.env.GITHUB_TOKEN,
-	userAgent: `Mon portfolio - ${name}`,
+	userAgent: `Mon portfolio - ${fullName}`,
 	timeZone: 'UTC',
 	log: {
 		debug: (): void => {},

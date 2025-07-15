@@ -161,7 +161,7 @@ const handleNetworkFirstWithFallback = async (request) => {
 			return cachedResponse;
 		}
 
-		// Fallback to cache homepage for navigation requests
+		// Fallback to the cache homepage for navigation requests
 		if (request.mode === 'navigate') {
 			const homepageResponse = await caches.match('/');
 			if (homepageResponse) {

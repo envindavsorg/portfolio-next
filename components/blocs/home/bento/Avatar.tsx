@@ -8,7 +8,7 @@ import { defaultVariantsNoDelay } from '@/components/motion/motion.variants';
 import { Lens } from '@/components/ui/Lens';
 import me from '@/images/me.webp';
 import { cn } from '@/lib/utils';
-import { name } from '@/resources/config';
+import { fullName } from '@/resources/config';
 
 export const AvatarCard = memo((): React.JSX.Element => {
 	const [hovering, setHovering] = useState(false);
@@ -24,7 +24,7 @@ export const AvatarCard = memo((): React.JSX.Element => {
 		>
 			<Lens hovering={hovering} setHovering={setHovering}>
 				<Image
-					alt={name}
+					alt={fullName}
 					src={me}
 					height={300}
 					width={300}

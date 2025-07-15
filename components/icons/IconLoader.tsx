@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, lazy, type ComponentType } from 'react';
+import { type ComponentType, lazy, Suspense } from 'react';
 
 interface IconProps {
 	className?: string;
@@ -8,7 +8,10 @@ interface IconProps {
 }
 
 // Dynamic icon imports for code splitting
-const iconComponents: Record<string, () => Promise<{ default: ComponentType<IconProps> }>> = {
+const iconComponents: Record<
+	string,
+	() => Promise<{ default: ComponentType<IconProps> }>
+> = {
 	bash: () => import('./Bash').then((mod) => ({ default: mod.BashIcon })),
 	bootstrap: () => import('./Bootstrap').then((mod) => ({ default: mod.BootstrapIcon })),
 	bun: () => import('./Bun').then((mod) => ({ default: mod.BunIcon })),
@@ -17,12 +20,14 @@ const iconComponents: Record<string, () => Promise<{ default: ComponentType<Icon
 	fastify: () => import('./Fastify').then((mod) => ({ default: mod.FastifyIcon })),
 	figma: () => import('./Figma').then((mod) => ({ default: mod.FigmaIcon })),
 	flask: () => import('./Flask').then((mod) => ({ default: mod.FlaskIcon })),
-	framermotion: () => import('./FramerMotion').then((mod) => ({ default: mod.FramerMotionIcon })),
+	framermotion: () =>
+		import('./FramerMotion').then((mod) => ({ default: mod.FramerMotionIcon })),
 	git: () => import('./Git').then((mod) => ({ default: mod.GitIcon })),
 	github: () => import('./GitHub').then((mod) => ({ default: mod.GitHubIcon })),
 	githubtext: () => import('./GitHubText').then((mod) => ({ default: mod.GitHubText })),
 	html: () => import('./HTML').then((mod) => ({ default: mod.HTML5Icon })),
-	javascript: () => import('./JavaScript').then((mod) => ({ default: mod.JavaScriptIcon })),
+	javascript: () =>
+		import('./JavaScript').then((mod) => ({ default: mod.JavaScriptIcon })),
 	js: () => import('./JavaScript').then((mod) => ({ default: mod.JavaScriptIcon })),
 	json: () => import('./Json').then((mod) => ({ default: mod.JsonIcon })),
 	markdown: () => import('./Markdown').then((mod) => ({ default: mod.MarkdownIcon })),
@@ -41,7 +46,8 @@ const iconComponents: Record<string, () => Promise<{ default: ComponentType<Icon
 	shell: () => import('./Shell').then((mod) => ({ default: mod.ShellIcon })),
 	storybook: () => import('./Storybook').then((mod) => ({ default: mod.StorybookIcon })),
 	tailwind: () => import('./Tailwind').then((mod) => ({ default: mod.TailwindIcon })),
-	typescript: () => import('./TypeScript').then((mod) => ({ default: mod.TypeScriptIcon })),
+	typescript: () =>
+		import('./TypeScript').then((mod) => ({ default: mod.TypeScriptIcon })),
 	ts: () => import('./TypeScript').then((mod) => ({ default: mod.TypeScriptIcon })),
 	v0: () => import('./V0').then((mod) => ({ default: mod.V0Icon })),
 	vue: () => import('./Vue').then((mod) => ({ default: mod.VueIcon })),
@@ -49,7 +55,9 @@ const iconComponents: Record<string, () => Promise<{ default: ComponentType<Icon
 };
 
 const IconSkeleton = ({ className }: { className?: string }) => (
-	<span className={`inline-block animate-pulse bg-neutral-200 dark:bg-neutral-700 rounded ${className}`} />
+	<span
+		className={`inline-block animate-pulse bg-neutral-200 dark:bg-neutral-700 rounded ${className}`}
+	/>
 );
 
 interface DynamicIconProps extends IconProps {

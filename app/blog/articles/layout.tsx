@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import type React from 'react';
 import { notFound } from 'next/navigation';
+import type React from 'react';
 import { constructMetadata } from '@/lib/metadata';
 import { getPost } from '@/lib/posts';
 import { baseURL } from '@/resources/config';
@@ -23,7 +23,7 @@ export async function generateMetadata({
 	}
 
 	const canonicalUrl = `https://${baseURL}/blog/articles/${slug}`;
-	const imageUrl = post.image 
+	const imageUrl = post.image
 		? `https://${baseURL}/blog/articles/${slug}/${post.image}`
 		: `https://${baseURL}/api/og?heading=${encodeURIComponent(post.title)}&type=article&mode=dark`;
 
@@ -39,7 +39,10 @@ export async function generateMetadata({
 	});
 }
 
-const ArticleLayout = async ({ children, params }: ArticleLayoutProps): Promise<React.JSX.Element> => {
+const ArticleLayout = async ({
+	children,
+	params,
+}: ArticleLayoutProps): Promise<React.JSX.Element> => {
 	const { slug } = await params;
 	const post = await getPost(slug);
 
@@ -52,7 +55,7 @@ const ArticleLayout = async ({ children, params }: ArticleLayoutProps): Promise<
 		'@type': 'Article',
 		headline: post.title,
 		description: post.description,
-		image: post.image 
+		image: post.image
 			? `https://${baseURL}/blog/articles/${slug}/${post.image}`
 			: `https://${baseURL}/api/og?heading=${encodeURIComponent(post.title)}&type=article&mode=dark`,
 		datePublished: post.date,

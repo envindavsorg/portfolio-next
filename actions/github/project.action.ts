@@ -3,7 +3,6 @@
 import { octokit } from '@/db/octokit';
 import { getCachedData, setCachedData } from '@/lib/cache';
 import { logger } from '@/lib/logger';
-import { githubUsername } from '@/resources/config';
 
 interface ProjectLanguage {
 	name: string;
@@ -251,7 +250,6 @@ const userRepositoriesQuery = String.raw`
 	}
 `;
 
-// Enhanced GraphQL query for single repository
 const singleRepositoryQuery = String.raw`
 	query singleRepository($owner: String!, $repo: String!) {
 		repository(owner: $owner, name: $repo) {
@@ -320,7 +318,9 @@ const singleRepositoryQuery = String.raw`
 `;
 
 // Get comprehensive data for all user repositories
-export const getUserRepositories = async (username: string = githubUsername) => {
+export const getUserRepositories = async (
+	username: string = process.env.GITHUB_USERNAME!,
+) => {
 	const cacheKey = `github-repositories-${username}`;
 	const cachedData = getCachedData(cacheKey);
 
@@ -491,7 +491,7 @@ export const projectInfo = async (repository: string): Promise<ProjectInfo> => {
 	}
 
 	try {
-		const data = await getRepositoryData(githubUsername, repository);
+		const data = await getRepositoryData(process.env.GITHUB_USERNAME!, repository);
 
 		return {
 			commits: data.commits,

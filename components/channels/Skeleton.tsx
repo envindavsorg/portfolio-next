@@ -1,5 +1,5 @@
-import { Skeleton } from '@/components/ui/Skeleton';
 import type React from 'react';
+import { Skeleton } from '@/components/ui/Skeleton';
 
 export const ChannelSkeleton = (): React.JSX.Element => (
 	<Skeleton className="w-full">

@@ -4,8 +4,6 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	pageExtensions: ['mdx', 'ts', 'tsx'],
-
-	// Enhanced image optimization
 	images: {
 		remotePatterns: [
 			{
@@ -22,12 +20,8 @@ const nextConfig: NextConfig = {
 		dangerouslyAllowSVG: true,
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 	},
-
-	// Performance optimizations
 	compress: true,
 	poweredByHeader: false,
-
-	// Enhanced redirects with error handling
 	async redirects() {
 		try {
 			const { UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN } = process.env;
@@ -54,8 +48,6 @@ const nextConfig: NextConfig = {
 			return [];
 		}
 	},
-
-	// Enhanced security headers
 	async headers() {
 		return [
 			{
@@ -81,18 +73,10 @@ const nextConfig: NextConfig = {
 			},
 		];
 	},
-
-	// Modern experimental features
 	experimental: {
 		mdxRs: true,
-		optimizePackageImports: [
-			'motion',
-			'lucide-react',
-			'@phosphor-icons/react',
-		],
+		optimizePackageImports: ['motion', 'lucide-react', '@phosphor-icons/react'],
 	},
-
-	// Turbopack configuration
 	turbopack: {
 		rules: {
 			'*.svg': {
@@ -101,16 +85,11 @@ const nextConfig: NextConfig = {
 			},
 		},
 	},
-
-	// Enhanced webpack configuration
 	webpack: (config, { dev, isServer }) => {
-		// SVG optimization
 		config.module.rules.push({
 			test: /\.svg$/,
 			use: ['@svgr/webpack'],
 		});
-
-		// Bundle analyzer in development
 		if (dev && !isServer) {
 			config.optimization.splitChunks = {
 				...config.optimization.splitChunks,

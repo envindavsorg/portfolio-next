@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/Separator';
 import { getAllArticles } from '@/lib/articles';
 import { constructMetadata } from '@/lib/metadata';
 import { absoluteUrl } from '@/lib/utils';
-import { name, title } from '@/resources/config';
+import { fullName, mainTitle } from '@/resources/config';
 
 const ArticlesLoading = () => (
 	<div className="space-y-4">
@@ -52,7 +52,7 @@ const BlogPage = async (): Promise<React.JSX.Element> => {
 
 	return (
 		<section>
-			<PageTitle name={name} title={title}>
+			<PageTitle name={fullName} title={mainTitle}>
 				- tous les articles que j'ai écrit | {totalBlogViews} vues sur le blog
 			</PageTitle>
 

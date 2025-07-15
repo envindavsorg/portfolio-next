@@ -94,7 +94,7 @@ export const channelSubscribers = async (): Promise<ChannelSubscribersData[]> =>
 			name: SOCIAL_PLATFORMS[0].name,
 			avatar: SOCIAL_PLATFORMS[0].avatar,
 			link: SOCIAL_PLATFORMS[0].link,
-			metric: 2414, // Static for now, could be made dynamic
+			metric: 2414,
 			icon: SOCIAL_PLATFORMS[0].icon,
 		});
 

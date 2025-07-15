@@ -1,12 +1,12 @@
 import type React from 'react';
 import { githubUser } from '@/actions/github/user.action';
-import { AvatarCard } from '@/components/blocs/cards/Avatar';
-import { GitHubIconCard } from '@/components/blocs/cards/GitHubIcon';
-import { GithubStatsCard } from '@/components/blocs/cards/GitHubStats';
-import { LinkedInCard } from '@/components/blocs/cards/LinkedIn';
-import { LocationCard } from '@/components/blocs/cards/Location';
-import { ThemeCard } from '@/components/blocs/cards/Theme';
-import { TimeCard } from '@/components/blocs/cards/Time';
+import { AvatarCard } from '@/components/blocs/home/bento/Avatar';
+import { GitHubIconCard } from '@/components/blocs/home/bento/GitHubIcon';
+import { GithubStatsCard } from '@/components/blocs/home/bento/GitHubStats';
+import { LinkedInCard } from '@/components/blocs/home/bento/LinkedIn';
+import { LocationCard } from '@/components/blocs/home/bento/Location';
+import { ThemeCard } from '@/components/blocs/home/bento/Theme';
+import { TimeCard } from '@/components/blocs/home/bento/Time';
 import { Motion } from '@/components/motion/motion';
 import { TextureCard } from '@/components/ui/TextureCard';
 

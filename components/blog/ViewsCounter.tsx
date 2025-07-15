@@ -8,7 +8,7 @@ import {
 } from '@/actions/blog/views.actions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar';
 import { formatDate } from '@/lib/formatDate';
-import { initials, name } from '@/resources/config';
+import { fullName, fullNameInitials } from '@/resources/config';
 
 interface ViewsCounterProps {
 	article: {
@@ -38,7 +38,6 @@ export const ViewsCounter = async ({
 	slug,
 }: ViewsCounterProps): Promise<React.JSX.Element> => {
 	try {
-		// Use static generation for better performance
 		const views: ViewData[] = await getViewsCount(false);
 		const viewsForSlug = views?.find((view: ViewData) => view.slug === slug);
 		const viewCount: number = Number(viewsForSlug?.count || 0);
@@ -50,10 +49,10 @@ export const ViewsCounter = async ({
 				<Avatar className="size-12 shrink-0">
 					<AvatarImage
 						src="/og-author.png"
-						alt={`Photo de profil de ${name}`}
+						alt={`Photo de profil de ${fullName} pour l'article: ${article.title}`}
 						loading="lazy"
 					/>
-					<AvatarFallback>{initials}</AvatarFallback>
+					<AvatarFallback>{fullNameInitials}</AvatarFallback>
 				</Avatar>
 				<div className="flex select-none flex-col gap-1">
 					<p className="font-medium text-primary">{article.author}</p>
@@ -76,7 +75,7 @@ export const ViewsCounter = async ({
 		return (
 			<div className="fade-in flex max-w-none items-center gap-4 py-6">
 				<Avatar className="size-12 shrink-0">
-					<AvatarFallback>{initials}</AvatarFallback>
+					<AvatarFallback>{fullNameInitials}</AvatarFallback>
 				</Avatar>
 				<div className="inline-flex select-none flex-col gap-1 overflow-hidden leading-tight">
 					<p className="font-medium text-primary">{article.author}</p>

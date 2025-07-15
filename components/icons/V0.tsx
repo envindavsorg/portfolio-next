@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import type { SVGProps } from 'react';
 
 export const V0Icon = (props: SVGProps<SVGSVGElement>): React.JSX.Element => (

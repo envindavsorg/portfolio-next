@@ -20,7 +20,7 @@ import {
 	FloatingPanelTrigger,
 } from '@/components/blocs/FloatingPanel';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
-import { name } from '@/resources/config';
+import { fullName } from '@/resources/config';
 
 const CV_CONFIG = {
 	filePath: '/cv-cuzeac-florin.pdf',
@@ -58,7 +58,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 					setPdfMetadata(metadata);
 				}
 			} catch (error) {
-				// PDF metadata fetch failed - using defaults
+				console.error(error);
 			}
 		};
 
@@ -85,7 +85,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 			toast.success('Lien copié dans le presse-papiers !', {
 				description: 'Vous pouvez maintenant partager ce lien',
 			});
-		} catch (error) {
+		} catch (_error) {
 			toast.error('Erreur lors de la copie', {
 				description: 'Impossible de copier le lien',
 			});
@@ -113,7 +113,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 										<div className="font-bold text-base">CV</div>
 									</div>
 									<div className="flex flex-1 flex-col gap-y-0.5">
-										<h3 className="font-bold text-foreground text-lg">{name}</h3>
+										<h3 className="font-bold text-foreground text-lg">{fullName}</h3>
 										<p className="text-muted-foreground text-xs">développeur front-end</p>
 									</div>
 								</div>
@@ -147,7 +147,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 										reducedMotion ? { duration: 0 } : { delay: 0.15, duration: 0.2 }
 									}
 									onClick={handleView}
-									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:transition-all md:duration-200 md:hover:scale-[1.01] dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
 								>
 									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 md:group-hover:scale-x-100" />
@@ -170,7 +170,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 										reducedMotion ? { duration: 0 } : { delay: 0.2, duration: 0.2 }
 									}
 									onClick={handleDownload}
-									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:transition-all md:duration-200 md:hover:scale-[1.01] dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
 								>
 									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 md:group-hover:scale-x-100" />
@@ -196,7 +196,7 @@ export const CV: React.FC<CVProps> = ({ className }) => {
 										reducedMotion ? { duration: 0 } : { delay: 0.25, duration: 0.2 }
 									}
 									onClick={handleCopy}
-									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:hover:scale-[1.01] md:transition-all md:duration-200 dark:border-neutral-700/50 dark:bg-white/10"
+									className="group relative cursor-pointer overflow-hidden rounded-lg border border-neutral-200/50 bg-white/20 p-3 text-left text-white ring-1 ring-black/5 transition-colors duration-150 active:scale-[0.99] md:transition-all md:duration-200 md:hover:scale-[1.01] dark:border-neutral-700/50 dark:bg-white/10"
 									style={{ willChange: 'transform, opacity' }}
 								>
 									<div className="absolute inset-0 origin-left scale-x-0 transform bg-white/10 transition-transform duration-200 md:group-hover:scale-x-100" />

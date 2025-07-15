@@ -3,7 +3,6 @@
 import { octokit } from '@/db/octokit';
 import { getCachedData, setCachedData } from '@/lib/cache';
 import { logger } from '@/lib/logger';
-import { githubUsername } from '@/resources/config';
 
 interface ProjectStars {
 	stars: number;
@@ -192,7 +191,9 @@ export const getRepositoryStars = async (
 };
 
 // Get user's starred repositories and total stars from owned repositories
-export const getUserStarsData = async (username: string = githubUsername) => {
+export const getUserStarsData = async (
+	username: string = process.env.GITHUB_USERNAME!,
+) => {
 	const cacheKey = `github-stars-${username}`;
 	const cachedData = getCachedData(cacheKey);
 
@@ -206,7 +207,7 @@ export const getUserStarsData = async (username: string = githubUsername) => {
 			username,
 		});
 
-		// Calculate total stars from user's own repositories
+		// Calculate total stars from a user's own repositories
 		const totalOwnedStars = user.repositories.nodes.reduce(
 			(total, repo) => total + repo.stargazers.totalCount,
 			0,
@@ -215,7 +216,7 @@ export const getUserStarsData = async (username: string = githubUsername) => {
 		const data = {
 			starredRepositories: {
 				total: user.starredRepositories.totalCount,
-				repos: user.starredRepositories.nodes.map(repo => ({
+				repos: user.starredRepositories.nodes.map((repo) => ({
 					name: repo.name,
 					owner: repo.owner.login,
 					avatar: repo.owner.avatarUrl,

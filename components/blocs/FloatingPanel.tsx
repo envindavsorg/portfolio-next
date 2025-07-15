@@ -1,13 +1,7 @@
 'use client';
 
 import { ArrowLeftIcon } from '@phosphor-icons/react';
-import {
-	AnimatePresence,
-	MotionConfig,
-	type MotionConfigProps,
-	motion,
-	type Variants,
-} from 'motion/react';
+import { AnimatePresence, MotionConfig, motion, type Variants } from 'motion/react';
 import type React from 'react';
 import { createContext, useContext, useEffect, useId, useRef, useState } from 'react';
 import useMotionConfig from '@/hooks/useMotionConfig';
@@ -110,7 +104,7 @@ export const FloatingPanelTrigger = ({ title }: FloatingPanelTriggerProps) => {
 			onClick={handleClick}
 			whileHover={{ scale: 1.02 }}
 			whileTap={{ scale: 0.98 }}
-			transition={{ type: "spring", stiffness: 400, damping: 25 }}
+			transition={{ type: 'spring', stiffness: 400, damping: 25 }}
 			aria-haspopup="dialog"
 			aria-expanded={false}
 		>

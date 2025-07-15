@@ -1,5 +1,5 @@
 import React from 'react';
-import { Info } from '@phosphor-icons/react/dist/ssr';
+import { InfoIcon } from '@phosphor-icons/react/dist/ssr';
 import { slugify } from '@/lib/slug';
 import { Alert, AlertDescription } from '@/components/ui/Alert';
 import { ArticleTitle } from '@/components/blog/ArticleTitle';
@@ -8,12 +8,12 @@ import { File, Folder, Tree } from '@/components/ui/FileTree';
 import { Separator } from '@/components/ui/Separator';
 import { GeneratorOG } from '../components/GeneratorOG';
 import { NextAppStructure, NextAppStructureOG } from '../constants/NextAppStructure';
-import { name } from '@/resources/config';
+import { fullName } from '@/resources/config';
 import appRouter from './app-router.png';
 import cover from './cover.png';
 
 export const article = {
-    author: name,
+    author: fullName,
     date: '2025-06-12',
     title: 'Générer des balises Open Graph dynamiques avec Next.js 14',
     description: "Une façon puissante d’améliorer le partage des liens de votre site web sur les réseaux sociaux est d'ajouter des balises Open Graph dynamiques. Dans ce tutoriel, nous allons explorer comment vous pouvez y parvenir facilement avec Next.js 14.",
@@ -61,7 +61,7 @@ npx create-next-app@latest
 
 <Alert className="mb-6">
     <AlertDescription className="flex items-center gap-3">
-        <Info className="size-6 shrink-0 text-theme" />{' '}
+        <InfoIcon className="size-6 shrink-0 text-theme" />{' '}
         <span className="text-sm">
             Dans le CLI, nommez votre projet <code>demo-opengraph-dynamique</code>, pour les besoins de ce tutoriel. Vous pouvez choisir un autre nom si vous le souhaitez.
         </span>
@@ -250,7 +250,7 @@ Voici une explication du code :
 
 <Alert className="mt-6">
     <AlertDescription className="flex items-center gap-3">
-        <Info className="size-6 shrink-0 text-theme" />{' '}
+        <InfoIcon className="size-6 shrink-0 text-theme" />{' '}
         <span className="text-sm">
             Pour utiliser **Tailwind CSS** pour styliser l'image **Open Graph**, au lieu d'utiliser *style*, on utilise <code>tw</code>.
         </span>

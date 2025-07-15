@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { absoluteUrl } from '@/lib/utils';
-import { baseURL, id, keywords, name } from '@/resources/config';
+import { baseURL, fullName, genId, keywords } from '@/resources/config';
 
 interface MetadataOptions {
 	title?: string;
@@ -19,9 +19,9 @@ const defaultDescription =
 
 export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 	const {
-		title = name,
+		title = fullName,
 		description = defaultDescription,
-		image = absoluteUrl(`/api/og?heading=${name}&type=image&mode=dark`),
+		image = absoluteUrl(`/api/og?heading=${fullName}&type=image&mode=dark`),
 		noIndex = false,
 		canonicalUrl,
 		tags,
@@ -33,11 +33,11 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 	return {
 		title: {
 			default: title,
-			template: `%s | ${name}`,
+			template: `%s | ${fullName}`,
 		},
 		description,
 		metadataBase: new URL(`https://${baseURL}`),
-		applicationName: name,
+		applicationName: fullName,
 		keywords: tags ? [...keywords, ...tags] : [...keywords],
 		openGraph: {
 			title,
@@ -47,7 +47,7 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 				article: {
 					publishedTime,
 					modifiedTime,
-					authors: [name],
+					authors: [fullName],
 					tags,
 				},
 			}),
@@ -61,7 +61,7 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 			],
 			locale: 'fr_FR',
 			url: `https://${baseURL}`,
-			siteName: name,
+			siteName: fullName,
 		},
 		alternates: {
 			canonical: canonicalUrl || '/',
@@ -76,14 +76,14 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 		},
 		authors: [
 			{
-				name,
+				name: fullName,
 				url: `https://${baseURL}`,
 			},
 		],
-		creator: name,
+		creator: fullName,
 		generator: 'Next.js',
 		referrer: 'origin-when-cross-origin',
-		publisher: name,
+		publisher: fullName,
 		icons: {
 			icon: '/favicon.ico',
 			shortcut: '/favicon-16x16.png',
@@ -105,7 +105,7 @@ export const constructMetadata = (options: MetadataOptions = {}): Metadata => {
 			title,
 			description,
 			images: [image],
-			creator: id,
+			creator: genId,
 		},
 		manifest: '/site.webmanifest',
 	};
